@@ -28,17 +28,17 @@
                     <li class="flex">
                         <a
                             rel="noopener noreferrer"
-                            href="#mission"
+                            href="#challenges"
                             class="flex items-center px-4 -mb-1 dark:border-transparent dark:text-default-400 dark:border-default-400"
-                            >Mission</a
+                            >Current Challenges</a
                         >
                     </li>
                     <li class="flex">
                         <a
                             rel="noopener noreferrer"
-                            href="#health-suite"
+                            href="#actions"
                             class="flex items-center px-4 -mb-1 dark:border-transparent dark:text-default-400 dark:border-default-400"
-                            >Health Suite</a
+                            >Actions</a
                         >
                     </li>
                     <li class="flex">
@@ -46,7 +46,31 @@
                             rel="noopener noreferrer"
                             href="#local-first"
                             class="flex items-center px-4 -mb-1 dark:border-transparent"
-                            >Local-First</a
+                            >What is Local-First</a
+                        >
+                    </li>
+                    <li class="flex">
+                        <a
+                            rel="noopener noreferrer"
+                            href="#papaya-sdk"
+                            class="flex items-center px-4 -mb-1 dark:border-transparent"
+                            >Papaya SDK</a
+                        >
+                    </li>
+                    <li class="flex">
+                        <a
+                            rel="noopener noreferrer"
+                            href="#health-suite"
+                            class="flex items-center px-4 -mb-1 dark:border-transparent"
+                            >Health Suite</a
+                        >
+                    </li>
+                    <li class="flex">
+                        <a
+                            rel="noopener noreferrer"
+                            href="#mission"
+                            class="flex items-center px-4 -mb-1 dark:border-transparent"
+                            >Mission</a
                         >
                     </li>
                     <li class="flex">
