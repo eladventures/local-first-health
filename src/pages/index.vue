@@ -344,20 +344,55 @@ function eraseText() {
         <div class="max-w-4xl mx-auto mt-10" id="papaya-sdk">
             <div>
                 <pre><code class="language-javascript">
-        const BASE_URL = 'https://api.example.com';
-        const API_KEY = 'your_api_key_here';
+    import { createId, createKeyPair } from '@localfirsthealth/papaya/encryption';
+    import { Application } from '@localfirsthealth/papaya/application';
+    import { Identities } from '@localfirsthealth/papaya/identities';
+    import { MedicalRecords } from '@localfirsthealth/papaya/emr';
 
-        async function request(method, endpoint, data) {
-        const url = `${BASE_URL}/${endpoint}`;
-        const headers = {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${API_KEY}`
-        };
+    // ensure a unique instance id for the app
+    const instanceId = createId();
 
-        const options = {
-        method,
-        headers
-        };
+    // ensure a key-pair for signing
+    const signinKeys = createKeyPair();
+
+    // create the main app
+    const app = new Application({ instanceId, signinKeys })
+    app.use(new Identities())
+    app.use(new MedicalRecords())
+
+    // signup/signin user
+    const identity = await app.identities.identities.create({
+        attributes: {
+        email: 'sample@example.com',
+        name: {
+            firstName: 'Sample',
+            lastName: 'User',
+        },
+        },
+        credentials: [{
+        strategy: 'local',
+        identity: 'sample@example.com',
+        password: 'strongpassword',
+        }],
+    });
+    await app.identities.authenticate({
+        credential: {
+        strategy: 'local',
+        email: 'sample@example.com',
+        password: 'strongpassword',
+        },
+    });
+
+    // create a medical record
+    const record = await app.emr.records.create({
+        type: 'prescription',
+        patient: identity.id,
+        medications: [{
+        name: 'Aspirin',
+        dosage: '1 pill',
+        frequency: 'daily',
+        }],
+    });
             </code></pre>
             </div>
         </div>
