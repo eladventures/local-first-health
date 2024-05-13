@@ -109,13 +109,14 @@ function eraseText() {
 
             <p class="max-w-4xl mx-auto mt-4 text-xl text-left">
                 Local First Health (LFH) is an initiative dedicated to creating
-                tech tools and applications that enhance health records
-                management and ensure data sovereignty. Using local-first
-                principles, your data remains secure and private—stored on your
-                own device, not in the cloud, while still supporting seamless
-                collaboration and enabling shareability. This protects your
-                privacy and empowers you to confidently manage your medical
-                data.
+                tech tools such as open-source SDKs and healthcare APIs that
+                enhance health records management and ensure data sovereignty.
+                By adhering to local-first principles, data remains secure and
+                private—stored on the user’s own device, not in the cloud. This
+                approach supports seamless collaboration and enables
+                shareability while protecting user privacy and empowering
+                healthcare providers and individuals to confidently manage and
+                control their medical data.
             </p>
         </div>
     </section>
@@ -197,28 +198,28 @@ function eraseText() {
             </p>
 
             <p class="max-w-2xl mx-auto mt-4 text-xl text-left">
-                <b>First </b>, the LFH initiative will utilize the local-first
-                principles (see 'what is local-first'' below) to tackle the
-                inefficiencies and security risks prevalent in current health
-                records management systems, reducing internet dependency and
-                mitigating data breach risks. <br /><br />
+                <b>First </b>, the LFH initiative will utilize and promote the
+                local-first principles (see 'what is local-first'' below) to
+                tackle the inefficiencies and security risks prevalent in
+                current health records management systems, reducing internet
+                dependency and mitigating data breach risks. <br /><br />
 
                 <b>Second </b>, it introduces 'Project Papaya', an innovative
                 open source Software Development Kit (SDK) for Medical Records
-                Management that embraces Local-First principles. This SDK allows
+                Management that embraces local-first principles. This SDK allows
                 developers to build customized medical records apps with ease,
                 enhancing accessibility and affordability of EMR solutions.
                 Being open source, Project Papaya benefits from continuous
                 community-driven improvements, ensuring it meets the evolving
                 needs of various healthcare facilities. <br /><br />
 
-                <b>Third </b>, the initiative will showcase the Local First
-                Health Suite, a comprehensive set of health products developed
-                using Project Papaya's SDK. This suite demonstrates the
-                practicality and effectiveness of Local-First solutions in
-                healthcare. It features applications specifically designed for
-                various health facilities, illustrating how local data storage
-                can facilitate seamless collaboration and data sharing.
+                <b>Third </b>, the initiative will establish a community-driven
+                platform where innovators and developers can share and
+                collaborate on their healthcare applications and code. This
+                platform will act as a hub for open-source contributions,
+                showcasing existing local-first healthcare apps and encouraging
+                the sharing of innovations. The goal is to promote and expand
+                the use of local-first solutions within the healthcare industry.
             </p>
         </div>
     </section>
@@ -444,9 +445,12 @@ function eraseText() {
 
             <p class="max-w-3xl mx-auto mt-4 text-xl text-left">
                 LFH introduces the Health Suite, a robust collection of
-                healthcare products developed using Project Papaya’s SDK.
-                Designed with local-first principles, these tools ensure secure,
+                healthcare products developed using Papaya’s SDK. Designed with
+                local-first principles, these tools ensure secure,
                 offline-capable, and user-controlled healthcare management.
+                Additionally, more local-first health apps developed by the
+                community will be featured here, showcasing ongoing innovations
+                and contributions.
             </p>
         </div>
     </section>
@@ -753,7 +757,7 @@ function eraseText() {
     <footer class="px-4 divide-y">
         <div class="flex flex-col items-center py-6 font-courier">
             <img
-                src="../assets/images/local-first-health-logo.png"
+                src="../assets/images/local-first-health-logo-footer.png"
                 alt="EasyJoey Logo"
                 class="mb-4 w-40 h-auto"
             />
