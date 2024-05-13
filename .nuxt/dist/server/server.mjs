@@ -1,1 +1,0 @@
-export { default } from "file:///Users/eladventures/Desktop/codes/local-first-health/node_modules/@nuxt/vite-builder/dist/runtime/vite-node.mjs"

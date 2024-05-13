@@ -4,135 +4,135 @@
     {
       "name": "vite:load-fallback",
       "result": "/*\n Language: G-code (ISO 6983)\n Contributors: Adam Joseph Cook <adam.joseph.cook@gmail.com>\n Description: G-code syntax highlighter for Fanuc and other common CNC machine tool controls.\n Website: https://www.sis.se/api/document/preview/911952/\n */\n\nfunction gcode(hljs) {\n  const GCODE_IDENT_RE = '[A-Z_][A-Z0-9_.]*';\n  const GCODE_CLOSE_RE = '%';\n  const GCODE_KEYWORDS = {\n    $pattern: GCODE_IDENT_RE,\n    keyword: 'IF DO WHILE ENDWHILE CALL ENDIF SUB ENDSUB GOTO REPEAT ENDREPEAT '\n      + 'EQ LT GT NE GE LE OR XOR'\n  };\n  const GCODE_START = {\n    className: 'meta',\n    begin: '([O])([0-9]+)'\n  };\n  const NUMBER = hljs.inherit(hljs.C_NUMBER_MODE, { begin: '([-+]?((\\\\.\\\\d+)|(\\\\d+)(\\\\.\\\\d*)?))|' + hljs.C_NUMBER_RE });\n  const GCODE_CODE = [\n    hljs.C_LINE_COMMENT_MODE,\n    hljs.C_BLOCK_COMMENT_MODE,\n    hljs.COMMENT(/\\(/, /\\)/),\n    NUMBER,\n    hljs.inherit(hljs.APOS_STRING_MODE, { illegal: null }),\n    hljs.inherit(hljs.QUOTE_STRING_MODE, { illegal: null }),\n    {\n      className: 'name',\n      begin: '([G])([0-9]+\\\\.?[0-9]?)'\n    },\n    {\n      className: 'name',\n      begin: '([M])([0-9]+\\\\.?[0-9]?)'\n    },\n    {\n      className: 'attr',\n      begin: '(VC|VS|#)',\n      end: '(\\\\d+)'\n    },\n    {\n      className: 'attr',\n      begin: '(VZOFX|VZOFY|VZOFZ)'\n    },\n    {\n      className: 'built_in',\n      begin: '(ATAN|ABS|ACOS|ASIN|SIN|COS|EXP|FIX|FUP|ROUND|LN|TAN)(\\\\[)',\n      contains: [ NUMBER ],\n      end: '\\\\]'\n    },\n    {\n      className: 'symbol',\n      variants: [\n        {\n          begin: 'N',\n          end: '\\\\d+',\n          illegal: '\\\\W'\n        }\n      ]\n    }\n  ];\n\n  return {\n    name: 'G-code (ISO 6983)',\n    aliases: [ 'nc' ],\n    // Some implementations (CNC controls) of G-code are interoperable with uppercase and lowercase letters seamlessly.\n    // However, most prefer all uppercase and uppercase is customary.\n    case_insensitive: true,\n    keywords: GCODE_KEYWORDS,\n    contains: [\n      {\n        className: 'meta',\n        begin: GCODE_CLOSE_RE\n      },\n      GCODE_START\n    ].concat(GCODE_CODE)\n  };\n}\n\nmodule.exports = gcode;\n",
-      "start": 1715466364940,
-      "end": 1715466364960,
+      "start": 1715636425798,
+      "end": 1715636425821,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1715466364960,
-      "end": 1715466364960,
+      "start": 1715636425821,
+      "end": 1715636425821,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1715466364960,
-      "end": 1715466364960,
+      "start": 1715636425821,
+      "end": 1715636425821,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1715466364960,
-      "end": 1715466364960,
+      "start": 1715636425821,
+      "end": 1715636425821,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1715466364960,
-      "end": 1715466364960,
+      "start": 1715636425821,
+      "end": 1715636425821,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1715466364960,
-      "end": 1715466364960,
+      "start": 1715636425821,
+      "end": 1715636425821,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1715466364960,
-      "end": 1715466364960,
+      "start": 1715636425821,
+      "end": 1715636425821,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1715466364960,
-      "end": 1715466364960,
+      "start": 1715636425821,
+      "end": 1715636425821,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1715466364960,
-      "end": 1715466364960,
+      "start": 1715636425821,
+      "end": 1715636425821,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1715466364960,
-      "end": 1715466364960,
+      "start": 1715636425821,
+      "end": 1715636425821,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1715466364960,
-      "end": 1715466364960,
+      "start": 1715636425821,
+      "end": 1715636425821,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1715466364960,
-      "end": 1715466364960,
+      "start": 1715636425821,
+      "end": 1715636425821,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1715466364960,
-      "end": 1715466364960,
+      "start": 1715636425821,
+      "end": 1715636425821,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1715466364960,
-      "end": 1715466364960,
+      "start": 1715636425821,
+      "end": 1715636425821,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1715466364960,
-      "end": 1715466364960,
+      "start": 1715636425821,
+      "end": 1715636425821,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1715466364960,
-      "end": 1715466364960,
+      "start": 1715636425821,
+      "end": 1715636425821,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1715466364960,
-      "end": 1715466364960,
+      "start": 1715636425821,
+      "end": 1715636425821,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1715466364960,
-      "end": 1715466364960,
+      "start": 1715636425821,
+      "end": 1715636425821,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1715466364960,
-      "end": 1715466364960,
+      "start": 1715636425821,
+      "end": 1715636425821,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1715466364960,
-      "end": 1715466364960,
+      "start": 1715636425821,
+      "end": 1715636425821,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1715466364960,
-      "end": 1715466364960,
+      "start": 1715636425821,
+      "end": 1715636425821,
       "order": "normal"
     },
     {
       "name": "commonjs",
       "result": "/*\n Language: G-code (ISO 6983)\n Contributors: Adam Joseph Cook <adam.joseph.cook@gmail.com>\n Description: G-code syntax highlighter for Fanuc and other common CNC machine tool controls.\n Website: https://www.sis.se/api/document/preview/911952/\n */\nimport * as commonjsHelpers from \"\u0000commonjsHelpers.js\";\n\nvar gcode_1;\nvar hasRequiredGcode;\n\nfunction requireGcode () {\n\tif (hasRequiredGcode) return gcode_1;\n\thasRequiredGcode = 1;\n\tfunction gcode(hljs) {\n\t  const GCODE_IDENT_RE = '[A-Z_][A-Z0-9_.]*';\n\t  const GCODE_CLOSE_RE = '%';\n\t  const GCODE_KEYWORDS = {\n\t    $pattern: GCODE_IDENT_RE,\n\t    keyword: 'IF DO WHILE ENDWHILE CALL ENDIF SUB ENDSUB GOTO REPEAT ENDREPEAT '\n\t      + 'EQ LT GT NE GE LE OR XOR'\n\t  };\n\t  const GCODE_START = {\n\t    className: 'meta',\n\t    begin: '([O])([0-9]+)'\n\t  };\n\t  const NUMBER = hljs.inherit(hljs.C_NUMBER_MODE, { begin: '([-+]?((\\\\.\\\\d+)|(\\\\d+)(\\\\.\\\\d*)?))|' + hljs.C_NUMBER_RE });\n\t  const GCODE_CODE = [\n\t    hljs.C_LINE_COMMENT_MODE,\n\t    hljs.C_BLOCK_COMMENT_MODE,\n\t    hljs.COMMENT(/\\(/, /\\)/),\n\t    NUMBER,\n\t    hljs.inherit(hljs.APOS_STRING_MODE, { illegal: null }),\n\t    hljs.inherit(hljs.QUOTE_STRING_MODE, { illegal: null }),\n\t    {\n\t      className: 'name',\n\t      begin: '([G])([0-9]+\\\\.?[0-9]?)'\n\t    },\n\t    {\n\t      className: 'name',\n\t      begin: '([M])([0-9]+\\\\.?[0-9]?)'\n\t    },\n\t    {\n\t      className: 'attr',\n\t      begin: '(VC|VS|#)',\n\t      end: '(\\\\d+)'\n\t    },\n\t    {\n\t      className: 'attr',\n\t      begin: '(VZOFX|VZOFY|VZOFZ)'\n\t    },\n\t    {\n\t      className: 'built_in',\n\t      begin: '(ATAN|ABS|ACOS|ASIN|SIN|COS|EXP|FIX|FUP|ROUND|LN|TAN)(\\\\[)',\n\t      contains: [ NUMBER ],\n\t      end: '\\\\]'\n\t    },\n\t    {\n\t      className: 'symbol',\n\t      variants: [\n\t        {\n\t          begin: 'N',\n\t          end: '\\\\d+',\n\t          illegal: '\\\\W'\n\t        }\n\t      ]\n\t    }\n\t  ];\n\n\t  return {\n\t    name: 'G-code (ISO 6983)',\n\t    aliases: [ 'nc' ],\n\t    // Some implementations (CNC controls) of G-code are interoperable with uppercase and lowercase letters seamlessly.\n\t    // However, most prefer all uppercase and uppercase is customary.\n\t    case_insensitive: true,\n\t    keywords: GCODE_KEYWORDS,\n\t    contains: [\n\t      {\n\t        className: 'meta',\n\t        begin: GCODE_CLOSE_RE\n\t      },\n\t      GCODE_START\n\t    ].concat(GCODE_CODE)\n\t  };\n\t}\n\n\tgcode_1 = gcode;\n\treturn gcode_1;\n}\n\nexport { requireGcode as __require };",
-      "start": 1715466364960,
-      "end": 1715466364960,
+      "start": 1715636425821,
+      "end": 1715636425822,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -149,74 +149,74 @@
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1715466364960,
-      "end": 1715466364960,
+      "start": 1715636425822,
+      "end": 1715636425822,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1715466364960,
-      "end": 1715466364960,
+      "start": 1715636425822,
+      "end": 1715636425822,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1715466364960,
-      "end": 1715466364960,
+      "start": 1715636425822,
+      "end": 1715636425822,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1715466364960,
-      "end": 1715466364960,
+      "start": 1715636425822,
+      "end": 1715636425822,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1715466364960,
-      "end": 1715466364960,
+      "start": 1715636425822,
+      "end": 1715636425822,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1715466364960,
-      "end": 1715466364960,
+      "start": 1715636425822,
+      "end": 1715636425822,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1715466364960,
-      "end": 1715466364960,
+      "start": 1715636425822,
+      "end": 1715636425822,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1715466364960,
-      "end": 1715466364960,
+      "start": 1715636425822,
+      "end": 1715636425822,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1715466364960,
-      "end": 1715466364960,
+      "start": 1715636425822,
+      "end": 1715636425822,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1715466364960,
-      "end": 1715466364960,
+      "start": 1715636425822,
+      "end": 1715636425822,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1715466364960,
-      "end": 1715466364960,
+      "start": 1715636425822,
+      "end": 1715636425822,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1715466364960,
-      "end": 1715466364960,
+      "start": 1715636425822,
+      "end": 1715636425822,
       "order": "normal"
     }
   ]

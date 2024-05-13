@@ -4,135 +4,135 @@
     {
       "name": "vite:load-fallback",
       "result": "const IDENT_RE = '[A-Za-z$_][0-9A-Za-z$_]*';\nconst KEYWORDS = [\n  \"as\", // for exports\n  \"in\",\n  \"of\",\n  \"if\",\n  \"for\",\n  \"while\",\n  \"finally\",\n  \"var\",\n  \"new\",\n  \"function\",\n  \"do\",\n  \"return\",\n  \"void\",\n  \"else\",\n  \"break\",\n  \"catch\",\n  \"instanceof\",\n  \"with\",\n  \"throw\",\n  \"case\",\n  \"default\",\n  \"try\",\n  \"switch\",\n  \"continue\",\n  \"typeof\",\n  \"delete\",\n  \"let\",\n  \"yield\",\n  \"const\",\n  \"class\",\n  // JS handles these with a special rule\n  // \"get\",\n  // \"set\",\n  \"debugger\",\n  \"async\",\n  \"await\",\n  \"static\",\n  \"import\",\n  \"from\",\n  \"export\",\n  \"extends\"\n];\nconst LITERALS = [\n  \"true\",\n  \"false\",\n  \"null\",\n  \"undefined\",\n  \"NaN\",\n  \"Infinity\"\n];\n\n// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects\nconst TYPES = [\n  // Fundamental objects\n  \"Object\",\n  \"Function\",\n  \"Boolean\",\n  \"Symbol\",\n  // numbers and dates\n  \"Math\",\n  \"Date\",\n  \"Number\",\n  \"BigInt\",\n  // text\n  \"String\",\n  \"RegExp\",\n  // Indexed collections\n  \"Array\",\n  \"Float32Array\",\n  \"Float64Array\",\n  \"Int8Array\",\n  \"Uint8Array\",\n  \"Uint8ClampedArray\",\n  \"Int16Array\",\n  \"Int32Array\",\n  \"Uint16Array\",\n  \"Uint32Array\",\n  \"BigInt64Array\",\n  \"BigUint64Array\",\n  // Keyed collections\n  \"Set\",\n  \"Map\",\n  \"WeakSet\",\n  \"WeakMap\",\n  // Structured data\n  \"ArrayBuffer\",\n  \"SharedArrayBuffer\",\n  \"Atomics\",\n  \"DataView\",\n  \"JSON\",\n  // Control abstraction objects\n  \"Promise\",\n  \"Generator\",\n  \"GeneratorFunction\",\n  \"AsyncFunction\",\n  // Reflection\n  \"Reflect\",\n  \"Proxy\",\n  // Internationalization\n  \"Intl\",\n  // WebAssembly\n  \"WebAssembly\"\n];\n\nconst ERROR_TYPES = [\n  \"Error\",\n  \"EvalError\",\n  \"InternalError\",\n  \"RangeError\",\n  \"ReferenceError\",\n  \"SyntaxError\",\n  \"TypeError\",\n  \"URIError\"\n];\n\nconst BUILT_IN_GLOBALS = [\n  \"setInterval\",\n  \"setTimeout\",\n  \"clearInterval\",\n  \"clearTimeout\",\n\n  \"require\",\n  \"exports\",\n\n  \"eval\",\n  \"isFinite\",\n  \"isNaN\",\n  \"parseFloat\",\n  \"parseInt\",\n  \"decodeURI\",\n  \"decodeURIComponent\",\n  \"encodeURI\",\n  \"encodeURIComponent\",\n  \"escape\",\n  \"unescape\"\n];\n\nconst BUILT_IN_VARIABLES = [\n  \"arguments\",\n  \"this\",\n  \"super\",\n  \"console\",\n  \"window\",\n  \"document\",\n  \"localStorage\",\n  \"sessionStorage\",\n  \"module\",\n  \"global\" // Node.js\n];\n\nconst BUILT_INS = [].concat(\n  BUILT_IN_GLOBALS,\n  TYPES,\n  ERROR_TYPES\n);\n\n/*\nLanguage: JavaScript\nDescription: JavaScript (JS) is a lightweight, interpreted, or just-in-time compiled programming language with first-class functions.\nCategory: common, scripting, web\nWebsite: https://developer.mozilla.org/en-US/docs/Web/JavaScript\n*/\n\n\n/** @type LanguageFn */\nfunction javascript(hljs) {\n  const regex = hljs.regex;\n  /**\n   * Takes a string like \"<Booger\" and checks to see\n   * if we can find a matching \"</Booger\" later in the\n   * content.\n   * @param {RegExpMatchArray} match\n   * @param {{after:number}} param1\n   */\n  const hasClosingTag = (match, { after }) => {\n    const tag = \"</\" + match[0].slice(1);\n    const pos = match.input.indexOf(tag, after);\n    return pos !== -1;\n  };\n\n  const IDENT_RE$1 = IDENT_RE;\n  const FRAGMENT = {\n    begin: '<>',\n    end: '</>'\n  };\n  // to avoid some special cases inside isTrulyOpeningTag\n  const XML_SELF_CLOSING = /<[A-Za-z0-9\\\\._:-]+\\s*\\/>/;\n  const XML_TAG = {\n    begin: /<[A-Za-z0-9\\\\._:-]+/,\n    end: /\\/[A-Za-z0-9\\\\._:-]+>|\\/>/,\n    /**\n     * @param {RegExpMatchArray} match\n     * @param {CallbackResponse} response\n     */\n    isTrulyOpeningTag: (match, response) => {\n      const afterMatchIndex = match[0].length + match.index;\n      const nextChar = match.input[afterMatchIndex];\n      if (\n        // HTML should not include another raw `<` inside a tag\n        // nested type?\n        // `<Array<Array<number>>`, etc.\n        nextChar === \"<\" ||\n        // the , gives away that this is not HTML\n        // `<T, A extends keyof T, V>`\n        nextChar === \",\"\n        ) {\n        response.ignoreMatch();\n        return;\n      }\n\n      // `<something>`\n      // Quite possibly a tag, lets look for a matching closing tag...\n      if (nextChar === \">\") {\n        // if we cannot find a matching closing tag, then we\n        // will ignore it\n        if (!hasClosingTag(match, { after: afterMatchIndex })) {\n          response.ignoreMatch();\n        }\n      }\n\n      // `<blah />` (self-closing)\n      // handled by simpleSelfClosing rule\n\n      let m;\n      const afterMatch = match.input.substring(afterMatchIndex);\n\n      // some more template typing stuff\n      //  <T = any>(key?: string) => Modify<\n      if ((m = afterMatch.match(/^\\s*=/))) {\n        response.ignoreMatch();\n        return;\n      }\n\n      // `<From extends string>`\n      // technically this could be HTML, but it smells like a type\n      // NOTE: This is ugh, but added specifically for https://github.com/highlightjs/highlight.js/issues/3276\n      if ((m = afterMatch.match(/^\\s+extends\\s+/))) {\n        if (m.index === 0) {\n          response.ignoreMatch();\n          // eslint-disable-next-line no-useless-return\n          return;\n        }\n      }\n    }\n  };\n  const KEYWORDS$1 = {\n    $pattern: IDENT_RE,\n    keyword: KEYWORDS,\n    literal: LITERALS,\n    built_in: BUILT_INS,\n    \"variable.language\": BUILT_IN_VARIABLES\n  };\n\n  // https://tc39.es/ecma262/#sec-literals-numeric-literals\n  const decimalDigits = '[0-9](_?[0-9])*';\n  const frac = `\\\\.(${decimalDigits})`;\n  // DecimalIntegerLiteral, including Annex B NonOctalDecimalIntegerLiteral\n  // https://tc39.es/ecma262/#sec-additional-syntax-numeric-literals\n  const decimalInteger = `0|[1-9](_?[0-9])*|0[0-7]*[89][0-9]*`;\n  const NUMBER = {\n    className: 'number',\n    variants: [\n      // DecimalLiteral\n      { begin: `(\\\\b(${decimalInteger})((${frac})|\\\\.)?|(${frac}))` +\n        `[eE][+-]?(${decimalDigits})\\\\b` },\n      { begin: `\\\\b(${decimalInteger})\\\\b((${frac})\\\\b|\\\\.)?|(${frac})\\\\b` },\n\n      // DecimalBigIntegerLiteral\n      { begin: `\\\\b(0|[1-9](_?[0-9])*)n\\\\b` },\n\n      // NonDecimalIntegerLiteral\n      { begin: \"\\\\b0[xX][0-9a-fA-F](_?[0-9a-fA-F])*n?\\\\b\" },\n      { begin: \"\\\\b0[bB][0-1](_?[0-1])*n?\\\\b\" },\n      { begin: \"\\\\b0[oO][0-7](_?[0-7])*n?\\\\b\" },\n\n      // LegacyOctalIntegerLiteral (does not include underscore separators)\n      // https://tc39.es/ecma262/#sec-additional-syntax-numeric-literals\n      { begin: \"\\\\b0[0-7]+n?\\\\b\" },\n    ],\n    relevance: 0\n  };\n\n  const SUBST = {\n    className: 'subst',\n    begin: '\\\\$\\\\{',\n    end: '\\\\}',\n    keywords: KEYWORDS$1,\n    contains: [] // defined later\n  };\n  const HTML_TEMPLATE = {\n    begin: 'html`',\n    end: '',\n    starts: {\n      end: '`',\n      returnEnd: false,\n      contains: [\n        hljs.BACKSLASH_ESCAPE,\n        SUBST\n      ],\n      subLanguage: 'xml'\n    }\n  };\n  const CSS_TEMPLATE = {\n    begin: 'css`',\n    end: '',\n    starts: {\n      end: '`',\n      returnEnd: false,\n      contains: [\n        hljs.BACKSLASH_ESCAPE,\n        SUBST\n      ],\n      subLanguage: 'css'\n    }\n  };\n  const GRAPHQL_TEMPLATE = {\n    begin: 'gql`',\n    end: '',\n    starts: {\n      end: '`',\n      returnEnd: false,\n      contains: [\n        hljs.BACKSLASH_ESCAPE,\n        SUBST\n      ],\n      subLanguage: 'graphql'\n    }\n  };\n  const TEMPLATE_STRING = {\n    className: 'string',\n    begin: '`',\n    end: '`',\n    contains: [\n      hljs.BACKSLASH_ESCAPE,\n      SUBST\n    ]\n  };\n  const JSDOC_COMMENT = hljs.COMMENT(\n    /\\/\\*\\*(?!\\/)/,\n    '\\\\*/',\n    {\n      relevance: 0,\n      contains: [\n        {\n          begin: '(?=@[A-Za-z]+)',\n          relevance: 0,\n          contains: [\n            {\n              className: 'doctag',\n              begin: '@[A-Za-z]+'\n            },\n            {\n              className: 'type',\n              begin: '\\\\{',\n              end: '\\\\}',\n              excludeEnd: true,\n              excludeBegin: true,\n              relevance: 0\n            },\n            {\n              className: 'variable',\n              begin: IDENT_RE$1 + '(?=\\\\s*(-)|$)',\n              endsParent: true,\n              relevance: 0\n            },\n            // eat spaces (not newlines) so we can find\n            // types or variables\n            {\n              begin: /(?=[^\\n])\\s/,\n              relevance: 0\n            }\n          ]\n        }\n      ]\n    }\n  );\n  const COMMENT = {\n    className: \"comment\",\n    variants: [\n      JSDOC_COMMENT,\n      hljs.C_BLOCK_COMMENT_MODE,\n      hljs.C_LINE_COMMENT_MODE\n    ]\n  };\n  const SUBST_INTERNALS = [\n    hljs.APOS_STRING_MODE,\n    hljs.QUOTE_STRING_MODE,\n    HTML_TEMPLATE,\n    CSS_TEMPLATE,\n    GRAPHQL_TEMPLATE,\n    TEMPLATE_STRING,\n    // Skip numbers when they are part of a variable name\n    { match: /\\$\\d+/ },\n    NUMBER,\n    // This is intentional:\n    // See https://github.com/highlightjs/highlight.js/issues/3288\n    // hljs.REGEXP_MODE\n  ];\n  SUBST.contains = SUBST_INTERNALS\n    .concat({\n      // we need to pair up {} inside our subst to prevent\n      // it from ending too early by matching another }\n      begin: /\\{/,\n      end: /\\}/,\n      keywords: KEYWORDS$1,\n      contains: [\n        \"self\"\n      ].concat(SUBST_INTERNALS)\n    });\n  const SUBST_AND_COMMENTS = [].concat(COMMENT, SUBST.contains);\n  const PARAMS_CONTAINS = SUBST_AND_COMMENTS.concat([\n    // eat recursive parens in sub expressions\n    {\n      begin: /\\(/,\n      end: /\\)/,\n      keywords: KEYWORDS$1,\n      contains: [\"self\"].concat(SUBST_AND_COMMENTS)\n    }\n  ]);\n  const PARAMS = {\n    className: 'params',\n    begin: /\\(/,\n    end: /\\)/,\n    excludeBegin: true,\n    excludeEnd: true,\n    keywords: KEYWORDS$1,\n    contains: PARAMS_CONTAINS\n  };\n\n  // ES6 classes\n  const CLASS_OR_EXTENDS = {\n    variants: [\n      // class Car extends vehicle\n      {\n        match: [\n          /class/,\n          /\\s+/,\n          IDENT_RE$1,\n          /\\s+/,\n          /extends/,\n          /\\s+/,\n          regex.concat(IDENT_RE$1, \"(\", regex.concat(/\\./, IDENT_RE$1), \")*\")\n        ],\n        scope: {\n          1: \"keyword\",\n          3: \"title.class\",\n          5: \"keyword\",\n          7: \"title.class.inherited\"\n        }\n      },\n      // class Car\n      {\n        match: [\n          /class/,\n          /\\s+/,\n          IDENT_RE$1\n        ],\n        scope: {\n          1: \"keyword\",\n          3: \"title.class\"\n        }\n      },\n\n    ]\n  };\n\n  const CLASS_REFERENCE = {\n    relevance: 0,\n    match:\n    regex.either(\n      // Hard coded exceptions\n      /\\bJSON/,\n      // Float32Array, OutT\n      /\\b[A-Z][a-z]+([A-Z][a-z]*|\\d)*/,\n      // CSSFactory, CSSFactoryT\n      /\\b[A-Z]{2,}([A-Z][a-z]+|\\d)+([A-Z][a-z]*)*/,\n      // FPs, FPsT\n      /\\b[A-Z]{2,}[a-z]+([A-Z][a-z]+|\\d)*([A-Z][a-z]*)*/,\n      // P\n      // single letters are not highlighted\n      // BLAH\n      // this will be flagged as a UPPER_CASE_CONSTANT instead\n    ),\n    className: \"title.class\",\n    keywords: {\n      _: [\n        // se we still get relevance credit for JS library classes\n        ...TYPES,\n        ...ERROR_TYPES\n      ]\n    }\n  };\n\n  const USE_STRICT = {\n    label: \"use_strict\",\n    className: 'meta',\n    relevance: 10,\n    begin: /^\\s*['\"]use (strict|asm)['\"]/\n  };\n\n  const FUNCTION_DEFINITION = {\n    variants: [\n      {\n        match: [\n          /function/,\n          /\\s+/,\n          IDENT_RE$1,\n          /(?=\\s*\\()/\n        ]\n      },\n      // anonymous function\n      {\n        match: [\n          /function/,\n          /\\s*(?=\\()/\n        ]\n      }\n    ],\n    className: {\n      1: \"keyword\",\n      3: \"title.function\"\n    },\n    label: \"func.def\",\n    contains: [ PARAMS ],\n    illegal: /%/\n  };\n\n  const UPPER_CASE_CONSTANT = {\n    relevance: 0,\n    match: /\\b[A-Z][A-Z_0-9]+\\b/,\n    className: \"variable.constant\"\n  };\n\n  function noneOf(list) {\n    return regex.concat(\"(?!\", list.join(\"|\"), \")\");\n  }\n\n  const FUNCTION_CALL = {\n    match: regex.concat(\n      /\\b/,\n      noneOf([\n        ...BUILT_IN_GLOBALS,\n        \"super\",\n        \"import\"\n      ]),\n      IDENT_RE$1, regex.lookahead(/\\(/)),\n    className: \"title.function\",\n    relevance: 0\n  };\n\n  const PROPERTY_ACCESS = {\n    begin: regex.concat(/\\./, regex.lookahead(\n      regex.concat(IDENT_RE$1, /(?![0-9A-Za-z$_(])/)\n    )),\n    end: IDENT_RE$1,\n    excludeBegin: true,\n    keywords: \"prototype\",\n    className: \"property\",\n    relevance: 0\n  };\n\n  const GETTER_OR_SETTER = {\n    match: [\n      /get|set/,\n      /\\s+/,\n      IDENT_RE$1,\n      /(?=\\()/\n    ],\n    className: {\n      1: \"keyword\",\n      3: \"title.function\"\n    },\n    contains: [\n      { // eat to avoid empty params\n        begin: /\\(\\)/\n      },\n      PARAMS\n    ]\n  };\n\n  const FUNC_LEAD_IN_RE = '(\\\\(' +\n    '[^()]*(\\\\(' +\n    '[^()]*(\\\\(' +\n    '[^()]*' +\n    '\\\\)[^()]*)*' +\n    '\\\\)[^()]*)*' +\n    '\\\\)|' + hljs.UNDERSCORE_IDENT_RE + ')\\\\s*=>';\n\n  const FUNCTION_VARIABLE = {\n    match: [\n      /const|var|let/, /\\s+/,\n      IDENT_RE$1, /\\s*/,\n      /=\\s*/,\n      /(async\\s*)?/, // async is optional\n      regex.lookahead(FUNC_LEAD_IN_RE)\n    ],\n    keywords: \"async\",\n    className: {\n      1: \"keyword\",\n      3: \"title.function\"\n    },\n    contains: [\n      PARAMS\n    ]\n  };\n\n  return {\n    name: 'JavaScript',\n    aliases: ['js', 'jsx', 'mjs', 'cjs'],\n    keywords: KEYWORDS$1,\n    // this will be extended by TypeScript\n    exports: { PARAMS_CONTAINS, CLASS_REFERENCE },\n    illegal: /#(?![$_A-z])/,\n    contains: [\n      hljs.SHEBANG({\n        label: \"shebang\",\n        binary: \"node\",\n        relevance: 5\n      }),\n      USE_STRICT,\n      hljs.APOS_STRING_MODE,\n      hljs.QUOTE_STRING_MODE,\n      HTML_TEMPLATE,\n      CSS_TEMPLATE,\n      GRAPHQL_TEMPLATE,\n      TEMPLATE_STRING,\n      COMMENT,\n      // Skip numbers when they are part of a variable name\n      { match: /\\$\\d+/ },\n      NUMBER,\n      CLASS_REFERENCE,\n      {\n        className: 'attr',\n        begin: IDENT_RE$1 + regex.lookahead(':'),\n        relevance: 0\n      },\n      FUNCTION_VARIABLE,\n      { // \"value\" container\n        begin: '(' + hljs.RE_STARTERS_RE + '|\\\\b(case|return|throw)\\\\b)\\\\s*',\n        keywords: 'return throw case',\n        relevance: 0,\n        contains: [\n          COMMENT,\n          hljs.REGEXP_MODE,\n          {\n            className: 'function',\n            // we have to count the parens to make sure we actually have the\n            // correct bounding ( ) before the =>.  There could be any number of\n            // sub-expressions inside also surrounded by parens.\n            begin: FUNC_LEAD_IN_RE,\n            returnBegin: true,\n            end: '\\\\s*=>',\n            contains: [\n              {\n                className: 'params',\n                variants: [\n                  {\n                    begin: hljs.UNDERSCORE_IDENT_RE,\n                    relevance: 0\n                  },\n                  {\n                    className: null,\n                    begin: /\\(\\s*\\)/,\n                    skip: true\n                  },\n                  {\n                    begin: /\\(/,\n                    end: /\\)/,\n                    excludeBegin: true,\n                    excludeEnd: true,\n                    keywords: KEYWORDS$1,\n                    contains: PARAMS_CONTAINS\n                  }\n                ]\n              }\n            ]\n          },\n          { // could be a comma delimited list of params to a function call\n            begin: /,/,\n            relevance: 0\n          },\n          {\n            match: /\\s+/,\n            relevance: 0\n          },\n          { // JSX\n            variants: [\n              { begin: FRAGMENT.begin, end: FRAGMENT.end },\n              { match: XML_SELF_CLOSING },\n              {\n                begin: XML_TAG.begin,\n                // we carefully check the opening tag to see if it truly\n                // is a tag and not a false positive\n                'on:begin': XML_TAG.isTrulyOpeningTag,\n                end: XML_TAG.end\n              }\n            ],\n            subLanguage: 'xml',\n            contains: [\n              {\n                begin: XML_TAG.begin,\n                end: XML_TAG.end,\n                skip: true,\n                contains: ['self']\n              }\n            ]\n          }\n        ],\n      },\n      FUNCTION_DEFINITION,\n      {\n        // prevent this from getting swallowed up by function\n        // since they appear \"function like\"\n        beginKeywords: \"while if switch catch for\"\n      },\n      {\n        // we have to count the parens to make sure we actually have the correct\n        // bounding ( ).  There could be any number of sub-expressions inside\n        // also surrounded by parens.\n        begin: '\\\\b(?!function)' + hljs.UNDERSCORE_IDENT_RE +\n          '\\\\(' + // first parens\n          '[^()]*(\\\\(' +\n            '[^()]*(\\\\(' +\n              '[^()]*' +\n            '\\\\)[^()]*)*' +\n          '\\\\)[^()]*)*' +\n          '\\\\)\\\\s*\\\\{', // end parens\n        returnBegin:true,\n        label: \"func.def\",\n        contains: [\n          PARAMS,\n          hljs.inherit(hljs.TITLE_MODE, { begin: IDENT_RE$1, className: \"title.function\" })\n        ]\n      },\n      // catch ... so it won't trigger the property rule below\n      {\n        match: /\\.\\.\\./,\n        relevance: 0\n      },\n      PROPERTY_ACCESS,\n      // hack: prevents detection of keywords in some circumstances\n      // .keyword()\n      // $keyword = x\n      {\n        match: '\\\\$' + IDENT_RE$1,\n        relevance: 0\n      },\n      {\n        match: [ /\\bconstructor(?=\\s*\\()/ ],\n        className: { 1: \"title.function\" },\n        contains: [ PARAMS ]\n      },\n      FUNCTION_CALL,\n      UPPER_CASE_CONSTANT,\n      CLASS_OR_EXTENDS,\n      GETTER_OR_SETTER,\n      {\n        match: /\\$[(.]/ // relevance booster for a pattern common to JS libs: `$(something)` and `$.something`\n      }\n    ]\n  };\n}\n\nmodule.exports = javascript;\n",
-      "start": 1715466364960,
-      "end": 1715466364995,
+      "start": 1715636425820,
+      "end": 1715636425844,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1715466364995,
-      "end": 1715466364995,
+      "start": 1715636425844,
+      "end": 1715636425844,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1715466364995,
-      "end": 1715466364995,
+      "start": 1715636425844,
+      "end": 1715636425844,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1715466364995,
-      "end": 1715466364995,
+      "start": 1715636425844,
+      "end": 1715636425844,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1715466364995,
-      "end": 1715466364995,
+      "start": 1715636425844,
+      "end": 1715636425844,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1715466364995,
-      "end": 1715466364995,
+      "start": 1715636425844,
+      "end": 1715636425844,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1715466364995,
-      "end": 1715466364995,
+      "start": 1715636425844,
+      "end": 1715636425844,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1715466364995,
-      "end": 1715466364995,
+      "start": 1715636425844,
+      "end": 1715636425844,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1715466364995,
-      "end": 1715466364995,
+      "start": 1715636425844,
+      "end": 1715636425844,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1715466364996,
-      "end": 1715466364996,
+      "start": 1715636425844,
+      "end": 1715636425844,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1715466364996,
-      "end": 1715466364996,
+      "start": 1715636425844,
+      "end": 1715636425844,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1715466364996,
-      "end": 1715466364996,
+      "start": 1715636425844,
+      "end": 1715636425844,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1715466364996,
-      "end": 1715466364996,
+      "start": 1715636425844,
+      "end": 1715636425844,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1715466364996,
-      "end": 1715466364996,
+      "start": 1715636425844,
+      "end": 1715636425844,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1715466364996,
-      "end": 1715466364996,
+      "start": 1715636425845,
+      "end": 1715636425845,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1715466364996,
-      "end": 1715466364996,
+      "start": 1715636425845,
+      "end": 1715636425845,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1715466364996,
-      "end": 1715466364996,
+      "start": 1715636425845,
+      "end": 1715636425845,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1715466364996,
-      "end": 1715466364996,
+      "start": 1715636425845,
+      "end": 1715636425845,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1715466364996,
-      "end": 1715466364996,
+      "start": 1715636425845,
+      "end": 1715636425845,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1715466364996,
-      "end": 1715466364996,
+      "start": 1715636425845,
+      "end": 1715636425845,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1715466364996,
-      "end": 1715466364996,
+      "start": 1715636425845,
+      "end": 1715636425845,
       "order": "normal"
     },
     {
       "name": "commonjs",
       "result": "import * as commonjsHelpers from \"\u0000commonjsHelpers.js\";\n\nvar javascript_1;\nvar hasRequiredJavascript;\n\nfunction requireJavascript () {\n\tif (hasRequiredJavascript) return javascript_1;\n\thasRequiredJavascript = 1;\n\tconst IDENT_RE = '[A-Za-z$_][0-9A-Za-z$_]*';\n\tconst KEYWORDS = [\n\t  \"as\", // for exports\n\t  \"in\",\n\t  \"of\",\n\t  \"if\",\n\t  \"for\",\n\t  \"while\",\n\t  \"finally\",\n\t  \"var\",\n\t  \"new\",\n\t  \"function\",\n\t  \"do\",\n\t  \"return\",\n\t  \"void\",\n\t  \"else\",\n\t  \"break\",\n\t  \"catch\",\n\t  \"instanceof\",\n\t  \"with\",\n\t  \"throw\",\n\t  \"case\",\n\t  \"default\",\n\t  \"try\",\n\t  \"switch\",\n\t  \"continue\",\n\t  \"typeof\",\n\t  \"delete\",\n\t  \"let\",\n\t  \"yield\",\n\t  \"const\",\n\t  \"class\",\n\t  // JS handles these with a special rule\n\t  // \"get\",\n\t  // \"set\",\n\t  \"debugger\",\n\t  \"async\",\n\t  \"await\",\n\t  \"static\",\n\t  \"import\",\n\t  \"from\",\n\t  \"export\",\n\t  \"extends\"\n\t];\n\tconst LITERALS = [\n\t  \"true\",\n\t  \"false\",\n\t  \"null\",\n\t  \"undefined\",\n\t  \"NaN\",\n\t  \"Infinity\"\n\t];\n\n\t// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects\n\tconst TYPES = [\n\t  // Fundamental objects\n\t  \"Object\",\n\t  \"Function\",\n\t  \"Boolean\",\n\t  \"Symbol\",\n\t  // numbers and dates\n\t  \"Math\",\n\t  \"Date\",\n\t  \"Number\",\n\t  \"BigInt\",\n\t  // text\n\t  \"String\",\n\t  \"RegExp\",\n\t  // Indexed collections\n\t  \"Array\",\n\t  \"Float32Array\",\n\t  \"Float64Array\",\n\t  \"Int8Array\",\n\t  \"Uint8Array\",\n\t  \"Uint8ClampedArray\",\n\t  \"Int16Array\",\n\t  \"Int32Array\",\n\t  \"Uint16Array\",\n\t  \"Uint32Array\",\n\t  \"BigInt64Array\",\n\t  \"BigUint64Array\",\n\t  // Keyed collections\n\t  \"Set\",\n\t  \"Map\",\n\t  \"WeakSet\",\n\t  \"WeakMap\",\n\t  // Structured data\n\t  \"ArrayBuffer\",\n\t  \"SharedArrayBuffer\",\n\t  \"Atomics\",\n\t  \"DataView\",\n\t  \"JSON\",\n\t  // Control abstraction objects\n\t  \"Promise\",\n\t  \"Generator\",\n\t  \"GeneratorFunction\",\n\t  \"AsyncFunction\",\n\t  // Reflection\n\t  \"Reflect\",\n\t  \"Proxy\",\n\t  // Internationalization\n\t  \"Intl\",\n\t  // WebAssembly\n\t  \"WebAssembly\"\n\t];\n\n\tconst ERROR_TYPES = [\n\t  \"Error\",\n\t  \"EvalError\",\n\t  \"InternalError\",\n\t  \"RangeError\",\n\t  \"ReferenceError\",\n\t  \"SyntaxError\",\n\t  \"TypeError\",\n\t  \"URIError\"\n\t];\n\n\tconst BUILT_IN_GLOBALS = [\n\t  \"setInterval\",\n\t  \"setTimeout\",\n\t  \"clearInterval\",\n\t  \"clearTimeout\",\n\n\t  \"require\",\n\t  \"exports\",\n\n\t  \"eval\",\n\t  \"isFinite\",\n\t  \"isNaN\",\n\t  \"parseFloat\",\n\t  \"parseInt\",\n\t  \"decodeURI\",\n\t  \"decodeURIComponent\",\n\t  \"encodeURI\",\n\t  \"encodeURIComponent\",\n\t  \"escape\",\n\t  \"unescape\"\n\t];\n\n\tconst BUILT_IN_VARIABLES = [\n\t  \"arguments\",\n\t  \"this\",\n\t  \"super\",\n\t  \"console\",\n\t  \"window\",\n\t  \"document\",\n\t  \"localStorage\",\n\t  \"sessionStorage\",\n\t  \"module\",\n\t  \"global\" // Node.js\n\t];\n\n\tconst BUILT_INS = [].concat(\n\t  BUILT_IN_GLOBALS,\n\t  TYPES,\n\t  ERROR_TYPES\n\t);\n\n\t/*\n\tLanguage: JavaScript\n\tDescription: JavaScript (JS) is a lightweight, interpreted, or just-in-time compiled programming language with first-class functions.\n\tCategory: common, scripting, web\n\tWebsite: https://developer.mozilla.org/en-US/docs/Web/JavaScript\n\t*/\n\n\n\t/** @type LanguageFn */\n\tfunction javascript(hljs) {\n\t  const regex = hljs.regex;\n\t  /**\n\t   * Takes a string like \"<Booger\" and checks to see\n\t   * if we can find a matching \"</Booger\" later in the\n\t   * content.\n\t   * @param {RegExpMatchArray} match\n\t   * @param {{after:number}} param1\n\t   */\n\t  const hasClosingTag = (match, { after }) => {\n\t    const tag = \"</\" + match[0].slice(1);\n\t    const pos = match.input.indexOf(tag, after);\n\t    return pos !== -1;\n\t  };\n\n\t  const IDENT_RE$1 = IDENT_RE;\n\t  const FRAGMENT = {\n\t    begin: '<>',\n\t    end: '</>'\n\t  };\n\t  // to avoid some special cases inside isTrulyOpeningTag\n\t  const XML_SELF_CLOSING = /<[A-Za-z0-9\\\\._:-]+\\s*\\/>/;\n\t  const XML_TAG = {\n\t    begin: /<[A-Za-z0-9\\\\._:-]+/,\n\t    end: /\\/[A-Za-z0-9\\\\._:-]+>|\\/>/,\n\t    /**\n\t     * @param {RegExpMatchArray} match\n\t     * @param {CallbackResponse} response\n\t     */\n\t    isTrulyOpeningTag: (match, response) => {\n\t      const afterMatchIndex = match[0].length + match.index;\n\t      const nextChar = match.input[afterMatchIndex];\n\t      if (\n\t        // HTML should not include another raw `<` inside a tag\n\t        // nested type?\n\t        // `<Array<Array<number>>`, etc.\n\t        nextChar === \"<\" ||\n\t        // the , gives away that this is not HTML\n\t        // `<T, A extends keyof T, V>`\n\t        nextChar === \",\"\n\t        ) {\n\t        response.ignoreMatch();\n\t        return;\n\t      }\n\n\t      // `<something>`\n\t      // Quite possibly a tag, lets look for a matching closing tag...\n\t      if (nextChar === \">\") {\n\t        // if we cannot find a matching closing tag, then we\n\t        // will ignore it\n\t        if (!hasClosingTag(match, { after: afterMatchIndex })) {\n\t          response.ignoreMatch();\n\t        }\n\t      }\n\n\t      // `<blah />` (self-closing)\n\t      // handled by simpleSelfClosing rule\n\n\t      let m;\n\t      const afterMatch = match.input.substring(afterMatchIndex);\n\n\t      // some more template typing stuff\n\t      //  <T = any>(key?: string) => Modify<\n\t      if ((m = afterMatch.match(/^\\s*=/))) {\n\t        response.ignoreMatch();\n\t        return;\n\t      }\n\n\t      // `<From extends string>`\n\t      // technically this could be HTML, but it smells like a type\n\t      // NOTE: This is ugh, but added specifically for https://github.com/highlightjs/highlight.js/issues/3276\n\t      if ((m = afterMatch.match(/^\\s+extends\\s+/))) {\n\t        if (m.index === 0) {\n\t          response.ignoreMatch();\n\t          // eslint-disable-next-line no-useless-return\n\t          return;\n\t        }\n\t      }\n\t    }\n\t  };\n\t  const KEYWORDS$1 = {\n\t    $pattern: IDENT_RE,\n\t    keyword: KEYWORDS,\n\t    literal: LITERALS,\n\t    built_in: BUILT_INS,\n\t    \"variable.language\": BUILT_IN_VARIABLES\n\t  };\n\n\t  // https://tc39.es/ecma262/#sec-literals-numeric-literals\n\t  const decimalDigits = '[0-9](_?[0-9])*';\n\t  const frac = `\\\\.(${decimalDigits})`;\n\t  // DecimalIntegerLiteral, including Annex B NonOctalDecimalIntegerLiteral\n\t  // https://tc39.es/ecma262/#sec-additional-syntax-numeric-literals\n\t  const decimalInteger = `0|[1-9](_?[0-9])*|0[0-7]*[89][0-9]*`;\n\t  const NUMBER = {\n\t    className: 'number',\n\t    variants: [\n\t      // DecimalLiteral\n\t      { begin: `(\\\\b(${decimalInteger})((${frac})|\\\\.)?|(${frac}))` +\n\t        `[eE][+-]?(${decimalDigits})\\\\b` },\n\t      { begin: `\\\\b(${decimalInteger})\\\\b((${frac})\\\\b|\\\\.)?|(${frac})\\\\b` },\n\n\t      // DecimalBigIntegerLiteral\n\t      { begin: `\\\\b(0|[1-9](_?[0-9])*)n\\\\b` },\n\n\t      // NonDecimalIntegerLiteral\n\t      { begin: \"\\\\b0[xX][0-9a-fA-F](_?[0-9a-fA-F])*n?\\\\b\" },\n\t      { begin: \"\\\\b0[bB][0-1](_?[0-1])*n?\\\\b\" },\n\t      { begin: \"\\\\b0[oO][0-7](_?[0-7])*n?\\\\b\" },\n\n\t      // LegacyOctalIntegerLiteral (does not include underscore separators)\n\t      // https://tc39.es/ecma262/#sec-additional-syntax-numeric-literals\n\t      { begin: \"\\\\b0[0-7]+n?\\\\b\" },\n\t    ],\n\t    relevance: 0\n\t  };\n\n\t  const SUBST = {\n\t    className: 'subst',\n\t    begin: '\\\\$\\\\{',\n\t    end: '\\\\}',\n\t    keywords: KEYWORDS$1,\n\t    contains: [] // defined later\n\t  };\n\t  const HTML_TEMPLATE = {\n\t    begin: 'html`',\n\t    end: '',\n\t    starts: {\n\t      end: '`',\n\t      returnEnd: false,\n\t      contains: [\n\t        hljs.BACKSLASH_ESCAPE,\n\t        SUBST\n\t      ],\n\t      subLanguage: 'xml'\n\t    }\n\t  };\n\t  const CSS_TEMPLATE = {\n\t    begin: 'css`',\n\t    end: '',\n\t    starts: {\n\t      end: '`',\n\t      returnEnd: false,\n\t      contains: [\n\t        hljs.BACKSLASH_ESCAPE,\n\t        SUBST\n\t      ],\n\t      subLanguage: 'css'\n\t    }\n\t  };\n\t  const GRAPHQL_TEMPLATE = {\n\t    begin: 'gql`',\n\t    end: '',\n\t    starts: {\n\t      end: '`',\n\t      returnEnd: false,\n\t      contains: [\n\t        hljs.BACKSLASH_ESCAPE,\n\t        SUBST\n\t      ],\n\t      subLanguage: 'graphql'\n\t    }\n\t  };\n\t  const TEMPLATE_STRING = {\n\t    className: 'string',\n\t    begin: '`',\n\t    end: '`',\n\t    contains: [\n\t      hljs.BACKSLASH_ESCAPE,\n\t      SUBST\n\t    ]\n\t  };\n\t  const JSDOC_COMMENT = hljs.COMMENT(\n\t    /\\/\\*\\*(?!\\/)/,\n\t    '\\\\*/',\n\t    {\n\t      relevance: 0,\n\t      contains: [\n\t        {\n\t          begin: '(?=@[A-Za-z]+)',\n\t          relevance: 0,\n\t          contains: [\n\t            {\n\t              className: 'doctag',\n\t              begin: '@[A-Za-z]+'\n\t            },\n\t            {\n\t              className: 'type',\n\t              begin: '\\\\{',\n\t              end: '\\\\}',\n\t              excludeEnd: true,\n\t              excludeBegin: true,\n\t              relevance: 0\n\t            },\n\t            {\n\t              className: 'variable',\n\t              begin: IDENT_RE$1 + '(?=\\\\s*(-)|$)',\n\t              endsParent: true,\n\t              relevance: 0\n\t            },\n\t            // eat spaces (not newlines) so we can find\n\t            // types or variables\n\t            {\n\t              begin: /(?=[^\\n])\\s/,\n\t              relevance: 0\n\t            }\n\t          ]\n\t        }\n\t      ]\n\t    }\n\t  );\n\t  const COMMENT = {\n\t    className: \"comment\",\n\t    variants: [\n\t      JSDOC_COMMENT,\n\t      hljs.C_BLOCK_COMMENT_MODE,\n\t      hljs.C_LINE_COMMENT_MODE\n\t    ]\n\t  };\n\t  const SUBST_INTERNALS = [\n\t    hljs.APOS_STRING_MODE,\n\t    hljs.QUOTE_STRING_MODE,\n\t    HTML_TEMPLATE,\n\t    CSS_TEMPLATE,\n\t    GRAPHQL_TEMPLATE,\n\t    TEMPLATE_STRING,\n\t    // Skip numbers when they are part of a variable name\n\t    { match: /\\$\\d+/ },\n\t    NUMBER,\n\t    // This is intentional:\n\t    // See https://github.com/highlightjs/highlight.js/issues/3288\n\t    // hljs.REGEXP_MODE\n\t  ];\n\t  SUBST.contains = SUBST_INTERNALS\n\t    .concat({\n\t      // we need to pair up {} inside our subst to prevent\n\t      // it from ending too early by matching another }\n\t      begin: /\\{/,\n\t      end: /\\}/,\n\t      keywords: KEYWORDS$1,\n\t      contains: [\n\t        \"self\"\n\t      ].concat(SUBST_INTERNALS)\n\t    });\n\t  const SUBST_AND_COMMENTS = [].concat(COMMENT, SUBST.contains);\n\t  const PARAMS_CONTAINS = SUBST_AND_COMMENTS.concat([\n\t    // eat recursive parens in sub expressions\n\t    {\n\t      begin: /\\(/,\n\t      end: /\\)/,\n\t      keywords: KEYWORDS$1,\n\t      contains: [\"self\"].concat(SUBST_AND_COMMENTS)\n\t    }\n\t  ]);\n\t  const PARAMS = {\n\t    className: 'params',\n\t    begin: /\\(/,\n\t    end: /\\)/,\n\t    excludeBegin: true,\n\t    excludeEnd: true,\n\t    keywords: KEYWORDS$1,\n\t    contains: PARAMS_CONTAINS\n\t  };\n\n\t  // ES6 classes\n\t  const CLASS_OR_EXTENDS = {\n\t    variants: [\n\t      // class Car extends vehicle\n\t      {\n\t        match: [\n\t          /class/,\n\t          /\\s+/,\n\t          IDENT_RE$1,\n\t          /\\s+/,\n\t          /extends/,\n\t          /\\s+/,\n\t          regex.concat(IDENT_RE$1, \"(\", regex.concat(/\\./, IDENT_RE$1), \")*\")\n\t        ],\n\t        scope: {\n\t          1: \"keyword\",\n\t          3: \"title.class\",\n\t          5: \"keyword\",\n\t          7: \"title.class.inherited\"\n\t        }\n\t      },\n\t      // class Car\n\t      {\n\t        match: [\n\t          /class/,\n\t          /\\s+/,\n\t          IDENT_RE$1\n\t        ],\n\t        scope: {\n\t          1: \"keyword\",\n\t          3: \"title.class\"\n\t        }\n\t      },\n\n\t    ]\n\t  };\n\n\t  const CLASS_REFERENCE = {\n\t    relevance: 0,\n\t    match:\n\t    regex.either(\n\t      // Hard coded exceptions\n\t      /\\bJSON/,\n\t      // Float32Array, OutT\n\t      /\\b[A-Z][a-z]+([A-Z][a-z]*|\\d)*/,\n\t      // CSSFactory, CSSFactoryT\n\t      /\\b[A-Z]{2,}([A-Z][a-z]+|\\d)+([A-Z][a-z]*)*/,\n\t      // FPs, FPsT\n\t      /\\b[A-Z]{2,}[a-z]+([A-Z][a-z]+|\\d)*([A-Z][a-z]*)*/,\n\t      // P\n\t      // single letters are not highlighted\n\t      // BLAH\n\t      // this will be flagged as a UPPER_CASE_CONSTANT instead\n\t    ),\n\t    className: \"title.class\",\n\t    keywords: {\n\t      _: [\n\t        // se we still get relevance credit for JS library classes\n\t        ...TYPES,\n\t        ...ERROR_TYPES\n\t      ]\n\t    }\n\t  };\n\n\t  const USE_STRICT = {\n\t    label: \"use_strict\",\n\t    className: 'meta',\n\t    relevance: 10,\n\t    begin: /^\\s*['\"]use (strict|asm)['\"]/\n\t  };\n\n\t  const FUNCTION_DEFINITION = {\n\t    variants: [\n\t      {\n\t        match: [\n\t          /function/,\n\t          /\\s+/,\n\t          IDENT_RE$1,\n\t          /(?=\\s*\\()/\n\t        ]\n\t      },\n\t      // anonymous function\n\t      {\n\t        match: [\n\t          /function/,\n\t          /\\s*(?=\\()/\n\t        ]\n\t      }\n\t    ],\n\t    className: {\n\t      1: \"keyword\",\n\t      3: \"title.function\"\n\t    },\n\t    label: \"func.def\",\n\t    contains: [ PARAMS ],\n\t    illegal: /%/\n\t  };\n\n\t  const UPPER_CASE_CONSTANT = {\n\t    relevance: 0,\n\t    match: /\\b[A-Z][A-Z_0-9]+\\b/,\n\t    className: \"variable.constant\"\n\t  };\n\n\t  function noneOf(list) {\n\t    return regex.concat(\"(?!\", list.join(\"|\"), \")\");\n\t  }\n\n\t  const FUNCTION_CALL = {\n\t    match: regex.concat(\n\t      /\\b/,\n\t      noneOf([\n\t        ...BUILT_IN_GLOBALS,\n\t        \"super\",\n\t        \"import\"\n\t      ]),\n\t      IDENT_RE$1, regex.lookahead(/\\(/)),\n\t    className: \"title.function\",\n\t    relevance: 0\n\t  };\n\n\t  const PROPERTY_ACCESS = {\n\t    begin: regex.concat(/\\./, regex.lookahead(\n\t      regex.concat(IDENT_RE$1, /(?![0-9A-Za-z$_(])/)\n\t    )),\n\t    end: IDENT_RE$1,\n\t    excludeBegin: true,\n\t    keywords: \"prototype\",\n\t    className: \"property\",\n\t    relevance: 0\n\t  };\n\n\t  const GETTER_OR_SETTER = {\n\t    match: [\n\t      /get|set/,\n\t      /\\s+/,\n\t      IDENT_RE$1,\n\t      /(?=\\()/\n\t    ],\n\t    className: {\n\t      1: \"keyword\",\n\t      3: \"title.function\"\n\t    },\n\t    contains: [\n\t      { // eat to avoid empty params\n\t        begin: /\\(\\)/\n\t      },\n\t      PARAMS\n\t    ]\n\t  };\n\n\t  const FUNC_LEAD_IN_RE = '(\\\\(' +\n\t    '[^()]*(\\\\(' +\n\t    '[^()]*(\\\\(' +\n\t    '[^()]*' +\n\t    '\\\\)[^()]*)*' +\n\t    '\\\\)[^()]*)*' +\n\t    '\\\\)|' + hljs.UNDERSCORE_IDENT_RE + ')\\\\s*=>';\n\n\t  const FUNCTION_VARIABLE = {\n\t    match: [\n\t      /const|var|let/, /\\s+/,\n\t      IDENT_RE$1, /\\s*/,\n\t      /=\\s*/,\n\t      /(async\\s*)?/, // async is optional\n\t      regex.lookahead(FUNC_LEAD_IN_RE)\n\t    ],\n\t    keywords: \"async\",\n\t    className: {\n\t      1: \"keyword\",\n\t      3: \"title.function\"\n\t    },\n\t    contains: [\n\t      PARAMS\n\t    ]\n\t  };\n\n\t  return {\n\t    name: 'JavaScript',\n\t    aliases: ['js', 'jsx', 'mjs', 'cjs'],\n\t    keywords: KEYWORDS$1,\n\t    // this will be extended by TypeScript\n\t    exports: { PARAMS_CONTAINS, CLASS_REFERENCE },\n\t    illegal: /#(?![$_A-z])/,\n\t    contains: [\n\t      hljs.SHEBANG({\n\t        label: \"shebang\",\n\t        binary: \"node\",\n\t        relevance: 5\n\t      }),\n\t      USE_STRICT,\n\t      hljs.APOS_STRING_MODE,\n\t      hljs.QUOTE_STRING_MODE,\n\t      HTML_TEMPLATE,\n\t      CSS_TEMPLATE,\n\t      GRAPHQL_TEMPLATE,\n\t      TEMPLATE_STRING,\n\t      COMMENT,\n\t      // Skip numbers when they are part of a variable name\n\t      { match: /\\$\\d+/ },\n\t      NUMBER,\n\t      CLASS_REFERENCE,\n\t      {\n\t        className: 'attr',\n\t        begin: IDENT_RE$1 + regex.lookahead(':'),\n\t        relevance: 0\n\t      },\n\t      FUNCTION_VARIABLE,\n\t      { // \"value\" container\n\t        begin: '(' + hljs.RE_STARTERS_RE + '|\\\\b(case|return|throw)\\\\b)\\\\s*',\n\t        keywords: 'return throw case',\n\t        relevance: 0,\n\t        contains: [\n\t          COMMENT,\n\t          hljs.REGEXP_MODE,\n\t          {\n\t            className: 'function',\n\t            // we have to count the parens to make sure we actually have the\n\t            // correct bounding ( ) before the =>.  There could be any number of\n\t            // sub-expressions inside also surrounded by parens.\n\t            begin: FUNC_LEAD_IN_RE,\n\t            returnBegin: true,\n\t            end: '\\\\s*=>',\n\t            contains: [\n\t              {\n\t                className: 'params',\n\t                variants: [\n\t                  {\n\t                    begin: hljs.UNDERSCORE_IDENT_RE,\n\t                    relevance: 0\n\t                  },\n\t                  {\n\t                    className: null,\n\t                    begin: /\\(\\s*\\)/,\n\t                    skip: true\n\t                  },\n\t                  {\n\t                    begin: /\\(/,\n\t                    end: /\\)/,\n\t                    excludeBegin: true,\n\t                    excludeEnd: true,\n\t                    keywords: KEYWORDS$1,\n\t                    contains: PARAMS_CONTAINS\n\t                  }\n\t                ]\n\t              }\n\t            ]\n\t          },\n\t          { // could be a comma delimited list of params to a function call\n\t            begin: /,/,\n\t            relevance: 0\n\t          },\n\t          {\n\t            match: /\\s+/,\n\t            relevance: 0\n\t          },\n\t          { // JSX\n\t            variants: [\n\t              { begin: FRAGMENT.begin, end: FRAGMENT.end },\n\t              { match: XML_SELF_CLOSING },\n\t              {\n\t                begin: XML_TAG.begin,\n\t                // we carefully check the opening tag to see if it truly\n\t                // is a tag and not a false positive\n\t                'on:begin': XML_TAG.isTrulyOpeningTag,\n\t                end: XML_TAG.end\n\t              }\n\t            ],\n\t            subLanguage: 'xml',\n\t            contains: [\n\t              {\n\t                begin: XML_TAG.begin,\n\t                end: XML_TAG.end,\n\t                skip: true,\n\t                contains: ['self']\n\t              }\n\t            ]\n\t          }\n\t        ],\n\t      },\n\t      FUNCTION_DEFINITION,\n\t      {\n\t        // prevent this from getting swallowed up by function\n\t        // since they appear \"function like\"\n\t        beginKeywords: \"while if switch catch for\"\n\t      },\n\t      {\n\t        // we have to count the parens to make sure we actually have the correct\n\t        // bounding ( ).  There could be any number of sub-expressions inside\n\t        // also surrounded by parens.\n\t        begin: '\\\\b(?!function)' + hljs.UNDERSCORE_IDENT_RE +\n\t          '\\\\(' + // first parens\n\t          '[^()]*(\\\\(' +\n\t            '[^()]*(\\\\(' +\n\t              '[^()]*' +\n\t            '\\\\)[^()]*)*' +\n\t          '\\\\)[^()]*)*' +\n\t          '\\\\)\\\\s*\\\\{', // end parens\n\t        returnBegin:true,\n\t        label: \"func.def\",\n\t        contains: [\n\t          PARAMS,\n\t          hljs.inherit(hljs.TITLE_MODE, { begin: IDENT_RE$1, className: \"title.function\" })\n\t        ]\n\t      },\n\t      // catch ... so it won't trigger the property rule below\n\t      {\n\t        match: /\\.\\.\\./,\n\t        relevance: 0\n\t      },\n\t      PROPERTY_ACCESS,\n\t      // hack: prevents detection of keywords in some circumstances\n\t      // .keyword()\n\t      // $keyword = x\n\t      {\n\t        match: '\\\\$' + IDENT_RE$1,\n\t        relevance: 0\n\t      },\n\t      {\n\t        match: [ /\\bconstructor(?=\\s*\\()/ ],\n\t        className: { 1: \"title.function\" },\n\t        contains: [ PARAMS ]\n\t      },\n\t      FUNCTION_CALL,\n\t      UPPER_CASE_CONSTANT,\n\t      CLASS_OR_EXTENDS,\n\t      GETTER_OR_SETTER,\n\t      {\n\t        match: /\\$[(.]/ // relevance booster for a pattern common to JS libs: `$(something)` and `$.something`\n\t      }\n\t    ]\n\t  };\n\t}\n\n\tjavascript_1 = javascript;\n\treturn javascript_1;\n}\n\nexport { requireJavascript as __require };",
-      "start": 1715466364996,
-      "end": 1715466364997,
+      "start": 1715636425845,
+      "end": 1715636425846,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -149,74 +149,74 @@
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1715466364997,
-      "end": 1715466364997,
+      "start": 1715636425846,
+      "end": 1715636425846,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1715466364997,
-      "end": 1715466364997,
+      "start": 1715636425846,
+      "end": 1715636425846,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1715466364997,
-      "end": 1715466364997,
+      "start": 1715636425846,
+      "end": 1715636425846,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1715466364997,
-      "end": 1715466364997,
+      "start": 1715636425846,
+      "end": 1715636425846,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1715466364997,
-      "end": 1715466364997,
+      "start": 1715636425846,
+      "end": 1715636425846,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1715466364997,
-      "end": 1715466364997,
+      "start": 1715636425846,
+      "end": 1715636425846,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1715466364997,
-      "end": 1715466364997,
+      "start": 1715636425846,
+      "end": 1715636425846,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1715466364997,
-      "end": 1715466364997,
+      "start": 1715636425846,
+      "end": 1715636425846,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1715466364997,
-      "end": 1715466364997,
+      "start": 1715636425846,
+      "end": 1715636425846,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1715466364997,
-      "end": 1715466364997,
+      "start": 1715636425846,
+      "end": 1715636425846,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1715466364997,
-      "end": 1715466364997,
+      "start": 1715636425846,
+      "end": 1715636425846,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1715466364997,
-      "end": 1715466364997,
+      "start": 1715636425846,
+      "end": 1715636425846,
       "order": "normal"
     }
   ]

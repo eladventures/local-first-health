@@ -4,135 +4,135 @@
     {
       "name": "vite:load-fallback",
       "result": "/*\nLanguage: Scala\nCategory: functional\nAuthor: Jan Berkel <jan.berkel@gmail.com>\nContributors: Erik Osheim <d_m@plastic-idolatry.com>\nWebsite: https://www.scala-lang.org\n*/\n\nfunction scala(hljs) {\n  const regex = hljs.regex;\n  const ANNOTATION = {\n    className: 'meta',\n    begin: '@[A-Za-z]+'\n  };\n\n  // used in strings for escaping/interpolation/substitution\n  const SUBST = {\n    className: 'subst',\n    variants: [\n      { begin: '\\\\$[A-Za-z0-9_]+' },\n      {\n        begin: /\\$\\{/,\n        end: /\\}/\n      }\n    ]\n  };\n\n  const STRING = {\n    className: 'string',\n    variants: [\n      {\n        begin: '\"\"\"',\n        end: '\"\"\"'\n      },\n      {\n        begin: '\"',\n        end: '\"',\n        illegal: '\\\\n',\n        contains: [ hljs.BACKSLASH_ESCAPE ]\n      },\n      {\n        begin: '[a-z]+\"',\n        end: '\"',\n        illegal: '\\\\n',\n        contains: [\n          hljs.BACKSLASH_ESCAPE,\n          SUBST\n        ]\n      },\n      {\n        className: 'string',\n        begin: '[a-z]+\"\"\"',\n        end: '\"\"\"',\n        contains: [ SUBST ],\n        relevance: 10\n      }\n    ]\n\n  };\n\n  const TYPE = {\n    className: 'type',\n    begin: '\\\\b[A-Z][A-Za-z0-9_]*',\n    relevance: 0\n  };\n\n  const NAME = {\n    className: 'title',\n    begin: /[^0-9\\n\\t \"'(),.`{}\\[\\]:;][^\\n\\t \"'(),.`{}\\[\\]:;]+|[^0-9\\n\\t \"'(),.`{}\\[\\]:;=]/,\n    relevance: 0\n  };\n\n  const CLASS = {\n    className: 'class',\n    beginKeywords: 'class object trait type',\n    end: /[:={\\[\\n;]/,\n    excludeEnd: true,\n    contains: [\n      hljs.C_LINE_COMMENT_MODE,\n      hljs.C_BLOCK_COMMENT_MODE,\n      {\n        beginKeywords: 'extends with',\n        relevance: 10\n      },\n      {\n        begin: /\\[/,\n        end: /\\]/,\n        excludeBegin: true,\n        excludeEnd: true,\n        relevance: 0,\n        contains: [ \n          TYPE, \n          hljs.C_LINE_COMMENT_MODE, \n          hljs.C_BLOCK_COMMENT_MODE, \n        ]\n      },\n      {\n        className: 'params',\n        begin: /\\(/,\n        end: /\\)/,\n        excludeBegin: true,\n        excludeEnd: true,\n        relevance: 0,\n        contains: [ \n          TYPE, \n          hljs.C_LINE_COMMENT_MODE, \n          hljs.C_BLOCK_COMMENT_MODE, \n        ]\n      },\n      NAME\n    ]\n  };\n\n  const METHOD = {\n    className: 'function',\n    beginKeywords: 'def',\n    end: regex.lookahead(/[:={\\[(\\n;]/),\n    contains: [ NAME ]\n  };\n\n  const EXTENSION = {\n    begin: [\n      /^\\s*/, // Is first token on the line\n      'extension',\n      /\\s+(?=[[(])/, // followed by at least one space and `[` or `(`\n    ],\n    beginScope: { 2: \"keyword\", }\n  };\n\n  const END = {\n    begin: [\n      /^\\s*/, // Is first token on the line\n      /end/,\n      /\\s+/,\n      /(extension\\b)?/, // `extension` is the only marker that follows an `end` that cannot be captured by another rule.\n    ],\n    beginScope: {\n      2: \"keyword\",\n      4: \"keyword\",\n    }\n  };\n\n  // TODO: use negative look-behind in future\n  //       /(?<!\\.)\\binline(?=\\s)/\n  const INLINE_MODES = [\n    { match: /\\.inline\\b/ },\n    {\n      begin: /\\binline(?=\\s)/,\n      keywords: 'inline'\n    }\n  ];\n\n  const USING_PARAM_CLAUSE = {\n    begin: [\n      /\\(\\s*/, // Opening `(` of a parameter or argument list\n      /using/,\n      /\\s+(?!\\))/, // Spaces not followed by `)`\n    ],\n    beginScope: { 2: \"keyword\", }\n  };\n\n  // glob all non-whitespace characters as a \"string\"\n  // sourced from https://github.com/scala/docs.scala-lang/pull/2845\n  const DIRECTIVE_VALUE = {\n    className: 'string',\n    begin: /\\S+/,\n  };\n\n  // directives\n  // sourced from https://github.com/scala/docs.scala-lang/pull/2845\n  const USING_DIRECTIVE = {\n    begin: [\n      '//>',\n      /\\s+/,\n      /using/,\n      /\\s+/,\n      /\\S+/\n    ],\n    beginScope: {\n      1: \"comment\",\n      3: \"keyword\",\n      5: \"type\"\n    },\n    end: /$/,\n    contains: [\n      DIRECTIVE_VALUE,\n    ]\n  };\n\n  return {\n    name: 'Scala',\n    keywords: {\n      literal: 'true false null',\n      keyword: 'type yield lazy override def with val var sealed abstract private trait object if then forSome for while do throw finally protected extends import final return else break new catch super class case package default try this match continue throws implicit export enum given transparent'\n    },\n    contains: [\n      USING_DIRECTIVE,\n      hljs.C_LINE_COMMENT_MODE,\n      hljs.C_BLOCK_COMMENT_MODE,\n      STRING,\n      TYPE,\n      METHOD,\n      CLASS,\n      hljs.C_NUMBER_MODE,\n      EXTENSION,\n      END,\n      ...INLINE_MODES,\n      USING_PARAM_CLAUSE,\n      ANNOTATION\n    ]\n  };\n}\n\nmodule.exports = scala;\n",
-      "start": 1715466365063,
-      "end": 1715466365080,
+      "start": 1715636425925,
+      "end": 1715636425944,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1715466365080,
-      "end": 1715466365080,
+      "start": 1715636425944,
+      "end": 1715636425944,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1715466365080,
-      "end": 1715466365080,
+      "start": 1715636425944,
+      "end": 1715636425944,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1715466365080,
-      "end": 1715466365080,
+      "start": 1715636425944,
+      "end": 1715636425944,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1715466365080,
-      "end": 1715466365080,
+      "start": 1715636425944,
+      "end": 1715636425944,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1715466365080,
-      "end": 1715466365080,
+      "start": 1715636425944,
+      "end": 1715636425944,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1715466365080,
-      "end": 1715466365080,
+      "start": 1715636425944,
+      "end": 1715636425944,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1715466365080,
-      "end": 1715466365080,
+      "start": 1715636425944,
+      "end": 1715636425944,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1715466365080,
-      "end": 1715466365080,
+      "start": 1715636425944,
+      "end": 1715636425944,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1715466365080,
-      "end": 1715466365080,
+      "start": 1715636425944,
+      "end": 1715636425944,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1715466365080,
-      "end": 1715466365080,
+      "start": 1715636425944,
+      "end": 1715636425944,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1715466365080,
-      "end": 1715466365080,
+      "start": 1715636425944,
+      "end": 1715636425944,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1715466365080,
-      "end": 1715466365080,
+      "start": 1715636425944,
+      "end": 1715636425944,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1715466365080,
-      "end": 1715466365080,
+      "start": 1715636425944,
+      "end": 1715636425944,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1715466365080,
-      "end": 1715466365080,
+      "start": 1715636425944,
+      "end": 1715636425944,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1715466365080,
-      "end": 1715466365080,
+      "start": 1715636425944,
+      "end": 1715636425944,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1715466365080,
-      "end": 1715466365080,
+      "start": 1715636425944,
+      "end": 1715636425945,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1715466365080,
-      "end": 1715466365080,
+      "start": 1715636425945,
+      "end": 1715636425945,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1715466365080,
-      "end": 1715466365080,
+      "start": 1715636425945,
+      "end": 1715636425945,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1715466365080,
-      "end": 1715466365080,
+      "start": 1715636425945,
+      "end": 1715636425945,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1715466365080,
-      "end": 1715466365080,
+      "start": 1715636425945,
+      "end": 1715636425945,
       "order": "normal"
     },
     {
       "name": "commonjs",
       "result": "/*\nLanguage: Scala\nCategory: functional\nAuthor: Jan Berkel <jan.berkel@gmail.com>\nContributors: Erik Osheim <d_m@plastic-idolatry.com>\nWebsite: https://www.scala-lang.org\n*/\nimport * as commonjsHelpers from \"\u0000commonjsHelpers.js\";\n\nvar scala_1;\nvar hasRequiredScala;\n\nfunction requireScala () {\n\tif (hasRequiredScala) return scala_1;\n\thasRequiredScala = 1;\n\tfunction scala(hljs) {\n\t  const regex = hljs.regex;\n\t  const ANNOTATION = {\n\t    className: 'meta',\n\t    begin: '@[A-Za-z]+'\n\t  };\n\n\t  // used in strings for escaping/interpolation/substitution\n\t  const SUBST = {\n\t    className: 'subst',\n\t    variants: [\n\t      { begin: '\\\\$[A-Za-z0-9_]+' },\n\t      {\n\t        begin: /\\$\\{/,\n\t        end: /\\}/\n\t      }\n\t    ]\n\t  };\n\n\t  const STRING = {\n\t    className: 'string',\n\t    variants: [\n\t      {\n\t        begin: '\"\"\"',\n\t        end: '\"\"\"'\n\t      },\n\t      {\n\t        begin: '\"',\n\t        end: '\"',\n\t        illegal: '\\\\n',\n\t        contains: [ hljs.BACKSLASH_ESCAPE ]\n\t      },\n\t      {\n\t        begin: '[a-z]+\"',\n\t        end: '\"',\n\t        illegal: '\\\\n',\n\t        contains: [\n\t          hljs.BACKSLASH_ESCAPE,\n\t          SUBST\n\t        ]\n\t      },\n\t      {\n\t        className: 'string',\n\t        begin: '[a-z]+\"\"\"',\n\t        end: '\"\"\"',\n\t        contains: [ SUBST ],\n\t        relevance: 10\n\t      }\n\t    ]\n\n\t  };\n\n\t  const TYPE = {\n\t    className: 'type',\n\t    begin: '\\\\b[A-Z][A-Za-z0-9_]*',\n\t    relevance: 0\n\t  };\n\n\t  const NAME = {\n\t    className: 'title',\n\t    begin: /[^0-9\\n\\t \"'(),.`{}\\[\\]:;][^\\n\\t \"'(),.`{}\\[\\]:;]+|[^0-9\\n\\t \"'(),.`{}\\[\\]:;=]/,\n\t    relevance: 0\n\t  };\n\n\t  const CLASS = {\n\t    className: 'class',\n\t    beginKeywords: 'class object trait type',\n\t    end: /[:={\\[\\n;]/,\n\t    excludeEnd: true,\n\t    contains: [\n\t      hljs.C_LINE_COMMENT_MODE,\n\t      hljs.C_BLOCK_COMMENT_MODE,\n\t      {\n\t        beginKeywords: 'extends with',\n\t        relevance: 10\n\t      },\n\t      {\n\t        begin: /\\[/,\n\t        end: /\\]/,\n\t        excludeBegin: true,\n\t        excludeEnd: true,\n\t        relevance: 0,\n\t        contains: [ \n\t          TYPE, \n\t          hljs.C_LINE_COMMENT_MODE, \n\t          hljs.C_BLOCK_COMMENT_MODE, \n\t        ]\n\t      },\n\t      {\n\t        className: 'params',\n\t        begin: /\\(/,\n\t        end: /\\)/,\n\t        excludeBegin: true,\n\t        excludeEnd: true,\n\t        relevance: 0,\n\t        contains: [ \n\t          TYPE, \n\t          hljs.C_LINE_COMMENT_MODE, \n\t          hljs.C_BLOCK_COMMENT_MODE, \n\t        ]\n\t      },\n\t      NAME\n\t    ]\n\t  };\n\n\t  const METHOD = {\n\t    className: 'function',\n\t    beginKeywords: 'def',\n\t    end: regex.lookahead(/[:={\\[(\\n;]/),\n\t    contains: [ NAME ]\n\t  };\n\n\t  const EXTENSION = {\n\t    begin: [\n\t      /^\\s*/, // Is first token on the line\n\t      'extension',\n\t      /\\s+(?=[[(])/, // followed by at least one space and `[` or `(`\n\t    ],\n\t    beginScope: { 2: \"keyword\", }\n\t  };\n\n\t  const END = {\n\t    begin: [\n\t      /^\\s*/, // Is first token on the line\n\t      /end/,\n\t      /\\s+/,\n\t      /(extension\\b)?/, // `extension` is the only marker that follows an `end` that cannot be captured by another rule.\n\t    ],\n\t    beginScope: {\n\t      2: \"keyword\",\n\t      4: \"keyword\",\n\t    }\n\t  };\n\n\t  // TODO: use negative look-behind in future\n\t  //       /(?<!\\.)\\binline(?=\\s)/\n\t  const INLINE_MODES = [\n\t    { match: /\\.inline\\b/ },\n\t    {\n\t      begin: /\\binline(?=\\s)/,\n\t      keywords: 'inline'\n\t    }\n\t  ];\n\n\t  const USING_PARAM_CLAUSE = {\n\t    begin: [\n\t      /\\(\\s*/, // Opening `(` of a parameter or argument list\n\t      /using/,\n\t      /\\s+(?!\\))/, // Spaces not followed by `)`\n\t    ],\n\t    beginScope: { 2: \"keyword\", }\n\t  };\n\n\t  // glob all non-whitespace characters as a \"string\"\n\t  // sourced from https://github.com/scala/docs.scala-lang/pull/2845\n\t  const DIRECTIVE_VALUE = {\n\t    className: 'string',\n\t    begin: /\\S+/,\n\t  };\n\n\t  // directives\n\t  // sourced from https://github.com/scala/docs.scala-lang/pull/2845\n\t  const USING_DIRECTIVE = {\n\t    begin: [\n\t      '//>',\n\t      /\\s+/,\n\t      /using/,\n\t      /\\s+/,\n\t      /\\S+/\n\t    ],\n\t    beginScope: {\n\t      1: \"comment\",\n\t      3: \"keyword\",\n\t      5: \"type\"\n\t    },\n\t    end: /$/,\n\t    contains: [\n\t      DIRECTIVE_VALUE,\n\t    ]\n\t  };\n\n\t  return {\n\t    name: 'Scala',\n\t    keywords: {\n\t      literal: 'true false null',\n\t      keyword: 'type yield lazy override def with val var sealed abstract private trait object if then forSome for while do throw finally protected extends import final return else break new catch super class case package default try this match continue throws implicit export enum given transparent'\n\t    },\n\t    contains: [\n\t      USING_DIRECTIVE,\n\t      hljs.C_LINE_COMMENT_MODE,\n\t      hljs.C_BLOCK_COMMENT_MODE,\n\t      STRING,\n\t      TYPE,\n\t      METHOD,\n\t      CLASS,\n\t      hljs.C_NUMBER_MODE,\n\t      EXTENSION,\n\t      END,\n\t      ...INLINE_MODES,\n\t      USING_PARAM_CLAUSE,\n\t      ANNOTATION\n\t    ]\n\t  };\n\t}\n\n\tscala_1 = scala;\n\treturn scala_1;\n}\n\nexport { requireScala as __require };",
-      "start": 1715466365080,
-      "end": 1715466365080,
+      "start": 1715636425945,
+      "end": 1715636425945,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -149,74 +149,74 @@
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1715466365080,
-      "end": 1715466365080,
+      "start": 1715636425945,
+      "end": 1715636425945,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1715466365080,
-      "end": 1715466365080,
+      "start": 1715636425945,
+      "end": 1715636425945,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1715466365080,
-      "end": 1715466365080,
+      "start": 1715636425945,
+      "end": 1715636425945,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1715466365080,
-      "end": 1715466365080,
+      "start": 1715636425945,
+      "end": 1715636425945,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1715466365080,
-      "end": 1715466365080,
+      "start": 1715636425945,
+      "end": 1715636425945,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1715466365080,
-      "end": 1715466365080,
+      "start": 1715636425945,
+      "end": 1715636425945,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1715466365080,
-      "end": 1715466365080,
+      "start": 1715636425945,
+      "end": 1715636425945,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1715466365080,
-      "end": 1715466365080,
+      "start": 1715636425945,
+      "end": 1715636425945,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1715466365080,
-      "end": 1715466365080,
+      "start": 1715636425945,
+      "end": 1715636425945,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1715466365080,
-      "end": 1715466365080,
+      "start": 1715636425945,
+      "end": 1715636425945,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1715466365080,
-      "end": 1715466365080,
+      "start": 1715636425945,
+      "end": 1715636425945,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1715466365080,
-      "end": 1715466365080,
+      "start": 1715636425945,
+      "end": 1715636425945,
       "order": "normal"
     }
   ]

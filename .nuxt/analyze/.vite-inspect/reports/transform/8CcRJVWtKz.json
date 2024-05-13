@@ -4,135 +4,135 @@
     {
       "name": "vite:load-fallback",
       "result": "/*\nLanguage: SubUnit\nAuthor: Sergey Bronnikov <sergeyb@bronevichok.ru>\nWebsite: https://pypi.org/project/python-subunit/\n*/\n\nfunction subunit(hljs) {\n  const DETAILS = {\n    className: 'string',\n    begin: '\\\\[\\n(multipart)?',\n    end: '\\\\]\\n'\n  };\n  const TIME = {\n    className: 'string',\n    begin: '\\\\d{4}-\\\\d{2}-\\\\d{2}(\\\\s+)\\\\d{2}:\\\\d{2}:\\\\d{2}\\.\\\\d+Z'\n  };\n  const PROGRESSVALUE = {\n    className: 'string',\n    begin: '(\\\\+|-)\\\\d+'\n  };\n  const KEYWORDS = {\n    className: 'keyword',\n    relevance: 10,\n    variants: [\n      { begin: '^(test|testing|success|successful|failure|error|skip|xfail|uxsuccess)(:?)\\\\s+(test)?' },\n      { begin: '^progress(:?)(\\\\s+)?(pop|push)?' },\n      { begin: '^tags:' },\n      { begin: '^time:' }\n    ]\n  };\n  return {\n    name: 'SubUnit',\n    case_insensitive: true,\n    contains: [\n      DETAILS,\n      TIME,\n      PROGRESSVALUE,\n      KEYWORDS\n    ]\n  };\n}\n\nmodule.exports = subunit;\n",
-      "start": 1715466365075,
-      "end": 1715466365101,
+      "start": 1715636425938,
+      "end": 1715636425965,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1715466365101,
-      "end": 1715466365101,
+      "start": 1715636425965,
+      "end": 1715636425965,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1715466365101,
-      "end": 1715466365101,
+      "start": 1715636425965,
+      "end": 1715636425965,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1715466365101,
-      "end": 1715466365101,
+      "start": 1715636425965,
+      "end": 1715636425965,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1715466365101,
-      "end": 1715466365101,
+      "start": 1715636425965,
+      "end": 1715636425965,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1715466365101,
-      "end": 1715466365101,
+      "start": 1715636425965,
+      "end": 1715636425965,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1715466365101,
-      "end": 1715466365101,
+      "start": 1715636425965,
+      "end": 1715636425965,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1715466365101,
-      "end": 1715466365101,
+      "start": 1715636425965,
+      "end": 1715636425965,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1715466365101,
-      "end": 1715466365101,
+      "start": 1715636425965,
+      "end": 1715636425965,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1715466365101,
-      "end": 1715466365101,
+      "start": 1715636425965,
+      "end": 1715636425965,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1715466365101,
-      "end": 1715466365101,
+      "start": 1715636425965,
+      "end": 1715636425965,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1715466365101,
-      "end": 1715466365101,
+      "start": 1715636425965,
+      "end": 1715636425965,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1715466365101,
-      "end": 1715466365101,
+      "start": 1715636425965,
+      "end": 1715636425965,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1715466365101,
-      "end": 1715466365101,
+      "start": 1715636425965,
+      "end": 1715636425965,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1715466365101,
-      "end": 1715466365101,
+      "start": 1715636425965,
+      "end": 1715636425965,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1715466365101,
-      "end": 1715466365101,
+      "start": 1715636425965,
+      "end": 1715636425965,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1715466365101,
-      "end": 1715466365101,
+      "start": 1715636425965,
+      "end": 1715636425965,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1715466365101,
-      "end": 1715466365101,
+      "start": 1715636425965,
+      "end": 1715636425965,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1715466365101,
-      "end": 1715466365101,
+      "start": 1715636425965,
+      "end": 1715636425965,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1715466365101,
-      "end": 1715466365101,
+      "start": 1715636425965,
+      "end": 1715636425965,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1715466365101,
-      "end": 1715466365101,
+      "start": 1715636425965,
+      "end": 1715636425965,
       "order": "normal"
     },
     {
       "name": "commonjs",
       "result": "/*\nLanguage: SubUnit\nAuthor: Sergey Bronnikov <sergeyb@bronevichok.ru>\nWebsite: https://pypi.org/project/python-subunit/\n*/\nimport * as commonjsHelpers from \"\u0000commonjsHelpers.js\";\n\nvar subunit_1;\nvar hasRequiredSubunit;\n\nfunction requireSubunit () {\n\tif (hasRequiredSubunit) return subunit_1;\n\thasRequiredSubunit = 1;\n\tfunction subunit(hljs) {\n\t  const DETAILS = {\n\t    className: 'string',\n\t    begin: '\\\\[\\n(multipart)?',\n\t    end: '\\\\]\\n'\n\t  };\n\t  const TIME = {\n\t    className: 'string',\n\t    begin: '\\\\d{4}-\\\\d{2}-\\\\d{2}(\\\\s+)\\\\d{2}:\\\\d{2}:\\\\d{2}\\.\\\\d+Z'\n\t  };\n\t  const PROGRESSVALUE = {\n\t    className: 'string',\n\t    begin: '(\\\\+|-)\\\\d+'\n\t  };\n\t  const KEYWORDS = {\n\t    className: 'keyword',\n\t    relevance: 10,\n\t    variants: [\n\t      { begin: '^(test|testing|success|successful|failure|error|skip|xfail|uxsuccess)(:?)\\\\s+(test)?' },\n\t      { begin: '^progress(:?)(\\\\s+)?(pop|push)?' },\n\t      { begin: '^tags:' },\n\t      { begin: '^time:' }\n\t    ]\n\t  };\n\t  return {\n\t    name: 'SubUnit',\n\t    case_insensitive: true,\n\t    contains: [\n\t      DETAILS,\n\t      TIME,\n\t      PROGRESSVALUE,\n\t      KEYWORDS\n\t    ]\n\t  };\n\t}\n\n\tsubunit_1 = subunit;\n\treturn subunit_1;\n}\n\nexport { requireSubunit as __require };",
-      "start": 1715466365101,
-      "end": 1715466365101,
+      "start": 1715636425965,
+      "end": 1715636425965,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -149,74 +149,74 @@
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1715466365101,
-      "end": 1715466365101,
+      "start": 1715636425965,
+      "end": 1715636425965,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1715466365101,
-      "end": 1715466365101,
+      "start": 1715636425965,
+      "end": 1715636425965,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1715466365101,
-      "end": 1715466365101,
+      "start": 1715636425965,
+      "end": 1715636425965,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1715466365101,
-      "end": 1715466365101,
+      "start": 1715636425965,
+      "end": 1715636425965,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1715466365101,
-      "end": 1715466365101,
+      "start": 1715636425965,
+      "end": 1715636425965,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1715466365101,
-      "end": 1715466365101,
+      "start": 1715636425965,
+      "end": 1715636425965,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1715466365101,
-      "end": 1715466365101,
+      "start": 1715636425965,
+      "end": 1715636425965,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1715466365101,
-      "end": 1715466365101,
+      "start": 1715636425965,
+      "end": 1715636425965,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1715466365101,
-      "end": 1715466365101,
+      "start": 1715636425965,
+      "end": 1715636425965,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1715466365101,
-      "end": 1715466365101,
+      "start": 1715636425965,
+      "end": 1715636425965,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1715466365101,
-      "end": 1715466365101,
+      "start": 1715636425965,
+      "end": 1715636425965,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1715466365101,
-      "end": 1715466365101,
+      "start": 1715636425965,
+      "end": 1715636425965,
       "order": "normal"
     }
   ]

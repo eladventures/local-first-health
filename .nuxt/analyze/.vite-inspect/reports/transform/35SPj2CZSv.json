@@ -4,135 +4,135 @@
     {
       "name": "vite:load-fallback",
       "result": "/*\nLanguage: Backus–Naur Form\nWebsite: https://en.wikipedia.org/wiki/Backus–Naur_form\nAuthor: Oleg Efimov <efimovov@gmail.com>\n*/\n\n/** @type LanguageFn */\nfunction bnf(hljs) {\n  return {\n    name: 'Backus–Naur Form',\n    contains: [\n      // Attribute\n      {\n        className: 'attribute',\n        begin: /</,\n        end: />/\n      },\n      // Specific\n      {\n        begin: /::=/,\n        end: /$/,\n        contains: [\n          {\n            begin: /</,\n            end: />/\n          },\n          // Common\n          hljs.C_LINE_COMMENT_MODE,\n          hljs.C_BLOCK_COMMENT_MODE,\n          hljs.APOS_STRING_MODE,\n          hljs.QUOTE_STRING_MODE\n        ]\n      }\n    ]\n  };\n}\n\nmodule.exports = bnf;\n",
-      "start": 1715466364872,
-      "end": 1715466364913,
+      "start": 1715636425721,
+      "end": 1715636425767,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1715466364913,
-      "end": 1715466364913,
+      "start": 1715636425767,
+      "end": 1715636425767,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1715466364913,
-      "end": 1715466364913,
+      "start": 1715636425767,
+      "end": 1715636425767,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1715466364913,
-      "end": 1715466364913,
+      "start": 1715636425767,
+      "end": 1715636425767,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1715466364913,
-      "end": 1715466364913,
+      "start": 1715636425767,
+      "end": 1715636425767,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1715466364913,
-      "end": 1715466364913,
+      "start": 1715636425767,
+      "end": 1715636425767,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1715466364913,
-      "end": 1715466364913,
+      "start": 1715636425767,
+      "end": 1715636425767,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1715466364913,
-      "end": 1715466364913,
+      "start": 1715636425767,
+      "end": 1715636425767,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1715466364913,
-      "end": 1715466364913,
+      "start": 1715636425767,
+      "end": 1715636425767,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1715466364913,
-      "end": 1715466364913,
+      "start": 1715636425767,
+      "end": 1715636425767,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1715466364913,
-      "end": 1715466364913,
+      "start": 1715636425767,
+      "end": 1715636425767,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1715466364913,
-      "end": 1715466364913,
+      "start": 1715636425767,
+      "end": 1715636425767,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1715466364913,
-      "end": 1715466364913,
+      "start": 1715636425768,
+      "end": 1715636425768,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1715466364913,
-      "end": 1715466364913,
+      "start": 1715636425768,
+      "end": 1715636425768,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1715466364913,
-      "end": 1715466364913,
+      "start": 1715636425768,
+      "end": 1715636425768,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1715466364913,
-      "end": 1715466364913,
+      "start": 1715636425768,
+      "end": 1715636425768,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1715466364913,
-      "end": 1715466364913,
+      "start": 1715636425768,
+      "end": 1715636425768,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1715466364913,
-      "end": 1715466364913,
+      "start": 1715636425768,
+      "end": 1715636425768,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1715466364913,
-      "end": 1715466364913,
+      "start": 1715636425768,
+      "end": 1715636425768,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1715466364913,
-      "end": 1715466364913,
+      "start": 1715636425768,
+      "end": 1715636425768,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1715466364913,
-      "end": 1715466364913,
+      "start": 1715636425768,
+      "end": 1715636425768,
       "order": "normal"
     },
     {
       "name": "commonjs",
       "result": "/*\nLanguage: Backus–Naur Form\nWebsite: https://en.wikipedia.org/wiki/Backus–Naur_form\nAuthor: Oleg Efimov <efimovov@gmail.com>\n*/\nimport * as commonjsHelpers from \"\u0000commonjsHelpers.js\";\n\nvar bnf_1;\nvar hasRequiredBnf;\n\nfunction requireBnf () {\n\tif (hasRequiredBnf) return bnf_1;\n\thasRequiredBnf = 1;\n\t/** @type LanguageFn */\n\tfunction bnf(hljs) {\n\t  return {\n\t    name: 'Backus–Naur Form',\n\t    contains: [\n\t      // Attribute\n\t      {\n\t        className: 'attribute',\n\t        begin: /</,\n\t        end: />/\n\t      },\n\t      // Specific\n\t      {\n\t        begin: /::=/,\n\t        end: /$/,\n\t        contains: [\n\t          {\n\t            begin: /</,\n\t            end: />/\n\t          },\n\t          // Common\n\t          hljs.C_LINE_COMMENT_MODE,\n\t          hljs.C_BLOCK_COMMENT_MODE,\n\t          hljs.APOS_STRING_MODE,\n\t          hljs.QUOTE_STRING_MODE\n\t        ]\n\t      }\n\t    ]\n\t  };\n\t}\n\n\tbnf_1 = bnf;\n\treturn bnf_1;\n}\n\nexport { requireBnf as __require };",
-      "start": 1715466364913,
-      "end": 1715466364913,
+      "start": 1715636425768,
+      "end": 1715636425768,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -149,74 +149,74 @@
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1715466364913,
-      "end": 1715466364913,
+      "start": 1715636425768,
+      "end": 1715636425768,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1715466364913,
-      "end": 1715466364913,
+      "start": 1715636425768,
+      "end": 1715636425768,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1715466364913,
-      "end": 1715466364913,
+      "start": 1715636425768,
+      "end": 1715636425768,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1715466364913,
-      "end": 1715466364913,
+      "start": 1715636425768,
+      "end": 1715636425768,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1715466364913,
-      "end": 1715466364913,
+      "start": 1715636425768,
+      "end": 1715636425768,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1715466364913,
-      "end": 1715466364913,
+      "start": 1715636425768,
+      "end": 1715636425768,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1715466364913,
-      "end": 1715466364913,
+      "start": 1715636425768,
+      "end": 1715636425768,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1715466364913,
-      "end": 1715466364913,
+      "start": 1715636425768,
+      "end": 1715636425768,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1715466364913,
-      "end": 1715466364913,
+      "start": 1715636425768,
+      "end": 1715636425768,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1715466364913,
-      "end": 1715466364913,
+      "start": 1715636425768,
+      "end": 1715636425768,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1715466364913,
-      "end": 1715466364913,
+      "start": 1715636425768,
+      "end": 1715636425768,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1715466364913,
-      "end": 1715466364913,
+      "start": 1715636425768,
+      "end": 1715636425768,
       "order": "normal"
     }
   ]

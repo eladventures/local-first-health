@@ -3,209 +3,221 @@
   "transforms": [
     {
       "name": "vite:asset",
-      "result": "export default \"__VITE_ASSET__a1983c97__\"",
-      "start": 1715466364328,
-      "end": 1715466364665,
-      "sourcemaps": null
-    },
-    {
-      "name": "nuxt:layer-aliasing",
-      "start": 1715466364665,
-      "end": 1715466364665,
-      "order": "pre"
-    },
-    {
-      "name": "nuxt:server-devonly:transform",
-      "start": 1715466364665,
-      "end": 1715466364665,
-      "order": "pre"
-    },
-    {
-      "name": "nuxt:client-fallback-auto-id",
-      "start": 1715466364665,
-      "end": 1715466364665,
-      "order": "pre"
-    },
-    {
-      "name": "vite:css",
-      "start": 1715466364665,
-      "end": 1715466364665,
-      "order": "normal"
-    },
-    {
-      "name": "vite:esbuild",
-      "start": 1715466364665,
-      "end": 1715466364665,
-      "order": "normal"
-    },
-    {
-      "name": "vite:json",
-      "start": 1715466364665,
-      "end": 1715466364665,
-      "order": "normal"
-    },
-    {
-      "name": "vite:worker",
-      "start": 1715466364665,
-      "end": 1715466364665,
-      "order": "normal"
-    },
-    {
-      "name": "vite:vue",
-      "start": 1715466364665,
-      "end": 1715466364665,
-      "order": "normal"
-    },
-    {
-      "name": "vite:vue-jsx",
-      "start": 1715466364665,
-      "end": 1715466364665,
-      "order": "normal"
-    },
-    {
-      "name": "replace",
-      "start": 1715466364665,
-      "end": 1715466364665,
-      "order": "normal"
-    },
-    {
-      "name": "nuxt:remove-plugin-metadata",
-      "start": 1715466364665,
-      "end": 1715466364665,
-      "order": "normal"
-    },
-    {
-      "name": "nuxt:chunk-error",
-      "start": 1715466364665,
-      "end": 1715466364665,
-      "order": "normal"
-    },
-    {
-      "name": "nuxt:components:imports",
-      "start": 1715466364665,
-      "end": 1715466364665,
-      "order": "normal"
-    },
-    {
-      "name": "replace",
-      "start": 1715466364665,
-      "end": 1715466364665,
-      "order": "normal"
-    },
-    {
-      "name": "ssr-styles",
-      "start": 1715466364665,
-      "end": 1715466364665,
-      "order": "normal"
-    },
-    {
-      "name": "vite:define",
-      "start": 1715466364665,
-      "end": 1715466364665,
-      "order": "normal"
-    },
-    {
-      "name": "vite:css-post",
-      "start": 1715466364665,
-      "end": 1715466364665,
-      "order": "normal"
-    },
-    {
-      "name": "vite:build-html",
-      "start": 1715466364665,
-      "end": 1715466364665,
-      "order": "normal"
-    },
-    {
-      "name": "vite:worker-import-meta-url",
-      "start": 1715466364665,
-      "end": 1715466364665,
-      "order": "normal"
-    },
-    {
-      "name": "vite:asset-import-meta-url",
-      "start": 1715466364665,
-      "end": 1715466364665,
-      "order": "normal"
-    },
-    {
-      "name": "commonjs",
-      "start": 1715466364665,
-      "end": 1715466364665,
-      "order": "normal"
-    },
-    {
-      "name": "vite:dynamic-import-vars",
-      "start": 1715466364665,
-      "end": 1715466364665,
-      "order": "normal"
-    },
-    {
-      "name": "vite:import-glob",
-      "start": 1715466364665,
-      "end": 1715466364665,
-      "order": "normal"
-    },
-    {
-      "name": "nuxt:composable-keys",
-      "start": 1715466364665,
-      "end": 1715466364665,
-      "order": "post"
-    },
-    {
-      "name": "nuxt:imports-transform",
-      "start": 1715466364665,
-      "end": 1715466364665,
-      "order": "post"
-    },
-    {
-      "name": "unctx:transform",
-      "start": 1715466364665,
-      "end": 1715466364665,
-      "order": "post"
-    },
-    {
-      "name": "nuxt:pages-macros-transform",
-      "start": 1715466364665,
-      "end": 1715466364665,
-      "order": "post"
-    },
-    {
-      "name": "nuxt:runtime-paths-dep",
-      "result": "import \"#build/paths.mjs\";export default \"__VITE_ASSET__a1983c97__\"",
-      "start": 1715466364665,
-      "end": 1715466364665,
-      "order": "post"
-    },
-    {
-      "name": "nuxt:route-injection-plugin",
-      "start": 1715466364665,
-      "end": 1715466364665,
-      "order": "post"
-    },
-    {
-      "name": "nuxt:components-loader",
-      "start": 1715466364665,
-      "end": 1715466364665,
-      "order": "post"
-    },
-    {
-      "name": "nuxt:tree-shake-composables:transform",
-      "start": 1715466364665,
-      "end": 1715466364665,
-      "order": "post"
-    },
-    {
-      "name": "vite:build-import-analysis",
-      "start": 1715466364665,
-      "end": 1715466364665,
-      "order": "normal"
-    },
-    {
-      "name": "vite:reporter",
-      "start": 1715466364665,
-      "end": 1715466364665,
-      "order": "normal"
+      "result": "[Error]",
+      "start": 1715636425434,
+      "end": 1715636425451,
+      "error": {
+        "message": "ENOENT: no such file or directory, open '/Users/eladventures/Desktop/codes/local-first-health/src/assets/images/local-first-health-doctors.png'",
+        "stack": [
+          {
+            "functionName": "async open",
+            "fileName": "node:internal/fs/promises",
+            "lineNumber": 638,
+            "columnNumber": 25,
+            "source": "    at async open (node:internal/fs/promises:638:25)"
+          },
+          {
+            "functionName": "async Object.readFile",
+            "fileName": "node:internal/fs/promises",
+            "lineNumber": 1251,
+            "columnNumber": 14,
+            "source": "    at async Object.readFile (node:internal/fs/promises:1251:14)"
+          },
+          {
+            "functionName": "async fileToBuiltUrl",
+            "fileName": "file:///Users/eladventures/Desktop/codes/local-first-health/node_modules/vite/dist/node/chunks/dep-41cf5ffd.js",
+            "lineNumber": 16283,
+            "columnNumber": 21,
+            "source": "    at async fileToBuiltUrl (file:///Users/eladventures/Desktop/codes/local-first-health/node_modules/vite/dist/node/chunks/dep-41cf5ffd.js:16283:21)"
+          },
+          {
+            "functionName": "async Object.load",
+            "fileName": "file:///Users/eladventures/Desktop/codes/local-first-health/node_modules/vite/dist/node/chunks/dep-41cf5ffd.js",
+            "lineNumber": 16164,
+            "columnNumber": 25,
+            "source": "    at async Object.load (file:///Users/eladventures/Desktop/codes/local-first-health/node_modules/vite/dist/node/chunks/dep-41cf5ffd.js:16164:25)"
+          },
+          {
+            "fileName": "async file:///Users/eladventures/Desktop/codes/local-first-health/node_modules/vite-plugin-inspect/dist/index.mjs",
+            "lineNumber": 402,
+            "columnNumber": 17,
+            "source": "    at async file:///Users/eladventures/Desktop/codes/local-first-health/node_modules/vite-plugin-inspect/dist/index.mjs:402:17"
+          },
+          {
+            "functionName": "async PluginDriver.hookFirstAndGetPlugin",
+            "fileName": "file:///Users/eladventures/Desktop/codes/local-first-health/node_modules/rollup/dist/es/shared/node-entry.js",
+            "lineNumber": 25444,
+            "columnNumber": 28,
+            "source": "    at async PluginDriver.hookFirstAndGetPlugin (file:///Users/eladventures/Desktop/codes/local-first-health/node_modules/rollup/dist/es/shared/node-entry.js:25444:28)"
+          },
+          {
+            "fileName": "async file:///Users/eladventures/Desktop/codes/local-first-health/node_modules/rollup/dist/es/shared/node-entry.js",
+            "lineNumber": 24611,
+            "columnNumber": 75,
+            "source": "    at async file:///Users/eladventures/Desktop/codes/local-first-health/node_modules/rollup/dist/es/shared/node-entry.js:24611:75"
+          },
+          {
+            "functionName": "async Queue.work",
+            "fileName": "file:///Users/eladventures/Desktop/codes/local-first-health/node_modules/rollup/dist/es/shared/node-entry.js",
+            "lineNumber": 25654,
+            "columnNumber": 32,
+            "source": "    at async Queue.work (file:///Users/eladventures/Desktop/codes/local-first-health/node_modules/rollup/dist/es/shared/node-entry.js:25654:32)"
+          }
+        ],
+        "raw": {
+          "errno": -2,
+          "code": "PLUGIN_ERROR",
+          "syscall": "open",
+          "path": "/Users/eladventures/Desktop/codes/local-first-health/src/assets/images/local-first-health-doctors.png",
+          "pluginCode": "ENOENT",
+          "plugin": "vite:asset",
+          "hook": "load",
+          "watchFiles": [
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/nuxt/dist/app/entry.js",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/nuxt/dist/app/nuxt.js",
+            "virtual:nuxt:/Users/eladventures/Desktop/codes/local-first-health/.nuxt/paths.mjs",
+            "virtual:nuxt:/Users/eladventures/Desktop/codes/local-first-health/.nuxt/fetch.mjs",
+            "virtual:nuxt:/Users/eladventures/Desktop/codes/local-first-health/.nuxt/plugins/client.mjs",
+            "virtual:nuxt:/Users/eladventures/Desktop/codes/local-first-health/.nuxt/root-component.mjs",
+            "virtual:nuxt:/Users/eladventures/Desktop/codes/local-first-health/.nuxt/nuxt.config.mjs",
+            "virtual:nuxt:/Users/eladventures/Desktop/codes/local-first-health/.nuxt/css.mjs",
+            "package.json",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/nuxt/dist/app/plugins/revive-payload.client.js",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/nuxt/dist/head/runtime/plugins/unhead.js",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/nuxt/dist/pages/runtime/plugins/router.js",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/nuxt/dist/app/plugins/payload.client.js",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/nuxt/dist/pages/runtime/plugins/prefetch.client.js",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/nuxt/dist/app/plugins/chunk-reload.client.js",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/nuxt/dist/app/plugins/check-outdated-build.client.js",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/ufo/dist/index.mjs",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/ofetch/dist/index.mjs",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/nuxt-gtag/dist/runtime/plugin.client.mjs",
+            "/Users/eladventures/Desktop/codes/local-first-health/src/plugins/aos.js",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/nuxt/dist/app/components/nuxt-root.vue",
+            "/Users/eladventures/Desktop/codes/local-first-health/src/assets/css/tailwind.css",
+            "virtual:nuxt:/Users/eladventures/Desktop/codes/local-first-health/.nuxt/components.plugin.mjs",
+            "virtual:nuxt:/Users/eladventures/Desktop/codes/local-first-health/.nuxt/nitro.client.mjs",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/nuxt/dist/app/composables/payload.js",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/nuxt/dist/app/composables/error.js",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/unctx/dist/index.mjs",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/destr/dist/index.mjs",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/@unhead/vue/dist/index.mjs",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/@unhead/dom/dist/index.mjs",
+            "virtual:nuxt:/Users/eladventures/Desktop/codes/local-first-health/.nuxt/unhead-plugins.mjs",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/h3/dist/index.mjs",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/nuxt/dist/app/composables/router.js",
+            "virtual:nuxt:/Users/eladventures/Desktop/codes/local-first-health/.nuxt/vue-router-stub.mjs",
+            "virtual:nuxt:/Users/eladventures/Desktop/codes/local-first-health/.nuxt/routes.mjs",
+            "virtual:nuxt:/Users/eladventures/Desktop/codes/local-first-health/.nuxt/router.options.mjs",
+            "virtual:nuxt:/Users/eladventures/Desktop/codes/local-first-health/.nuxt/middleware.mjs",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/nuxt/dist/app/composables/ready.js",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/nuxt/dist/app/composables/manifest.js",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/vue-router/dist/vue-router.mjs",
+            "/Users/eladventures/Desktop/codes/local-first-health/src/pages/index copy.vue?macro=true",
+            "/Users/eladventures/Desktop/codes/local-first-health/src/pages/index.vue?macro=true",
+            "/Users/eladventures/Desktop/codes/local-first-health/src/pages/index copy.vue",
+            "/Users/eladventures/Desktop/codes/local-first-health/src/pages/index.vue",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/nuxt/dist/pages/runtime/router.options.js",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/nuxt/dist/pages/runtime/validate.js",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/nuxt/dist/app/middleware/manifest-route-rule.js",
+            "/Users/eladventures/Desktop/codes/local-first-health/src/middleware/exclude-route.js",
+            "\u0000vite/preload-helper",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/nuxt/dist/app/composables/chunk.js",
+            "virtual:nuxt:/Users/eladventures/Desktop/codes/local-first-health/.nuxt/layouts.mjs",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/nuxt-gtag/dist/runtime/gtag.mjs",
+            "/Users/eladventures/Desktop/codes/local-first-health/package.json",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/aos/dist/aos.esm.js",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/aos/dist/aos.css",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/ofetch/dist/shared/ofetch.00501375.mjs",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/hookable/dist/index.mjs",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/nuxt/dist/app/components/injections.js",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/nuxt/dist/app/components/island-renderer.js",
+            "virtual:nuxt:/Users/eladventures/Desktop/codes/local-first-health/.nuxt/app-component.mjs",
+            "virtual:nuxt:/Users/eladventures/Desktop/codes/local-first-health/.nuxt/error-component.mjs",
+            "virtual:nuxt:/Users/eladventures/Desktop/codes/local-first-health/.nuxt/test-component-wrapper.mjs",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/@vue/runtime-dom/dist/runtime-dom.esm-bundler.js",
+            "/Users/eladventures/Desktop/codes/local-first-health/src/layouts/Default.vue",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/devalue/index.js",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/h3/node_modules/iron-webcrypto/dist/index.js",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/cookie-es/dist/index.mjs",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/radix3/dist/index.mjs",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/defu/dist/defu.mjs",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/uncrypto/dist/crypto.web.mjs",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/unenv/runtime/node/http/_request.mjs",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/unenv/runtime/node/http/_response.mjs",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/@unhead/shared/dist/index.mjs",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/unhead/dist/index.mjs",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/@unhead/vue/dist/shared/vue.cf295fb1.mjs",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/@unhead/vue/dist/shared/vue.f36acd1f.mjs",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/nuxt/dist/app/compat/idle-callback.js",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/nuxt/dist/pages/runtime/app.vue",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/nuxt/dist/app/components/nuxt-error-page.vue",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/nuxt/dist/app/components/test-component-wrapper.js",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/@vue/devtools-api/lib/esm/index.js",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/nuxt/dist/app/config.js",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/nuxt/dist/pages/runtime/composables.js",
+            "/Users/eladventures/Desktop/codes/local-first-health/src/assets/images/local-first-health-logo.png",
+            "/Users/eladventures/Desktop/codes/local-first-health/src/assets/images/local-first-health-footer.png",
+            "/Users/eladventures/Desktop/codes/local-first-health/src/assets/images/local-first-health-banner.png",
+            "/Users/eladventures/Desktop/codes/local-first-health/src/pages/index copy.vue?vue&type=style&index=0&scoped=d1b7076a&lang.css",
+            "\u0000plugin-vue:export-helper",
+            "/Users/eladventures/Desktop/codes/local-first-health/src/assets/images/local-first-health-problem-1.png",
+            "/Users/eladventures/Desktop/codes/local-first-health/src/assets/images/local-first-health-mission.png",
+            "/Users/eladventures/Desktop/codes/local-first-health/src/assets/images/local-first-health-what-is-local-first.png",
+            "/Users/eladventures/Desktop/codes/local-first-health/src/assets/images/local-first-health-story.png",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/nuxt/dist/app/components/utils.js",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/highlight.js/es/index.js",
+            "/Users/eladventures/Desktop/codes/local-first-health/src/assets/images/local-first-health-hands-2.png",
+            "/Users/eladventures/Desktop/codes/local-first-health/src/assets/images/local-first-health-frustrated.png",
+            "/Users/eladventures/Desktop/codes/local-first-health/src/assets/images/local-first-health-happy.png",
+            "/Users/eladventures/Desktop/codes/local-first-health/src/assets/images/local-first-health-papaya.png",
+            "/Users/eladventures/Desktop/codes/local-first-health/src/assets/images/local-first-health-suite.png",
+            "/Users/eladventures/Desktop/codes/local-first-health/src/assets/images/local-first-health-own-software-own-data.png",
+            "/Users/eladventures/Desktop/codes/local-first-health/src/assets/images/local-first-health-logo-footer.png",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/highlight.js/styles/atom-one-dark.css",
+            "/Users/eladventures/Desktop/codes/local-first-health/src/pages/index.vue?vue&type=style&index=0&scoped=42743fce&lang.css",
+            "/Users/eladventures/Desktop/codes/local-first-health/src/assets/images/local-first-health-suite-mycure-blue-apple.png",
+            "/Users/eladventures/Desktop/codes/local-first-health/src/assets/images/local-first-health-suite-parmazip-berry.png",
+            "/Users/eladventures/Desktop/codes/local-first-health/src/assets/images/local-first-health-suite-ospitalis-green-coco.png",
+            "/Users/eladventures/Desktop/codes/local-first-health/src/assets/images/local-first-health-suite-easyjoey-durian.png",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/nuxt/dist/app/index.js",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/lodash.throttle/index.js",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/lodash.debounce/index.js",
+            "virtual:nuxt:/Users/eladventures/Desktop/codes/local-first-health/.nuxt/components.islands.mjs",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/devalue/src/uneval.js",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/devalue/src/parse.js",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/devalue/src/stringify.js",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/@vue/runtime-core/dist/runtime-core.esm-bundler.js",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/@vue/shared/dist/shared.esm-bundler.js",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/unenv/runtime/node/net/socket.mjs",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/unenv/runtime/node/stream/readable.mjs",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/unenv/runtime/_internal/utils.mjs",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/unenv/runtime/node/stream/writable.mjs",
+            "/Users/eladventures/Desktop/codes/local-first-health/src/assets/images/local-first-health-doctors.png",
+            "/Users/eladventures/Desktop/codes/local-first-health/src/assets/images/local-first-health-problem-2.png",
+            "/Users/eladventures/Desktop/codes/local-first-health/src/assets/images/local-first-health-problem-3.png",
+            "/Users/eladventures/Desktop/codes/local-first-health/src/assets/images/local-first-health-result.png",
+            "/Users/eladventures/Desktop/codes/local-first-health/src/assets/images/local-first-health-health-suite.png",
+            "/Users/eladventures/Desktop/codes/local-first-health/src/assets/images/local-first-health-own-the-software.png",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/nuxt/dist/pages/runtime/page.js",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/nuxt/dist/app/components/nuxt-layout.js",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/@nuxt/ui-templates/dist/templates/error-404.vue",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/@nuxt/ui-templates/dist/templates/error-dev.vue",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/@nuxt/ui-templates/dist/templates/error-500.vue",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/klona/dist/index.mjs",
+            "/Users/eladventures/Desktop/codes/local-first-health/.nuxt/app.config.mjs",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/@vue/devtools-api/lib/esm/env.js",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/@vue/devtools-api/lib/esm/const.js",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/@vue/devtools-api/lib/esm/proxy.js",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/@vue/devtools-api/lib/esm/api/index.js",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/@vue/devtools-api/lib/esm/plugin.js",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/@vue/devtools-api/lib/esm/time.js",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/pathe/dist/index.mjs",
+            "/Users/eladventures/Desktop/codes/local-first-health/node_modules/highlight.js/lib/index.js"
+          ]
+        }
+      }
     }
   ]
 }
