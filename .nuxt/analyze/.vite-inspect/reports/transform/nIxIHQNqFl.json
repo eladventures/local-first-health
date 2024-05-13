@@ -4,135 +4,135 @@
     {
       "name": "vite:load-fallback",
       "result": "const KEYWORDS = [\n  \"as\", // for exports\n  \"in\",\n  \"of\",\n  \"if\",\n  \"for\",\n  \"while\",\n  \"finally\",\n  \"var\",\n  \"new\",\n  \"function\",\n  \"do\",\n  \"return\",\n  \"void\",\n  \"else\",\n  \"break\",\n  \"catch\",\n  \"instanceof\",\n  \"with\",\n  \"throw\",\n  \"case\",\n  \"default\",\n  \"try\",\n  \"switch\",\n  \"continue\",\n  \"typeof\",\n  \"delete\",\n  \"let\",\n  \"yield\",\n  \"const\",\n  \"class\",\n  // JS handles these with a special rule\n  // \"get\",\n  // \"set\",\n  \"debugger\",\n  \"async\",\n  \"await\",\n  \"static\",\n  \"import\",\n  \"from\",\n  \"export\",\n  \"extends\"\n];\nconst LITERALS = [\n  \"true\",\n  \"false\",\n  \"null\",\n  \"undefined\",\n  \"NaN\",\n  \"Infinity\"\n];\n\n// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects\nconst TYPES = [\n  // Fundamental objects\n  \"Object\",\n  \"Function\",\n  \"Boolean\",\n  \"Symbol\",\n  // numbers and dates\n  \"Math\",\n  \"Date\",\n  \"Number\",\n  \"BigInt\",\n  // text\n  \"String\",\n  \"RegExp\",\n  // Indexed collections\n  \"Array\",\n  \"Float32Array\",\n  \"Float64Array\",\n  \"Int8Array\",\n  \"Uint8Array\",\n  \"Uint8ClampedArray\",\n  \"Int16Array\",\n  \"Int32Array\",\n  \"Uint16Array\",\n  \"Uint32Array\",\n  \"BigInt64Array\",\n  \"BigUint64Array\",\n  // Keyed collections\n  \"Set\",\n  \"Map\",\n  \"WeakSet\",\n  \"WeakMap\",\n  // Structured data\n  \"ArrayBuffer\",\n  \"SharedArrayBuffer\",\n  \"Atomics\",\n  \"DataView\",\n  \"JSON\",\n  // Control abstraction objects\n  \"Promise\",\n  \"Generator\",\n  \"GeneratorFunction\",\n  \"AsyncFunction\",\n  // Reflection\n  \"Reflect\",\n  \"Proxy\",\n  // Internationalization\n  \"Intl\",\n  // WebAssembly\n  \"WebAssembly\"\n];\n\nconst ERROR_TYPES = [\n  \"Error\",\n  \"EvalError\",\n  \"InternalError\",\n  \"RangeError\",\n  \"ReferenceError\",\n  \"SyntaxError\",\n  \"TypeError\",\n  \"URIError\"\n];\n\nconst BUILT_IN_GLOBALS = [\n  \"setInterval\",\n  \"setTimeout\",\n  \"clearInterval\",\n  \"clearTimeout\",\n\n  \"require\",\n  \"exports\",\n\n  \"eval\",\n  \"isFinite\",\n  \"isNaN\",\n  \"parseFloat\",\n  \"parseInt\",\n  \"decodeURI\",\n  \"decodeURIComponent\",\n  \"encodeURI\",\n  \"encodeURIComponent\",\n  \"escape\",\n  \"unescape\"\n];\n\nconst BUILT_INS = [].concat(\n  BUILT_IN_GLOBALS,\n  TYPES,\n  ERROR_TYPES\n);\n\n/*\nLanguage: LiveScript\nAuthor: Taneli Vatanen <taneli.vatanen@gmail.com>\nContributors: Jen Evers-Corvina <jen@sevvie.net>\nOrigin: coffeescript.js\nDescription: LiveScript is a programming language that transcompiles to JavaScript. For info about language see http://livescript.net/\nWebsite: https://livescript.net\nCategory: scripting\n*/\n\n\nfunction livescript(hljs) {\n  const LIVESCRIPT_BUILT_INS = [\n    'npm',\n    'print'\n  ];\n  const LIVESCRIPT_LITERALS = [\n    'yes',\n    'no',\n    'on',\n    'off',\n    'it',\n    'that',\n    'void'\n  ];\n  const LIVESCRIPT_KEYWORDS = [\n    'then',\n    'unless',\n    'until',\n    'loop',\n    'of',\n    'by',\n    'when',\n    'and',\n    'or',\n    'is',\n    'isnt',\n    'not',\n    'it',\n    'that',\n    'otherwise',\n    'from',\n    'to',\n    'til',\n    'fallthrough',\n    'case',\n    'enum',\n    'native',\n    'list',\n    'map',\n    '__hasProp',\n    '__extends',\n    '__slice',\n    '__bind',\n    '__indexOf'\n  ];\n  const KEYWORDS$1 = {\n    keyword: KEYWORDS.concat(LIVESCRIPT_KEYWORDS),\n    literal: LITERALS.concat(LIVESCRIPT_LITERALS),\n    built_in: BUILT_INS.concat(LIVESCRIPT_BUILT_INS)\n  };\n  const JS_IDENT_RE = '[A-Za-z$_](?:-[0-9A-Za-z$_]|[0-9A-Za-z$_])*';\n  const TITLE = hljs.inherit(hljs.TITLE_MODE, { begin: JS_IDENT_RE });\n  const SUBST = {\n    className: 'subst',\n    begin: /#\\{/,\n    end: /\\}/,\n    keywords: KEYWORDS$1\n  };\n  const SUBST_SIMPLE = {\n    className: 'subst',\n    begin: /#[A-Za-z$_]/,\n    end: /(?:-[0-9A-Za-z$_]|[0-9A-Za-z$_])*/,\n    keywords: KEYWORDS$1\n  };\n  const EXPRESSIONS = [\n    hljs.BINARY_NUMBER_MODE,\n    {\n      className: 'number',\n      begin: '(\\\\b0[xX][a-fA-F0-9_]+)|(\\\\b\\\\d(\\\\d|_\\\\d)*(\\\\.(\\\\d(\\\\d|_\\\\d)*)?)?(_*[eE]([-+]\\\\d(_\\\\d|\\\\d)*)?)?[_a-z]*)',\n      relevance: 0,\n      starts: {\n        end: '(\\\\s*/)?',\n        relevance: 0\n      } // a number tries to eat the following slash to prevent treating it as a regexp\n    },\n    {\n      className: 'string',\n      variants: [\n        {\n          begin: /'''/,\n          end: /'''/,\n          contains: [ hljs.BACKSLASH_ESCAPE ]\n        },\n        {\n          begin: /'/,\n          end: /'/,\n          contains: [ hljs.BACKSLASH_ESCAPE ]\n        },\n        {\n          begin: /\"\"\"/,\n          end: /\"\"\"/,\n          contains: [\n            hljs.BACKSLASH_ESCAPE,\n            SUBST,\n            SUBST_SIMPLE\n          ]\n        },\n        {\n          begin: /\"/,\n          end: /\"/,\n          contains: [\n            hljs.BACKSLASH_ESCAPE,\n            SUBST,\n            SUBST_SIMPLE\n          ]\n        },\n        {\n          begin: /\\\\/,\n          end: /(\\s|$)/,\n          excludeEnd: true\n        }\n      ]\n    },\n    {\n      className: 'regexp',\n      variants: [\n        {\n          begin: '//',\n          end: '//[gim]*',\n          contains: [\n            SUBST,\n            hljs.HASH_COMMENT_MODE\n          ]\n        },\n        {\n          // regex can't start with space to parse x / 2 / 3 as two divisions\n          // regex can't start with *, and it supports an \"illegal\" in the main mode\n          begin: /\\/(?![ *])(\\\\.|[^\\\\\\n])*?\\/[gim]*(?=\\W)/ }\n      ]\n    },\n    { begin: '@' + JS_IDENT_RE },\n    {\n      begin: '``',\n      end: '``',\n      excludeBegin: true,\n      excludeEnd: true,\n      subLanguage: 'javascript'\n    }\n  ];\n  SUBST.contains = EXPRESSIONS;\n\n  const PARAMS = {\n    className: 'params',\n    begin: '\\\\(',\n    returnBegin: true,\n    /* We need another contained nameless mode to not have every nested\n    pair of parens to be called \"params\" */\n    contains: [\n      {\n        begin: /\\(/,\n        end: /\\)/,\n        keywords: KEYWORDS$1,\n        contains: [ 'self' ].concat(EXPRESSIONS)\n      }\n    ]\n  };\n\n  const SYMBOLS = { begin: '(#=>|=>|\\\\|>>|-?->|!->)' };\n\n  const CLASS_DEFINITION = {\n    variants: [\n      { match: [\n        /class\\s+/,\n        JS_IDENT_RE,\n        /\\s+extends\\s+/,\n        JS_IDENT_RE\n      ] },\n      { match: [\n        /class\\s+/,\n        JS_IDENT_RE\n      ] }\n    ],\n    scope: {\n      2: \"title.class\",\n      4: \"title.class.inherited\"\n    },\n    keywords: KEYWORDS$1\n  };\n\n  return {\n    name: 'LiveScript',\n    aliases: [ 'ls' ],\n    keywords: KEYWORDS$1,\n    illegal: /\\/\\*/,\n    contains: EXPRESSIONS.concat([\n      hljs.COMMENT('\\\\/\\\\*', '\\\\*\\\\/'),\n      hljs.HASH_COMMENT_MODE,\n      SYMBOLS, // relevance booster\n      {\n        className: 'function',\n        contains: [\n          TITLE,\n          PARAMS\n        ],\n        returnBegin: true,\n        variants: [\n          {\n            begin: '(' + JS_IDENT_RE + '\\\\s*(?:=|:=)\\\\s*)?(\\\\(.*\\\\)\\\\s*)?\\\\B->\\\\*?',\n            end: '->\\\\*?'\n          },\n          {\n            begin: '(' + JS_IDENT_RE + '\\\\s*(?:=|:=)\\\\s*)?!?(\\\\(.*\\\\)\\\\s*)?\\\\B[-~]{1,2}>\\\\*?',\n            end: '[-~]{1,2}>\\\\*?'\n          },\n          {\n            begin: '(' + JS_IDENT_RE + '\\\\s*(?:=|:=)\\\\s*)?(\\\\(.*\\\\)\\\\s*)?\\\\B!?[-~]{1,2}>\\\\*?',\n            end: '!?[-~]{1,2}>\\\\*?'\n          }\n        ]\n      },\n      CLASS_DEFINITION,\n      {\n        begin: JS_IDENT_RE + ':',\n        end: ':',\n        returnBegin: true,\n        returnEnd: true,\n        relevance: 0\n      }\n    ])\n  };\n}\n\nmodule.exports = livescript;\n",
-      "start": 1715636425839,
-      "end": 1715636425874,
+      "start": 1715636874920,
+      "end": 1715636874956,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1715636425874,
-      "end": 1715636425874,
+      "start": 1715636874956,
+      "end": 1715636874956,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1715636425874,
-      "end": 1715636425874,
+      "start": 1715636874956,
+      "end": 1715636874956,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1715636425874,
-      "end": 1715636425874,
+      "start": 1715636874956,
+      "end": 1715636874956,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1715636425874,
-      "end": 1715636425874,
+      "start": 1715636874956,
+      "end": 1715636874956,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1715636425874,
-      "end": 1715636425874,
+      "start": 1715636874956,
+      "end": 1715636874956,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1715636425874,
-      "end": 1715636425874,
+      "start": 1715636874956,
+      "end": 1715636874956,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1715636425874,
-      "end": 1715636425874,
+      "start": 1715636874956,
+      "end": 1715636874956,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1715636425874,
-      "end": 1715636425874,
+      "start": 1715636874956,
+      "end": 1715636874956,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1715636425874,
-      "end": 1715636425874,
+      "start": 1715636874956,
+      "end": 1715636874956,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1715636425874,
-      "end": 1715636425874,
+      "start": 1715636874956,
+      "end": 1715636874956,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1715636425874,
-      "end": 1715636425874,
+      "start": 1715636874956,
+      "end": 1715636874956,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1715636425874,
-      "end": 1715636425874,
+      "start": 1715636874956,
+      "end": 1715636874956,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1715636425874,
-      "end": 1715636425874,
+      "start": 1715636874956,
+      "end": 1715636874956,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1715636425874,
-      "end": 1715636425874,
+      "start": 1715636874956,
+      "end": 1715636874956,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1715636425874,
-      "end": 1715636425874,
+      "start": 1715636874956,
+      "end": 1715636874956,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1715636425874,
-      "end": 1715636425874,
+      "start": 1715636874956,
+      "end": 1715636874956,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1715636425874,
-      "end": 1715636425874,
+      "start": 1715636874956,
+      "end": 1715636874956,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1715636425874,
-      "end": 1715636425874,
+      "start": 1715636874956,
+      "end": 1715636874956,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1715636425874,
-      "end": 1715636425874,
+      "start": 1715636874956,
+      "end": 1715636874956,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1715636425874,
-      "end": 1715636425874,
+      "start": 1715636874956,
+      "end": 1715636874956,
       "order": "normal"
     },
     {
       "name": "commonjs",
       "result": "import * as commonjsHelpers from \"\u0000commonjsHelpers.js\";\n\nvar livescript_1;\nvar hasRequiredLivescript;\n\nfunction requireLivescript () {\n\tif (hasRequiredLivescript) return livescript_1;\n\thasRequiredLivescript = 1;\n\tconst KEYWORDS = [\n\t  \"as\", // for exports\n\t  \"in\",\n\t  \"of\",\n\t  \"if\",\n\t  \"for\",\n\t  \"while\",\n\t  \"finally\",\n\t  \"var\",\n\t  \"new\",\n\t  \"function\",\n\t  \"do\",\n\t  \"return\",\n\t  \"void\",\n\t  \"else\",\n\t  \"break\",\n\t  \"catch\",\n\t  \"instanceof\",\n\t  \"with\",\n\t  \"throw\",\n\t  \"case\",\n\t  \"default\",\n\t  \"try\",\n\t  \"switch\",\n\t  \"continue\",\n\t  \"typeof\",\n\t  \"delete\",\n\t  \"let\",\n\t  \"yield\",\n\t  \"const\",\n\t  \"class\",\n\t  // JS handles these with a special rule\n\t  // \"get\",\n\t  // \"set\",\n\t  \"debugger\",\n\t  \"async\",\n\t  \"await\",\n\t  \"static\",\n\t  \"import\",\n\t  \"from\",\n\t  \"export\",\n\t  \"extends\"\n\t];\n\tconst LITERALS = [\n\t  \"true\",\n\t  \"false\",\n\t  \"null\",\n\t  \"undefined\",\n\t  \"NaN\",\n\t  \"Infinity\"\n\t];\n\n\t// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects\n\tconst TYPES = [\n\t  // Fundamental objects\n\t  \"Object\",\n\t  \"Function\",\n\t  \"Boolean\",\n\t  \"Symbol\",\n\t  // numbers and dates\n\t  \"Math\",\n\t  \"Date\",\n\t  \"Number\",\n\t  \"BigInt\",\n\t  // text\n\t  \"String\",\n\t  \"RegExp\",\n\t  // Indexed collections\n\t  \"Array\",\n\t  \"Float32Array\",\n\t  \"Float64Array\",\n\t  \"Int8Array\",\n\t  \"Uint8Array\",\n\t  \"Uint8ClampedArray\",\n\t  \"Int16Array\",\n\t  \"Int32Array\",\n\t  \"Uint16Array\",\n\t  \"Uint32Array\",\n\t  \"BigInt64Array\",\n\t  \"BigUint64Array\",\n\t  // Keyed collections\n\t  \"Set\",\n\t  \"Map\",\n\t  \"WeakSet\",\n\t  \"WeakMap\",\n\t  // Structured data\n\t  \"ArrayBuffer\",\n\t  \"SharedArrayBuffer\",\n\t  \"Atomics\",\n\t  \"DataView\",\n\t  \"JSON\",\n\t  // Control abstraction objects\n\t  \"Promise\",\n\t  \"Generator\",\n\t  \"GeneratorFunction\",\n\t  \"AsyncFunction\",\n\t  // Reflection\n\t  \"Reflect\",\n\t  \"Proxy\",\n\t  // Internationalization\n\t  \"Intl\",\n\t  // WebAssembly\n\t  \"WebAssembly\"\n\t];\n\n\tconst ERROR_TYPES = [\n\t  \"Error\",\n\t  \"EvalError\",\n\t  \"InternalError\",\n\t  \"RangeError\",\n\t  \"ReferenceError\",\n\t  \"SyntaxError\",\n\t  \"TypeError\",\n\t  \"URIError\"\n\t];\n\n\tconst BUILT_IN_GLOBALS = [\n\t  \"setInterval\",\n\t  \"setTimeout\",\n\t  \"clearInterval\",\n\t  \"clearTimeout\",\n\n\t  \"require\",\n\t  \"exports\",\n\n\t  \"eval\",\n\t  \"isFinite\",\n\t  \"isNaN\",\n\t  \"parseFloat\",\n\t  \"parseInt\",\n\t  \"decodeURI\",\n\t  \"decodeURIComponent\",\n\t  \"encodeURI\",\n\t  \"encodeURIComponent\",\n\t  \"escape\",\n\t  \"unescape\"\n\t];\n\n\tconst BUILT_INS = [].concat(\n\t  BUILT_IN_GLOBALS,\n\t  TYPES,\n\t  ERROR_TYPES\n\t);\n\n\t/*\n\tLanguage: LiveScript\n\tAuthor: Taneli Vatanen <taneli.vatanen@gmail.com>\n\tContributors: Jen Evers-Corvina <jen@sevvie.net>\n\tOrigin: coffeescript.js\n\tDescription: LiveScript is a programming language that transcompiles to JavaScript. For info about language see http://livescript.net/\n\tWebsite: https://livescript.net\n\tCategory: scripting\n\t*/\n\n\n\tfunction livescript(hljs) {\n\t  const LIVESCRIPT_BUILT_INS = [\n\t    'npm',\n\t    'print'\n\t  ];\n\t  const LIVESCRIPT_LITERALS = [\n\t    'yes',\n\t    'no',\n\t    'on',\n\t    'off',\n\t    'it',\n\t    'that',\n\t    'void'\n\t  ];\n\t  const LIVESCRIPT_KEYWORDS = [\n\t    'then',\n\t    'unless',\n\t    'until',\n\t    'loop',\n\t    'of',\n\t    'by',\n\t    'when',\n\t    'and',\n\t    'or',\n\t    'is',\n\t    'isnt',\n\t    'not',\n\t    'it',\n\t    'that',\n\t    'otherwise',\n\t    'from',\n\t    'to',\n\t    'til',\n\t    'fallthrough',\n\t    'case',\n\t    'enum',\n\t    'native',\n\t    'list',\n\t    'map',\n\t    '__hasProp',\n\t    '__extends',\n\t    '__slice',\n\t    '__bind',\n\t    '__indexOf'\n\t  ];\n\t  const KEYWORDS$1 = {\n\t    keyword: KEYWORDS.concat(LIVESCRIPT_KEYWORDS),\n\t    literal: LITERALS.concat(LIVESCRIPT_LITERALS),\n\t    built_in: BUILT_INS.concat(LIVESCRIPT_BUILT_INS)\n\t  };\n\t  const JS_IDENT_RE = '[A-Za-z$_](?:-[0-9A-Za-z$_]|[0-9A-Za-z$_])*';\n\t  const TITLE = hljs.inherit(hljs.TITLE_MODE, { begin: JS_IDENT_RE });\n\t  const SUBST = {\n\t    className: 'subst',\n\t    begin: /#\\{/,\n\t    end: /\\}/,\n\t    keywords: KEYWORDS$1\n\t  };\n\t  const SUBST_SIMPLE = {\n\t    className: 'subst',\n\t    begin: /#[A-Za-z$_]/,\n\t    end: /(?:-[0-9A-Za-z$_]|[0-9A-Za-z$_])*/,\n\t    keywords: KEYWORDS$1\n\t  };\n\t  const EXPRESSIONS = [\n\t    hljs.BINARY_NUMBER_MODE,\n\t    {\n\t      className: 'number',\n\t      begin: '(\\\\b0[xX][a-fA-F0-9_]+)|(\\\\b\\\\d(\\\\d|_\\\\d)*(\\\\.(\\\\d(\\\\d|_\\\\d)*)?)?(_*[eE]([-+]\\\\d(_\\\\d|\\\\d)*)?)?[_a-z]*)',\n\t      relevance: 0,\n\t      starts: {\n\t        end: '(\\\\s*/)?',\n\t        relevance: 0\n\t      } // a number tries to eat the following slash to prevent treating it as a regexp\n\t    },\n\t    {\n\t      className: 'string',\n\t      variants: [\n\t        {\n\t          begin: /'''/,\n\t          end: /'''/,\n\t          contains: [ hljs.BACKSLASH_ESCAPE ]\n\t        },\n\t        {\n\t          begin: /'/,\n\t          end: /'/,\n\t          contains: [ hljs.BACKSLASH_ESCAPE ]\n\t        },\n\t        {\n\t          begin: /\"\"\"/,\n\t          end: /\"\"\"/,\n\t          contains: [\n\t            hljs.BACKSLASH_ESCAPE,\n\t            SUBST,\n\t            SUBST_SIMPLE\n\t          ]\n\t        },\n\t        {\n\t          begin: /\"/,\n\t          end: /\"/,\n\t          contains: [\n\t            hljs.BACKSLASH_ESCAPE,\n\t            SUBST,\n\t            SUBST_SIMPLE\n\t          ]\n\t        },\n\t        {\n\t          begin: /\\\\/,\n\t          end: /(\\s|$)/,\n\t          excludeEnd: true\n\t        }\n\t      ]\n\t    },\n\t    {\n\t      className: 'regexp',\n\t      variants: [\n\t        {\n\t          begin: '//',\n\t          end: '//[gim]*',\n\t          contains: [\n\t            SUBST,\n\t            hljs.HASH_COMMENT_MODE\n\t          ]\n\t        },\n\t        {\n\t          // regex can't start with space to parse x / 2 / 3 as two divisions\n\t          // regex can't start with *, and it supports an \"illegal\" in the main mode\n\t          begin: /\\/(?![ *])(\\\\.|[^\\\\\\n])*?\\/[gim]*(?=\\W)/ }\n\t      ]\n\t    },\n\t    { begin: '@' + JS_IDENT_RE },\n\t    {\n\t      begin: '``',\n\t      end: '``',\n\t      excludeBegin: true,\n\t      excludeEnd: true,\n\t      subLanguage: 'javascript'\n\t    }\n\t  ];\n\t  SUBST.contains = EXPRESSIONS;\n\n\t  const PARAMS = {\n\t    className: 'params',\n\t    begin: '\\\\(',\n\t    returnBegin: true,\n\t    /* We need another contained nameless mode to not have every nested\n\t    pair of parens to be called \"params\" */\n\t    contains: [\n\t      {\n\t        begin: /\\(/,\n\t        end: /\\)/,\n\t        keywords: KEYWORDS$1,\n\t        contains: [ 'self' ].concat(EXPRESSIONS)\n\t      }\n\t    ]\n\t  };\n\n\t  const SYMBOLS = { begin: '(#=>|=>|\\\\|>>|-?->|!->)' };\n\n\t  const CLASS_DEFINITION = {\n\t    variants: [\n\t      { match: [\n\t        /class\\s+/,\n\t        JS_IDENT_RE,\n\t        /\\s+extends\\s+/,\n\t        JS_IDENT_RE\n\t      ] },\n\t      { match: [\n\t        /class\\s+/,\n\t        JS_IDENT_RE\n\t      ] }\n\t    ],\n\t    scope: {\n\t      2: \"title.class\",\n\t      4: \"title.class.inherited\"\n\t    },\n\t    keywords: KEYWORDS$1\n\t  };\n\n\t  return {\n\t    name: 'LiveScript',\n\t    aliases: [ 'ls' ],\n\t    keywords: KEYWORDS$1,\n\t    illegal: /\\/\\*/,\n\t    contains: EXPRESSIONS.concat([\n\t      hljs.COMMENT('\\\\/\\\\*', '\\\\*\\\\/'),\n\t      hljs.HASH_COMMENT_MODE,\n\t      SYMBOLS, // relevance booster\n\t      {\n\t        className: 'function',\n\t        contains: [\n\t          TITLE,\n\t          PARAMS\n\t        ],\n\t        returnBegin: true,\n\t        variants: [\n\t          {\n\t            begin: '(' + JS_IDENT_RE + '\\\\s*(?:=|:=)\\\\s*)?(\\\\(.*\\\\)\\\\s*)?\\\\B->\\\\*?',\n\t            end: '->\\\\*?'\n\t          },\n\t          {\n\t            begin: '(' + JS_IDENT_RE + '\\\\s*(?:=|:=)\\\\s*)?!?(\\\\(.*\\\\)\\\\s*)?\\\\B[-~]{1,2}>\\\\*?',\n\t            end: '[-~]{1,2}>\\\\*?'\n\t          },\n\t          {\n\t            begin: '(' + JS_IDENT_RE + '\\\\s*(?:=|:=)\\\\s*)?(\\\\(.*\\\\)\\\\s*)?\\\\B!?[-~]{1,2}>\\\\*?',\n\t            end: '!?[-~]{1,2}>\\\\*?'\n\t          }\n\t        ]\n\t      },\n\t      CLASS_DEFINITION,\n\t      {\n\t        begin: JS_IDENT_RE + ':',\n\t        end: ':',\n\t        returnBegin: true,\n\t        returnEnd: true,\n\t        relevance: 0\n\t      }\n\t    ])\n\t  };\n\t}\n\n\tlivescript_1 = livescript;\n\treturn livescript_1;\n}\n\nexport { requireLivescript as __require };",
-      "start": 1715636425874,
-      "end": 1715636425874,
+      "start": 1715636874956,
+      "end": 1715636874957,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -149,74 +149,74 @@
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1715636425874,
-      "end": 1715636425874,
+      "start": 1715636874957,
+      "end": 1715636874957,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1715636425874,
-      "end": 1715636425874,
+      "start": 1715636874957,
+      "end": 1715636874957,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1715636425874,
-      "end": 1715636425874,
+      "start": 1715636874957,
+      "end": 1715636874957,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1715636425874,
-      "end": 1715636425874,
+      "start": 1715636874957,
+      "end": 1715636874957,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1715636425874,
-      "end": 1715636425874,
+      "start": 1715636874957,
+      "end": 1715636874957,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1715636425874,
-      "end": 1715636425874,
+      "start": 1715636874957,
+      "end": 1715636874957,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1715636425874,
-      "end": 1715636425874,
+      "start": 1715636874957,
+      "end": 1715636874957,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1715636425874,
-      "end": 1715636425874,
+      "start": 1715636874957,
+      "end": 1715636874957,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1715636425874,
-      "end": 1715636425874,
+      "start": 1715636874957,
+      "end": 1715636874957,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1715636425874,
-      "end": 1715636425875,
+      "start": 1715636874957,
+      "end": 1715636874957,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1715636425875,
-      "end": 1715636425875,
+      "start": 1715636874957,
+      "end": 1715636874957,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1715636425875,
-      "end": 1715636425875,
+      "start": 1715636874957,
+      "end": 1715636874957,
       "order": "normal"
     }
   ]

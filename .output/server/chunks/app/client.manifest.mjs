@@ -12,7 +12,7 @@ const client_manifest = {
     "prefetch": true,
     "preload": true,
     "css": [],
-    "file": "error-404.399d2102.js",
+    "file": "error-404.0486a975.js",
     "imports": [
       "../node_modules/nuxt/dist/app/entry.js"
     ],
@@ -38,7 +38,7 @@ const client_manifest = {
     "prefetch": true,
     "preload": true,
     "css": [],
-    "file": "error-500.59262758.js",
+    "file": "error-500.d35f0ae7.js",
     "imports": [
       "../node_modules/nuxt/dist/app/entry.js"
     ],
@@ -72,7 +72,7 @@ const client_manifest = {
       "../node_modules/@nuxt/ui-templates/dist/templates/error-404.vue",
       "../node_modules/@nuxt/ui-templates/dist/templates/error-500.vue"
     ],
-    "file": "entry.35081479.js",
+    "file": "entry.83cb4cfc.js",
     "isEntry": true,
     "src": "../node_modules/nuxt/dist/app/entry.js",
     "_globalCSS": true
@@ -83,29 +83,22 @@ const client_manifest = {
     "prefetch": true,
     "preload": true
   },
-  "_local-first-health-banner.11bfd889.js": {
+  "_local-first-health-banner.134ec284.js": {
     "resourceType": "script",
     "module": true,
     "prefetch": true,
     "preload": true,
     "assets": [
-      "local-first-health-logo.1aeb2529.png",
       "local-first-health-mission.10115713.png",
       "local-first-health-what-is-local-first.fe17cff6.png",
-      "local-first-health-story.dc20b671.png",
+      "local-first-health-story.eb2969c2.png",
       "local-first-health-footer.18352f36.png",
       "local-first-health-banner.fad86ee1.png"
     ],
-    "file": "local-first-health-banner.11bfd889.js",
+    "file": "local-first-health-banner.134ec284.js",
     "imports": [
       "../node_modules/nuxt/dist/app/entry.js"
     ]
-  },
-  "local-first-health-logo.1aeb2529.png": {
-    "file": "local-first-health-logo.1aeb2529.png",
-    "resourceType": "image",
-    "prefetch": true,
-    "mimeType": "image/png"
   },
   "local-first-health-mission.10115713.png": {
     "file": "local-first-health-mission.10115713.png",
@@ -119,8 +112,8 @@ const client_manifest = {
     "prefetch": true,
     "mimeType": "image/png"
   },
-  "local-first-health-story.dc20b671.png": {
-    "file": "local-first-health-story.dc20b671.png",
+  "local-first-health-story.eb2969c2.png": {
+    "file": "local-first-health-story.eb2969c2.png",
     "resourceType": "image",
     "prefetch": true,
     "mimeType": "image/png"
@@ -186,11 +179,18 @@ const client_manifest = {
     "file": "local-first-health-health-suite.5666c95f.png",
     "src": "assets/images/local-first-health-health-suite.png"
   },
+  "assets/images/local-first-health-logo-footer.png": {
+    "resourceType": "image",
+    "prefetch": true,
+    "mimeType": "image/png",
+    "file": "local-first-health-logo-footer.bf3d467f.png",
+    "src": "assets/images/local-first-health-logo-footer.png"
+  },
   "assets/images/local-first-health-logo.png": {
     "resourceType": "image",
     "prefetch": true,
     "mimeType": "image/png",
-    "file": "local-first-health-logo.1aeb2529.png",
+    "file": "local-first-health-logo.d8b848cc.png",
     "src": "assets/images/local-first-health-logo.png"
   },
   "assets/images/local-first-health-mission.png": {
@@ -253,35 +253,35 @@ const client_manifest = {
     "resourceType": "image",
     "prefetch": true,
     "mimeType": "image/png",
-    "file": "local-first-health-story.dc20b671.png",
+    "file": "local-first-health-story.eb2969c2.png",
     "src": "assets/images/local-first-health-story.png"
   },
   "assets/images/local-first-health-suite-easyjoey-durian.png": {
     "resourceType": "image",
     "prefetch": true,
     "mimeType": "image/png",
-    "file": "local-first-health-suite-easyjoey-durian.f9843735.png",
+    "file": "local-first-health-suite-easyjoey-durian.dcf70bd3.png",
     "src": "assets/images/local-first-health-suite-easyjoey-durian.png"
   },
   "assets/images/local-first-health-suite-mycure-blue-apple.png": {
     "resourceType": "image",
     "prefetch": true,
     "mimeType": "image/png",
-    "file": "local-first-health-suite-mycure-blue-apple.87a30fe2.png",
+    "file": "local-first-health-suite-mycure-blue-apple.759054b6.png",
     "src": "assets/images/local-first-health-suite-mycure-blue-apple.png"
   },
   "assets/images/local-first-health-suite-ospitalis-green-coco.png": {
     "resourceType": "image",
     "prefetch": true,
     "mimeType": "image/png",
-    "file": "local-first-health-suite-ospitalis-green-coco.47cdecf4.png",
+    "file": "local-first-health-suite-ospitalis-green-coco.355bcf47.png",
     "src": "assets/images/local-first-health-suite-ospitalis-green-coco.png"
   },
   "assets/images/local-first-health-suite-parmazip-berry.png": {
     "resourceType": "image",
     "prefetch": true,
     "mimeType": "image/png",
-    "file": "local-first-health-suite-parmazip-berry.c0dd54c4.png",
+    "file": "local-first-health-suite-parmazip-berry.e1d42d23.png",
     "src": "assets/images/local-first-health-suite-parmazip-berry.png"
   },
   "assets/images/local-first-health-suite.png": {
@@ -303,7 +303,7 @@ const client_manifest = {
     "module": true,
     "prefetch": true,
     "preload": true,
-    "file": "Default.b0d1ecf5.js",
+    "file": "Default.9dfc43d1.js",
     "imports": [
       "../node_modules/nuxt/dist/app/entry.js"
     ],
@@ -315,7 +315,7 @@ const client_manifest = {
     "module": true,
     "prefetch": true,
     "preload": true,
-    "file": "exclude-route.bfacadd8.js",
+    "file": "exclude-route.34851957.js",
     "imports": [
       "../node_modules/nuxt/dist/app/entry.js"
     ],
@@ -335,6 +335,7 @@ const client_manifest = {
     "prefetch": true,
     "preload": true,
     "assets": [
+      "local-first-health-logo.d8b848cc.png",
       "local-first-health-doctors.520722c5.png",
       "local-first-health-problem-1.8ab0004c.png",
       "local-first-health-problem-2.000c2370.png",
@@ -344,10 +345,10 @@ const client_manifest = {
       "local-first-health-own-the-software.88d3f215.png"
     ],
     "css": [],
-    "file": "index copy.416b2a50.js",
+    "file": "index copy.892610ae.js",
     "imports": [
       "../node_modules/nuxt/dist/app/entry.js",
-      "_local-first-health-banner.11bfd889.js"
+      "_local-first-health-banner.134ec284.js"
     ],
     "isDynamicEntry": true,
     "src": "pages/index copy.vue"
@@ -357,6 +358,12 @@ const client_manifest = {
     "resourceType": "style",
     "prefetch": true,
     "preload": true
+  },
+  "local-first-health-logo.d8b848cc.png": {
+    "file": "local-first-health-logo.d8b848cc.png",
+    "resourceType": "image",
+    "prefetch": true,
+    "mimeType": "image/png"
   },
   "local-first-health-doctors.520722c5.png": {
     "file": "local-first-health-doctors.520722c5.png",
@@ -404,7 +411,7 @@ const client_manifest = {
     "resourceType": "style",
     "prefetch": true,
     "preload": true,
-    "file": "index.09a8c02f.css",
+    "file": "index.4d1c84b0.css",
     "src": "pages/index.css"
   },
   "pages/index.vue": {
@@ -418,23 +425,24 @@ const client_manifest = {
       "local-first-health-happy.d0bbba87.png",
       "local-first-health-papaya.460a8e39.png",
       "local-first-health-suite.8f65fadc.png",
-      "local-first-health-suite-mycure-blue-apple.87a30fe2.png",
-      "local-first-health-suite-parmazip-berry.c0dd54c4.png",
-      "local-first-health-suite-ospitalis-green-coco.47cdecf4.png",
-      "local-first-health-suite-easyjoey-durian.f9843735.png",
-      "local-first-health-own-software-own-data.e0933055.png"
+      "local-first-health-suite-mycure-blue-apple.759054b6.png",
+      "local-first-health-suite-parmazip-berry.e1d42d23.png",
+      "local-first-health-suite-ospitalis-green-coco.355bcf47.png",
+      "local-first-health-suite-easyjoey-durian.dcf70bd3.png",
+      "local-first-health-own-software-own-data.e0933055.png",
+      "local-first-health-logo-footer.bf3d467f.png"
     ],
     "css": [],
-    "file": "index.222bb98e.js",
+    "file": "index.1049dad8.js",
     "imports": [
       "../node_modules/nuxt/dist/app/entry.js",
-      "_local-first-health-banner.11bfd889.js"
+      "_local-first-health-banner.134ec284.js"
     ],
     "isDynamicEntry": true,
     "src": "pages/index.vue"
   },
-  "index.09a8c02f.css": {
-    "file": "index.09a8c02f.css",
+  "index.4d1c84b0.css": {
+    "file": "index.4d1c84b0.css",
     "resourceType": "style",
     "prefetch": true,
     "preload": true
@@ -469,32 +477,38 @@ const client_manifest = {
     "prefetch": true,
     "mimeType": "image/png"
   },
-  "local-first-health-suite-mycure-blue-apple.87a30fe2.png": {
-    "file": "local-first-health-suite-mycure-blue-apple.87a30fe2.png",
+  "local-first-health-suite-mycure-blue-apple.759054b6.png": {
+    "file": "local-first-health-suite-mycure-blue-apple.759054b6.png",
     "resourceType": "image",
     "prefetch": true,
     "mimeType": "image/png"
   },
-  "local-first-health-suite-parmazip-berry.c0dd54c4.png": {
-    "file": "local-first-health-suite-parmazip-berry.c0dd54c4.png",
+  "local-first-health-suite-parmazip-berry.e1d42d23.png": {
+    "file": "local-first-health-suite-parmazip-berry.e1d42d23.png",
     "resourceType": "image",
     "prefetch": true,
     "mimeType": "image/png"
   },
-  "local-first-health-suite-ospitalis-green-coco.47cdecf4.png": {
-    "file": "local-first-health-suite-ospitalis-green-coco.47cdecf4.png",
+  "local-first-health-suite-ospitalis-green-coco.355bcf47.png": {
+    "file": "local-first-health-suite-ospitalis-green-coco.355bcf47.png",
     "resourceType": "image",
     "prefetch": true,
     "mimeType": "image/png"
   },
-  "local-first-health-suite-easyjoey-durian.f9843735.png": {
-    "file": "local-first-health-suite-easyjoey-durian.f9843735.png",
+  "local-first-health-suite-easyjoey-durian.dcf70bd3.png": {
+    "file": "local-first-health-suite-easyjoey-durian.dcf70bd3.png",
     "resourceType": "image",
     "prefetch": true,
     "mimeType": "image/png"
   },
   "local-first-health-own-software-own-data.e0933055.png": {
     "file": "local-first-health-own-software-own-data.e0933055.png",
+    "resourceType": "image",
+    "prefetch": true,
+    "mimeType": "image/png"
+  },
+  "local-first-health-logo-footer.bf3d467f.png": {
+    "file": "local-first-health-logo-footer.bf3d467f.png",
     "resourceType": "image",
     "prefetch": true,
     "mimeType": "image/png"

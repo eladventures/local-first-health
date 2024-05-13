@@ -4,135 +4,135 @@
     {
       "name": "vite:load-fallback",
       "result": "/*\nLanguage: Parser3\nRequires: xml.js\nAuthor: Oleg Volchkov <oleg@volchkov.net>\nWebsite: https://www.parser.ru/en/\nCategory: template\n*/\n\nfunction parser3(hljs) {\n  const CURLY_SUBCOMMENT = hljs.COMMENT(\n    /\\{/,\n    /\\}/,\n    { contains: [ 'self' ] }\n  );\n  return {\n    name: 'Parser3',\n    subLanguage: 'xml',\n    relevance: 0,\n    contains: [\n      hljs.COMMENT('^#', '$'),\n      hljs.COMMENT(\n        /\\^rem\\{/,\n        /\\}/,\n        {\n          relevance: 10,\n          contains: [ CURLY_SUBCOMMENT ]\n        }\n      ),\n      {\n        className: 'meta',\n        begin: '^@(?:BASE|USE|CLASS|OPTIONS)$',\n        relevance: 10\n      },\n      {\n        className: 'title',\n        begin: '@[\\\\w\\\\-]+\\\\[[\\\\w^;\\\\-]*\\\\](?:\\\\[[\\\\w^;\\\\-]*\\\\])?(?:.*)$'\n      },\n      {\n        className: 'variable',\n        begin: /\\$\\{?[\\w\\-.:]+\\}?/\n      },\n      {\n        className: 'keyword',\n        begin: /\\^[\\w\\-.:]+/\n      },\n      {\n        className: 'number',\n        begin: '\\\\^#[0-9a-fA-F]+'\n      },\n      hljs.C_NUMBER_MODE\n    ]\n  };\n}\n\nmodule.exports = parser3;\n",
-      "start": 1715636425896,
-      "end": 1715636425915,
+      "start": 1715636874980,
+      "end": 1715636874999,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1715636425915,
-      "end": 1715636425915,
+      "start": 1715636874999,
+      "end": 1715636874999,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1715636425915,
-      "end": 1715636425915,
+      "start": 1715636874999,
+      "end": 1715636874999,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1715636425915,
-      "end": 1715636425915,
+      "start": 1715636874999,
+      "end": 1715636874999,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1715636425915,
-      "end": 1715636425915,
+      "start": 1715636874999,
+      "end": 1715636874999,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1715636425915,
-      "end": 1715636425915,
+      "start": 1715636874999,
+      "end": 1715636874999,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1715636425915,
-      "end": 1715636425915,
+      "start": 1715636874999,
+      "end": 1715636874999,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1715636425915,
-      "end": 1715636425915,
+      "start": 1715636874999,
+      "end": 1715636874999,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1715636425915,
-      "end": 1715636425915,
+      "start": 1715636874999,
+      "end": 1715636874999,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1715636425915,
-      "end": 1715636425915,
+      "start": 1715636874999,
+      "end": 1715636874999,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1715636425915,
-      "end": 1715636425915,
+      "start": 1715636874999,
+      "end": 1715636874999,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1715636425915,
-      "end": 1715636425915,
+      "start": 1715636874999,
+      "end": 1715636874999,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1715636425915,
-      "end": 1715636425915,
+      "start": 1715636874999,
+      "end": 1715636874999,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1715636425915,
-      "end": 1715636425915,
+      "start": 1715636874999,
+      "end": 1715636874999,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1715636425915,
-      "end": 1715636425915,
+      "start": 1715636874999,
+      "end": 1715636874999,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1715636425915,
-      "end": 1715636425915,
+      "start": 1715636874999,
+      "end": 1715636874999,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1715636425915,
-      "end": 1715636425915,
+      "start": 1715636874999,
+      "end": 1715636874999,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1715636425915,
-      "end": 1715636425915,
+      "start": 1715636874999,
+      "end": 1715636874999,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1715636425915,
-      "end": 1715636425915,
+      "start": 1715636874999,
+      "end": 1715636874999,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1715636425915,
-      "end": 1715636425915,
+      "start": 1715636874999,
+      "end": 1715636874999,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1715636425915,
-      "end": 1715636425915,
+      "start": 1715636874999,
+      "end": 1715636874999,
       "order": "normal"
     },
     {
       "name": "commonjs",
       "result": "/*\nLanguage: Parser3\nRequires: xml.js\nAuthor: Oleg Volchkov <oleg@volchkov.net>\nWebsite: https://www.parser.ru/en/\nCategory: template\n*/\nimport * as commonjsHelpers from \"\u0000commonjsHelpers.js\";\n\nvar parser3_1;\nvar hasRequiredParser3;\n\nfunction requireParser3 () {\n\tif (hasRequiredParser3) return parser3_1;\n\thasRequiredParser3 = 1;\n\tfunction parser3(hljs) {\n\t  const CURLY_SUBCOMMENT = hljs.COMMENT(\n\t    /\\{/,\n\t    /\\}/,\n\t    { contains: [ 'self' ] }\n\t  );\n\t  return {\n\t    name: 'Parser3',\n\t    subLanguage: 'xml',\n\t    relevance: 0,\n\t    contains: [\n\t      hljs.COMMENT('^#', '$'),\n\t      hljs.COMMENT(\n\t        /\\^rem\\{/,\n\t        /\\}/,\n\t        {\n\t          relevance: 10,\n\t          contains: [ CURLY_SUBCOMMENT ]\n\t        }\n\t      ),\n\t      {\n\t        className: 'meta',\n\t        begin: '^@(?:BASE|USE|CLASS|OPTIONS)$',\n\t        relevance: 10\n\t      },\n\t      {\n\t        className: 'title',\n\t        begin: '@[\\\\w\\\\-]+\\\\[[\\\\w^;\\\\-]*\\\\](?:\\\\[[\\\\w^;\\\\-]*\\\\])?(?:.*)$'\n\t      },\n\t      {\n\t        className: 'variable',\n\t        begin: /\\$\\{?[\\w\\-.:]+\\}?/\n\t      },\n\t      {\n\t        className: 'keyword',\n\t        begin: /\\^[\\w\\-.:]+/\n\t      },\n\t      {\n\t        className: 'number',\n\t        begin: '\\\\^#[0-9a-fA-F]+'\n\t      },\n\t      hljs.C_NUMBER_MODE\n\t    ]\n\t  };\n\t}\n\n\tparser3_1 = parser3;\n\treturn parser3_1;\n}\n\nexport { requireParser3 as __require };",
-      "start": 1715636425915,
-      "end": 1715636425915,
+      "start": 1715636874999,
+      "end": 1715636874999,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -149,74 +149,74 @@
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1715636425915,
-      "end": 1715636425915,
+      "start": 1715636874999,
+      "end": 1715636874999,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1715636425915,
-      "end": 1715636425915,
+      "start": 1715636874999,
+      "end": 1715636874999,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1715636425915,
-      "end": 1715636425915,
+      "start": 1715636874999,
+      "end": 1715636874999,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1715636425915,
-      "end": 1715636425915,
+      "start": 1715636874999,
+      "end": 1715636874999,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1715636425915,
-      "end": 1715636425915,
+      "start": 1715636874999,
+      "end": 1715636874999,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1715636425915,
-      "end": 1715636425915,
+      "start": 1715636874999,
+      "end": 1715636874999,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1715636425915,
-      "end": 1715636425915,
+      "start": 1715636874999,
+      "end": 1715636874999,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1715636425915,
-      "end": 1715636425915,
+      "start": 1715636874999,
+      "end": 1715636874999,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1715636425915,
-      "end": 1715636425915,
+      "start": 1715636874999,
+      "end": 1715636874999,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1715636425915,
-      "end": 1715636425915,
+      "start": 1715636874999,
+      "end": 1715636874999,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1715636425915,
-      "end": 1715636425915,
+      "start": 1715636874999,
+      "end": 1715636874999,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1715636425915,
-      "end": 1715636425915,
+      "start": 1715636874999,
+      "end": 1715636874999,
       "order": "normal"
     }
   ]

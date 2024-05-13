@@ -4,135 +4,135 @@
     {
       "name": "vite:load-fallback",
       "result": "/*\nLanguage: Device Tree\nDescription: *.dts files used in the Linux kernel\nAuthor: Martin Braun <martin.braun@ettus.com>, Moritz Fischer <moritz.fischer@ettus.com>\nWebsite: https://elinux.org/Device_Tree_Reference\nCategory: config\n*/\n\n/** @type LanguageFn */\nfunction dts(hljs) {\n  const STRINGS = {\n    className: 'string',\n    variants: [\n      hljs.inherit(hljs.QUOTE_STRING_MODE, { begin: '((u8?|U)|L)?\"' }),\n      {\n        begin: '(u8?|U)?R\"',\n        end: '\"',\n        contains: [ hljs.BACKSLASH_ESCAPE ]\n      },\n      {\n        begin: '\\'\\\\\\\\?.',\n        end: '\\'',\n        illegal: '.'\n      }\n    ]\n  };\n\n  const NUMBERS = {\n    className: 'number',\n    variants: [\n      { begin: '\\\\b(\\\\d+(\\\\.\\\\d*)?|\\\\.\\\\d+)(u|U|l|L|ul|UL|f|F)' },\n      { begin: hljs.C_NUMBER_RE }\n    ],\n    relevance: 0\n  };\n\n  const PREPROCESSOR = {\n    className: 'meta',\n    begin: '#',\n    end: '$',\n    keywords: { keyword: 'if else elif endif define undef ifdef ifndef' },\n    contains: [\n      {\n        begin: /\\\\\\n/,\n        relevance: 0\n      },\n      {\n        beginKeywords: 'include',\n        end: '$',\n        keywords: { keyword: 'include' },\n        contains: [\n          hljs.inherit(STRINGS, { className: 'string' }),\n          {\n            className: 'string',\n            begin: '<',\n            end: '>',\n            illegal: '\\\\n'\n          }\n        ]\n      },\n      STRINGS,\n      hljs.C_LINE_COMMENT_MODE,\n      hljs.C_BLOCK_COMMENT_MODE\n    ]\n  };\n\n  const REFERENCE = {\n    className: 'variable',\n    begin: /&[a-z\\d_]*\\b/\n  };\n\n  const KEYWORD = {\n    className: 'keyword',\n    begin: '/[a-z][a-z\\\\d-]*/'\n  };\n\n  const LABEL = {\n    className: 'symbol',\n    begin: '^\\\\s*[a-zA-Z_][a-zA-Z\\\\d_]*:'\n  };\n\n  const CELL_PROPERTY = {\n    className: 'params',\n    relevance: 0,\n    begin: '<',\n    end: '>',\n    contains: [\n      NUMBERS,\n      REFERENCE\n    ]\n  };\n\n  const NODE = {\n    className: 'title.class',\n    begin: /[a-zA-Z_][a-zA-Z\\d_@-]*(?=\\s\\{)/,\n    relevance: 0.2\n  };\n\n  const ROOT_NODE = {\n    className: 'title.class',\n    begin: /^\\/(?=\\s*\\{)/,\n    relevance: 10\n  };\n\n  // TODO: `attribute` might be the right scope here, unsure\n  // I'm not sure if all these key names have semantic meaning or not\n  const ATTR_NO_VALUE = {\n    match: /[a-z][a-z-,]+(?=;)/,\n    relevance: 0,\n    scope: \"attr\"\n  };\n  const ATTR = {\n    relevance: 0,\n    match: [\n      /[a-z][a-z-,]+/,\n      /\\s*/,\n      /=/\n    ],\n    scope: {\n      1: \"attr\",\n      3: \"operator\"\n    }\n  };\n\n  const PUNC = {\n    scope: \"punctuation\",\n    relevance: 0,\n    // `};` combined is just to avoid tons of useless punctuation nodes\n    match: /\\};|[;{}]/\n  };\n\n  return {\n    name: 'Device Tree',\n    contains: [\n      ROOT_NODE,\n      REFERENCE,\n      KEYWORD,\n      LABEL,\n      NODE,\n      ATTR,\n      ATTR_NO_VALUE,\n      CELL_PROPERTY,\n      hljs.C_LINE_COMMENT_MODE,\n      hljs.C_BLOCK_COMMENT_MODE,\n      NUMBERS,\n      STRINGS,\n      PREPROCESSOR,\n      PUNC,\n      {\n        begin: hljs.IDENT_RE + '::',\n        keywords: \"\"\n      }\n    ]\n  };\n}\n\nmodule.exports = dts;\n",
-      "start": 1715636425776,
-      "end": 1715636425801,
+      "start": 1715636874861,
+      "end": 1715636874884,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1715636425801,
-      "end": 1715636425801,
+      "start": 1715636874884,
+      "end": 1715636874884,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1715636425801,
-      "end": 1715636425801,
+      "start": 1715636874884,
+      "end": 1715636874884,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1715636425801,
-      "end": 1715636425801,
+      "start": 1715636874884,
+      "end": 1715636874884,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1715636425801,
-      "end": 1715636425801,
+      "start": 1715636874884,
+      "end": 1715636874884,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1715636425801,
-      "end": 1715636425801,
+      "start": 1715636874884,
+      "end": 1715636874884,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1715636425801,
-      "end": 1715636425801,
+      "start": 1715636874884,
+      "end": 1715636874884,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1715636425801,
-      "end": 1715636425801,
+      "start": 1715636874884,
+      "end": 1715636874884,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1715636425801,
-      "end": 1715636425801,
+      "start": 1715636874884,
+      "end": 1715636874884,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1715636425801,
-      "end": 1715636425801,
+      "start": 1715636874884,
+      "end": 1715636874884,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1715636425801,
-      "end": 1715636425801,
+      "start": 1715636874884,
+      "end": 1715636874884,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1715636425801,
-      "end": 1715636425801,
+      "start": 1715636874884,
+      "end": 1715636874884,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1715636425801,
-      "end": 1715636425801,
+      "start": 1715636874884,
+      "end": 1715636874884,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1715636425801,
-      "end": 1715636425801,
+      "start": 1715636874884,
+      "end": 1715636874884,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1715636425801,
-      "end": 1715636425801,
+      "start": 1715636874884,
+      "end": 1715636874884,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1715636425801,
-      "end": 1715636425801,
+      "start": 1715636874884,
+      "end": 1715636874884,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1715636425801,
-      "end": 1715636425801,
+      "start": 1715636874884,
+      "end": 1715636874884,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1715636425801,
-      "end": 1715636425801,
+      "start": 1715636874884,
+      "end": 1715636874884,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1715636425801,
-      "end": 1715636425801,
+      "start": 1715636874884,
+      "end": 1715636874884,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1715636425801,
-      "end": 1715636425801,
+      "start": 1715636874884,
+      "end": 1715636874884,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1715636425801,
-      "end": 1715636425801,
+      "start": 1715636874884,
+      "end": 1715636874884,
       "order": "normal"
     },
     {
       "name": "commonjs",
       "result": "/*\nLanguage: Device Tree\nDescription: *.dts files used in the Linux kernel\nAuthor: Martin Braun <martin.braun@ettus.com>, Moritz Fischer <moritz.fischer@ettus.com>\nWebsite: https://elinux.org/Device_Tree_Reference\nCategory: config\n*/\nimport * as commonjsHelpers from \"\u0000commonjsHelpers.js\";\n\nvar dts_1;\nvar hasRequiredDts;\n\nfunction requireDts () {\n\tif (hasRequiredDts) return dts_1;\n\thasRequiredDts = 1;\n\t/** @type LanguageFn */\n\tfunction dts(hljs) {\n\t  const STRINGS = {\n\t    className: 'string',\n\t    variants: [\n\t      hljs.inherit(hljs.QUOTE_STRING_MODE, { begin: '((u8?|U)|L)?\"' }),\n\t      {\n\t        begin: '(u8?|U)?R\"',\n\t        end: '\"',\n\t        contains: [ hljs.BACKSLASH_ESCAPE ]\n\t      },\n\t      {\n\t        begin: '\\'\\\\\\\\?.',\n\t        end: '\\'',\n\t        illegal: '.'\n\t      }\n\t    ]\n\t  };\n\n\t  const NUMBERS = {\n\t    className: 'number',\n\t    variants: [\n\t      { begin: '\\\\b(\\\\d+(\\\\.\\\\d*)?|\\\\.\\\\d+)(u|U|l|L|ul|UL|f|F)' },\n\t      { begin: hljs.C_NUMBER_RE }\n\t    ],\n\t    relevance: 0\n\t  };\n\n\t  const PREPROCESSOR = {\n\t    className: 'meta',\n\t    begin: '#',\n\t    end: '$',\n\t    keywords: { keyword: 'if else elif endif define undef ifdef ifndef' },\n\t    contains: [\n\t      {\n\t        begin: /\\\\\\n/,\n\t        relevance: 0\n\t      },\n\t      {\n\t        beginKeywords: 'include',\n\t        end: '$',\n\t        keywords: { keyword: 'include' },\n\t        contains: [\n\t          hljs.inherit(STRINGS, { className: 'string' }),\n\t          {\n\t            className: 'string',\n\t            begin: '<',\n\t            end: '>',\n\t            illegal: '\\\\n'\n\t          }\n\t        ]\n\t      },\n\t      STRINGS,\n\t      hljs.C_LINE_COMMENT_MODE,\n\t      hljs.C_BLOCK_COMMENT_MODE\n\t    ]\n\t  };\n\n\t  const REFERENCE = {\n\t    className: 'variable',\n\t    begin: /&[a-z\\d_]*\\b/\n\t  };\n\n\t  const KEYWORD = {\n\t    className: 'keyword',\n\t    begin: '/[a-z][a-z\\\\d-]*/'\n\t  };\n\n\t  const LABEL = {\n\t    className: 'symbol',\n\t    begin: '^\\\\s*[a-zA-Z_][a-zA-Z\\\\d_]*:'\n\t  };\n\n\t  const CELL_PROPERTY = {\n\t    className: 'params',\n\t    relevance: 0,\n\t    begin: '<',\n\t    end: '>',\n\t    contains: [\n\t      NUMBERS,\n\t      REFERENCE\n\t    ]\n\t  };\n\n\t  const NODE = {\n\t    className: 'title.class',\n\t    begin: /[a-zA-Z_][a-zA-Z\\d_@-]*(?=\\s\\{)/,\n\t    relevance: 0.2\n\t  };\n\n\t  const ROOT_NODE = {\n\t    className: 'title.class',\n\t    begin: /^\\/(?=\\s*\\{)/,\n\t    relevance: 10\n\t  };\n\n\t  // TODO: `attribute` might be the right scope here, unsure\n\t  // I'm not sure if all these key names have semantic meaning or not\n\t  const ATTR_NO_VALUE = {\n\t    match: /[a-z][a-z-,]+(?=;)/,\n\t    relevance: 0,\n\t    scope: \"attr\"\n\t  };\n\t  const ATTR = {\n\t    relevance: 0,\n\t    match: [\n\t      /[a-z][a-z-,]+/,\n\t      /\\s*/,\n\t      /=/\n\t    ],\n\t    scope: {\n\t      1: \"attr\",\n\t      3: \"operator\"\n\t    }\n\t  };\n\n\t  const PUNC = {\n\t    scope: \"punctuation\",\n\t    relevance: 0,\n\t    // `};` combined is just to avoid tons of useless punctuation nodes\n\t    match: /\\};|[;{}]/\n\t  };\n\n\t  return {\n\t    name: 'Device Tree',\n\t    contains: [\n\t      ROOT_NODE,\n\t      REFERENCE,\n\t      KEYWORD,\n\t      LABEL,\n\t      NODE,\n\t      ATTR,\n\t      ATTR_NO_VALUE,\n\t      CELL_PROPERTY,\n\t      hljs.C_LINE_COMMENT_MODE,\n\t      hljs.C_BLOCK_COMMENT_MODE,\n\t      NUMBERS,\n\t      STRINGS,\n\t      PREPROCESSOR,\n\t      PUNC,\n\t      {\n\t        begin: hljs.IDENT_RE + '::',\n\t        keywords: \"\"\n\t      }\n\t    ]\n\t  };\n\t}\n\n\tdts_1 = dts;\n\treturn dts_1;\n}\n\nexport { requireDts as __require };",
-      "start": 1715636425801,
-      "end": 1715636425801,
+      "start": 1715636874884,
+      "end": 1715636874884,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -149,74 +149,74 @@
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1715636425801,
-      "end": 1715636425801,
+      "start": 1715636874884,
+      "end": 1715636874884,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1715636425801,
-      "end": 1715636425801,
+      "start": 1715636874884,
+      "end": 1715636874884,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1715636425801,
-      "end": 1715636425801,
+      "start": 1715636874884,
+      "end": 1715636874884,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1715636425801,
-      "end": 1715636425801,
+      "start": 1715636874884,
+      "end": 1715636874884,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1715636425801,
-      "end": 1715636425801,
+      "start": 1715636874884,
+      "end": 1715636874884,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1715636425801,
-      "end": 1715636425801,
+      "start": 1715636874884,
+      "end": 1715636874884,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1715636425801,
-      "end": 1715636425801,
+      "start": 1715636874884,
+      "end": 1715636874884,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1715636425801,
-      "end": 1715636425801,
+      "start": 1715636874884,
+      "end": 1715636874884,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1715636425801,
-      "end": 1715636425801,
+      "start": 1715636874884,
+      "end": 1715636874884,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1715636425801,
-      "end": 1715636425801,
+      "start": 1715636874884,
+      "end": 1715636874884,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1715636425801,
-      "end": 1715636425801,
+      "start": 1715636874884,
+      "end": 1715636874884,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1715636425801,
-      "end": 1715636425801,
+      "start": 1715636874884,
+      "end": 1715636874884,
       "order": "normal"
     }
   ]

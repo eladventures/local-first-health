@@ -587,7 +587,7 @@ const _routes = [
     meta: __nuxt_page_meta$1 || {},
     alias: (__nuxt_page_meta$1 == null ? void 0 : __nuxt_page_meta$1.alias) || [],
     redirect: (__nuxt_page_meta$1 == null ? void 0 : __nuxt_page_meta$1.redirect) || void 0,
-    component: () => import('./_nuxt/index copy-4930715b.mjs').then((m) => m.default || m)
+    component: () => import('./_nuxt/index copy-bf5ec783.mjs').then((m) => m.default || m)
   },
   {
     name: (__nuxt_page_meta == null ? void 0 : __nuxt_page_meta.name) ?? "index",
@@ -595,7 +595,7 @@ const _routes = [
     meta: __nuxt_page_meta || {},
     alias: (__nuxt_page_meta == null ? void 0 : __nuxt_page_meta.alias) || [],
     redirect: (__nuxt_page_meta == null ? void 0 : __nuxt_page_meta.redirect) || void 0,
-    component: () => import('./_nuxt/index-e8d0137b.mjs').then((m) => m.default || m)
+    component: () => import('./_nuxt/index-099971ec.mjs').then((m) => m.default || m)
   }
 ];
 const _wrapIf = (component, props, slots) => {

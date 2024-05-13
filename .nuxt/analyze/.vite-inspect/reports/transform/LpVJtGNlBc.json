@@ -4,135 +4,135 @@
     {
       "name": "vite:load-fallback",
       "result": "/*\nLanguage: crmsh\nAuthor: Kristoffer Gronlund <kgronlund@suse.com>\nWebsite: http://crmsh.github.io\nDescription: Syntax Highlighting for the crmsh DSL\nCategory: config\n*/\n\n/** @type LanguageFn */\nfunction crmsh(hljs) {\n  const RESOURCES = 'primitive rsc_template';\n  const COMMANDS = 'group clone ms master location colocation order fencing_topology '\n      + 'rsc_ticket acl_target acl_group user role '\n      + 'tag xml';\n  const PROPERTY_SETS = 'property rsc_defaults op_defaults';\n  const KEYWORDS = 'params meta operations op rule attributes utilization';\n  const OPERATORS = 'read write deny defined not_defined in_range date spec in '\n      + 'ref reference attribute type xpath version and or lt gt tag '\n      + 'lte gte eq ne \\\\';\n  const TYPES = 'number string';\n  const LITERALS = 'Master Started Slave Stopped start promote demote stop monitor true false';\n\n  return {\n    name: 'crmsh',\n    aliases: [\n      'crm',\n      'pcmk'\n    ],\n    case_insensitive: true,\n    keywords: {\n      keyword: KEYWORDS + ' ' + OPERATORS + ' ' + TYPES,\n      literal: LITERALS\n    },\n    contains: [\n      hljs.HASH_COMMENT_MODE,\n      {\n        beginKeywords: 'node',\n        starts: {\n          end: '\\\\s*([\\\\w_-]+:)?',\n          starts: {\n            className: 'title',\n            end: '\\\\s*[\\\\$\\\\w_][\\\\w_-]*'\n          }\n        }\n      },\n      {\n        beginKeywords: RESOURCES,\n        starts: {\n          className: 'title',\n          end: '\\\\s*[\\\\$\\\\w_][\\\\w_-]*',\n          starts: { end: '\\\\s*@?[\\\\w_][\\\\w_\\\\.:-]*' }\n        }\n      },\n      {\n        begin: '\\\\b(' + COMMANDS.split(' ').join('|') + ')\\\\s+',\n        keywords: COMMANDS,\n        starts: {\n          className: 'title',\n          end: '[\\\\$\\\\w_][\\\\w_-]*'\n        }\n      },\n      {\n        beginKeywords: PROPERTY_SETS,\n        starts: {\n          className: 'title',\n          end: '\\\\s*([\\\\w_-]+:)?'\n        }\n      },\n      hljs.QUOTE_STRING_MODE,\n      {\n        className: 'meta',\n        begin: '(ocf|systemd|service|lsb):[\\\\w_:-]+',\n        relevance: 0\n      },\n      {\n        className: 'number',\n        begin: '\\\\b\\\\d+(\\\\.\\\\d+)?(ms|s|h|m)?',\n        relevance: 0\n      },\n      {\n        className: 'literal',\n        begin: '[-]?(infinity|inf)',\n        relevance: 0\n      },\n      {\n        className: 'attr',\n        begin: /([A-Za-z$_#][\\w_-]+)=/,\n        relevance: 0\n      },\n      {\n        className: 'tag',\n        begin: '</?',\n        end: '/?>',\n        relevance: 0\n      }\n    ]\n  };\n}\n\nmodule.exports = crmsh;\n",
-      "start": 1715636425759,
-      "end": 1715636425785,
+      "start": 1715636874848,
+      "end": 1715636874866,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1715636425785,
-      "end": 1715636425785,
+      "start": 1715636874866,
+      "end": 1715636874866,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1715636425785,
-      "end": 1715636425785,
+      "start": 1715636874866,
+      "end": 1715636874866,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1715636425785,
-      "end": 1715636425785,
+      "start": 1715636874866,
+      "end": 1715636874866,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1715636425785,
-      "end": 1715636425785,
+      "start": 1715636874866,
+      "end": 1715636874866,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1715636425785,
-      "end": 1715636425785,
+      "start": 1715636874866,
+      "end": 1715636874866,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1715636425785,
-      "end": 1715636425785,
+      "start": 1715636874866,
+      "end": 1715636874866,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1715636425785,
-      "end": 1715636425785,
+      "start": 1715636874866,
+      "end": 1715636874866,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1715636425785,
-      "end": 1715636425785,
+      "start": 1715636874866,
+      "end": 1715636874866,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1715636425785,
-      "end": 1715636425785,
+      "start": 1715636874866,
+      "end": 1715636874866,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1715636425785,
-      "end": 1715636425785,
+      "start": 1715636874866,
+      "end": 1715636874866,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1715636425785,
-      "end": 1715636425785,
+      "start": 1715636874866,
+      "end": 1715636874866,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1715636425785,
-      "end": 1715636425786,
+      "start": 1715636874866,
+      "end": 1715636874866,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1715636425786,
-      "end": 1715636425786,
+      "start": 1715636874866,
+      "end": 1715636874866,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1715636425786,
-      "end": 1715636425786,
+      "start": 1715636874866,
+      "end": 1715636874866,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1715636425786,
-      "end": 1715636425786,
+      "start": 1715636874866,
+      "end": 1715636874866,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1715636425786,
-      "end": 1715636425786,
+      "start": 1715636874866,
+      "end": 1715636874866,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1715636425786,
-      "end": 1715636425786,
+      "start": 1715636874866,
+      "end": 1715636874866,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1715636425786,
-      "end": 1715636425786,
+      "start": 1715636874866,
+      "end": 1715636874866,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1715636425786,
-      "end": 1715636425786,
+      "start": 1715636874866,
+      "end": 1715636874866,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1715636425786,
-      "end": 1715636425786,
+      "start": 1715636874866,
+      "end": 1715636874866,
       "order": "normal"
     },
     {
       "name": "commonjs",
       "result": "/*\nLanguage: crmsh\nAuthor: Kristoffer Gronlund <kgronlund@suse.com>\nWebsite: http://crmsh.github.io\nDescription: Syntax Highlighting for the crmsh DSL\nCategory: config\n*/\nimport * as commonjsHelpers from \"\u0000commonjsHelpers.js\";\n\nvar crmsh_1;\nvar hasRequiredCrmsh;\n\nfunction requireCrmsh () {\n\tif (hasRequiredCrmsh) return crmsh_1;\n\thasRequiredCrmsh = 1;\n\t/** @type LanguageFn */\n\tfunction crmsh(hljs) {\n\t  const RESOURCES = 'primitive rsc_template';\n\t  const COMMANDS = 'group clone ms master location colocation order fencing_topology '\n\t      + 'rsc_ticket acl_target acl_group user role '\n\t      + 'tag xml';\n\t  const PROPERTY_SETS = 'property rsc_defaults op_defaults';\n\t  const KEYWORDS = 'params meta operations op rule attributes utilization';\n\t  const OPERATORS = 'read write deny defined not_defined in_range date spec in '\n\t      + 'ref reference attribute type xpath version and or lt gt tag '\n\t      + 'lte gte eq ne \\\\';\n\t  const TYPES = 'number string';\n\t  const LITERALS = 'Master Started Slave Stopped start promote demote stop monitor true false';\n\n\t  return {\n\t    name: 'crmsh',\n\t    aliases: [\n\t      'crm',\n\t      'pcmk'\n\t    ],\n\t    case_insensitive: true,\n\t    keywords: {\n\t      keyword: KEYWORDS + ' ' + OPERATORS + ' ' + TYPES,\n\t      literal: LITERALS\n\t    },\n\t    contains: [\n\t      hljs.HASH_COMMENT_MODE,\n\t      {\n\t        beginKeywords: 'node',\n\t        starts: {\n\t          end: '\\\\s*([\\\\w_-]+:)?',\n\t          starts: {\n\t            className: 'title',\n\t            end: '\\\\s*[\\\\$\\\\w_][\\\\w_-]*'\n\t          }\n\t        }\n\t      },\n\t      {\n\t        beginKeywords: RESOURCES,\n\t        starts: {\n\t          className: 'title',\n\t          end: '\\\\s*[\\\\$\\\\w_][\\\\w_-]*',\n\t          starts: { end: '\\\\s*@?[\\\\w_][\\\\w_\\\\.:-]*' }\n\t        }\n\t      },\n\t      {\n\t        begin: '\\\\b(' + COMMANDS.split(' ').join('|') + ')\\\\s+',\n\t        keywords: COMMANDS,\n\t        starts: {\n\t          className: 'title',\n\t          end: '[\\\\$\\\\w_][\\\\w_-]*'\n\t        }\n\t      },\n\t      {\n\t        beginKeywords: PROPERTY_SETS,\n\t        starts: {\n\t          className: 'title',\n\t          end: '\\\\s*([\\\\w_-]+:)?'\n\t        }\n\t      },\n\t      hljs.QUOTE_STRING_MODE,\n\t      {\n\t        className: 'meta',\n\t        begin: '(ocf|systemd|service|lsb):[\\\\w_:-]+',\n\t        relevance: 0\n\t      },\n\t      {\n\t        className: 'number',\n\t        begin: '\\\\b\\\\d+(\\\\.\\\\d+)?(ms|s|h|m)?',\n\t        relevance: 0\n\t      },\n\t      {\n\t        className: 'literal',\n\t        begin: '[-]?(infinity|inf)',\n\t        relevance: 0\n\t      },\n\t      {\n\t        className: 'attr',\n\t        begin: /([A-Za-z$_#][\\w_-]+)=/,\n\t        relevance: 0\n\t      },\n\t      {\n\t        className: 'tag',\n\t        begin: '</?',\n\t        end: '/?>',\n\t        relevance: 0\n\t      }\n\t    ]\n\t  };\n\t}\n\n\tcrmsh_1 = crmsh;\n\treturn crmsh_1;\n}\n\nexport { requireCrmsh as __require };",
-      "start": 1715636425786,
-      "end": 1715636425786,
+      "start": 1715636874866,
+      "end": 1715636874866,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -149,74 +149,74 @@
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1715636425786,
-      "end": 1715636425786,
+      "start": 1715636874866,
+      "end": 1715636874866,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1715636425786,
-      "end": 1715636425786,
+      "start": 1715636874866,
+      "end": 1715636874866,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1715636425786,
-      "end": 1715636425786,
+      "start": 1715636874866,
+      "end": 1715636874866,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1715636425786,
-      "end": 1715636425786,
+      "start": 1715636874866,
+      "end": 1715636874866,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1715636425786,
-      "end": 1715636425786,
+      "start": 1715636874866,
+      "end": 1715636874866,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1715636425786,
-      "end": 1715636425786,
+      "start": 1715636874866,
+      "end": 1715636874866,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1715636425786,
-      "end": 1715636425786,
+      "start": 1715636874866,
+      "end": 1715636874866,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1715636425786,
-      "end": 1715636425786,
+      "start": 1715636874866,
+      "end": 1715636874866,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1715636425786,
-      "end": 1715636425786,
+      "start": 1715636874866,
+      "end": 1715636874866,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1715636425786,
-      "end": 1715636425786,
+      "start": 1715636874866,
+      "end": 1715636874866,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1715636425786,
-      "end": 1715636425786,
+      "start": 1715636874866,
+      "end": 1715636874866,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1715636425786,
-      "end": 1715636425786,
+      "start": 1715636874866,
+      "end": 1715636874866,
       "order": "normal"
     }
   ]

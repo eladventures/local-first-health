@@ -4,135 +4,135 @@
     {
       "name": "vite:load-fallback",
       "result": "/*\nLanguage: Prolog\nDescription: Prolog is a general purpose logic programming language associated with artificial intelligence and computational linguistics.\nAuthor: Raivo Laanemets <raivo@infdot.com>\nWebsite: https://en.wikipedia.org/wiki/Prolog\n*/\n\nfunction prolog(hljs) {\n  const ATOM = {\n\n    begin: /[a-z][A-Za-z0-9_]*/,\n    relevance: 0\n  };\n\n  const VAR = {\n\n    className: 'symbol',\n    variants: [\n      { begin: /[A-Z][a-zA-Z0-9_]*/ },\n      { begin: /_[A-Za-z0-9_]*/ }\n    ],\n    relevance: 0\n  };\n\n  const PARENTED = {\n\n    begin: /\\(/,\n    end: /\\)/,\n    relevance: 0\n  };\n\n  const LIST = {\n\n    begin: /\\[/,\n    end: /\\]/\n  };\n\n  const LINE_COMMENT = {\n\n    className: 'comment',\n    begin: /%/,\n    end: /$/,\n    contains: [ hljs.PHRASAL_WORDS_MODE ]\n  };\n\n  const BACKTICK_STRING = {\n\n    className: 'string',\n    begin: /`/,\n    end: /`/,\n    contains: [ hljs.BACKSLASH_ESCAPE ]\n  };\n\n  const CHAR_CODE = {\n    className: 'string', // 0'a etc.\n    begin: /0'(\\\\'|.)/\n  };\n\n  const SPACE_CODE = {\n    className: 'string',\n    begin: /0'\\\\s/ // 0'\\s\n  };\n\n  const PRED_OP = { // relevance booster\n    begin: /:-/ };\n\n  const inner = [\n\n    ATOM,\n    VAR,\n    PARENTED,\n    PRED_OP,\n    LIST,\n    LINE_COMMENT,\n    hljs.C_BLOCK_COMMENT_MODE,\n    hljs.QUOTE_STRING_MODE,\n    hljs.APOS_STRING_MODE,\n    BACKTICK_STRING,\n    CHAR_CODE,\n    SPACE_CODE,\n    hljs.C_NUMBER_MODE\n  ];\n\n  PARENTED.contains = inner;\n  LIST.contains = inner;\n\n  return {\n    name: 'Prolog',\n    contains: inner.concat([\n      { // relevance booster\n        begin: /\\.$/ }\n    ])\n  };\n}\n\nmodule.exports = prolog;\n",
-      "start": 1715636425907,
-      "end": 1715636425927,
+      "start": 1715636874989,
+      "end": 1715636875010,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1715636425927,
-      "end": 1715636425927,
+      "start": 1715636875010,
+      "end": 1715636875010,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1715636425927,
-      "end": 1715636425927,
+      "start": 1715636875011,
+      "end": 1715636875011,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1715636425927,
-      "end": 1715636425927,
+      "start": 1715636875011,
+      "end": 1715636875011,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1715636425927,
-      "end": 1715636425927,
+      "start": 1715636875011,
+      "end": 1715636875011,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1715636425927,
-      "end": 1715636425927,
+      "start": 1715636875011,
+      "end": 1715636875011,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1715636425927,
-      "end": 1715636425927,
+      "start": 1715636875011,
+      "end": 1715636875011,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1715636425927,
-      "end": 1715636425927,
+      "start": 1715636875011,
+      "end": 1715636875011,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1715636425927,
-      "end": 1715636425927,
+      "start": 1715636875011,
+      "end": 1715636875011,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1715636425927,
-      "end": 1715636425927,
+      "start": 1715636875011,
+      "end": 1715636875011,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1715636425927,
-      "end": 1715636425927,
+      "start": 1715636875011,
+      "end": 1715636875011,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1715636425927,
-      "end": 1715636425927,
+      "start": 1715636875011,
+      "end": 1715636875011,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1715636425927,
-      "end": 1715636425927,
+      "start": 1715636875011,
+      "end": 1715636875011,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1715636425927,
-      "end": 1715636425927,
+      "start": 1715636875011,
+      "end": 1715636875011,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1715636425927,
-      "end": 1715636425927,
+      "start": 1715636875011,
+      "end": 1715636875011,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1715636425927,
-      "end": 1715636425927,
+      "start": 1715636875011,
+      "end": 1715636875011,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1715636425927,
-      "end": 1715636425927,
+      "start": 1715636875011,
+      "end": 1715636875011,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1715636425927,
-      "end": 1715636425927,
+      "start": 1715636875011,
+      "end": 1715636875011,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1715636425927,
-      "end": 1715636425927,
+      "start": 1715636875011,
+      "end": 1715636875011,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1715636425927,
-      "end": 1715636425927,
+      "start": 1715636875011,
+      "end": 1715636875011,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1715636425927,
-      "end": 1715636425927,
+      "start": 1715636875011,
+      "end": 1715636875011,
       "order": "normal"
     },
     {
       "name": "commonjs",
       "result": "/*\nLanguage: Prolog\nDescription: Prolog is a general purpose logic programming language associated with artificial intelligence and computational linguistics.\nAuthor: Raivo Laanemets <raivo@infdot.com>\nWebsite: https://en.wikipedia.org/wiki/Prolog\n*/\nimport * as commonjsHelpers from \"\u0000commonjsHelpers.js\";\n\nvar prolog_1;\nvar hasRequiredProlog;\n\nfunction requireProlog () {\n\tif (hasRequiredProlog) return prolog_1;\n\thasRequiredProlog = 1;\n\tfunction prolog(hljs) {\n\t  const ATOM = {\n\n\t    begin: /[a-z][A-Za-z0-9_]*/,\n\t    relevance: 0\n\t  };\n\n\t  const VAR = {\n\n\t    className: 'symbol',\n\t    variants: [\n\t      { begin: /[A-Z][a-zA-Z0-9_]*/ },\n\t      { begin: /_[A-Za-z0-9_]*/ }\n\t    ],\n\t    relevance: 0\n\t  };\n\n\t  const PARENTED = {\n\n\t    begin: /\\(/,\n\t    end: /\\)/,\n\t    relevance: 0\n\t  };\n\n\t  const LIST = {\n\n\t    begin: /\\[/,\n\t    end: /\\]/\n\t  };\n\n\t  const LINE_COMMENT = {\n\n\t    className: 'comment',\n\t    begin: /%/,\n\t    end: /$/,\n\t    contains: [ hljs.PHRASAL_WORDS_MODE ]\n\t  };\n\n\t  const BACKTICK_STRING = {\n\n\t    className: 'string',\n\t    begin: /`/,\n\t    end: /`/,\n\t    contains: [ hljs.BACKSLASH_ESCAPE ]\n\t  };\n\n\t  const CHAR_CODE = {\n\t    className: 'string', // 0'a etc.\n\t    begin: /0'(\\\\'|.)/\n\t  };\n\n\t  const SPACE_CODE = {\n\t    className: 'string',\n\t    begin: /0'\\\\s/ // 0'\\s\n\t  };\n\n\t  const PRED_OP = { // relevance booster\n\t    begin: /:-/ };\n\n\t  const inner = [\n\n\t    ATOM,\n\t    VAR,\n\t    PARENTED,\n\t    PRED_OP,\n\t    LIST,\n\t    LINE_COMMENT,\n\t    hljs.C_BLOCK_COMMENT_MODE,\n\t    hljs.QUOTE_STRING_MODE,\n\t    hljs.APOS_STRING_MODE,\n\t    BACKTICK_STRING,\n\t    CHAR_CODE,\n\t    SPACE_CODE,\n\t    hljs.C_NUMBER_MODE\n\t  ];\n\n\t  PARENTED.contains = inner;\n\t  LIST.contains = inner;\n\n\t  return {\n\t    name: 'Prolog',\n\t    contains: inner.concat([\n\t      { // relevance booster\n\t        begin: /\\.$/ }\n\t    ])\n\t  };\n\t}\n\n\tprolog_1 = prolog;\n\treturn prolog_1;\n}\n\nexport { requireProlog as __require };",
-      "start": 1715636425927,
-      "end": 1715636425927,
+      "start": 1715636875011,
+      "end": 1715636875011,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -149,74 +149,74 @@
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1715636425927,
-      "end": 1715636425927,
+      "start": 1715636875011,
+      "end": 1715636875011,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1715636425927,
-      "end": 1715636425927,
+      "start": 1715636875011,
+      "end": 1715636875011,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1715636425927,
-      "end": 1715636425927,
+      "start": 1715636875011,
+      "end": 1715636875011,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1715636425927,
-      "end": 1715636425927,
+      "start": 1715636875011,
+      "end": 1715636875011,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1715636425927,
-      "end": 1715636425927,
+      "start": 1715636875011,
+      "end": 1715636875011,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1715636425927,
-      "end": 1715636425927,
+      "start": 1715636875011,
+      "end": 1715636875011,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1715636425927,
-      "end": 1715636425927,
+      "start": 1715636875011,
+      "end": 1715636875011,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1715636425927,
-      "end": 1715636425927,
+      "start": 1715636875011,
+      "end": 1715636875011,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1715636425927,
-      "end": 1715636425927,
+      "start": 1715636875011,
+      "end": 1715636875011,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1715636425927,
-      "end": 1715636425927,
+      "start": 1715636875011,
+      "end": 1715636875011,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1715636425927,
-      "end": 1715636425927,
+      "start": 1715636875011,
+      "end": 1715636875011,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1715636425927,
-      "end": 1715636425927,
+      "start": 1715636875011,
+      "end": 1715636875011,
       "order": "normal"
     }
   ]

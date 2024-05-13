@@ -4,135 +4,135 @@
     {
       "name": "vite:load-fallback",
       "result": "/*\nLanguage: Tagger Script\nAuthor: Philipp Wolfer <ph.wolfer@gmail.com>\nDescription: Syntax Highlighting for the Tagger Script as used by MusicBrainz Picard.\nWebsite: https://picard.musicbrainz.org\n */\nfunction taggerscript(hljs) {\n  const NOOP = {\n    className: 'comment',\n    begin: /\\$noop\\(/,\n    end: /\\)/,\n    contains: [\n      { begin: /\\\\[()]/ },\n      {\n        begin: /\\(/,\n        end: /\\)/,\n        contains: [\n          { begin: /\\\\[()]/ },\n          'self'\n        ]\n      }\n    ],\n    relevance: 10\n  };\n\n  const FUNCTION = {\n    className: 'keyword',\n    begin: /\\$[_a-zA-Z0-9]+(?=\\()/\n  };\n\n  const VARIABLE = {\n    className: 'variable',\n    begin: /%[_a-zA-Z0-9:]+%/\n  };\n\n  const ESCAPE_SEQUENCE_UNICODE = {\n    className: 'symbol',\n    begin: /\\\\u[a-fA-F0-9]{4}/\n  };\n\n  const ESCAPE_SEQUENCE = {\n    className: 'symbol',\n    begin: /\\\\[\\\\nt$%,()]/\n  };\n\n  return {\n    name: 'Tagger Script',\n    contains: [\n      NOOP,\n      FUNCTION,\n      VARIABLE,\n      ESCAPE_SEQUENCE,\n      ESCAPE_SEQUENCE_UNICODE\n    ]\n  };\n}\n\nmodule.exports = taggerscript;\n",
-      "start": 1715636425940,
-      "end": 1715636425967,
+      "start": 1715636875023,
+      "end": 1715636875050,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1715636425967,
-      "end": 1715636425967,
+      "start": 1715636875050,
+      "end": 1715636875050,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1715636425967,
-      "end": 1715636425967,
+      "start": 1715636875050,
+      "end": 1715636875050,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1715636425967,
-      "end": 1715636425967,
+      "start": 1715636875050,
+      "end": 1715636875050,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1715636425967,
-      "end": 1715636425967,
+      "start": 1715636875050,
+      "end": 1715636875050,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1715636425967,
-      "end": 1715636425967,
+      "start": 1715636875050,
+      "end": 1715636875050,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1715636425967,
-      "end": 1715636425967,
+      "start": 1715636875050,
+      "end": 1715636875050,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1715636425967,
-      "end": 1715636425967,
+      "start": 1715636875050,
+      "end": 1715636875050,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1715636425967,
-      "end": 1715636425967,
+      "start": 1715636875050,
+      "end": 1715636875050,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1715636425967,
-      "end": 1715636425967,
+      "start": 1715636875050,
+      "end": 1715636875050,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1715636425967,
-      "end": 1715636425967,
+      "start": 1715636875050,
+      "end": 1715636875050,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1715636425967,
-      "end": 1715636425967,
+      "start": 1715636875050,
+      "end": 1715636875050,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1715636425967,
-      "end": 1715636425967,
+      "start": 1715636875050,
+      "end": 1715636875050,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1715636425967,
-      "end": 1715636425967,
+      "start": 1715636875050,
+      "end": 1715636875050,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1715636425967,
-      "end": 1715636425967,
+      "start": 1715636875050,
+      "end": 1715636875050,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1715636425967,
-      "end": 1715636425967,
+      "start": 1715636875050,
+      "end": 1715636875050,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1715636425967,
-      "end": 1715636425967,
+      "start": 1715636875050,
+      "end": 1715636875050,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1715636425967,
-      "end": 1715636425967,
+      "start": 1715636875050,
+      "end": 1715636875050,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1715636425967,
-      "end": 1715636425967,
+      "start": 1715636875050,
+      "end": 1715636875050,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1715636425967,
-      "end": 1715636425967,
+      "start": 1715636875050,
+      "end": 1715636875050,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1715636425967,
-      "end": 1715636425967,
+      "start": 1715636875050,
+      "end": 1715636875050,
       "order": "normal"
     },
     {
       "name": "commonjs",
       "result": "/*\nLanguage: Tagger Script\nAuthor: Philipp Wolfer <ph.wolfer@gmail.com>\nDescription: Syntax Highlighting for the Tagger Script as used by MusicBrainz Picard.\nWebsite: https://picard.musicbrainz.org\n */\nimport * as commonjsHelpers from \"\u0000commonjsHelpers.js\";\n\nvar taggerscript_1;\nvar hasRequiredTaggerscript;\n\nfunction requireTaggerscript () {\n\tif (hasRequiredTaggerscript) return taggerscript_1;\n\thasRequiredTaggerscript = 1;\n\tfunction taggerscript(hljs) {\n\t  const NOOP = {\n\t    className: 'comment',\n\t    begin: /\\$noop\\(/,\n\t    end: /\\)/,\n\t    contains: [\n\t      { begin: /\\\\[()]/ },\n\t      {\n\t        begin: /\\(/,\n\t        end: /\\)/,\n\t        contains: [\n\t          { begin: /\\\\[()]/ },\n\t          'self'\n\t        ]\n\t      }\n\t    ],\n\t    relevance: 10\n\t  };\n\n\t  const FUNCTION = {\n\t    className: 'keyword',\n\t    begin: /\\$[_a-zA-Z0-9]+(?=\\()/\n\t  };\n\n\t  const VARIABLE = {\n\t    className: 'variable',\n\t    begin: /%[_a-zA-Z0-9:]+%/\n\t  };\n\n\t  const ESCAPE_SEQUENCE_UNICODE = {\n\t    className: 'symbol',\n\t    begin: /\\\\u[a-fA-F0-9]{4}/\n\t  };\n\n\t  const ESCAPE_SEQUENCE = {\n\t    className: 'symbol',\n\t    begin: /\\\\[\\\\nt$%,()]/\n\t  };\n\n\t  return {\n\t    name: 'Tagger Script',\n\t    contains: [\n\t      NOOP,\n\t      FUNCTION,\n\t      VARIABLE,\n\t      ESCAPE_SEQUENCE,\n\t      ESCAPE_SEQUENCE_UNICODE\n\t    ]\n\t  };\n\t}\n\n\ttaggerscript_1 = taggerscript;\n\treturn taggerscript_1;\n}\n\nexport { requireTaggerscript as __require };",
-      "start": 1715636425967,
-      "end": 1715636425967,
+      "start": 1715636875050,
+      "end": 1715636875051,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -149,74 +149,74 @@
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1715636425967,
-      "end": 1715636425967,
+      "start": 1715636875051,
+      "end": 1715636875051,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1715636425967,
-      "end": 1715636425967,
+      "start": 1715636875051,
+      "end": 1715636875051,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1715636425967,
-      "end": 1715636425967,
+      "start": 1715636875051,
+      "end": 1715636875051,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1715636425967,
-      "end": 1715636425967,
+      "start": 1715636875051,
+      "end": 1715636875051,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1715636425967,
-      "end": 1715636425967,
+      "start": 1715636875051,
+      "end": 1715636875051,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1715636425967,
-      "end": 1715636425967,
+      "start": 1715636875051,
+      "end": 1715636875051,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1715636425967,
-      "end": 1715636425967,
+      "start": 1715636875051,
+      "end": 1715636875051,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1715636425967,
-      "end": 1715636425967,
+      "start": 1715636875051,
+      "end": 1715636875051,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1715636425967,
-      "end": 1715636425967,
+      "start": 1715636875051,
+      "end": 1715636875051,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1715636425967,
-      "end": 1715636425967,
+      "start": 1715636875051,
+      "end": 1715636875051,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1715636425967,
-      "end": 1715636425967,
+      "start": 1715636875051,
+      "end": 1715636875051,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1715636425967,
-      "end": 1715636425967,
+      "start": 1715636875051,
+      "end": 1715636875051,
       "order": "normal"
     }
   ]

@@ -4,135 +4,135 @@
     {
       "name": "vite:load-fallback",
       "result": "/*\nLanguage: Lasso\nAuthor: Eric Knibbe <eric@lassosoft.com>\nDescription: Lasso is a language and server platform for database-driven web applications. This definition handles Lasso 9 syntax and LassoScript for Lasso 8.6 and earlier.\nWebsite: http://www.lassosoft.com/What-Is-Lasso\n*/\n\nfunction lasso(hljs) {\n  const LASSO_IDENT_RE = '[a-zA-Z_][\\\\w.]*';\n  const LASSO_ANGLE_RE = '<\\\\?(lasso(script)?|=)';\n  const LASSO_CLOSE_RE = '\\\\]|\\\\?>';\n  const LASSO_KEYWORDS = {\n    $pattern: LASSO_IDENT_RE + '|&[lg]t;',\n    literal:\n      'true false none minimal full all void and or not '\n      + 'bw nbw ew new cn ncn lt lte gt gte eq neq rx nrx ft',\n    built_in:\n      'array date decimal duration integer map pair string tag xml null '\n      + 'boolean bytes keyword list locale queue set stack staticarray '\n      + 'local var variable global data self inherited currentcapture givenblock',\n    keyword:\n      'cache database_names database_schemanames database_tablenames '\n      + 'define_tag define_type email_batch encode_set html_comment handle '\n      + 'handle_error header if inline iterate ljax_target link '\n      + 'link_currentaction link_currentgroup link_currentrecord link_detail '\n      + 'link_firstgroup link_firstrecord link_lastgroup link_lastrecord '\n      + 'link_nextgroup link_nextrecord link_prevgroup link_prevrecord log '\n      + 'loop namespace_using output_none portal private protect records '\n      + 'referer referrer repeating resultset rows search_args '\n      + 'search_arguments select sort_args sort_arguments thread_atomic '\n      + 'value_list while abort case else fail_if fail_ifnot fail if_empty '\n      + 'if_false if_null if_true loop_abort loop_continue loop_count params '\n      + 'params_up return return_value run_children soap_definetag '\n      + 'soap_lastrequest soap_lastresponse tag_name ascending average by '\n      + 'define descending do equals frozen group handle_failure import in '\n      + 'into join let match max min on order parent protected provide public '\n      + 'require returnhome skip split_thread sum take thread to trait type '\n      + 'where with yield yieldhome'\n  };\n  const HTML_COMMENT = hljs.COMMENT(\n    '<!--',\n    '-->',\n    { relevance: 0 }\n  );\n  const LASSO_NOPROCESS = {\n    className: 'meta',\n    begin: '\\\\[noprocess\\\\]',\n    starts: {\n      end: '\\\\[/noprocess\\\\]',\n      returnEnd: true,\n      contains: [ HTML_COMMENT ]\n    }\n  };\n  const LASSO_START = {\n    className: 'meta',\n    begin: '\\\\[/noprocess|' + LASSO_ANGLE_RE\n  };\n  const LASSO_DATAMEMBER = {\n    className: 'symbol',\n    begin: '\\'' + LASSO_IDENT_RE + '\\''\n  };\n  const LASSO_CODE = [\n    hljs.C_LINE_COMMENT_MODE,\n    hljs.C_BLOCK_COMMENT_MODE,\n    hljs.inherit(hljs.C_NUMBER_MODE, { begin: hljs.C_NUMBER_RE + '|(-?infinity|NaN)\\\\b' }),\n    hljs.inherit(hljs.APOS_STRING_MODE, { illegal: null }),\n    hljs.inherit(hljs.QUOTE_STRING_MODE, { illegal: null }),\n    {\n      className: 'string',\n      begin: '`',\n      end: '`'\n    },\n    { // variables\n      variants: [\n        { begin: '[#$]' + LASSO_IDENT_RE },\n        {\n          begin: '#',\n          end: '\\\\d+',\n          illegal: '\\\\W'\n        }\n      ] },\n    {\n      className: 'type',\n      begin: '::\\\\s*',\n      end: LASSO_IDENT_RE,\n      illegal: '\\\\W'\n    },\n    {\n      className: 'params',\n      variants: [\n        {\n          begin: '-(?!infinity)' + LASSO_IDENT_RE,\n          relevance: 0\n        },\n        { begin: '(\\\\.\\\\.\\\\.)' }\n      ]\n    },\n    {\n      begin: /(->|\\.)\\s*/,\n      relevance: 0,\n      contains: [ LASSO_DATAMEMBER ]\n    },\n    {\n      className: 'class',\n      beginKeywords: 'define',\n      returnEnd: true,\n      end: '\\\\(|=>',\n      contains: [ hljs.inherit(hljs.TITLE_MODE, { begin: LASSO_IDENT_RE + '(=(?!>))?|[-+*/%](?!>)' }) ]\n    }\n  ];\n  return {\n    name: 'Lasso',\n    aliases: [\n      'ls',\n      'lassoscript'\n    ],\n    case_insensitive: true,\n    keywords: LASSO_KEYWORDS,\n    contains: [\n      {\n        className: 'meta',\n        begin: LASSO_CLOSE_RE,\n        relevance: 0,\n        starts: { // markup\n          end: '\\\\[|' + LASSO_ANGLE_RE,\n          returnEnd: true,\n          relevance: 0,\n          contains: [ HTML_COMMENT ]\n        }\n      },\n      LASSO_NOPROCESS,\n      LASSO_START,\n      {\n        className: 'meta',\n        begin: '\\\\[no_square_brackets',\n        starts: {\n          end: '\\\\[/no_square_brackets\\\\]', // not implemented in the language\n          keywords: LASSO_KEYWORDS,\n          contains: [\n            {\n              className: 'meta',\n              begin: LASSO_CLOSE_RE,\n              relevance: 0,\n              starts: {\n                end: '\\\\[noprocess\\\\]|' + LASSO_ANGLE_RE,\n                returnEnd: true,\n                contains: [ HTML_COMMENT ]\n              }\n            },\n            LASSO_NOPROCESS,\n            LASSO_START\n          ].concat(LASSO_CODE)\n        }\n      },\n      {\n        className: 'meta',\n        begin: '\\\\[',\n        relevance: 0\n      },\n      {\n        className: 'meta',\n        begin: '^#!',\n        end: 'lasso9$',\n        relevance: 10\n      }\n    ].concat(LASSO_CODE)\n  };\n}\n\nmodule.exports = lasso;\n",
-      "start": 1715636425824,
-      "end": 1715636425865,
+      "start": 1715636874913,
+      "end": 1715636874947,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1715636425865,
-      "end": 1715636425865,
+      "start": 1715636874947,
+      "end": 1715636874947,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1715636425865,
-      "end": 1715636425865,
+      "start": 1715636874947,
+      "end": 1715636874947,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1715636425865,
-      "end": 1715636425865,
+      "start": 1715636874947,
+      "end": 1715636874947,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1715636425865,
-      "end": 1715636425865,
+      "start": 1715636874947,
+      "end": 1715636874947,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1715636425865,
-      "end": 1715636425865,
+      "start": 1715636874947,
+      "end": 1715636874947,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1715636425865,
-      "end": 1715636425865,
+      "start": 1715636874947,
+      "end": 1715636874947,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1715636425865,
-      "end": 1715636425865,
+      "start": 1715636874947,
+      "end": 1715636874947,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1715636425865,
-      "end": 1715636425865,
+      "start": 1715636874947,
+      "end": 1715636874947,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1715636425865,
-      "end": 1715636425865,
+      "start": 1715636874947,
+      "end": 1715636874947,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1715636425865,
-      "end": 1715636425865,
+      "start": 1715636874947,
+      "end": 1715636874947,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1715636425865,
-      "end": 1715636425865,
+      "start": 1715636874947,
+      "end": 1715636874947,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1715636425865,
-      "end": 1715636425865,
+      "start": 1715636874947,
+      "end": 1715636874947,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1715636425865,
-      "end": 1715636425865,
+      "start": 1715636874947,
+      "end": 1715636874947,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1715636425865,
-      "end": 1715636425865,
+      "start": 1715636874947,
+      "end": 1715636874947,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1715636425865,
-      "end": 1715636425865,
+      "start": 1715636874947,
+      "end": 1715636874947,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1715636425865,
-      "end": 1715636425865,
+      "start": 1715636874947,
+      "end": 1715636874947,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1715636425865,
-      "end": 1715636425865,
+      "start": 1715636874947,
+      "end": 1715636874947,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1715636425865,
-      "end": 1715636425865,
+      "start": 1715636874947,
+      "end": 1715636874947,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1715636425865,
-      "end": 1715636425865,
+      "start": 1715636874947,
+      "end": 1715636874947,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1715636425865,
-      "end": 1715636425865,
+      "start": 1715636874947,
+      "end": 1715636874947,
       "order": "normal"
     },
     {
       "name": "commonjs",
       "result": "/*\nLanguage: Lasso\nAuthor: Eric Knibbe <eric@lassosoft.com>\nDescription: Lasso is a language and server platform for database-driven web applications. This definition handles Lasso 9 syntax and LassoScript for Lasso 8.6 and earlier.\nWebsite: http://www.lassosoft.com/What-Is-Lasso\n*/\nimport * as commonjsHelpers from \"\u0000commonjsHelpers.js\";\n\nvar lasso_1;\nvar hasRequiredLasso;\n\nfunction requireLasso () {\n\tif (hasRequiredLasso) return lasso_1;\n\thasRequiredLasso = 1;\n\tfunction lasso(hljs) {\n\t  const LASSO_IDENT_RE = '[a-zA-Z_][\\\\w.]*';\n\t  const LASSO_ANGLE_RE = '<\\\\?(lasso(script)?|=)';\n\t  const LASSO_CLOSE_RE = '\\\\]|\\\\?>';\n\t  const LASSO_KEYWORDS = {\n\t    $pattern: LASSO_IDENT_RE + '|&[lg]t;',\n\t    literal:\n\t      'true false none minimal full all void and or not '\n\t      + 'bw nbw ew new cn ncn lt lte gt gte eq neq rx nrx ft',\n\t    built_in:\n\t      'array date decimal duration integer map pair string tag xml null '\n\t      + 'boolean bytes keyword list locale queue set stack staticarray '\n\t      + 'local var variable global data self inherited currentcapture givenblock',\n\t    keyword:\n\t      'cache database_names database_schemanames database_tablenames '\n\t      + 'define_tag define_type email_batch encode_set html_comment handle '\n\t      + 'handle_error header if inline iterate ljax_target link '\n\t      + 'link_currentaction link_currentgroup link_currentrecord link_detail '\n\t      + 'link_firstgroup link_firstrecord link_lastgroup link_lastrecord '\n\t      + 'link_nextgroup link_nextrecord link_prevgroup link_prevrecord log '\n\t      + 'loop namespace_using output_none portal private protect records '\n\t      + 'referer referrer repeating resultset rows search_args '\n\t      + 'search_arguments select sort_args sort_arguments thread_atomic '\n\t      + 'value_list while abort case else fail_if fail_ifnot fail if_empty '\n\t      + 'if_false if_null if_true loop_abort loop_continue loop_count params '\n\t      + 'params_up return return_value run_children soap_definetag '\n\t      + 'soap_lastrequest soap_lastresponse tag_name ascending average by '\n\t      + 'define descending do equals frozen group handle_failure import in '\n\t      + 'into join let match max min on order parent protected provide public '\n\t      + 'require returnhome skip split_thread sum take thread to trait type '\n\t      + 'where with yield yieldhome'\n\t  };\n\t  const HTML_COMMENT = hljs.COMMENT(\n\t    '<!--',\n\t    '-->',\n\t    { relevance: 0 }\n\t  );\n\t  const LASSO_NOPROCESS = {\n\t    className: 'meta',\n\t    begin: '\\\\[noprocess\\\\]',\n\t    starts: {\n\t      end: '\\\\[/noprocess\\\\]',\n\t      returnEnd: true,\n\t      contains: [ HTML_COMMENT ]\n\t    }\n\t  };\n\t  const LASSO_START = {\n\t    className: 'meta',\n\t    begin: '\\\\[/noprocess|' + LASSO_ANGLE_RE\n\t  };\n\t  const LASSO_DATAMEMBER = {\n\t    className: 'symbol',\n\t    begin: '\\'' + LASSO_IDENT_RE + '\\''\n\t  };\n\t  const LASSO_CODE = [\n\t    hljs.C_LINE_COMMENT_MODE,\n\t    hljs.C_BLOCK_COMMENT_MODE,\n\t    hljs.inherit(hljs.C_NUMBER_MODE, { begin: hljs.C_NUMBER_RE + '|(-?infinity|NaN)\\\\b' }),\n\t    hljs.inherit(hljs.APOS_STRING_MODE, { illegal: null }),\n\t    hljs.inherit(hljs.QUOTE_STRING_MODE, { illegal: null }),\n\t    {\n\t      className: 'string',\n\t      begin: '`',\n\t      end: '`'\n\t    },\n\t    { // variables\n\t      variants: [\n\t        { begin: '[#$]' + LASSO_IDENT_RE },\n\t        {\n\t          begin: '#',\n\t          end: '\\\\d+',\n\t          illegal: '\\\\W'\n\t        }\n\t      ] },\n\t    {\n\t      className: 'type',\n\t      begin: '::\\\\s*',\n\t      end: LASSO_IDENT_RE,\n\t      illegal: '\\\\W'\n\t    },\n\t    {\n\t      className: 'params',\n\t      variants: [\n\t        {\n\t          begin: '-(?!infinity)' + LASSO_IDENT_RE,\n\t          relevance: 0\n\t        },\n\t        { begin: '(\\\\.\\\\.\\\\.)' }\n\t      ]\n\t    },\n\t    {\n\t      begin: /(->|\\.)\\s*/,\n\t      relevance: 0,\n\t      contains: [ LASSO_DATAMEMBER ]\n\t    },\n\t    {\n\t      className: 'class',\n\t      beginKeywords: 'define',\n\t      returnEnd: true,\n\t      end: '\\\\(|=>',\n\t      contains: [ hljs.inherit(hljs.TITLE_MODE, { begin: LASSO_IDENT_RE + '(=(?!>))?|[-+*/%](?!>)' }) ]\n\t    }\n\t  ];\n\t  return {\n\t    name: 'Lasso',\n\t    aliases: [\n\t      'ls',\n\t      'lassoscript'\n\t    ],\n\t    case_insensitive: true,\n\t    keywords: LASSO_KEYWORDS,\n\t    contains: [\n\t      {\n\t        className: 'meta',\n\t        begin: LASSO_CLOSE_RE,\n\t        relevance: 0,\n\t        starts: { // markup\n\t          end: '\\\\[|' + LASSO_ANGLE_RE,\n\t          returnEnd: true,\n\t          relevance: 0,\n\t          contains: [ HTML_COMMENT ]\n\t        }\n\t      },\n\t      LASSO_NOPROCESS,\n\t      LASSO_START,\n\t      {\n\t        className: 'meta',\n\t        begin: '\\\\[no_square_brackets',\n\t        starts: {\n\t          end: '\\\\[/no_square_brackets\\\\]', // not implemented in the language\n\t          keywords: LASSO_KEYWORDS,\n\t          contains: [\n\t            {\n\t              className: 'meta',\n\t              begin: LASSO_CLOSE_RE,\n\t              relevance: 0,\n\t              starts: {\n\t                end: '\\\\[noprocess\\\\]|' + LASSO_ANGLE_RE,\n\t                returnEnd: true,\n\t                contains: [ HTML_COMMENT ]\n\t              }\n\t            },\n\t            LASSO_NOPROCESS,\n\t            LASSO_START\n\t          ].concat(LASSO_CODE)\n\t        }\n\t      },\n\t      {\n\t        className: 'meta',\n\t        begin: '\\\\[',\n\t        relevance: 0\n\t      },\n\t      {\n\t        className: 'meta',\n\t        begin: '^#!',\n\t        end: 'lasso9$',\n\t        relevance: 10\n\t      }\n\t    ].concat(LASSO_CODE)\n\t  };\n\t}\n\n\tlasso_1 = lasso;\n\treturn lasso_1;\n}\n\nexport { requireLasso as __require };",
-      "start": 1715636425865,
-      "end": 1715636425865,
+      "start": 1715636874947,
+      "end": 1715636874947,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -149,74 +149,74 @@
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1715636425865,
-      "end": 1715636425865,
+      "start": 1715636874947,
+      "end": 1715636874947,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1715636425866,
-      "end": 1715636425866,
+      "start": 1715636874947,
+      "end": 1715636874947,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1715636425866,
-      "end": 1715636425866,
+      "start": 1715636874947,
+      "end": 1715636874947,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1715636425866,
-      "end": 1715636425866,
+      "start": 1715636874947,
+      "end": 1715636874947,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1715636425866,
-      "end": 1715636425866,
+      "start": 1715636874947,
+      "end": 1715636874947,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1715636425866,
-      "end": 1715636425866,
+      "start": 1715636874947,
+      "end": 1715636874947,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1715636425866,
-      "end": 1715636425866,
+      "start": 1715636874947,
+      "end": 1715636874947,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1715636425866,
-      "end": 1715636425866,
+      "start": 1715636874947,
+      "end": 1715636874947,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1715636425866,
-      "end": 1715636425866,
+      "start": 1715636874947,
+      "end": 1715636874947,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1715636425866,
-      "end": 1715636425866,
+      "start": 1715636874947,
+      "end": 1715636874947,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1715636425866,
-      "end": 1715636425866,
+      "start": 1715636874947,
+      "end": 1715636874947,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1715636425866,
-      "end": 1715636425866,
+      "start": 1715636874947,
+      "end": 1715636874947,
       "order": "normal"
     }
   ]

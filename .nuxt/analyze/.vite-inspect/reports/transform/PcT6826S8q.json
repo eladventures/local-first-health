@@ -3,77 +3,209 @@
   "transforms": [
     {
       "name": "vite:asset",
-      "result": "[Error]",
-      "start": 1715636425435,
-      "end": 1715636425455,
-      "error": {
-        "message": "ENOENT: no such file or directory, open '/Users/eladventures/Desktop/codes/local-first-health/src/assets/images/local-first-health-result.png'",
-        "stack": [
-          {
-            "functionName": "async open",
-            "fileName": "node:internal/fs/promises",
-            "lineNumber": 638,
-            "columnNumber": 25,
-            "source": "    at async open (node:internal/fs/promises:638:25)"
-          },
-          {
-            "functionName": "async Object.readFile",
-            "fileName": "node:internal/fs/promises",
-            "lineNumber": 1251,
-            "columnNumber": 14,
-            "source": "    at async Object.readFile (node:internal/fs/promises:1251:14)"
-          },
-          {
-            "functionName": "async fileToBuiltUrl",
-            "fileName": "file:///Users/eladventures/Desktop/codes/local-first-health/node_modules/vite/dist/node/chunks/dep-41cf5ffd.js",
-            "lineNumber": 16283,
-            "columnNumber": 21,
-            "source": "    at async fileToBuiltUrl (file:///Users/eladventures/Desktop/codes/local-first-health/node_modules/vite/dist/node/chunks/dep-41cf5ffd.js:16283:21)"
-          },
-          {
-            "functionName": "async Object.load",
-            "fileName": "file:///Users/eladventures/Desktop/codes/local-first-health/node_modules/vite/dist/node/chunks/dep-41cf5ffd.js",
-            "lineNumber": 16164,
-            "columnNumber": 25,
-            "source": "    at async Object.load (file:///Users/eladventures/Desktop/codes/local-first-health/node_modules/vite/dist/node/chunks/dep-41cf5ffd.js:16164:25)"
-          },
-          {
-            "fileName": "async file:///Users/eladventures/Desktop/codes/local-first-health/node_modules/vite-plugin-inspect/dist/index.mjs",
-            "lineNumber": 402,
-            "columnNumber": 17,
-            "source": "    at async file:///Users/eladventures/Desktop/codes/local-first-health/node_modules/vite-plugin-inspect/dist/index.mjs:402:17"
-          },
-          {
-            "functionName": "async PluginDriver.hookFirstAndGetPlugin",
-            "fileName": "file:///Users/eladventures/Desktop/codes/local-first-health/node_modules/rollup/dist/es/shared/node-entry.js",
-            "lineNumber": 25444,
-            "columnNumber": 28,
-            "source": "    at async PluginDriver.hookFirstAndGetPlugin (file:///Users/eladventures/Desktop/codes/local-first-health/node_modules/rollup/dist/es/shared/node-entry.js:25444:28)"
-          },
-          {
-            "fileName": "async file:///Users/eladventures/Desktop/codes/local-first-health/node_modules/rollup/dist/es/shared/node-entry.js",
-            "lineNumber": 24611,
-            "columnNumber": 75,
-            "source": "    at async file:///Users/eladventures/Desktop/codes/local-first-health/node_modules/rollup/dist/es/shared/node-entry.js:24611:75"
-          },
-          {
-            "functionName": "async Queue.work",
-            "fileName": "file:///Users/eladventures/Desktop/codes/local-first-health/node_modules/rollup/dist/es/shared/node-entry.js",
-            "lineNumber": 25654,
-            "columnNumber": 32,
-            "source": "    at async Queue.work (file:///Users/eladventures/Desktop/codes/local-first-health/node_modules/rollup/dist/es/shared/node-entry.js:25654:32)"
-          }
-        ],
-        "raw": {
-          "errno": -2,
-          "code": "PLUGIN_ERROR",
-          "syscall": "open",
-          "path": "/Users/eladventures/Desktop/codes/local-first-health/src/assets/images/local-first-health-result.png",
-          "pluginCode": "ENOENT",
-          "plugin": "vite:asset",
-          "hook": "load"
-        }
-      }
+      "result": "export default \"__VITE_ASSET__b8814c07__\"",
+      "start": 1715636874256,
+      "end": 1715636874542,
+      "sourcemaps": null
+    },
+    {
+      "name": "nuxt:layer-aliasing",
+      "start": 1715636874542,
+      "end": 1715636874542,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:server-devonly:transform",
+      "start": 1715636874542,
+      "end": 1715636874542,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:client-fallback-auto-id",
+      "start": 1715636874542,
+      "end": 1715636874542,
+      "order": "pre"
+    },
+    {
+      "name": "vite:css",
+      "start": 1715636874542,
+      "end": 1715636874542,
+      "order": "normal"
+    },
+    {
+      "name": "vite:esbuild",
+      "start": 1715636874542,
+      "end": 1715636874542,
+      "order": "normal"
+    },
+    {
+      "name": "vite:json",
+      "start": 1715636874542,
+      "end": 1715636874542,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker",
+      "start": 1715636874542,
+      "end": 1715636874542,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue",
+      "start": 1715636874542,
+      "end": 1715636874542,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue-jsx",
+      "start": 1715636874542,
+      "end": 1715636874542,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1715636874542,
+      "end": 1715636874542,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:remove-plugin-metadata",
+      "start": 1715636874542,
+      "end": 1715636874542,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:chunk-error",
+      "start": 1715636874542,
+      "end": 1715636874542,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:components:imports",
+      "start": 1715636874542,
+      "end": 1715636874542,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1715636874542,
+      "end": 1715636874542,
+      "order": "normal"
+    },
+    {
+      "name": "ssr-styles",
+      "start": 1715636874542,
+      "end": 1715636874542,
+      "order": "normal"
+    },
+    {
+      "name": "vite:define",
+      "start": 1715636874542,
+      "end": 1715636874542,
+      "order": "normal"
+    },
+    {
+      "name": "vite:css-post",
+      "start": 1715636874542,
+      "end": 1715636874542,
+      "order": "normal"
+    },
+    {
+      "name": "vite:build-html",
+      "start": 1715636874542,
+      "end": 1715636874542,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker-import-meta-url",
+      "start": 1715636874542,
+      "end": 1715636874542,
+      "order": "normal"
+    },
+    {
+      "name": "vite:asset-import-meta-url",
+      "start": 1715636874542,
+      "end": 1715636874542,
+      "order": "normal"
+    },
+    {
+      "name": "commonjs",
+      "start": 1715636874542,
+      "end": 1715636874542,
+      "order": "normal"
+    },
+    {
+      "name": "vite:dynamic-import-vars",
+      "start": 1715636874542,
+      "end": 1715636874542,
+      "order": "normal"
+    },
+    {
+      "name": "vite:import-glob",
+      "start": 1715636874542,
+      "end": 1715636874542,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:composable-keys",
+      "start": 1715636874542,
+      "end": 1715636874542,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:imports-transform",
+      "start": 1715636874542,
+      "end": 1715636874542,
+      "order": "post"
+    },
+    {
+      "name": "unctx:transform",
+      "start": 1715636874542,
+      "end": 1715636874542,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:pages-macros-transform",
+      "start": 1715636874542,
+      "end": 1715636874542,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:runtime-paths-dep",
+      "result": "import \"#build/paths.mjs\";export default \"__VITE_ASSET__b8814c07__\"",
+      "start": 1715636874542,
+      "end": 1715636874542,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:route-injection-plugin",
+      "start": 1715636874542,
+      "end": 1715636874542,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:components-loader",
+      "start": 1715636874542,
+      "end": 1715636874542,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:tree-shake-composables:transform",
+      "start": 1715636874542,
+      "end": 1715636874542,
+      "order": "post"
+    },
+    {
+      "name": "vite:build-import-analysis",
+      "start": 1715636874542,
+      "end": 1715636874542,
+      "order": "normal"
+    },
+    {
+      "name": "vite:reporter",
+      "start": 1715636874542,
+      "end": 1715636874542,
+      "order": "normal"
     }
   ]
 }
