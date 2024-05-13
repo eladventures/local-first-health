@@ -4,135 +4,135 @@
     {
       "name": "vite:load-fallback",
       "result": "/*\nLanguage: AppleScript\nAuthors: Nathan Grigg <nathan@nathanamy.org>, Dr. Drang <drdrang@gmail.com>\nCategory: scripting\nWebsite: https://developer.apple.com/library/archive/documentation/AppleScript/Conceptual/AppleScriptLangGuide/introduction/ASLR_intro.html\nAudit: 2020\n*/\n\n/** @type LanguageFn */\nfunction applescript(hljs) {\n  const regex = hljs.regex;\n  const STRING = hljs.inherit(\n    hljs.QUOTE_STRING_MODE, { illegal: null });\n  const PARAMS = {\n    className: 'params',\n    begin: /\\(/,\n    end: /\\)/,\n    contains: [\n      'self',\n      hljs.C_NUMBER_MODE,\n      STRING\n    ]\n  };\n  const COMMENT_MODE_1 = hljs.COMMENT(/--/, /$/);\n  const COMMENT_MODE_2 = hljs.COMMENT(\n    /\\(\\*/,\n    /\\*\\)/,\n    { contains: [\n      'self', // allow nesting\n      COMMENT_MODE_1\n    ] }\n  );\n  const COMMENTS = [\n    COMMENT_MODE_1,\n    COMMENT_MODE_2,\n    hljs.HASH_COMMENT_MODE\n  ];\n\n  const KEYWORD_PATTERNS = [\n    /apart from/,\n    /aside from/,\n    /instead of/,\n    /out of/,\n    /greater than/,\n    /isn't|(doesn't|does not) (equal|come before|come after|contain)/,\n    /(greater|less) than( or equal)?/,\n    /(starts?|ends|begins?) with/,\n    /contained by/,\n    /comes (before|after)/,\n    /a (ref|reference)/,\n    /POSIX (file|path)/,\n    /(date|time) string/,\n    /quoted form/\n  ];\n\n  const BUILT_IN_PATTERNS = [\n    /clipboard info/,\n    /the clipboard/,\n    /info for/,\n    /list (disks|folder)/,\n    /mount volume/,\n    /path to/,\n    /(close|open for) access/,\n    /(get|set) eof/,\n    /current date/,\n    /do shell script/,\n    /get volume settings/,\n    /random number/,\n    /set volume/,\n    /system attribute/,\n    /system info/,\n    /time to GMT/,\n    /(load|run|store) script/,\n    /scripting components/,\n    /ASCII (character|number)/,\n    /localized string/,\n    /choose (application|color|file|file name|folder|from list|remote application|URL)/,\n    /display (alert|dialog)/\n  ];\n\n  return {\n    name: 'AppleScript',\n    aliases: [ 'osascript' ],\n    keywords: {\n      keyword:\n        'about above after against and around as at back before beginning '\n        + 'behind below beneath beside between but by considering '\n        + 'contain contains continue copy div does eighth else end equal '\n        + 'equals error every exit fifth first for fourth from front '\n        + 'get given global if ignoring in into is it its last local me '\n        + 'middle mod my ninth not of on onto or over prop property put ref '\n        + 'reference repeat returning script second set seventh since '\n        + 'sixth some tell tenth that the|0 then third through thru '\n        + 'timeout times to transaction try until where while whose with '\n        + 'without',\n      literal:\n        'AppleScript false linefeed return pi quote result space tab true',\n      built_in:\n        'alias application boolean class constant date file integer list '\n        + 'number real record string text '\n        + 'activate beep count delay launch log offset read round '\n        + 'run say summarize write '\n        + 'character characters contents day frontmost id item length '\n        + 'month name|0 paragraph paragraphs rest reverse running time version '\n        + 'weekday word words year'\n    },\n    contains: [\n      STRING,\n      hljs.C_NUMBER_MODE,\n      {\n        className: 'built_in',\n        begin: regex.concat(\n          /\\b/,\n          regex.either(...BUILT_IN_PATTERNS),\n          /\\b/\n        )\n      },\n      {\n        className: 'built_in',\n        begin: /^\\s*return\\b/\n      },\n      {\n        className: 'literal',\n        begin:\n          /\\b(text item delimiters|current application|missing value)\\b/\n      },\n      {\n        className: 'keyword',\n        begin: regex.concat(\n          /\\b/,\n          regex.either(...KEYWORD_PATTERNS),\n          /\\b/\n        )\n      },\n      {\n        beginKeywords: 'on',\n        illegal: /[${=;\\n]/,\n        contains: [\n          hljs.UNDERSCORE_TITLE_MODE,\n          PARAMS\n        ]\n      },\n      ...COMMENTS\n    ],\n    illegal: /\\/\\/|->|=>|\\[\\[/\n  };\n}\n\nmodule.exports = applescript;\n",
-      "start": 1715637176877,
-      "end": 1715637176912,
+      "start": 1715637636354,
+      "end": 1715637636396,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1715637176912,
-      "end": 1715637176912,
+      "start": 1715637636396,
+      "end": 1715637636396,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1715637176912,
-      "end": 1715637176912,
+      "start": 1715637636396,
+      "end": 1715637636396,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1715637176912,
-      "end": 1715637176912,
+      "start": 1715637636396,
+      "end": 1715637636396,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1715637176912,
-      "end": 1715637176912,
+      "start": 1715637636396,
+      "end": 1715637636396,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1715637176912,
-      "end": 1715637176912,
+      "start": 1715637636396,
+      "end": 1715637636396,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1715637176912,
-      "end": 1715637176912,
+      "start": 1715637636396,
+      "end": 1715637636396,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1715637176912,
-      "end": 1715637176912,
+      "start": 1715637636396,
+      "end": 1715637636396,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1715637176912,
-      "end": 1715637176912,
+      "start": 1715637636396,
+      "end": 1715637636396,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1715637176912,
-      "end": 1715637176912,
+      "start": 1715637636396,
+      "end": 1715637636396,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1715637176912,
-      "end": 1715637176912,
+      "start": 1715637636396,
+      "end": 1715637636396,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1715637176912,
-      "end": 1715637176912,
+      "start": 1715637636396,
+      "end": 1715637636396,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1715637176912,
-      "end": 1715637176912,
+      "start": 1715637636396,
+      "end": 1715637636396,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1715637176912,
-      "end": 1715637176912,
+      "start": 1715637636396,
+      "end": 1715637636396,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1715637176912,
-      "end": 1715637176912,
+      "start": 1715637636396,
+      "end": 1715637636396,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1715637176912,
-      "end": 1715637176912,
+      "start": 1715637636396,
+      "end": 1715637636396,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1715637176912,
-      "end": 1715637176912,
+      "start": 1715637636396,
+      "end": 1715637636396,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1715637176912,
-      "end": 1715637176912,
+      "start": 1715637636396,
+      "end": 1715637636396,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1715637176912,
-      "end": 1715637176912,
+      "start": 1715637636396,
+      "end": 1715637636396,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1715637176912,
-      "end": 1715637176912,
+      "start": 1715637636396,
+      "end": 1715637636396,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1715637176912,
-      "end": 1715637176912,
+      "start": 1715637636396,
+      "end": 1715637636396,
       "order": "normal"
     },
     {
       "name": "commonjs",
       "result": "/*\nLanguage: AppleScript\nAuthors: Nathan Grigg <nathan@nathanamy.org>, Dr. Drang <drdrang@gmail.com>\nCategory: scripting\nWebsite: https://developer.apple.com/library/archive/documentation/AppleScript/Conceptual/AppleScriptLangGuide/introduction/ASLR_intro.html\nAudit: 2020\n*/\nimport * as commonjsHelpers from \"\u0000commonjsHelpers.js\";\n\nvar applescript_1;\nvar hasRequiredApplescript;\n\nfunction requireApplescript () {\n\tif (hasRequiredApplescript) return applescript_1;\n\thasRequiredApplescript = 1;\n\t/** @type LanguageFn */\n\tfunction applescript(hljs) {\n\t  const regex = hljs.regex;\n\t  const STRING = hljs.inherit(\n\t    hljs.QUOTE_STRING_MODE, { illegal: null });\n\t  const PARAMS = {\n\t    className: 'params',\n\t    begin: /\\(/,\n\t    end: /\\)/,\n\t    contains: [\n\t      'self',\n\t      hljs.C_NUMBER_MODE,\n\t      STRING\n\t    ]\n\t  };\n\t  const COMMENT_MODE_1 = hljs.COMMENT(/--/, /$/);\n\t  const COMMENT_MODE_2 = hljs.COMMENT(\n\t    /\\(\\*/,\n\t    /\\*\\)/,\n\t    { contains: [\n\t      'self', // allow nesting\n\t      COMMENT_MODE_1\n\t    ] }\n\t  );\n\t  const COMMENTS = [\n\t    COMMENT_MODE_1,\n\t    COMMENT_MODE_2,\n\t    hljs.HASH_COMMENT_MODE\n\t  ];\n\n\t  const KEYWORD_PATTERNS = [\n\t    /apart from/,\n\t    /aside from/,\n\t    /instead of/,\n\t    /out of/,\n\t    /greater than/,\n\t    /isn't|(doesn't|does not) (equal|come before|come after|contain)/,\n\t    /(greater|less) than( or equal)?/,\n\t    /(starts?|ends|begins?) with/,\n\t    /contained by/,\n\t    /comes (before|after)/,\n\t    /a (ref|reference)/,\n\t    /POSIX (file|path)/,\n\t    /(date|time) string/,\n\t    /quoted form/\n\t  ];\n\n\t  const BUILT_IN_PATTERNS = [\n\t    /clipboard info/,\n\t    /the clipboard/,\n\t    /info for/,\n\t    /list (disks|folder)/,\n\t    /mount volume/,\n\t    /path to/,\n\t    /(close|open for) access/,\n\t    /(get|set) eof/,\n\t    /current date/,\n\t    /do shell script/,\n\t    /get volume settings/,\n\t    /random number/,\n\t    /set volume/,\n\t    /system attribute/,\n\t    /system info/,\n\t    /time to GMT/,\n\t    /(load|run|store) script/,\n\t    /scripting components/,\n\t    /ASCII (character|number)/,\n\t    /localized string/,\n\t    /choose (application|color|file|file name|folder|from list|remote application|URL)/,\n\t    /display (alert|dialog)/\n\t  ];\n\n\t  return {\n\t    name: 'AppleScript',\n\t    aliases: [ 'osascript' ],\n\t    keywords: {\n\t      keyword:\n\t        'about above after against and around as at back before beginning '\n\t        + 'behind below beneath beside between but by considering '\n\t        + 'contain contains continue copy div does eighth else end equal '\n\t        + 'equals error every exit fifth first for fourth from front '\n\t        + 'get given global if ignoring in into is it its last local me '\n\t        + 'middle mod my ninth not of on onto or over prop property put ref '\n\t        + 'reference repeat returning script second set seventh since '\n\t        + 'sixth some tell tenth that the|0 then third through thru '\n\t        + 'timeout times to transaction try until where while whose with '\n\t        + 'without',\n\t      literal:\n\t        'AppleScript false linefeed return pi quote result space tab true',\n\t      built_in:\n\t        'alias application boolean class constant date file integer list '\n\t        + 'number real record string text '\n\t        + 'activate beep count delay launch log offset read round '\n\t        + 'run say summarize write '\n\t        + 'character characters contents day frontmost id item length '\n\t        + 'month name|0 paragraph paragraphs rest reverse running time version '\n\t        + 'weekday word words year'\n\t    },\n\t    contains: [\n\t      STRING,\n\t      hljs.C_NUMBER_MODE,\n\t      {\n\t        className: 'built_in',\n\t        begin: regex.concat(\n\t          /\\b/,\n\t          regex.either(...BUILT_IN_PATTERNS),\n\t          /\\b/\n\t        )\n\t      },\n\t      {\n\t        className: 'built_in',\n\t        begin: /^\\s*return\\b/\n\t      },\n\t      {\n\t        className: 'literal',\n\t        begin:\n\t          /\\b(text item delimiters|current application|missing value)\\b/\n\t      },\n\t      {\n\t        className: 'keyword',\n\t        begin: regex.concat(\n\t          /\\b/,\n\t          regex.either(...KEYWORD_PATTERNS),\n\t          /\\b/\n\t        )\n\t      },\n\t      {\n\t        beginKeywords: 'on',\n\t        illegal: /[${=;\\n]/,\n\t        contains: [\n\t          hljs.UNDERSCORE_TITLE_MODE,\n\t          PARAMS\n\t        ]\n\t      },\n\t      ...COMMENTS\n\t    ],\n\t    illegal: /\\/\\/|->|=>|\\[\\[/\n\t  };\n\t}\n\n\tapplescript_1 = applescript;\n\treturn applescript_1;\n}\n\nexport { requireApplescript as __require };",
-      "start": 1715637176912,
-      "end": 1715637176913,
+      "start": 1715637636396,
+      "end": 1715637636397,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -149,74 +149,74 @@
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1715637176913,
-      "end": 1715637176913,
+      "start": 1715637636397,
+      "end": 1715637636397,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1715637176913,
-      "end": 1715637176913,
+      "start": 1715637636397,
+      "end": 1715637636397,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1715637176913,
-      "end": 1715637176913,
+      "start": 1715637636397,
+      "end": 1715637636397,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1715637176913,
-      "end": 1715637176913,
+      "start": 1715637636397,
+      "end": 1715637636397,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1715637176913,
-      "end": 1715637176913,
+      "start": 1715637636397,
+      "end": 1715637636397,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1715637176913,
-      "end": 1715637176913,
+      "start": 1715637636397,
+      "end": 1715637636397,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1715637176913,
-      "end": 1715637176913,
+      "start": 1715637636397,
+      "end": 1715637636397,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1715637176913,
-      "end": 1715637176913,
+      "start": 1715637636397,
+      "end": 1715637636397,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1715637176913,
-      "end": 1715637176913,
+      "start": 1715637636397,
+      "end": 1715637636397,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1715637176913,
-      "end": 1715637176913,
+      "start": 1715637636397,
+      "end": 1715637636397,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1715637176913,
-      "end": 1715637176913,
+      "start": 1715637636397,
+      "end": 1715637636397,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1715637176913,
-      "end": 1715637176913,
+      "start": 1715637636397,
+      "end": 1715637636397,
       "order": "normal"
     }
   ]

@@ -4,135 +4,135 @@
     {
       "name": "vite:load-fallback",
       "result": "/*\nLanguage: Wren\nDescription: Think Smalltalk in a Lua-sized package with a dash of Erlang and wrapped up in a familiar, modern syntax.\nCategory: scripting\nAuthor: @joshgoebel\nMaintainer: @joshgoebel\nWebsite: https://wren.io/\n*/\n\n/** @type LanguageFn */\nfunction wren(hljs) {\n  const regex = hljs.regex;\n  const IDENT_RE = /[a-zA-Z]\\w*/;\n  const KEYWORDS = [\n    \"as\",\n    \"break\",\n    \"class\",\n    \"construct\",\n    \"continue\",\n    \"else\",\n    \"for\",\n    \"foreign\",\n    \"if\",\n    \"import\",\n    \"in\",\n    \"is\",\n    \"return\",\n    \"static\",\n    \"var\",\n    \"while\"\n  ];\n  const LITERALS = [\n    \"true\",\n    \"false\",\n    \"null\"\n  ];\n  const LANGUAGE_VARS = [\n    \"this\",\n    \"super\"\n  ];\n  const CORE_CLASSES = [\n    \"Bool\",\n    \"Class\",\n    \"Fiber\",\n    \"Fn\",\n    \"List\",\n    \"Map\",\n    \"Null\",\n    \"Num\",\n    \"Object\",\n    \"Range\",\n    \"Sequence\",\n    \"String\",\n    \"System\"\n  ];\n  const OPERATORS = [\n    \"-\",\n    \"~\",\n    /\\*/,\n    \"%\",\n    /\\.\\.\\./,\n    /\\.\\./,\n    /\\+/,\n    \"<<\",\n    \">>\",\n    \">=\",\n    \"<=\",\n    \"<\",\n    \">\",\n    /\\^/,\n    /!=/,\n    /!/,\n    /\\bis\\b/,\n    \"==\",\n    \"&&\",\n    \"&\",\n    /\\|\\|/,\n    /\\|/,\n    /\\?:/,\n    \"=\"\n  ];\n  const FUNCTION = {\n    relevance: 0,\n    match: regex.concat(/\\b(?!(if|while|for|else|super)\\b)/, IDENT_RE, /(?=\\s*[({])/),\n    className: \"title.function\"\n  };\n  const FUNCTION_DEFINITION = {\n    match: regex.concat(\n      regex.either(\n        regex.concat(/\\b(?!(if|while|for|else|super)\\b)/, IDENT_RE),\n        regex.either(...OPERATORS)\n      ),\n      /(?=\\s*\\([^)]+\\)\\s*\\{)/),\n    className: \"title.function\",\n    starts: { contains: [\n      {\n        begin: /\\(/,\n        end: /\\)/,\n        contains: [\n          {\n            relevance: 0,\n            scope: \"params\",\n            match: IDENT_RE\n          }\n        ]\n      }\n    ] }\n  };\n  const CLASS_DEFINITION = {\n    variants: [\n      { match: [\n        /class\\s+/,\n        IDENT_RE,\n        /\\s+is\\s+/,\n        IDENT_RE\n      ] },\n      { match: [\n        /class\\s+/,\n        IDENT_RE\n      ] }\n    ],\n    scope: {\n      2: \"title.class\",\n      4: \"title.class.inherited\"\n    },\n    keywords: KEYWORDS\n  };\n\n  const OPERATOR = {\n    relevance: 0,\n    match: regex.either(...OPERATORS),\n    className: \"operator\"\n  };\n\n  const TRIPLE_STRING = {\n    className: \"string\",\n    begin: /\"\"\"/,\n    end: /\"\"\"/\n  };\n\n  const PROPERTY = {\n    className: \"property\",\n    begin: regex.concat(/\\./, regex.lookahead(IDENT_RE)),\n    end: IDENT_RE,\n    excludeBegin: true,\n    relevance: 0\n  };\n\n  const FIELD = {\n    relevance: 0,\n    match: regex.concat(/\\b_/, IDENT_RE),\n    scope: \"variable\"\n  };\n\n  // CamelCase\n  const CLASS_REFERENCE = {\n    relevance: 0,\n    match: /\\b[A-Z]+[a-z]+([A-Z]+[a-z]+)*/,\n    scope: \"title.class\",\n    keywords: { _: CORE_CLASSES }\n  };\n\n  // TODO: add custom number modes\n  const NUMBER = hljs.C_NUMBER_MODE;\n\n  const SETTER = {\n    match: [\n      IDENT_RE,\n      /\\s*/,\n      /=/,\n      /\\s*/,\n      /\\(/,\n      IDENT_RE,\n      /\\)\\s*\\{/\n    ],\n    scope: {\n      1: \"title.function\",\n      3: \"operator\",\n      6: \"params\"\n    }\n  };\n\n  const COMMENT_DOCS = hljs.COMMENT(\n    /\\/\\*\\*/,\n    /\\*\\//,\n    { contains: [\n      {\n        match: /@[a-z]+/,\n        scope: \"doctag\"\n      },\n      \"self\"\n    ] }\n  );\n  const SUBST = {\n    scope: \"subst\",\n    begin: /%\\(/,\n    end: /\\)/,\n    contains: [\n      NUMBER,\n      CLASS_REFERENCE,\n      FUNCTION,\n      FIELD,\n      OPERATOR\n    ]\n  };\n  const STRING = {\n    scope: \"string\",\n    begin: /\"/,\n    end: /\"/,\n    contains: [\n      SUBST,\n      {\n        scope: \"char.escape\",\n        variants: [\n          { match: /\\\\\\\\|\\\\[\"0%abefnrtv]/ },\n          { match: /\\\\x[0-9A-F]{2}/ },\n          { match: /\\\\u[0-9A-F]{4}/ },\n          { match: /\\\\U[0-9A-F]{8}/ }\n        ]\n      }\n    ]\n  };\n  SUBST.contains.push(STRING);\n\n  const ALL_KWS = [\n    ...KEYWORDS,\n    ...LANGUAGE_VARS,\n    ...LITERALS\n  ];\n  const VARIABLE = {\n    relevance: 0,\n    match: regex.concat(\n      \"\\\\b(?!\",\n      ALL_KWS.join(\"|\"),\n      \"\\\\b)\",\n      /[a-zA-Z_]\\w*(?:[?!]|\\b)/\n    ),\n    className: \"variable\"\n  };\n\n  // TODO: reconsider this in the future\n  const ATTRIBUTE = {\n    // scope: \"meta\",\n    scope: \"comment\",\n    variants: [\n      {\n        begin: [\n          /#!?/,\n          /[A-Za-z_]+(?=\\()/\n        ],\n        beginScope: {\n          // 2: \"attr\"\n        },\n        keywords: { literal: LITERALS },\n        contains: [\n          // NUMBER,\n          // VARIABLE\n        ],\n        end: /\\)/\n      },\n      {\n        begin: [\n          /#!?/,\n          /[A-Za-z_]+/\n        ],\n        beginScope: {\n          // 2: \"attr\"\n        },\n        end: /$/\n      }\n    ]\n  };\n\n  return {\n    name: \"Wren\",\n    keywords: {\n      keyword: KEYWORDS,\n      \"variable.language\": LANGUAGE_VARS,\n      literal: LITERALS\n    },\n    contains: [\n      ATTRIBUTE,\n      NUMBER,\n      STRING,\n      TRIPLE_STRING,\n      COMMENT_DOCS,\n      hljs.C_LINE_COMMENT_MODE,\n      hljs.C_BLOCK_COMMENT_MODE,\n      CLASS_REFERENCE,\n      CLASS_DEFINITION,\n      SETTER,\n      FUNCTION_DEFINITION,\n      FUNCTION,\n      OPERATOR,\n      FIELD,\n      PROPERTY,\n      VARIABLE\n    ]\n  };\n}\n\nmodule.exports = wren;\n",
-      "start": 1715637177119,
-      "end": 1715637177143,
+      "start": 1715637636608,
+      "end": 1715637636633,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1715637177144,
-      "end": 1715637177144,
+      "start": 1715637636633,
+      "end": 1715637636633,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1715637177144,
-      "end": 1715637177144,
+      "start": 1715637636633,
+      "end": 1715637636633,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1715637177144,
-      "end": 1715637177144,
+      "start": 1715637636633,
+      "end": 1715637636633,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1715637177144,
-      "end": 1715637177144,
+      "start": 1715637636633,
+      "end": 1715637636633,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1715637177144,
-      "end": 1715637177144,
+      "start": 1715637636633,
+      "end": 1715637636633,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1715637177144,
-      "end": 1715637177144,
+      "start": 1715637636633,
+      "end": 1715637636633,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1715637177144,
-      "end": 1715637177144,
+      "start": 1715637636633,
+      "end": 1715637636633,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1715637177144,
-      "end": 1715637177144,
+      "start": 1715637636633,
+      "end": 1715637636633,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1715637177144,
-      "end": 1715637177144,
+      "start": 1715637636633,
+      "end": 1715637636633,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1715637177144,
-      "end": 1715637177144,
+      "start": 1715637636633,
+      "end": 1715637636633,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1715637177144,
-      "end": 1715637177144,
+      "start": 1715637636633,
+      "end": 1715637636633,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1715637177144,
-      "end": 1715637177144,
+      "start": 1715637636633,
+      "end": 1715637636633,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1715637177144,
-      "end": 1715637177144,
+      "start": 1715637636633,
+      "end": 1715637636633,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1715637177144,
-      "end": 1715637177144,
+      "start": 1715637636633,
+      "end": 1715637636633,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1715637177144,
-      "end": 1715637177144,
+      "start": 1715637636633,
+      "end": 1715637636633,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1715637177144,
-      "end": 1715637177144,
+      "start": 1715637636633,
+      "end": 1715637636633,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1715637177144,
-      "end": 1715637177144,
+      "start": 1715637636633,
+      "end": 1715637636633,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1715637177144,
-      "end": 1715637177144,
+      "start": 1715637636633,
+      "end": 1715637636633,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1715637177144,
-      "end": 1715637177144,
+      "start": 1715637636633,
+      "end": 1715637636633,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1715637177144,
-      "end": 1715637177144,
+      "start": 1715637636633,
+      "end": 1715637636633,
       "order": "normal"
     },
     {
       "name": "commonjs",
       "result": "/*\nLanguage: Wren\nDescription: Think Smalltalk in a Lua-sized package with a dash of Erlang and wrapped up in a familiar, modern syntax.\nCategory: scripting\nAuthor: @joshgoebel\nMaintainer: @joshgoebel\nWebsite: https://wren.io/\n*/\nimport * as commonjsHelpers from \"\u0000commonjsHelpers.js\";\n\nvar wren_1;\nvar hasRequiredWren;\n\nfunction requireWren () {\n\tif (hasRequiredWren) return wren_1;\n\thasRequiredWren = 1;\n\t/** @type LanguageFn */\n\tfunction wren(hljs) {\n\t  const regex = hljs.regex;\n\t  const IDENT_RE = /[a-zA-Z]\\w*/;\n\t  const KEYWORDS = [\n\t    \"as\",\n\t    \"break\",\n\t    \"class\",\n\t    \"construct\",\n\t    \"continue\",\n\t    \"else\",\n\t    \"for\",\n\t    \"foreign\",\n\t    \"if\",\n\t    \"import\",\n\t    \"in\",\n\t    \"is\",\n\t    \"return\",\n\t    \"static\",\n\t    \"var\",\n\t    \"while\"\n\t  ];\n\t  const LITERALS = [\n\t    \"true\",\n\t    \"false\",\n\t    \"null\"\n\t  ];\n\t  const LANGUAGE_VARS = [\n\t    \"this\",\n\t    \"super\"\n\t  ];\n\t  const CORE_CLASSES = [\n\t    \"Bool\",\n\t    \"Class\",\n\t    \"Fiber\",\n\t    \"Fn\",\n\t    \"List\",\n\t    \"Map\",\n\t    \"Null\",\n\t    \"Num\",\n\t    \"Object\",\n\t    \"Range\",\n\t    \"Sequence\",\n\t    \"String\",\n\t    \"System\"\n\t  ];\n\t  const OPERATORS = [\n\t    \"-\",\n\t    \"~\",\n\t    /\\*/,\n\t    \"%\",\n\t    /\\.\\.\\./,\n\t    /\\.\\./,\n\t    /\\+/,\n\t    \"<<\",\n\t    \">>\",\n\t    \">=\",\n\t    \"<=\",\n\t    \"<\",\n\t    \">\",\n\t    /\\^/,\n\t    /!=/,\n\t    /!/,\n\t    /\\bis\\b/,\n\t    \"==\",\n\t    \"&&\",\n\t    \"&\",\n\t    /\\|\\|/,\n\t    /\\|/,\n\t    /\\?:/,\n\t    \"=\"\n\t  ];\n\t  const FUNCTION = {\n\t    relevance: 0,\n\t    match: regex.concat(/\\b(?!(if|while|for|else|super)\\b)/, IDENT_RE, /(?=\\s*[({])/),\n\t    className: \"title.function\"\n\t  };\n\t  const FUNCTION_DEFINITION = {\n\t    match: regex.concat(\n\t      regex.either(\n\t        regex.concat(/\\b(?!(if|while|for|else|super)\\b)/, IDENT_RE),\n\t        regex.either(...OPERATORS)\n\t      ),\n\t      /(?=\\s*\\([^)]+\\)\\s*\\{)/),\n\t    className: \"title.function\",\n\t    starts: { contains: [\n\t      {\n\t        begin: /\\(/,\n\t        end: /\\)/,\n\t        contains: [\n\t          {\n\t            relevance: 0,\n\t            scope: \"params\",\n\t            match: IDENT_RE\n\t          }\n\t        ]\n\t      }\n\t    ] }\n\t  };\n\t  const CLASS_DEFINITION = {\n\t    variants: [\n\t      { match: [\n\t        /class\\s+/,\n\t        IDENT_RE,\n\t        /\\s+is\\s+/,\n\t        IDENT_RE\n\t      ] },\n\t      { match: [\n\t        /class\\s+/,\n\t        IDENT_RE\n\t      ] }\n\t    ],\n\t    scope: {\n\t      2: \"title.class\",\n\t      4: \"title.class.inherited\"\n\t    },\n\t    keywords: KEYWORDS\n\t  };\n\n\t  const OPERATOR = {\n\t    relevance: 0,\n\t    match: regex.either(...OPERATORS),\n\t    className: \"operator\"\n\t  };\n\n\t  const TRIPLE_STRING = {\n\t    className: \"string\",\n\t    begin: /\"\"\"/,\n\t    end: /\"\"\"/\n\t  };\n\n\t  const PROPERTY = {\n\t    className: \"property\",\n\t    begin: regex.concat(/\\./, regex.lookahead(IDENT_RE)),\n\t    end: IDENT_RE,\n\t    excludeBegin: true,\n\t    relevance: 0\n\t  };\n\n\t  const FIELD = {\n\t    relevance: 0,\n\t    match: regex.concat(/\\b_/, IDENT_RE),\n\t    scope: \"variable\"\n\t  };\n\n\t  // CamelCase\n\t  const CLASS_REFERENCE = {\n\t    relevance: 0,\n\t    match: /\\b[A-Z]+[a-z]+([A-Z]+[a-z]+)*/,\n\t    scope: \"title.class\",\n\t    keywords: { _: CORE_CLASSES }\n\t  };\n\n\t  // TODO: add custom number modes\n\t  const NUMBER = hljs.C_NUMBER_MODE;\n\n\t  const SETTER = {\n\t    match: [\n\t      IDENT_RE,\n\t      /\\s*/,\n\t      /=/,\n\t      /\\s*/,\n\t      /\\(/,\n\t      IDENT_RE,\n\t      /\\)\\s*\\{/\n\t    ],\n\t    scope: {\n\t      1: \"title.function\",\n\t      3: \"operator\",\n\t      6: \"params\"\n\t    }\n\t  };\n\n\t  const COMMENT_DOCS = hljs.COMMENT(\n\t    /\\/\\*\\*/,\n\t    /\\*\\//,\n\t    { contains: [\n\t      {\n\t        match: /@[a-z]+/,\n\t        scope: \"doctag\"\n\t      },\n\t      \"self\"\n\t    ] }\n\t  );\n\t  const SUBST = {\n\t    scope: \"subst\",\n\t    begin: /%\\(/,\n\t    end: /\\)/,\n\t    contains: [\n\t      NUMBER,\n\t      CLASS_REFERENCE,\n\t      FUNCTION,\n\t      FIELD,\n\t      OPERATOR\n\t    ]\n\t  };\n\t  const STRING = {\n\t    scope: \"string\",\n\t    begin: /\"/,\n\t    end: /\"/,\n\t    contains: [\n\t      SUBST,\n\t      {\n\t        scope: \"char.escape\",\n\t        variants: [\n\t          { match: /\\\\\\\\|\\\\[\"0%abefnrtv]/ },\n\t          { match: /\\\\x[0-9A-F]{2}/ },\n\t          { match: /\\\\u[0-9A-F]{4}/ },\n\t          { match: /\\\\U[0-9A-F]{8}/ }\n\t        ]\n\t      }\n\t    ]\n\t  };\n\t  SUBST.contains.push(STRING);\n\n\t  const ALL_KWS = [\n\t    ...KEYWORDS,\n\t    ...LANGUAGE_VARS,\n\t    ...LITERALS\n\t  ];\n\t  const VARIABLE = {\n\t    relevance: 0,\n\t    match: regex.concat(\n\t      \"\\\\b(?!\",\n\t      ALL_KWS.join(\"|\"),\n\t      \"\\\\b)\",\n\t      /[a-zA-Z_]\\w*(?:[?!]|\\b)/\n\t    ),\n\t    className: \"variable\"\n\t  };\n\n\t  // TODO: reconsider this in the future\n\t  const ATTRIBUTE = {\n\t    // scope: \"meta\",\n\t    scope: \"comment\",\n\t    variants: [\n\t      {\n\t        begin: [\n\t          /#!?/,\n\t          /[A-Za-z_]+(?=\\()/\n\t        ],\n\t        beginScope: {\n\t          // 2: \"attr\"\n\t        },\n\t        keywords: { literal: LITERALS },\n\t        contains: [\n\t          // NUMBER,\n\t          // VARIABLE\n\t        ],\n\t        end: /\\)/\n\t      },\n\t      {\n\t        begin: [\n\t          /#!?/,\n\t          /[A-Za-z_]+/\n\t        ],\n\t        beginScope: {\n\t          // 2: \"attr\"\n\t        },\n\t        end: /$/\n\t      }\n\t    ]\n\t  };\n\n\t  return {\n\t    name: \"Wren\",\n\t    keywords: {\n\t      keyword: KEYWORDS,\n\t      \"variable.language\": LANGUAGE_VARS,\n\t      literal: LITERALS\n\t    },\n\t    contains: [\n\t      ATTRIBUTE,\n\t      NUMBER,\n\t      STRING,\n\t      TRIPLE_STRING,\n\t      COMMENT_DOCS,\n\t      hljs.C_LINE_COMMENT_MODE,\n\t      hljs.C_BLOCK_COMMENT_MODE,\n\t      CLASS_REFERENCE,\n\t      CLASS_DEFINITION,\n\t      SETTER,\n\t      FUNCTION_DEFINITION,\n\t      FUNCTION,\n\t      OPERATOR,\n\t      FIELD,\n\t      PROPERTY,\n\t      VARIABLE\n\t    ]\n\t  };\n\t}\n\n\twren_1 = wren;\n\treturn wren_1;\n}\n\nexport { requireWren as __require };",
-      "start": 1715637177144,
-      "end": 1715637177144,
+      "start": 1715637636633,
+      "end": 1715637636633,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -149,74 +149,74 @@
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1715637177144,
-      "end": 1715637177144,
+      "start": 1715637636633,
+      "end": 1715637636633,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1715637177144,
-      "end": 1715637177144,
+      "start": 1715637636633,
+      "end": 1715637636633,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1715637177144,
-      "end": 1715637177144,
+      "start": 1715637636633,
+      "end": 1715637636633,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1715637177144,
-      "end": 1715637177144,
+      "start": 1715637636633,
+      "end": 1715637636633,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1715637177144,
-      "end": 1715637177144,
+      "start": 1715637636633,
+      "end": 1715637636633,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1715637177144,
-      "end": 1715637177144,
+      "start": 1715637636633,
+      "end": 1715637636633,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1715637177144,
-      "end": 1715637177144,
+      "start": 1715637636633,
+      "end": 1715637636633,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1715637177144,
-      "end": 1715637177144,
+      "start": 1715637636633,
+      "end": 1715637636633,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1715637177144,
-      "end": 1715637177144,
+      "start": 1715637636633,
+      "end": 1715637636633,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1715637177144,
-      "end": 1715637177144,
+      "start": 1715637636633,
+      "end": 1715637636633,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1715637177144,
-      "end": 1715637177144,
+      "start": 1715637636633,
+      "end": 1715637636633,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1715637177144,
-      "end": 1715637177144,
+      "start": 1715637636633,
+      "end": 1715637636633,
       "order": "normal"
     }
   ]

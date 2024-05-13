@@ -4,135 +4,135 @@
     {
       "name": "vite:load-fallback",
       "result": "/*\nLanguage: PHP Template\nRequires: xml.js, php.js\nAuthor: Josh Goebel <hello@joshgoebel.com>\nWebsite: https://www.php.net\nCategory: common\n*/\n\nfunction phpTemplate(hljs) {\n  return {\n    name: \"PHP template\",\n    subLanguage: 'xml',\n    contains: [\n      {\n        begin: /<\\?(php|=)?/,\n        end: /\\?>/,\n        subLanguage: 'php',\n        contains: [\n          // We don't want the php closing tag ?> to close the PHP block when\n          // inside any of the following blocks:\n          {\n            begin: '/\\\\*',\n            end: '\\\\*/',\n            skip: true\n          },\n          {\n            begin: 'b\"',\n            end: '\"',\n            skip: true\n          },\n          {\n            begin: 'b\\'',\n            end: '\\'',\n            skip: true\n          },\n          hljs.inherit(hljs.APOS_STRING_MODE, {\n            illegal: null,\n            className: null,\n            contains: null,\n            skip: true\n          }),\n          hljs.inherit(hljs.QUOTE_STRING_MODE, {\n            illegal: null,\n            className: null,\n            contains: null,\n            skip: true\n          })\n        ]\n      }\n    ]\n  };\n}\n\nmodule.exports = phpTemplate;\n",
-      "start": 1715637177061,
-      "end": 1715637177082,
+      "start": 1715637636548,
+      "end": 1715637636569,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1715637177082,
-      "end": 1715637177082,
+      "start": 1715637636569,
+      "end": 1715637636569,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1715637177082,
-      "end": 1715637177082,
+      "start": 1715637636569,
+      "end": 1715637636569,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1715637177082,
-      "end": 1715637177082,
+      "start": 1715637636569,
+      "end": 1715637636569,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1715637177082,
-      "end": 1715637177082,
+      "start": 1715637636569,
+      "end": 1715637636569,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1715637177082,
-      "end": 1715637177082,
+      "start": 1715637636569,
+      "end": 1715637636569,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1715637177082,
-      "end": 1715637177082,
+      "start": 1715637636569,
+      "end": 1715637636569,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1715637177082,
-      "end": 1715637177082,
+      "start": 1715637636569,
+      "end": 1715637636569,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1715637177082,
-      "end": 1715637177082,
+      "start": 1715637636569,
+      "end": 1715637636569,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1715637177082,
-      "end": 1715637177082,
+      "start": 1715637636569,
+      "end": 1715637636569,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1715637177082,
-      "end": 1715637177082,
+      "start": 1715637636569,
+      "end": 1715637636569,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1715637177082,
-      "end": 1715637177082,
+      "start": 1715637636569,
+      "end": 1715637636569,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1715637177082,
-      "end": 1715637177082,
+      "start": 1715637636569,
+      "end": 1715637636569,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1715637177082,
-      "end": 1715637177082,
+      "start": 1715637636569,
+      "end": 1715637636569,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1715637177082,
-      "end": 1715637177082,
+      "start": 1715637636569,
+      "end": 1715637636569,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1715637177082,
-      "end": 1715637177082,
+      "start": 1715637636569,
+      "end": 1715637636569,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1715637177082,
-      "end": 1715637177082,
+      "start": 1715637636569,
+      "end": 1715637636570,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1715637177082,
-      "end": 1715637177082,
+      "start": 1715637636570,
+      "end": 1715637636570,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1715637177082,
-      "end": 1715637177082,
+      "start": 1715637636570,
+      "end": 1715637636570,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1715637177082,
-      "end": 1715637177082,
+      "start": 1715637636570,
+      "end": 1715637636570,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1715637177082,
-      "end": 1715637177082,
+      "start": 1715637636570,
+      "end": 1715637636570,
       "order": "normal"
     },
     {
       "name": "commonjs",
       "result": "/*\nLanguage: PHP Template\nRequires: xml.js, php.js\nAuthor: Josh Goebel <hello@joshgoebel.com>\nWebsite: https://www.php.net\nCategory: common\n*/\nimport * as commonjsHelpers from \"\u0000commonjsHelpers.js\";\n\nvar phpTemplate_1;\nvar hasRequiredPhpTemplate;\n\nfunction requirePhpTemplate () {\n\tif (hasRequiredPhpTemplate) return phpTemplate_1;\n\thasRequiredPhpTemplate = 1;\n\tfunction phpTemplate(hljs) {\n\t  return {\n\t    name: \"PHP template\",\n\t    subLanguage: 'xml',\n\t    contains: [\n\t      {\n\t        begin: /<\\?(php|=)?/,\n\t        end: /\\?>/,\n\t        subLanguage: 'php',\n\t        contains: [\n\t          // We don't want the php closing tag ?> to close the PHP block when\n\t          // inside any of the following blocks:\n\t          {\n\t            begin: '/\\\\*',\n\t            end: '\\\\*/',\n\t            skip: true\n\t          },\n\t          {\n\t            begin: 'b\"',\n\t            end: '\"',\n\t            skip: true\n\t          },\n\t          {\n\t            begin: 'b\\'',\n\t            end: '\\'',\n\t            skip: true\n\t          },\n\t          hljs.inherit(hljs.APOS_STRING_MODE, {\n\t            illegal: null,\n\t            className: null,\n\t            contains: null,\n\t            skip: true\n\t          }),\n\t          hljs.inherit(hljs.QUOTE_STRING_MODE, {\n\t            illegal: null,\n\t            className: null,\n\t            contains: null,\n\t            skip: true\n\t          })\n\t        ]\n\t      }\n\t    ]\n\t  };\n\t}\n\n\tphpTemplate_1 = phpTemplate;\n\treturn phpTemplate_1;\n}\n\nexport { requirePhpTemplate as __require };",
-      "start": 1715637177082,
-      "end": 1715637177082,
+      "start": 1715637636570,
+      "end": 1715637636570,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -149,74 +149,74 @@
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1715637177082,
-      "end": 1715637177082,
+      "start": 1715637636570,
+      "end": 1715637636570,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1715637177082,
-      "end": 1715637177082,
+      "start": 1715637636570,
+      "end": 1715637636570,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1715637177082,
-      "end": 1715637177082,
+      "start": 1715637636570,
+      "end": 1715637636570,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1715637177082,
-      "end": 1715637177082,
+      "start": 1715637636570,
+      "end": 1715637636570,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1715637177082,
-      "end": 1715637177082,
+      "start": 1715637636570,
+      "end": 1715637636570,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1715637177082,
-      "end": 1715637177082,
+      "start": 1715637636570,
+      "end": 1715637636570,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1715637177082,
-      "end": 1715637177082,
+      "start": 1715637636570,
+      "end": 1715637636570,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1715637177082,
-      "end": 1715637177082,
+      "start": 1715637636570,
+      "end": 1715637636570,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1715637177082,
-      "end": 1715637177082,
+      "start": 1715637636570,
+      "end": 1715637636570,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1715637177082,
-      "end": 1715637177082,
+      "start": 1715637636570,
+      "end": 1715637636570,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1715637177082,
-      "end": 1715637177082,
+      "start": 1715637636570,
+      "end": 1715637636570,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1715637177082,
-      "end": 1715637177082,
+      "start": 1715637636570,
+      "end": 1715637636570,
       "order": "normal"
     }
   ]

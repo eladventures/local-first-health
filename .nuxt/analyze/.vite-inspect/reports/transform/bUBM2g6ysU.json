@@ -4,135 +4,135 @@
     {
       "name": "vite:load-fallback",
       "result": "/*\nLanguage: Crystal\nAuthor: TSUYUSATO Kitsune <make.just.on@gmail.com>\nWebsite: https://crystal-lang.org\n*/\n\n/** @type LanguageFn */\nfunction crystal(hljs) {\n  const INT_SUFFIX = '(_?[ui](8|16|32|64|128))?';\n  const FLOAT_SUFFIX = '(_?f(32|64))?';\n  const CRYSTAL_IDENT_RE = '[a-zA-Z_]\\\\w*[!?=]?';\n  const CRYSTAL_METHOD_RE = '[a-zA-Z_]\\\\w*[!?=]?|[-+~]@|<<|>>|[=!]~|===?|<=>|[<>]=?|\\\\*\\\\*|[-/+%^&*~|]|//|//=|&[-+*]=?|&\\\\*\\\\*|\\\\[\\\\][=?]?';\n  const CRYSTAL_PATH_RE = '[A-Za-z_]\\\\w*(::\\\\w+)*(\\\\?|!)?';\n  const CRYSTAL_KEYWORDS = {\n    $pattern: CRYSTAL_IDENT_RE,\n    keyword:\n      'abstract alias annotation as as? asm begin break case class def do else elsif end ensure enum extend for fun if '\n      + 'include instance_sizeof is_a? lib macro module next nil? of out pointerof private protected rescue responds_to? '\n      + 'return require select self sizeof struct super then type typeof union uninitialized unless until verbatim when while with yield '\n      + '__DIR__ __END_LINE__ __FILE__ __LINE__',\n    literal: 'false nil true'\n  };\n  const SUBST = {\n    className: 'subst',\n    begin: /#\\{/,\n    end: /\\}/,\n    keywords: CRYSTAL_KEYWORDS\n  };\n  // borrowed from Ruby\n  const VARIABLE = {\n    // negative-look forward attemps to prevent false matches like:\n    // @ident@ or $ident$ that might indicate this is not ruby at all\n    className: \"variable\",\n    begin: '(\\\\$\\\\W)|((\\\\$|@@?)(\\\\w+))(?=[^@$?])' + `(?![A-Za-z])(?![@$?'])`\n  };\n  const EXPANSION = {\n    className: 'template-variable',\n    variants: [\n      {\n        begin: '\\\\{\\\\{',\n        end: '\\\\}\\\\}'\n      },\n      {\n        begin: '\\\\{%',\n        end: '%\\\\}'\n      }\n    ],\n    keywords: CRYSTAL_KEYWORDS\n  };\n\n  function recursiveParen(begin, end) {\n    const\n        contains = [\n          {\n            begin: begin,\n            end: end\n          }\n        ];\n    contains[0].contains = contains;\n    return contains;\n  }\n  const STRING = {\n    className: 'string',\n    contains: [\n      hljs.BACKSLASH_ESCAPE,\n      SUBST\n    ],\n    variants: [\n      {\n        begin: /'/,\n        end: /'/\n      },\n      {\n        begin: /\"/,\n        end: /\"/\n      },\n      {\n        begin: /`/,\n        end: /`/\n      },\n      {\n        begin: '%[Qwi]?\\\\(',\n        end: '\\\\)',\n        contains: recursiveParen('\\\\(', '\\\\)')\n      },\n      {\n        begin: '%[Qwi]?\\\\[',\n        end: '\\\\]',\n        contains: recursiveParen('\\\\[', '\\\\]')\n      },\n      {\n        begin: '%[Qwi]?\\\\{',\n        end: /\\}/,\n        contains: recursiveParen(/\\{/, /\\}/)\n      },\n      {\n        begin: '%[Qwi]?<',\n        end: '>',\n        contains: recursiveParen('<', '>')\n      },\n      {\n        begin: '%[Qwi]?\\\\|',\n        end: '\\\\|'\n      },\n      {\n        begin: /<<-\\w+$/,\n        end: /^\\s*\\w+$/\n      }\n    ],\n    relevance: 0\n  };\n  const Q_STRING = {\n    className: 'string',\n    variants: [\n      {\n        begin: '%q\\\\(',\n        end: '\\\\)',\n        contains: recursiveParen('\\\\(', '\\\\)')\n      },\n      {\n        begin: '%q\\\\[',\n        end: '\\\\]',\n        contains: recursiveParen('\\\\[', '\\\\]')\n      },\n      {\n        begin: '%q\\\\{',\n        end: /\\}/,\n        contains: recursiveParen(/\\{/, /\\}/)\n      },\n      {\n        begin: '%q<',\n        end: '>',\n        contains: recursiveParen('<', '>')\n      },\n      {\n        begin: '%q\\\\|',\n        end: '\\\\|'\n      },\n      {\n        begin: /<<-'\\w+'$/,\n        end: /^\\s*\\w+$/\n      }\n    ],\n    relevance: 0\n  };\n  const REGEXP = {\n    begin: '(?!%\\\\})(' + hljs.RE_STARTERS_RE + '|\\\\n|\\\\b(case|if|select|unless|until|when|while)\\\\b)\\\\s*',\n    keywords: 'case if select unless until when while',\n    contains: [\n      {\n        className: 'regexp',\n        contains: [\n          hljs.BACKSLASH_ESCAPE,\n          SUBST\n        ],\n        variants: [\n          {\n            begin: '//[a-z]*',\n            relevance: 0\n          },\n          {\n            begin: '/(?!\\\\/)',\n            end: '/[a-z]*'\n          }\n        ]\n      }\n    ],\n    relevance: 0\n  };\n  const REGEXP2 = {\n    className: 'regexp',\n    contains: [\n      hljs.BACKSLASH_ESCAPE,\n      SUBST\n    ],\n    variants: [\n      {\n        begin: '%r\\\\(',\n        end: '\\\\)',\n        contains: recursiveParen('\\\\(', '\\\\)')\n      },\n      {\n        begin: '%r\\\\[',\n        end: '\\\\]',\n        contains: recursiveParen('\\\\[', '\\\\]')\n      },\n      {\n        begin: '%r\\\\{',\n        end: /\\}/,\n        contains: recursiveParen(/\\{/, /\\}/)\n      },\n      {\n        begin: '%r<',\n        end: '>',\n        contains: recursiveParen('<', '>')\n      },\n      {\n        begin: '%r\\\\|',\n        end: '\\\\|'\n      }\n    ],\n    relevance: 0\n  };\n  const ATTRIBUTE = {\n    className: 'meta',\n    begin: '@\\\\[',\n    end: '\\\\]',\n    contains: [ hljs.inherit(hljs.QUOTE_STRING_MODE, { className: 'string' }) ]\n  };\n  const CRYSTAL_DEFAULT_CONTAINS = [\n    EXPANSION,\n    STRING,\n    Q_STRING,\n    REGEXP2,\n    REGEXP,\n    ATTRIBUTE,\n    VARIABLE,\n    hljs.HASH_COMMENT_MODE,\n    {\n      className: 'class',\n      beginKeywords: 'class module struct',\n      end: '$|;',\n      illegal: /=/,\n      contains: [\n        hljs.HASH_COMMENT_MODE,\n        hljs.inherit(hljs.TITLE_MODE, { begin: CRYSTAL_PATH_RE }),\n        { // relevance booster for inheritance\n          begin: '<' }\n      ]\n    },\n    {\n      className: 'class',\n      beginKeywords: 'lib enum union',\n      end: '$|;',\n      illegal: /=/,\n      contains: [\n        hljs.HASH_COMMENT_MODE,\n        hljs.inherit(hljs.TITLE_MODE, { begin: CRYSTAL_PATH_RE })\n      ]\n    },\n    {\n      beginKeywords: 'annotation',\n      end: '$|;',\n      illegal: /=/,\n      contains: [\n        hljs.HASH_COMMENT_MODE,\n        hljs.inherit(hljs.TITLE_MODE, { begin: CRYSTAL_PATH_RE })\n      ],\n      relevance: 2\n    },\n    {\n      className: 'function',\n      beginKeywords: 'def',\n      end: /\\B\\b/,\n      contains: [\n        hljs.inherit(hljs.TITLE_MODE, {\n          begin: CRYSTAL_METHOD_RE,\n          endsParent: true\n        })\n      ]\n    },\n    {\n      className: 'function',\n      beginKeywords: 'fun macro',\n      end: /\\B\\b/,\n      contains: [\n        hljs.inherit(hljs.TITLE_MODE, {\n          begin: CRYSTAL_METHOD_RE,\n          endsParent: true\n        })\n      ],\n      relevance: 2\n    },\n    {\n      className: 'symbol',\n      begin: hljs.UNDERSCORE_IDENT_RE + '(!|\\\\?)?:',\n      relevance: 0\n    },\n    {\n      className: 'symbol',\n      begin: ':',\n      contains: [\n        STRING,\n        { begin: CRYSTAL_METHOD_RE }\n      ],\n      relevance: 0\n    },\n    {\n      className: 'number',\n      variants: [\n        { begin: '\\\\b0b([01_]+)' + INT_SUFFIX },\n        { begin: '\\\\b0o([0-7_]+)' + INT_SUFFIX },\n        { begin: '\\\\b0x([A-Fa-f0-9_]+)' + INT_SUFFIX },\n        { begin: '\\\\b([1-9][0-9_]*[0-9]|[0-9])(\\\\.[0-9][0-9_]*)?([eE]_?[-+]?[0-9_]*)?' + FLOAT_SUFFIX + '(?!_)' },\n        { begin: '\\\\b([1-9][0-9_]*|0)' + INT_SUFFIX }\n      ],\n      relevance: 0\n    }\n  ];\n  SUBST.contains = CRYSTAL_DEFAULT_CONTAINS;\n  EXPANSION.contains = CRYSTAL_DEFAULT_CONTAINS.slice(1); // without EXPANSION\n\n  return {\n    name: 'Crystal',\n    aliases: [ 'cr' ],\n    keywords: CRYSTAL_KEYWORDS,\n    contains: CRYSTAL_DEFAULT_CONTAINS\n  };\n}\n\nmodule.exports = crystal;\n",
-      "start": 1715637176932,
-      "end": 1715637176951,
+      "start": 1715637636412,
+      "end": 1715637636431,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1715637176951,
-      "end": 1715637176951,
+      "start": 1715637636431,
+      "end": 1715637636431,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1715637176951,
-      "end": 1715637176951,
+      "start": 1715637636431,
+      "end": 1715637636431,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1715637176951,
-      "end": 1715637176951,
+      "start": 1715637636431,
+      "end": 1715637636431,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1715637176951,
-      "end": 1715637176951,
+      "start": 1715637636431,
+      "end": 1715637636431,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1715637176951,
-      "end": 1715637176951,
+      "start": 1715637636431,
+      "end": 1715637636431,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1715637176951,
-      "end": 1715637176952,
+      "start": 1715637636431,
+      "end": 1715637636431,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1715637176952,
-      "end": 1715637176952,
+      "start": 1715637636431,
+      "end": 1715637636431,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1715637176952,
-      "end": 1715637176952,
+      "start": 1715637636431,
+      "end": 1715637636431,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1715637176952,
-      "end": 1715637176952,
+      "start": 1715637636431,
+      "end": 1715637636431,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1715637176952,
-      "end": 1715637176952,
+      "start": 1715637636431,
+      "end": 1715637636431,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1715637176952,
-      "end": 1715637176952,
+      "start": 1715637636431,
+      "end": 1715637636431,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1715637176952,
-      "end": 1715637176952,
+      "start": 1715637636431,
+      "end": 1715637636431,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1715637176952,
-      "end": 1715637176952,
+      "start": 1715637636431,
+      "end": 1715637636431,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1715637176952,
-      "end": 1715637176952,
+      "start": 1715637636431,
+      "end": 1715637636431,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1715637176952,
-      "end": 1715637176952,
+      "start": 1715637636431,
+      "end": 1715637636431,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1715637176952,
-      "end": 1715637176952,
+      "start": 1715637636431,
+      "end": 1715637636431,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1715637176952,
-      "end": 1715637176952,
+      "start": 1715637636431,
+      "end": 1715637636431,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1715637176952,
-      "end": 1715637176952,
+      "start": 1715637636431,
+      "end": 1715637636431,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1715637176952,
-      "end": 1715637176952,
+      "start": 1715637636431,
+      "end": 1715637636431,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1715637176952,
-      "end": 1715637176952,
+      "start": 1715637636431,
+      "end": 1715637636431,
       "order": "normal"
     },
     {
       "name": "commonjs",
       "result": "/*\nLanguage: Crystal\nAuthor: TSUYUSATO Kitsune <make.just.on@gmail.com>\nWebsite: https://crystal-lang.org\n*/\nimport * as commonjsHelpers from \"\u0000commonjsHelpers.js\";\n\nvar crystal_1;\nvar hasRequiredCrystal;\n\nfunction requireCrystal () {\n\tif (hasRequiredCrystal) return crystal_1;\n\thasRequiredCrystal = 1;\n\t/** @type LanguageFn */\n\tfunction crystal(hljs) {\n\t  const INT_SUFFIX = '(_?[ui](8|16|32|64|128))?';\n\t  const FLOAT_SUFFIX = '(_?f(32|64))?';\n\t  const CRYSTAL_IDENT_RE = '[a-zA-Z_]\\\\w*[!?=]?';\n\t  const CRYSTAL_METHOD_RE = '[a-zA-Z_]\\\\w*[!?=]?|[-+~]@|<<|>>|[=!]~|===?|<=>|[<>]=?|\\\\*\\\\*|[-/+%^&*~|]|//|//=|&[-+*]=?|&\\\\*\\\\*|\\\\[\\\\][=?]?';\n\t  const CRYSTAL_PATH_RE = '[A-Za-z_]\\\\w*(::\\\\w+)*(\\\\?|!)?';\n\t  const CRYSTAL_KEYWORDS = {\n\t    $pattern: CRYSTAL_IDENT_RE,\n\t    keyword:\n\t      'abstract alias annotation as as? asm begin break case class def do else elsif end ensure enum extend for fun if '\n\t      + 'include instance_sizeof is_a? lib macro module next nil? of out pointerof private protected rescue responds_to? '\n\t      + 'return require select self sizeof struct super then type typeof union uninitialized unless until verbatim when while with yield '\n\t      + '__DIR__ __END_LINE__ __FILE__ __LINE__',\n\t    literal: 'false nil true'\n\t  };\n\t  const SUBST = {\n\t    className: 'subst',\n\t    begin: /#\\{/,\n\t    end: /\\}/,\n\t    keywords: CRYSTAL_KEYWORDS\n\t  };\n\t  // borrowed from Ruby\n\t  const VARIABLE = {\n\t    // negative-look forward attemps to prevent false matches like:\n\t    // @ident@ or $ident$ that might indicate this is not ruby at all\n\t    className: \"variable\",\n\t    begin: '(\\\\$\\\\W)|((\\\\$|@@?)(\\\\w+))(?=[^@$?])' + `(?![A-Za-z])(?![@$?'])`\n\t  };\n\t  const EXPANSION = {\n\t    className: 'template-variable',\n\t    variants: [\n\t      {\n\t        begin: '\\\\{\\\\{',\n\t        end: '\\\\}\\\\}'\n\t      },\n\t      {\n\t        begin: '\\\\{%',\n\t        end: '%\\\\}'\n\t      }\n\t    ],\n\t    keywords: CRYSTAL_KEYWORDS\n\t  };\n\n\t  function recursiveParen(begin, end) {\n\t    const\n\t        contains = [\n\t          {\n\t            begin: begin,\n\t            end: end\n\t          }\n\t        ];\n\t    contains[0].contains = contains;\n\t    return contains;\n\t  }\n\t  const STRING = {\n\t    className: 'string',\n\t    contains: [\n\t      hljs.BACKSLASH_ESCAPE,\n\t      SUBST\n\t    ],\n\t    variants: [\n\t      {\n\t        begin: /'/,\n\t        end: /'/\n\t      },\n\t      {\n\t        begin: /\"/,\n\t        end: /\"/\n\t      },\n\t      {\n\t        begin: /`/,\n\t        end: /`/\n\t      },\n\t      {\n\t        begin: '%[Qwi]?\\\\(',\n\t        end: '\\\\)',\n\t        contains: recursiveParen('\\\\(', '\\\\)')\n\t      },\n\t      {\n\t        begin: '%[Qwi]?\\\\[',\n\t        end: '\\\\]',\n\t        contains: recursiveParen('\\\\[', '\\\\]')\n\t      },\n\t      {\n\t        begin: '%[Qwi]?\\\\{',\n\t        end: /\\}/,\n\t        contains: recursiveParen(/\\{/, /\\}/)\n\t      },\n\t      {\n\t        begin: '%[Qwi]?<',\n\t        end: '>',\n\t        contains: recursiveParen('<', '>')\n\t      },\n\t      {\n\t        begin: '%[Qwi]?\\\\|',\n\t        end: '\\\\|'\n\t      },\n\t      {\n\t        begin: /<<-\\w+$/,\n\t        end: /^\\s*\\w+$/\n\t      }\n\t    ],\n\t    relevance: 0\n\t  };\n\t  const Q_STRING = {\n\t    className: 'string',\n\t    variants: [\n\t      {\n\t        begin: '%q\\\\(',\n\t        end: '\\\\)',\n\t        contains: recursiveParen('\\\\(', '\\\\)')\n\t      },\n\t      {\n\t        begin: '%q\\\\[',\n\t        end: '\\\\]',\n\t        contains: recursiveParen('\\\\[', '\\\\]')\n\t      },\n\t      {\n\t        begin: '%q\\\\{',\n\t        end: /\\}/,\n\t        contains: recursiveParen(/\\{/, /\\}/)\n\t      },\n\t      {\n\t        begin: '%q<',\n\t        end: '>',\n\t        contains: recursiveParen('<', '>')\n\t      },\n\t      {\n\t        begin: '%q\\\\|',\n\t        end: '\\\\|'\n\t      },\n\t      {\n\t        begin: /<<-'\\w+'$/,\n\t        end: /^\\s*\\w+$/\n\t      }\n\t    ],\n\t    relevance: 0\n\t  };\n\t  const REGEXP = {\n\t    begin: '(?!%\\\\})(' + hljs.RE_STARTERS_RE + '|\\\\n|\\\\b(case|if|select|unless|until|when|while)\\\\b)\\\\s*',\n\t    keywords: 'case if select unless until when while',\n\t    contains: [\n\t      {\n\t        className: 'regexp',\n\t        contains: [\n\t          hljs.BACKSLASH_ESCAPE,\n\t          SUBST\n\t        ],\n\t        variants: [\n\t          {\n\t            begin: '//[a-z]*',\n\t            relevance: 0\n\t          },\n\t          {\n\t            begin: '/(?!\\\\/)',\n\t            end: '/[a-z]*'\n\t          }\n\t        ]\n\t      }\n\t    ],\n\t    relevance: 0\n\t  };\n\t  const REGEXP2 = {\n\t    className: 'regexp',\n\t    contains: [\n\t      hljs.BACKSLASH_ESCAPE,\n\t      SUBST\n\t    ],\n\t    variants: [\n\t      {\n\t        begin: '%r\\\\(',\n\t        end: '\\\\)',\n\t        contains: recursiveParen('\\\\(', '\\\\)')\n\t      },\n\t      {\n\t        begin: '%r\\\\[',\n\t        end: '\\\\]',\n\t        contains: recursiveParen('\\\\[', '\\\\]')\n\t      },\n\t      {\n\t        begin: '%r\\\\{',\n\t        end: /\\}/,\n\t        contains: recursiveParen(/\\{/, /\\}/)\n\t      },\n\t      {\n\t        begin: '%r<',\n\t        end: '>',\n\t        contains: recursiveParen('<', '>')\n\t      },\n\t      {\n\t        begin: '%r\\\\|',\n\t        end: '\\\\|'\n\t      }\n\t    ],\n\t    relevance: 0\n\t  };\n\t  const ATTRIBUTE = {\n\t    className: 'meta',\n\t    begin: '@\\\\[',\n\t    end: '\\\\]',\n\t    contains: [ hljs.inherit(hljs.QUOTE_STRING_MODE, { className: 'string' }) ]\n\t  };\n\t  const CRYSTAL_DEFAULT_CONTAINS = [\n\t    EXPANSION,\n\t    STRING,\n\t    Q_STRING,\n\t    REGEXP2,\n\t    REGEXP,\n\t    ATTRIBUTE,\n\t    VARIABLE,\n\t    hljs.HASH_COMMENT_MODE,\n\t    {\n\t      className: 'class',\n\t      beginKeywords: 'class module struct',\n\t      end: '$|;',\n\t      illegal: /=/,\n\t      contains: [\n\t        hljs.HASH_COMMENT_MODE,\n\t        hljs.inherit(hljs.TITLE_MODE, { begin: CRYSTAL_PATH_RE }),\n\t        { // relevance booster for inheritance\n\t          begin: '<' }\n\t      ]\n\t    },\n\t    {\n\t      className: 'class',\n\t      beginKeywords: 'lib enum union',\n\t      end: '$|;',\n\t      illegal: /=/,\n\t      contains: [\n\t        hljs.HASH_COMMENT_MODE,\n\t        hljs.inherit(hljs.TITLE_MODE, { begin: CRYSTAL_PATH_RE })\n\t      ]\n\t    },\n\t    {\n\t      beginKeywords: 'annotation',\n\t      end: '$|;',\n\t      illegal: /=/,\n\t      contains: [\n\t        hljs.HASH_COMMENT_MODE,\n\t        hljs.inherit(hljs.TITLE_MODE, { begin: CRYSTAL_PATH_RE })\n\t      ],\n\t      relevance: 2\n\t    },\n\t    {\n\t      className: 'function',\n\t      beginKeywords: 'def',\n\t      end: /\\B\\b/,\n\t      contains: [\n\t        hljs.inherit(hljs.TITLE_MODE, {\n\t          begin: CRYSTAL_METHOD_RE,\n\t          endsParent: true\n\t        })\n\t      ]\n\t    },\n\t    {\n\t      className: 'function',\n\t      beginKeywords: 'fun macro',\n\t      end: /\\B\\b/,\n\t      contains: [\n\t        hljs.inherit(hljs.TITLE_MODE, {\n\t          begin: CRYSTAL_METHOD_RE,\n\t          endsParent: true\n\t        })\n\t      ],\n\t      relevance: 2\n\t    },\n\t    {\n\t      className: 'symbol',\n\t      begin: hljs.UNDERSCORE_IDENT_RE + '(!|\\\\?)?:',\n\t      relevance: 0\n\t    },\n\t    {\n\t      className: 'symbol',\n\t      begin: ':',\n\t      contains: [\n\t        STRING,\n\t        { begin: CRYSTAL_METHOD_RE }\n\t      ],\n\t      relevance: 0\n\t    },\n\t    {\n\t      className: 'number',\n\t      variants: [\n\t        { begin: '\\\\b0b([01_]+)' + INT_SUFFIX },\n\t        { begin: '\\\\b0o([0-7_]+)' + INT_SUFFIX },\n\t        { begin: '\\\\b0x([A-Fa-f0-9_]+)' + INT_SUFFIX },\n\t        { begin: '\\\\b([1-9][0-9_]*[0-9]|[0-9])(\\\\.[0-9][0-9_]*)?([eE]_?[-+]?[0-9_]*)?' + FLOAT_SUFFIX + '(?!_)' },\n\t        { begin: '\\\\b([1-9][0-9_]*|0)' + INT_SUFFIX }\n\t      ],\n\t      relevance: 0\n\t    }\n\t  ];\n\t  SUBST.contains = CRYSTAL_DEFAULT_CONTAINS;\n\t  EXPANSION.contains = CRYSTAL_DEFAULT_CONTAINS.slice(1); // without EXPANSION\n\n\t  return {\n\t    name: 'Crystal',\n\t    aliases: [ 'cr' ],\n\t    keywords: CRYSTAL_KEYWORDS,\n\t    contains: CRYSTAL_DEFAULT_CONTAINS\n\t  };\n\t}\n\n\tcrystal_1 = crystal;\n\treturn crystal_1;\n}\n\nexport { requireCrystal as __require };",
-      "start": 1715637176952,
-      "end": 1715637176952,
+      "start": 1715637636431,
+      "end": 1715637636431,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -149,74 +149,74 @@
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1715637176952,
-      "end": 1715637176952,
+      "start": 1715637636431,
+      "end": 1715637636431,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1715637176952,
-      "end": 1715637176952,
+      "start": 1715637636431,
+      "end": 1715637636431,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1715637176952,
-      "end": 1715637176952,
+      "start": 1715637636431,
+      "end": 1715637636431,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1715637176952,
-      "end": 1715637176952,
+      "start": 1715637636431,
+      "end": 1715637636431,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1715637176952,
-      "end": 1715637176952,
+      "start": 1715637636431,
+      "end": 1715637636431,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1715637176952,
-      "end": 1715637176952,
+      "start": 1715637636431,
+      "end": 1715637636431,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1715637176952,
-      "end": 1715637176952,
+      "start": 1715637636431,
+      "end": 1715637636431,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1715637176952,
-      "end": 1715637176952,
+      "start": 1715637636431,
+      "end": 1715637636431,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1715637176952,
-      "end": 1715637176952,
+      "start": 1715637636431,
+      "end": 1715637636431,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1715637176952,
-      "end": 1715637176952,
+      "start": 1715637636431,
+      "end": 1715637636431,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1715637176952,
-      "end": 1715637176952,
+      "start": 1715637636431,
+      "end": 1715637636431,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1715637176952,
-      "end": 1715637176952,
+      "start": 1715637636431,
+      "end": 1715637636431,
       "order": "normal"
     }
   ]

@@ -4,135 +4,135 @@
     {
       "name": "vite:load-fallback",
       "result": "/*\nLanguage: C#\nAuthor: Jason Diamond <jason@diamond.name>\nContributor: Nicolas LLOBERA <nllobera@gmail.com>, Pieter Vantorre <pietervantorre@gmail.com>, David Pine <david.pine@microsoft.com>\nWebsite: https://docs.microsoft.com/dotnet/csharp/\nCategory: common\n*/\n\n/** @type LanguageFn */\nfunction csharp(hljs) {\n  const BUILT_IN_KEYWORDS = [\n    'bool',\n    'byte',\n    'char',\n    'decimal',\n    'delegate',\n    'double',\n    'dynamic',\n    'enum',\n    'float',\n    'int',\n    'long',\n    'nint',\n    'nuint',\n    'object',\n    'sbyte',\n    'short',\n    'string',\n    'ulong',\n    'uint',\n    'ushort'\n  ];\n  const FUNCTION_MODIFIERS = [\n    'public',\n    'private',\n    'protected',\n    'static',\n    'internal',\n    'protected',\n    'abstract',\n    'async',\n    'extern',\n    'override',\n    'unsafe',\n    'virtual',\n    'new',\n    'sealed',\n    'partial'\n  ];\n  const LITERAL_KEYWORDS = [\n    'default',\n    'false',\n    'null',\n    'true'\n  ];\n  const NORMAL_KEYWORDS = [\n    'abstract',\n    'as',\n    'base',\n    'break',\n    'case',\n    'catch',\n    'class',\n    'const',\n    'continue',\n    'do',\n    'else',\n    'event',\n    'explicit',\n    'extern',\n    'finally',\n    'fixed',\n    'for',\n    'foreach',\n    'goto',\n    'if',\n    'implicit',\n    'in',\n    'interface',\n    'internal',\n    'is',\n    'lock',\n    'namespace',\n    'new',\n    'operator',\n    'out',\n    'override',\n    'params',\n    'private',\n    'protected',\n    'public',\n    'readonly',\n    'record',\n    'ref',\n    'return',\n    'scoped',\n    'sealed',\n    'sizeof',\n    'stackalloc',\n    'static',\n    'struct',\n    'switch',\n    'this',\n    'throw',\n    'try',\n    'typeof',\n    'unchecked',\n    'unsafe',\n    'using',\n    'virtual',\n    'void',\n    'volatile',\n    'while'\n  ];\n  const CONTEXTUAL_KEYWORDS = [\n    'add',\n    'alias',\n    'and',\n    'ascending',\n    'async',\n    'await',\n    'by',\n    'descending',\n    'equals',\n    'from',\n    'get',\n    'global',\n    'group',\n    'init',\n    'into',\n    'join',\n    'let',\n    'nameof',\n    'not',\n    'notnull',\n    'on',\n    'or',\n    'orderby',\n    'partial',\n    'remove',\n    'select',\n    'set',\n    'unmanaged',\n    'value|0',\n    'var',\n    'when',\n    'where',\n    'with',\n    'yield'\n  ];\n\n  const KEYWORDS = {\n    keyword: NORMAL_KEYWORDS.concat(CONTEXTUAL_KEYWORDS),\n    built_in: BUILT_IN_KEYWORDS,\n    literal: LITERAL_KEYWORDS\n  };\n  const TITLE_MODE = hljs.inherit(hljs.TITLE_MODE, { begin: '[a-zA-Z](\\\\.?\\\\w)*' });\n  const NUMBERS = {\n    className: 'number',\n    variants: [\n      { begin: '\\\\b(0b[01\\']+)' },\n      { begin: '(-?)\\\\b([\\\\d\\']+(\\\\.[\\\\d\\']*)?|\\\\.[\\\\d\\']+)(u|U|l|L|ul|UL|f|F|b|B)' },\n      { begin: '(-?)(\\\\b0[xX][a-fA-F0-9\\']+|(\\\\b[\\\\d\\']+(\\\\.[\\\\d\\']*)?|\\\\.[\\\\d\\']+)([eE][-+]?[\\\\d\\']+)?)' }\n    ],\n    relevance: 0\n  };\n  const VERBATIM_STRING = {\n    className: 'string',\n    begin: '@\"',\n    end: '\"',\n    contains: [ { begin: '\"\"' } ]\n  };\n  const VERBATIM_STRING_NO_LF = hljs.inherit(VERBATIM_STRING, { illegal: /\\n/ });\n  const SUBST = {\n    className: 'subst',\n    begin: /\\{/,\n    end: /\\}/,\n    keywords: KEYWORDS\n  };\n  const SUBST_NO_LF = hljs.inherit(SUBST, { illegal: /\\n/ });\n  const INTERPOLATED_STRING = {\n    className: 'string',\n    begin: /\\$\"/,\n    end: '\"',\n    illegal: /\\n/,\n    contains: [\n      { begin: /\\{\\{/ },\n      { begin: /\\}\\}/ },\n      hljs.BACKSLASH_ESCAPE,\n      SUBST_NO_LF\n    ]\n  };\n  const INTERPOLATED_VERBATIM_STRING = {\n    className: 'string',\n    begin: /\\$@\"/,\n    end: '\"',\n    contains: [\n      { begin: /\\{\\{/ },\n      { begin: /\\}\\}/ },\n      { begin: '\"\"' },\n      SUBST\n    ]\n  };\n  const INTERPOLATED_VERBATIM_STRING_NO_LF = hljs.inherit(INTERPOLATED_VERBATIM_STRING, {\n    illegal: /\\n/,\n    contains: [\n      { begin: /\\{\\{/ },\n      { begin: /\\}\\}/ },\n      { begin: '\"\"' },\n      SUBST_NO_LF\n    ]\n  });\n  SUBST.contains = [\n    INTERPOLATED_VERBATIM_STRING,\n    INTERPOLATED_STRING,\n    VERBATIM_STRING,\n    hljs.APOS_STRING_MODE,\n    hljs.QUOTE_STRING_MODE,\n    NUMBERS,\n    hljs.C_BLOCK_COMMENT_MODE\n  ];\n  SUBST_NO_LF.contains = [\n    INTERPOLATED_VERBATIM_STRING_NO_LF,\n    INTERPOLATED_STRING,\n    VERBATIM_STRING_NO_LF,\n    hljs.APOS_STRING_MODE,\n    hljs.QUOTE_STRING_MODE,\n    NUMBERS,\n    hljs.inherit(hljs.C_BLOCK_COMMENT_MODE, { illegal: /\\n/ })\n  ];\n  const STRING = { variants: [\n    INTERPOLATED_VERBATIM_STRING,\n    INTERPOLATED_STRING,\n    VERBATIM_STRING,\n    hljs.APOS_STRING_MODE,\n    hljs.QUOTE_STRING_MODE\n  ] };\n\n  const GENERIC_MODIFIER = {\n    begin: \"<\",\n    end: \">\",\n    contains: [\n      { beginKeywords: \"in out\" },\n      TITLE_MODE\n    ]\n  };\n  const TYPE_IDENT_RE = hljs.IDENT_RE + '(<' + hljs.IDENT_RE + '(\\\\s*,\\\\s*' + hljs.IDENT_RE + ')*>)?(\\\\[\\\\])?';\n  const AT_IDENTIFIER = {\n    // prevents expressions like `@class` from incorrect flagging\n    // `class` as a keyword\n    begin: \"@\" + hljs.IDENT_RE,\n    relevance: 0\n  };\n\n  return {\n    name: 'C#',\n    aliases: [\n      'cs',\n      'c#'\n    ],\n    keywords: KEYWORDS,\n    illegal: /::/,\n    contains: [\n      hljs.COMMENT(\n        '///',\n        '$',\n        {\n          returnBegin: true,\n          contains: [\n            {\n              className: 'doctag',\n              variants: [\n                {\n                  begin: '///',\n                  relevance: 0\n                },\n                { begin: '<!--|-->' },\n                {\n                  begin: '</?',\n                  end: '>'\n                }\n              ]\n            }\n          ]\n        }\n      ),\n      hljs.C_LINE_COMMENT_MODE,\n      hljs.C_BLOCK_COMMENT_MODE,\n      {\n        className: 'meta',\n        begin: '#',\n        end: '$',\n        keywords: { keyword: 'if else elif endif define undef warning error line region endregion pragma checksum' }\n      },\n      STRING,\n      NUMBERS,\n      {\n        beginKeywords: 'class interface',\n        relevance: 0,\n        end: /[{;=]/,\n        illegal: /[^\\s:,]/,\n        contains: [\n          { beginKeywords: \"where class\" },\n          TITLE_MODE,\n          GENERIC_MODIFIER,\n          hljs.C_LINE_COMMENT_MODE,\n          hljs.C_BLOCK_COMMENT_MODE\n        ]\n      },\n      {\n        beginKeywords: 'namespace',\n        relevance: 0,\n        end: /[{;=]/,\n        illegal: /[^\\s:]/,\n        contains: [\n          TITLE_MODE,\n          hljs.C_LINE_COMMENT_MODE,\n          hljs.C_BLOCK_COMMENT_MODE\n        ]\n      },\n      {\n        beginKeywords: 'record',\n        relevance: 0,\n        end: /[{;=]/,\n        illegal: /[^\\s:]/,\n        contains: [\n          TITLE_MODE,\n          GENERIC_MODIFIER,\n          hljs.C_LINE_COMMENT_MODE,\n          hljs.C_BLOCK_COMMENT_MODE\n        ]\n      },\n      {\n        // [Attributes(\"\")]\n        className: 'meta',\n        begin: '^\\\\s*\\\\[(?=[\\\\w])',\n        excludeBegin: true,\n        end: '\\\\]',\n        excludeEnd: true,\n        contains: [\n          {\n            className: 'string',\n            begin: /\"/,\n            end: /\"/\n          }\n        ]\n      },\n      {\n        // Expression keywords prevent 'keyword Name(...)' from being\n        // recognized as a function definition\n        beginKeywords: 'new return throw await else',\n        relevance: 0\n      },\n      {\n        className: 'function',\n        begin: '(' + TYPE_IDENT_RE + '\\\\s+)+' + hljs.IDENT_RE + '\\\\s*(<[^=]+>\\\\s*)?\\\\(',\n        returnBegin: true,\n        end: /\\s*[{;=]/,\n        excludeEnd: true,\n        keywords: KEYWORDS,\n        contains: [\n          // prevents these from being highlighted `title`\n          {\n            beginKeywords: FUNCTION_MODIFIERS.join(\" \"),\n            relevance: 0\n          },\n          {\n            begin: hljs.IDENT_RE + '\\\\s*(<[^=]+>\\\\s*)?\\\\(',\n            returnBegin: true,\n            contains: [\n              hljs.TITLE_MODE,\n              GENERIC_MODIFIER\n            ],\n            relevance: 0\n          },\n          { match: /\\(\\)/ },\n          {\n            className: 'params',\n            begin: /\\(/,\n            end: /\\)/,\n            excludeBegin: true,\n            excludeEnd: true,\n            keywords: KEYWORDS,\n            relevance: 0,\n            contains: [\n              STRING,\n              NUMBERS,\n              hljs.C_BLOCK_COMMENT_MODE\n            ]\n          },\n          hljs.C_LINE_COMMENT_MODE,\n          hljs.C_BLOCK_COMMENT_MODE\n        ]\n      },\n      AT_IDENTIFIER\n    ]\n  };\n}\n\nmodule.exports = csharp;\n",
-      "start": 1715637176933,
-      "end": 1715637176953,
+      "start": 1715637636412,
+      "end": 1715637636433,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1715637176953,
-      "end": 1715637176953,
+      "start": 1715637636433,
+      "end": 1715637636433,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1715637176953,
-      "end": 1715637176953,
+      "start": 1715637636433,
+      "end": 1715637636433,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1715637176953,
-      "end": 1715637176953,
+      "start": 1715637636433,
+      "end": 1715637636433,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1715637176953,
-      "end": 1715637176953,
+      "start": 1715637636433,
+      "end": 1715637636433,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1715637176953,
-      "end": 1715637176953,
+      "start": 1715637636433,
+      "end": 1715637636433,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1715637176953,
-      "end": 1715637176953,
+      "start": 1715637636433,
+      "end": 1715637636433,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1715637176953,
-      "end": 1715637176953,
+      "start": 1715637636433,
+      "end": 1715637636433,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1715637176953,
-      "end": 1715637176953,
+      "start": 1715637636433,
+      "end": 1715637636433,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1715637176953,
-      "end": 1715637176953,
+      "start": 1715637636433,
+      "end": 1715637636433,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1715637176953,
-      "end": 1715637176953,
+      "start": 1715637636433,
+      "end": 1715637636433,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1715637176953,
-      "end": 1715637176953,
+      "start": 1715637636433,
+      "end": 1715637636433,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1715637176953,
-      "end": 1715637176953,
+      "start": 1715637636433,
+      "end": 1715637636433,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1715637176953,
-      "end": 1715637176953,
+      "start": 1715637636433,
+      "end": 1715637636433,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1715637176953,
-      "end": 1715637176953,
+      "start": 1715637636433,
+      "end": 1715637636433,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1715637176953,
-      "end": 1715637176953,
+      "start": 1715637636433,
+      "end": 1715637636433,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1715637176953,
-      "end": 1715637176953,
+      "start": 1715637636433,
+      "end": 1715637636433,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1715637176953,
-      "end": 1715637176953,
+      "start": 1715637636433,
+      "end": 1715637636433,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1715637176953,
-      "end": 1715637176953,
+      "start": 1715637636433,
+      "end": 1715637636433,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1715637176953,
-      "end": 1715637176953,
+      "start": 1715637636433,
+      "end": 1715637636433,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1715637176953,
-      "end": 1715637176953,
+      "start": 1715637636433,
+      "end": 1715637636433,
       "order": "normal"
     },
     {
       "name": "commonjs",
       "result": "/*\nLanguage: C#\nAuthor: Jason Diamond <jason@diamond.name>\nContributor: Nicolas LLOBERA <nllobera@gmail.com>, Pieter Vantorre <pietervantorre@gmail.com>, David Pine <david.pine@microsoft.com>\nWebsite: https://docs.microsoft.com/dotnet/csharp/\nCategory: common\n*/\nimport * as commonjsHelpers from \"\u0000commonjsHelpers.js\";\n\nvar csharp_1;\nvar hasRequiredCsharp;\n\nfunction requireCsharp () {\n\tif (hasRequiredCsharp) return csharp_1;\n\thasRequiredCsharp = 1;\n\t/** @type LanguageFn */\n\tfunction csharp(hljs) {\n\t  const BUILT_IN_KEYWORDS = [\n\t    'bool',\n\t    'byte',\n\t    'char',\n\t    'decimal',\n\t    'delegate',\n\t    'double',\n\t    'dynamic',\n\t    'enum',\n\t    'float',\n\t    'int',\n\t    'long',\n\t    'nint',\n\t    'nuint',\n\t    'object',\n\t    'sbyte',\n\t    'short',\n\t    'string',\n\t    'ulong',\n\t    'uint',\n\t    'ushort'\n\t  ];\n\t  const FUNCTION_MODIFIERS = [\n\t    'public',\n\t    'private',\n\t    'protected',\n\t    'static',\n\t    'internal',\n\t    'protected',\n\t    'abstract',\n\t    'async',\n\t    'extern',\n\t    'override',\n\t    'unsafe',\n\t    'virtual',\n\t    'new',\n\t    'sealed',\n\t    'partial'\n\t  ];\n\t  const LITERAL_KEYWORDS = [\n\t    'default',\n\t    'false',\n\t    'null',\n\t    'true'\n\t  ];\n\t  const NORMAL_KEYWORDS = [\n\t    'abstract',\n\t    'as',\n\t    'base',\n\t    'break',\n\t    'case',\n\t    'catch',\n\t    'class',\n\t    'const',\n\t    'continue',\n\t    'do',\n\t    'else',\n\t    'event',\n\t    'explicit',\n\t    'extern',\n\t    'finally',\n\t    'fixed',\n\t    'for',\n\t    'foreach',\n\t    'goto',\n\t    'if',\n\t    'implicit',\n\t    'in',\n\t    'interface',\n\t    'internal',\n\t    'is',\n\t    'lock',\n\t    'namespace',\n\t    'new',\n\t    'operator',\n\t    'out',\n\t    'override',\n\t    'params',\n\t    'private',\n\t    'protected',\n\t    'public',\n\t    'readonly',\n\t    'record',\n\t    'ref',\n\t    'return',\n\t    'scoped',\n\t    'sealed',\n\t    'sizeof',\n\t    'stackalloc',\n\t    'static',\n\t    'struct',\n\t    'switch',\n\t    'this',\n\t    'throw',\n\t    'try',\n\t    'typeof',\n\t    'unchecked',\n\t    'unsafe',\n\t    'using',\n\t    'virtual',\n\t    'void',\n\t    'volatile',\n\t    'while'\n\t  ];\n\t  const CONTEXTUAL_KEYWORDS = [\n\t    'add',\n\t    'alias',\n\t    'and',\n\t    'ascending',\n\t    'async',\n\t    'await',\n\t    'by',\n\t    'descending',\n\t    'equals',\n\t    'from',\n\t    'get',\n\t    'global',\n\t    'group',\n\t    'init',\n\t    'into',\n\t    'join',\n\t    'let',\n\t    'nameof',\n\t    'not',\n\t    'notnull',\n\t    'on',\n\t    'or',\n\t    'orderby',\n\t    'partial',\n\t    'remove',\n\t    'select',\n\t    'set',\n\t    'unmanaged',\n\t    'value|0',\n\t    'var',\n\t    'when',\n\t    'where',\n\t    'with',\n\t    'yield'\n\t  ];\n\n\t  const KEYWORDS = {\n\t    keyword: NORMAL_KEYWORDS.concat(CONTEXTUAL_KEYWORDS),\n\t    built_in: BUILT_IN_KEYWORDS,\n\t    literal: LITERAL_KEYWORDS\n\t  };\n\t  const TITLE_MODE = hljs.inherit(hljs.TITLE_MODE, { begin: '[a-zA-Z](\\\\.?\\\\w)*' });\n\t  const NUMBERS = {\n\t    className: 'number',\n\t    variants: [\n\t      { begin: '\\\\b(0b[01\\']+)' },\n\t      { begin: '(-?)\\\\b([\\\\d\\']+(\\\\.[\\\\d\\']*)?|\\\\.[\\\\d\\']+)(u|U|l|L|ul|UL|f|F|b|B)' },\n\t      { begin: '(-?)(\\\\b0[xX][a-fA-F0-9\\']+|(\\\\b[\\\\d\\']+(\\\\.[\\\\d\\']*)?|\\\\.[\\\\d\\']+)([eE][-+]?[\\\\d\\']+)?)' }\n\t    ],\n\t    relevance: 0\n\t  };\n\t  const VERBATIM_STRING = {\n\t    className: 'string',\n\t    begin: '@\"',\n\t    end: '\"',\n\t    contains: [ { begin: '\"\"' } ]\n\t  };\n\t  const VERBATIM_STRING_NO_LF = hljs.inherit(VERBATIM_STRING, { illegal: /\\n/ });\n\t  const SUBST = {\n\t    className: 'subst',\n\t    begin: /\\{/,\n\t    end: /\\}/,\n\t    keywords: KEYWORDS\n\t  };\n\t  const SUBST_NO_LF = hljs.inherit(SUBST, { illegal: /\\n/ });\n\t  const INTERPOLATED_STRING = {\n\t    className: 'string',\n\t    begin: /\\$\"/,\n\t    end: '\"',\n\t    illegal: /\\n/,\n\t    contains: [\n\t      { begin: /\\{\\{/ },\n\t      { begin: /\\}\\}/ },\n\t      hljs.BACKSLASH_ESCAPE,\n\t      SUBST_NO_LF\n\t    ]\n\t  };\n\t  const INTERPOLATED_VERBATIM_STRING = {\n\t    className: 'string',\n\t    begin: /\\$@\"/,\n\t    end: '\"',\n\t    contains: [\n\t      { begin: /\\{\\{/ },\n\t      { begin: /\\}\\}/ },\n\t      { begin: '\"\"' },\n\t      SUBST\n\t    ]\n\t  };\n\t  const INTERPOLATED_VERBATIM_STRING_NO_LF = hljs.inherit(INTERPOLATED_VERBATIM_STRING, {\n\t    illegal: /\\n/,\n\t    contains: [\n\t      { begin: /\\{\\{/ },\n\t      { begin: /\\}\\}/ },\n\t      { begin: '\"\"' },\n\t      SUBST_NO_LF\n\t    ]\n\t  });\n\t  SUBST.contains = [\n\t    INTERPOLATED_VERBATIM_STRING,\n\t    INTERPOLATED_STRING,\n\t    VERBATIM_STRING,\n\t    hljs.APOS_STRING_MODE,\n\t    hljs.QUOTE_STRING_MODE,\n\t    NUMBERS,\n\t    hljs.C_BLOCK_COMMENT_MODE\n\t  ];\n\t  SUBST_NO_LF.contains = [\n\t    INTERPOLATED_VERBATIM_STRING_NO_LF,\n\t    INTERPOLATED_STRING,\n\t    VERBATIM_STRING_NO_LF,\n\t    hljs.APOS_STRING_MODE,\n\t    hljs.QUOTE_STRING_MODE,\n\t    NUMBERS,\n\t    hljs.inherit(hljs.C_BLOCK_COMMENT_MODE, { illegal: /\\n/ })\n\t  ];\n\t  const STRING = { variants: [\n\t    INTERPOLATED_VERBATIM_STRING,\n\t    INTERPOLATED_STRING,\n\t    VERBATIM_STRING,\n\t    hljs.APOS_STRING_MODE,\n\t    hljs.QUOTE_STRING_MODE\n\t  ] };\n\n\t  const GENERIC_MODIFIER = {\n\t    begin: \"<\",\n\t    end: \">\",\n\t    contains: [\n\t      { beginKeywords: \"in out\" },\n\t      TITLE_MODE\n\t    ]\n\t  };\n\t  const TYPE_IDENT_RE = hljs.IDENT_RE + '(<' + hljs.IDENT_RE + '(\\\\s*,\\\\s*' + hljs.IDENT_RE + ')*>)?(\\\\[\\\\])?';\n\t  const AT_IDENTIFIER = {\n\t    // prevents expressions like `@class` from incorrect flagging\n\t    // `class` as a keyword\n\t    begin: \"@\" + hljs.IDENT_RE,\n\t    relevance: 0\n\t  };\n\n\t  return {\n\t    name: 'C#',\n\t    aliases: [\n\t      'cs',\n\t      'c#'\n\t    ],\n\t    keywords: KEYWORDS,\n\t    illegal: /::/,\n\t    contains: [\n\t      hljs.COMMENT(\n\t        '///',\n\t        '$',\n\t        {\n\t          returnBegin: true,\n\t          contains: [\n\t            {\n\t              className: 'doctag',\n\t              variants: [\n\t                {\n\t                  begin: '///',\n\t                  relevance: 0\n\t                },\n\t                { begin: '<!--|-->' },\n\t                {\n\t                  begin: '</?',\n\t                  end: '>'\n\t                }\n\t              ]\n\t            }\n\t          ]\n\t        }\n\t      ),\n\t      hljs.C_LINE_COMMENT_MODE,\n\t      hljs.C_BLOCK_COMMENT_MODE,\n\t      {\n\t        className: 'meta',\n\t        begin: '#',\n\t        end: '$',\n\t        keywords: { keyword: 'if else elif endif define undef warning error line region endregion pragma checksum' }\n\t      },\n\t      STRING,\n\t      NUMBERS,\n\t      {\n\t        beginKeywords: 'class interface',\n\t        relevance: 0,\n\t        end: /[{;=]/,\n\t        illegal: /[^\\s:,]/,\n\t        contains: [\n\t          { beginKeywords: \"where class\" },\n\t          TITLE_MODE,\n\t          GENERIC_MODIFIER,\n\t          hljs.C_LINE_COMMENT_MODE,\n\t          hljs.C_BLOCK_COMMENT_MODE\n\t        ]\n\t      },\n\t      {\n\t        beginKeywords: 'namespace',\n\t        relevance: 0,\n\t        end: /[{;=]/,\n\t        illegal: /[^\\s:]/,\n\t        contains: [\n\t          TITLE_MODE,\n\t          hljs.C_LINE_COMMENT_MODE,\n\t          hljs.C_BLOCK_COMMENT_MODE\n\t        ]\n\t      },\n\t      {\n\t        beginKeywords: 'record',\n\t        relevance: 0,\n\t        end: /[{;=]/,\n\t        illegal: /[^\\s:]/,\n\t        contains: [\n\t          TITLE_MODE,\n\t          GENERIC_MODIFIER,\n\t          hljs.C_LINE_COMMENT_MODE,\n\t          hljs.C_BLOCK_COMMENT_MODE\n\t        ]\n\t      },\n\t      {\n\t        // [Attributes(\"\")]\n\t        className: 'meta',\n\t        begin: '^\\\\s*\\\\[(?=[\\\\w])',\n\t        excludeBegin: true,\n\t        end: '\\\\]',\n\t        excludeEnd: true,\n\t        contains: [\n\t          {\n\t            className: 'string',\n\t            begin: /\"/,\n\t            end: /\"/\n\t          }\n\t        ]\n\t      },\n\t      {\n\t        // Expression keywords prevent 'keyword Name(...)' from being\n\t        // recognized as a function definition\n\t        beginKeywords: 'new return throw await else',\n\t        relevance: 0\n\t      },\n\t      {\n\t        className: 'function',\n\t        begin: '(' + TYPE_IDENT_RE + '\\\\s+)+' + hljs.IDENT_RE + '\\\\s*(<[^=]+>\\\\s*)?\\\\(',\n\t        returnBegin: true,\n\t        end: /\\s*[{;=]/,\n\t        excludeEnd: true,\n\t        keywords: KEYWORDS,\n\t        contains: [\n\t          // prevents these from being highlighted `title`\n\t          {\n\t            beginKeywords: FUNCTION_MODIFIERS.join(\" \"),\n\t            relevance: 0\n\t          },\n\t          {\n\t            begin: hljs.IDENT_RE + '\\\\s*(<[^=]+>\\\\s*)?\\\\(',\n\t            returnBegin: true,\n\t            contains: [\n\t              hljs.TITLE_MODE,\n\t              GENERIC_MODIFIER\n\t            ],\n\t            relevance: 0\n\t          },\n\t          { match: /\\(\\)/ },\n\t          {\n\t            className: 'params',\n\t            begin: /\\(/,\n\t            end: /\\)/,\n\t            excludeBegin: true,\n\t            excludeEnd: true,\n\t            keywords: KEYWORDS,\n\t            relevance: 0,\n\t            contains: [\n\t              STRING,\n\t              NUMBERS,\n\t              hljs.C_BLOCK_COMMENT_MODE\n\t            ]\n\t          },\n\t          hljs.C_LINE_COMMENT_MODE,\n\t          hljs.C_BLOCK_COMMENT_MODE\n\t        ]\n\t      },\n\t      AT_IDENTIFIER\n\t    ]\n\t  };\n\t}\n\n\tcsharp_1 = csharp;\n\treturn csharp_1;\n}\n\nexport { requireCsharp as __require };",
-      "start": 1715637176953,
-      "end": 1715637176954,
+      "start": 1715637636433,
+      "end": 1715637636434,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -149,74 +149,74 @@
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1715637176954,
-      "end": 1715637176954,
+      "start": 1715637636434,
+      "end": 1715637636434,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1715637176954,
-      "end": 1715637176954,
+      "start": 1715637636434,
+      "end": 1715637636434,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1715637176954,
-      "end": 1715637176954,
+      "start": 1715637636434,
+      "end": 1715637636434,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1715637176954,
-      "end": 1715637176954,
+      "start": 1715637636434,
+      "end": 1715637636434,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1715637176954,
-      "end": 1715637176954,
+      "start": 1715637636434,
+      "end": 1715637636434,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1715637176954,
-      "end": 1715637176954,
+      "start": 1715637636434,
+      "end": 1715637636434,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1715637176954,
-      "end": 1715637176954,
+      "start": 1715637636434,
+      "end": 1715637636434,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1715637176954,
-      "end": 1715637176954,
+      "start": 1715637636434,
+      "end": 1715637636434,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1715637176954,
-      "end": 1715637176954,
+      "start": 1715637636434,
+      "end": 1715637636434,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1715637176954,
-      "end": 1715637176954,
+      "start": 1715637636434,
+      "end": 1715637636434,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1715637176954,
-      "end": 1715637176954,
+      "start": 1715637636434,
+      "end": 1715637636434,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1715637176954,
-      "end": 1715637176954,
+      "start": 1715637636434,
+      "end": 1715637636434,
       "order": "normal"
     }
   ]
