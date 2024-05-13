@@ -4,135 +4,135 @@
     {
       "name": "vite:load-fallback",
       "result": "/*\nLanguage: .properties\nContributors: Valentin Aitken <valentin@nalisbg.com>, Egor Rogov <e.rogov@postgrespro.ru>\nWebsite: https://en.wikipedia.org/wiki/.properties\nCategory: config\n*/\n\n/** @type LanguageFn */\nfunction properties(hljs) {\n  // whitespaces: space, tab, formfeed\n  const WS0 = '[ \\\\t\\\\f]*';\n  const WS1 = '[ \\\\t\\\\f]+';\n  // delimiter\n  const EQUAL_DELIM = WS0 + '[:=]' + WS0;\n  const WS_DELIM = WS1;\n  const DELIM = '(' + EQUAL_DELIM + '|' + WS_DELIM + ')';\n  const KEY = '([^\\\\\\\\:= \\\\t\\\\f\\\\n]|\\\\\\\\.)+';\n\n  const DELIM_AND_VALUE = {\n    // skip DELIM\n    end: DELIM,\n    relevance: 0,\n    starts: {\n      // value: everything until end of line (again, taking into account backslashes)\n      className: 'string',\n      end: /$/,\n      relevance: 0,\n      contains: [\n        { begin: '\\\\\\\\\\\\\\\\' },\n        { begin: '\\\\\\\\\\\\n' }\n      ]\n    }\n  };\n\n  return {\n    name: '.properties',\n    disableAutodetect: true,\n    case_insensitive: true,\n    illegal: /\\S/,\n    contains: [\n      hljs.COMMENT('^\\\\s*[!#]', '$'),\n      // key: everything until whitespace or = or : (taking into account backslashes)\n      // case of a key-value pair\n      {\n        returnBegin: true,\n        variants: [\n          { begin: KEY + EQUAL_DELIM },\n          { begin: KEY + WS_DELIM }\n        ],\n        contains: [\n          {\n            className: 'attr',\n            begin: KEY,\n            endsParent: true\n          }\n        ],\n        starts: DELIM_AND_VALUE\n      },\n      // case of an empty key\n      {\n        className: 'attr',\n        begin: KEY + WS0 + '$'\n      }\n    ]\n  };\n}\n\nmodule.exports = properties;\n",
-      "start": 1715636874990,
-      "end": 1715636875011,
+      "start": 1715637177069,
+      "end": 1715637177087,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1715636875011,
-      "end": 1715636875011,
+      "start": 1715637177087,
+      "end": 1715637177087,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1715636875011,
-      "end": 1715636875011,
+      "start": 1715637177087,
+      "end": 1715637177087,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1715636875011,
-      "end": 1715636875011,
+      "start": 1715637177087,
+      "end": 1715637177087,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1715636875011,
-      "end": 1715636875011,
+      "start": 1715637177087,
+      "end": 1715637177087,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1715636875011,
-      "end": 1715636875011,
+      "start": 1715637177087,
+      "end": 1715637177087,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1715636875011,
-      "end": 1715636875011,
+      "start": 1715637177087,
+      "end": 1715637177087,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1715636875011,
-      "end": 1715636875011,
+      "start": 1715637177087,
+      "end": 1715637177087,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1715636875011,
-      "end": 1715636875011,
+      "start": 1715637177087,
+      "end": 1715637177087,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1715636875011,
-      "end": 1715636875011,
+      "start": 1715637177087,
+      "end": 1715637177087,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1715636875011,
-      "end": 1715636875011,
+      "start": 1715637177087,
+      "end": 1715637177087,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1715636875011,
-      "end": 1715636875011,
+      "start": 1715637177087,
+      "end": 1715637177087,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1715636875011,
-      "end": 1715636875011,
+      "start": 1715637177087,
+      "end": 1715637177087,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1715636875011,
-      "end": 1715636875011,
+      "start": 1715637177087,
+      "end": 1715637177087,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1715636875011,
-      "end": 1715636875011,
+      "start": 1715637177087,
+      "end": 1715637177087,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1715636875011,
-      "end": 1715636875011,
+      "start": 1715637177087,
+      "end": 1715637177087,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1715636875011,
-      "end": 1715636875011,
+      "start": 1715637177087,
+      "end": 1715637177087,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1715636875011,
-      "end": 1715636875011,
+      "start": 1715637177087,
+      "end": 1715637177087,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1715636875011,
-      "end": 1715636875011,
+      "start": 1715637177087,
+      "end": 1715637177087,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1715636875011,
-      "end": 1715636875011,
+      "start": 1715637177087,
+      "end": 1715637177087,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1715636875011,
-      "end": 1715636875011,
+      "start": 1715637177087,
+      "end": 1715637177087,
       "order": "normal"
     },
     {
       "name": "commonjs",
       "result": "/*\nLanguage: .properties\nContributors: Valentin Aitken <valentin@nalisbg.com>, Egor Rogov <e.rogov@postgrespro.ru>\nWebsite: https://en.wikipedia.org/wiki/.properties\nCategory: config\n*/\nimport * as commonjsHelpers from \"\u0000commonjsHelpers.js\";\n\nvar properties_1;\nvar hasRequiredProperties;\n\nfunction requireProperties () {\n\tif (hasRequiredProperties) return properties_1;\n\thasRequiredProperties = 1;\n\t/** @type LanguageFn */\n\tfunction properties(hljs) {\n\t  // whitespaces: space, tab, formfeed\n\t  const WS0 = '[ \\\\t\\\\f]*';\n\t  const WS1 = '[ \\\\t\\\\f]+';\n\t  // delimiter\n\t  const EQUAL_DELIM = WS0 + '[:=]' + WS0;\n\t  const WS_DELIM = WS1;\n\t  const DELIM = '(' + EQUAL_DELIM + '|' + WS_DELIM + ')';\n\t  const KEY = '([^\\\\\\\\:= \\\\t\\\\f\\\\n]|\\\\\\\\.)+';\n\n\t  const DELIM_AND_VALUE = {\n\t    // skip DELIM\n\t    end: DELIM,\n\t    relevance: 0,\n\t    starts: {\n\t      // value: everything until end of line (again, taking into account backslashes)\n\t      className: 'string',\n\t      end: /$/,\n\t      relevance: 0,\n\t      contains: [\n\t        { begin: '\\\\\\\\\\\\\\\\' },\n\t        { begin: '\\\\\\\\\\\\n' }\n\t      ]\n\t    }\n\t  };\n\n\t  return {\n\t    name: '.properties',\n\t    disableAutodetect: true,\n\t    case_insensitive: true,\n\t    illegal: /\\S/,\n\t    contains: [\n\t      hljs.COMMENT('^\\\\s*[!#]', '$'),\n\t      // key: everything until whitespace or = or : (taking into account backslashes)\n\t      // case of a key-value pair\n\t      {\n\t        returnBegin: true,\n\t        variants: [\n\t          { begin: KEY + EQUAL_DELIM },\n\t          { begin: KEY + WS_DELIM }\n\t        ],\n\t        contains: [\n\t          {\n\t            className: 'attr',\n\t            begin: KEY,\n\t            endsParent: true\n\t          }\n\t        ],\n\t        starts: DELIM_AND_VALUE\n\t      },\n\t      // case of an empty key\n\t      {\n\t        className: 'attr',\n\t        begin: KEY + WS0 + '$'\n\t      }\n\t    ]\n\t  };\n\t}\n\n\tproperties_1 = properties;\n\treturn properties_1;\n}\n\nexport { requireProperties as __require };",
-      "start": 1715636875011,
-      "end": 1715636875011,
+      "start": 1715637177087,
+      "end": 1715637177087,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -149,74 +149,74 @@
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1715636875011,
-      "end": 1715636875011,
+      "start": 1715637177087,
+      "end": 1715637177087,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1715636875011,
-      "end": 1715636875012,
+      "start": 1715637177087,
+      "end": 1715637177087,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1715636875012,
-      "end": 1715636875012,
+      "start": 1715637177087,
+      "end": 1715637177087,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1715636875012,
-      "end": 1715636875012,
+      "start": 1715637177087,
+      "end": 1715637177087,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1715636875012,
-      "end": 1715636875012,
+      "start": 1715637177087,
+      "end": 1715637177087,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1715636875012,
-      "end": 1715636875012,
+      "start": 1715637177087,
+      "end": 1715637177087,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1715636875012,
-      "end": 1715636875012,
+      "start": 1715637177087,
+      "end": 1715637177087,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1715636875012,
-      "end": 1715636875012,
+      "start": 1715637177087,
+      "end": 1715637177087,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1715636875012,
-      "end": 1715636875012,
+      "start": 1715637177087,
+      "end": 1715637177087,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1715636875012,
-      "end": 1715636875012,
+      "start": 1715637177087,
+      "end": 1715637177087,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1715636875012,
-      "end": 1715636875012,
+      "start": 1715637177087,
+      "end": 1715637177087,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1715636875012,
-      "end": 1715636875012,
+      "start": 1715637177087,
+      "end": 1715637177087,
       "order": "normal"
     }
   ]

@@ -4,135 +4,135 @@
     {
       "name": "vite:load-fallback",
       "result": "/*\nLanguage: Leaf\nDescription: A Swift-based templating language created for the Vapor project.\nWebsite: https://docs.vapor.codes/leaf/overview\nCategory: template\n*/\n\nfunction leaf(hljs) {\n  const IDENT = /([A-Za-z_][A-Za-z_0-9]*)?/;\n  const LITERALS = [\n    'true',\n    'false',\n    'in'\n  ];\n  const PARAMS = {\n    scope: 'params',\n    begin: /\\(/,\n    end: /\\)(?=\\:?)/,\n    endsParent: true,\n    relevance: 7,\n    contains: [\n      {\n        scope: 'string',\n        begin: '\"',\n        end: '\"'\n      },\n      {\n        scope: 'keyword',\n        match: LITERALS.join(\"|\"),\n      },\n      {\n        scope: 'variable',\n        match: /[A-Za-z_][A-Za-z_0-9]*/\n      },\n      {\n        scope: 'operator',\n        match: /\\+|\\-|\\*|\\/|\\%|\\=\\=|\\=|\\!|\\>|\\<|\\&\\&|\\|\\|/\n      }\n    ]\n  };\n  const INSIDE_DISPATCH = {\n    match: [\n      IDENT,\n      /(?=\\()/,\n    ],\n    scope: {\n      1: \"keyword\"\n    },\n    contains: [ PARAMS ]\n  };\n  PARAMS.contains.unshift(INSIDE_DISPATCH);\n  return {\n    name: 'Leaf',\n    contains: [\n      // #ident():\n      {\n        match: [\n          /#+/,\n          IDENT,\n          /(?=\\()/,\n        ],\n        scope: {\n          1: \"punctuation\",\n          2: \"keyword\"\n        },\n        // will start up after the ending `)` match from line ~44\n        // just to grab the trailing `:` if we can match it\n        starts: {\n          contains: [\n            {\n              match: /\\:/,\n              scope: \"punctuation\"\n            }\n          ]\n        },\n        contains: [\n          PARAMS\n        ],\n      },\n      // #ident or #ident:\n      {\n        match: [\n          /#+/,\n          IDENT,\n          /:?/,\n        ],\n        scope: {\n          1: \"punctuation\",\n          2: \"keyword\",\n          3: \"punctuation\"\n        }\n      },\n    ]\n  };\n}\n\nmodule.exports = leaf;\n",
-      "start": 1715636874915,
-      "end": 1715636874950,
+      "start": 1715637176998,
+      "end": 1715637177030,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1715636874950,
-      "end": 1715636874950,
+      "start": 1715637177030,
+      "end": 1715637177030,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1715636874950,
-      "end": 1715636874950,
+      "start": 1715637177030,
+      "end": 1715637177030,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1715636874950,
-      "end": 1715636874950,
+      "start": 1715637177030,
+      "end": 1715637177030,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1715636874950,
-      "end": 1715636874950,
+      "start": 1715637177030,
+      "end": 1715637177030,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1715636874950,
-      "end": 1715636874950,
+      "start": 1715637177030,
+      "end": 1715637177030,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1715636874950,
-      "end": 1715636874950,
+      "start": 1715637177030,
+      "end": 1715637177030,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1715636874950,
-      "end": 1715636874950,
+      "start": 1715637177030,
+      "end": 1715637177030,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1715636874950,
-      "end": 1715636874950,
+      "start": 1715637177030,
+      "end": 1715637177030,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1715636874950,
-      "end": 1715636874950,
+      "start": 1715637177030,
+      "end": 1715637177030,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1715636874950,
-      "end": 1715636874950,
+      "start": 1715637177030,
+      "end": 1715637177030,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1715636874950,
-      "end": 1715636874950,
+      "start": 1715637177030,
+      "end": 1715637177030,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1715636874950,
-      "end": 1715636874950,
+      "start": 1715637177030,
+      "end": 1715637177030,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1715636874950,
-      "end": 1715636874950,
+      "start": 1715637177030,
+      "end": 1715637177030,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1715636874950,
-      "end": 1715636874950,
+      "start": 1715637177030,
+      "end": 1715637177030,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1715636874950,
-      "end": 1715636874950,
+      "start": 1715637177030,
+      "end": 1715637177030,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1715636874950,
-      "end": 1715636874950,
+      "start": 1715637177030,
+      "end": 1715637177030,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1715636874950,
-      "end": 1715636874950,
+      "start": 1715637177030,
+      "end": 1715637177030,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1715636874950,
-      "end": 1715636874950,
+      "start": 1715637177030,
+      "end": 1715637177030,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1715636874950,
-      "end": 1715636874950,
+      "start": 1715637177030,
+      "end": 1715637177030,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1715636874950,
-      "end": 1715636874950,
+      "start": 1715637177030,
+      "end": 1715637177030,
       "order": "normal"
     },
     {
       "name": "commonjs",
       "result": "/*\nLanguage: Leaf\nDescription: A Swift-based templating language created for the Vapor project.\nWebsite: https://docs.vapor.codes/leaf/overview\nCategory: template\n*/\nimport * as commonjsHelpers from \"\u0000commonjsHelpers.js\";\n\nvar leaf_1;\nvar hasRequiredLeaf;\n\nfunction requireLeaf () {\n\tif (hasRequiredLeaf) return leaf_1;\n\thasRequiredLeaf = 1;\n\tfunction leaf(hljs) {\n\t  const IDENT = /([A-Za-z_][A-Za-z_0-9]*)?/;\n\t  const LITERALS = [\n\t    'true',\n\t    'false',\n\t    'in'\n\t  ];\n\t  const PARAMS = {\n\t    scope: 'params',\n\t    begin: /\\(/,\n\t    end: /\\)(?=\\:?)/,\n\t    endsParent: true,\n\t    relevance: 7,\n\t    contains: [\n\t      {\n\t        scope: 'string',\n\t        begin: '\"',\n\t        end: '\"'\n\t      },\n\t      {\n\t        scope: 'keyword',\n\t        match: LITERALS.join(\"|\"),\n\t      },\n\t      {\n\t        scope: 'variable',\n\t        match: /[A-Za-z_][A-Za-z_0-9]*/\n\t      },\n\t      {\n\t        scope: 'operator',\n\t        match: /\\+|\\-|\\*|\\/|\\%|\\=\\=|\\=|\\!|\\>|\\<|\\&\\&|\\|\\|/\n\t      }\n\t    ]\n\t  };\n\t  const INSIDE_DISPATCH = {\n\t    match: [\n\t      IDENT,\n\t      /(?=\\()/,\n\t    ],\n\t    scope: {\n\t      1: \"keyword\"\n\t    },\n\t    contains: [ PARAMS ]\n\t  };\n\t  PARAMS.contains.unshift(INSIDE_DISPATCH);\n\t  return {\n\t    name: 'Leaf',\n\t    contains: [\n\t      // #ident():\n\t      {\n\t        match: [\n\t          /#+/,\n\t          IDENT,\n\t          /(?=\\()/,\n\t        ],\n\t        scope: {\n\t          1: \"punctuation\",\n\t          2: \"keyword\"\n\t        },\n\t        // will start up after the ending `)` match from line ~44\n\t        // just to grab the trailing `:` if we can match it\n\t        starts: {\n\t          contains: [\n\t            {\n\t              match: /\\:/,\n\t              scope: \"punctuation\"\n\t            }\n\t          ]\n\t        },\n\t        contains: [\n\t          PARAMS\n\t        ],\n\t      },\n\t      // #ident or #ident:\n\t      {\n\t        match: [\n\t          /#+/,\n\t          IDENT,\n\t          /:?/,\n\t        ],\n\t        scope: {\n\t          1: \"punctuation\",\n\t          2: \"keyword\",\n\t          3: \"punctuation\"\n\t        }\n\t      },\n\t    ]\n\t  };\n\t}\n\n\tleaf_1 = leaf;\n\treturn leaf_1;\n}\n\nexport { requireLeaf as __require };",
-      "start": 1715636874950,
-      "end": 1715636874950,
+      "start": 1715637177030,
+      "end": 1715637177030,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -149,74 +149,74 @@
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1715636874950,
-      "end": 1715636874950,
+      "start": 1715637177030,
+      "end": 1715637177030,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1715636874950,
-      "end": 1715636874950,
+      "start": 1715637177030,
+      "end": 1715637177030,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1715636874950,
-      "end": 1715636874950,
+      "start": 1715637177030,
+      "end": 1715637177030,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1715636874950,
-      "end": 1715636874950,
+      "start": 1715637177030,
+      "end": 1715637177030,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1715636874950,
-      "end": 1715636874950,
+      "start": 1715637177030,
+      "end": 1715637177030,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1715636874950,
-      "end": 1715636874950,
+      "start": 1715637177030,
+      "end": 1715637177030,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1715636874950,
-      "end": 1715636874950,
+      "start": 1715637177030,
+      "end": 1715637177030,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1715636874950,
-      "end": 1715636874950,
+      "start": 1715637177030,
+      "end": 1715637177030,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1715636874950,
-      "end": 1715636874950,
+      "start": 1715637177030,
+      "end": 1715637177030,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1715636874950,
-      "end": 1715636874950,
+      "start": 1715637177030,
+      "end": 1715637177030,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1715636874950,
-      "end": 1715636874950,
+      "start": 1715637177030,
+      "end": 1715637177030,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1715636874950,
-      "end": 1715636874950,
+      "start": 1715637177030,
+      "end": 1715637177030,
       "order": "normal"
     }
   ]

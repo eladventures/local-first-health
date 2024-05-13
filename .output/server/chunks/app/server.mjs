@@ -574,28 +574,17 @@ const createError = (err) => {
   _err.__nuxt_error = true;
   return _err;
 };
-const __nuxt_page_meta$1 = {
-  layout: "default"
-};
 const __nuxt_page_meta = {
   layout: "default"
 };
 const _routes = [
-  {
-    name: (__nuxt_page_meta$1 == null ? void 0 : __nuxt_page_meta$1.name) ?? "index copy",
-    path: (__nuxt_page_meta$1 == null ? void 0 : __nuxt_page_meta$1.path) ?? "/index%20copy",
-    meta: __nuxt_page_meta$1 || {},
-    alias: (__nuxt_page_meta$1 == null ? void 0 : __nuxt_page_meta$1.alias) || [],
-    redirect: (__nuxt_page_meta$1 == null ? void 0 : __nuxt_page_meta$1.redirect) || void 0,
-    component: () => import('./_nuxt/index copy-bf5ec783.mjs').then((m) => m.default || m)
-  },
   {
     name: (__nuxt_page_meta == null ? void 0 : __nuxt_page_meta.name) ?? "index",
     path: (__nuxt_page_meta == null ? void 0 : __nuxt_page_meta.path) ?? "/",
     meta: __nuxt_page_meta || {},
     alias: (__nuxt_page_meta == null ? void 0 : __nuxt_page_meta.alias) || [],
     redirect: (__nuxt_page_meta == null ? void 0 : __nuxt_page_meta.redirect) || void 0,
-    component: () => import('./_nuxt/index-099971ec.mjs').then((m) => m.default || m)
+    component: () => import('./_nuxt/index-1fb96a1f.mjs').then((m) => m.default || m)
   }
 ];
 const _wrapIf = (component, props, slots) => {

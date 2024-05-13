@@ -4,135 +4,135 @@
     {
       "name": "vite:load-fallback",
       "result": "/*\n Language: Flix\n Category: functional\n Author: Magnus Madsen <mmadsen@uwaterloo.ca>\n Website: https://flix.dev/\n */\n\n/** @type LanguageFn */\nfunction flix(hljs) {\n  const CHAR = {\n    className: 'string',\n    begin: /'(.|\\\\[xXuU][a-zA-Z0-9]+)'/\n  };\n\n  const STRING = {\n    className: 'string',\n    variants: [\n      {\n        begin: '\"',\n        end: '\"'\n      }\n    ]\n  };\n\n  const NAME = {\n    className: 'title',\n    relevance: 0,\n    begin: /[^0-9\\n\\t \"'(),.`{}\\[\\]:;][^\\n\\t \"'(),.`{}\\[\\]:;]+|[^0-9\\n\\t \"'(),.`{}\\[\\]:;=]/\n  };\n\n  const METHOD = {\n    className: 'function',\n    beginKeywords: 'def',\n    end: /[:={\\[(\\n;]/,\n    excludeEnd: true,\n    contains: [ NAME ]\n  };\n\n  return {\n    name: 'Flix',\n    keywords: {\n      keyword: [\n        \"case\",\n        \"class\",\n        \"def\",\n        \"else\",\n        \"enum\",\n        \"if\",\n        \"impl\",\n        \"import\",\n        \"in\",\n        \"lat\",\n        \"rel\",\n        \"index\",\n        \"let\",\n        \"match\",\n        \"namespace\",\n        \"switch\",\n        \"type\",\n        \"yield\",\n        \"with\"\n      ],\n      literal: [\n        \"true\",\n        \"false\"\n      ]\n    },\n    contains: [\n      hljs.C_LINE_COMMENT_MODE,\n      hljs.C_BLOCK_COMMENT_MODE,\n      CHAR,\n      STRING,\n      METHOD,\n      hljs.C_NUMBER_MODE\n    ]\n  };\n}\n\nmodule.exports = flix;\n",
-      "start": 1715636874877,
-      "end": 1715636874894,
+      "start": 1715637176959,
+      "end": 1715637176976,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1715636874895,
-      "end": 1715636874895,
+      "start": 1715637176976,
+      "end": 1715637176976,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1715636874895,
-      "end": 1715636874895,
+      "start": 1715637176976,
+      "end": 1715637176976,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1715636874895,
-      "end": 1715636874895,
+      "start": 1715637176976,
+      "end": 1715637176976,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1715636874895,
-      "end": 1715636874895,
+      "start": 1715637176976,
+      "end": 1715637176976,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1715636874895,
-      "end": 1715636874895,
+      "start": 1715637176976,
+      "end": 1715637176976,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1715636874895,
-      "end": 1715636874895,
+      "start": 1715637176976,
+      "end": 1715637176976,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1715636874895,
-      "end": 1715636874895,
+      "start": 1715637176976,
+      "end": 1715637176976,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1715636874895,
-      "end": 1715636874895,
+      "start": 1715637176976,
+      "end": 1715637176976,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1715636874895,
-      "end": 1715636874895,
+      "start": 1715637176976,
+      "end": 1715637176976,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1715636874895,
-      "end": 1715636874895,
+      "start": 1715637176976,
+      "end": 1715637176976,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1715636874895,
-      "end": 1715636874895,
+      "start": 1715637176976,
+      "end": 1715637176976,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1715636874895,
-      "end": 1715636874895,
+      "start": 1715637176976,
+      "end": 1715637176976,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1715636874895,
-      "end": 1715636874895,
+      "start": 1715637176976,
+      "end": 1715637176976,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1715636874895,
-      "end": 1715636874895,
+      "start": 1715637176976,
+      "end": 1715637176976,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1715636874895,
-      "end": 1715636874895,
+      "start": 1715637176976,
+      "end": 1715637176976,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1715636874895,
-      "end": 1715636874895,
+      "start": 1715637176976,
+      "end": 1715637176976,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1715636874895,
-      "end": 1715636874895,
+      "start": 1715637176976,
+      "end": 1715637176976,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1715636874895,
-      "end": 1715636874895,
+      "start": 1715637176976,
+      "end": 1715637176976,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1715636874895,
-      "end": 1715636874895,
+      "start": 1715637176976,
+      "end": 1715637176976,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1715636874895,
-      "end": 1715636874895,
+      "start": 1715637176976,
+      "end": 1715637176976,
       "order": "normal"
     },
     {
       "name": "commonjs",
       "result": "/*\n Language: Flix\n Category: functional\n Author: Magnus Madsen <mmadsen@uwaterloo.ca>\n Website: https://flix.dev/\n */\nimport * as commonjsHelpers from \"\u0000commonjsHelpers.js\";\n\nvar flix_1;\nvar hasRequiredFlix;\n\nfunction requireFlix () {\n\tif (hasRequiredFlix) return flix_1;\n\thasRequiredFlix = 1;\n\t/** @type LanguageFn */\n\tfunction flix(hljs) {\n\t  const CHAR = {\n\t    className: 'string',\n\t    begin: /'(.|\\\\[xXuU][a-zA-Z0-9]+)'/\n\t  };\n\n\t  const STRING = {\n\t    className: 'string',\n\t    variants: [\n\t      {\n\t        begin: '\"',\n\t        end: '\"'\n\t      }\n\t    ]\n\t  };\n\n\t  const NAME = {\n\t    className: 'title',\n\t    relevance: 0,\n\t    begin: /[^0-9\\n\\t \"'(),.`{}\\[\\]:;][^\\n\\t \"'(),.`{}\\[\\]:;]+|[^0-9\\n\\t \"'(),.`{}\\[\\]:;=]/\n\t  };\n\n\t  const METHOD = {\n\t    className: 'function',\n\t    beginKeywords: 'def',\n\t    end: /[:={\\[(\\n;]/,\n\t    excludeEnd: true,\n\t    contains: [ NAME ]\n\t  };\n\n\t  return {\n\t    name: 'Flix',\n\t    keywords: {\n\t      keyword: [\n\t        \"case\",\n\t        \"class\",\n\t        \"def\",\n\t        \"else\",\n\t        \"enum\",\n\t        \"if\",\n\t        \"impl\",\n\t        \"import\",\n\t        \"in\",\n\t        \"lat\",\n\t        \"rel\",\n\t        \"index\",\n\t        \"let\",\n\t        \"match\",\n\t        \"namespace\",\n\t        \"switch\",\n\t        \"type\",\n\t        \"yield\",\n\t        \"with\"\n\t      ],\n\t      literal: [\n\t        \"true\",\n\t        \"false\"\n\t      ]\n\t    },\n\t    contains: [\n\t      hljs.C_LINE_COMMENT_MODE,\n\t      hljs.C_BLOCK_COMMENT_MODE,\n\t      CHAR,\n\t      STRING,\n\t      METHOD,\n\t      hljs.C_NUMBER_MODE\n\t    ]\n\t  };\n\t}\n\n\tflix_1 = flix;\n\treturn flix_1;\n}\n\nexport { requireFlix as __require };",
-      "start": 1715636874895,
-      "end": 1715636874895,
+      "start": 1715637176976,
+      "end": 1715637176976,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -149,74 +149,74 @@
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1715636874895,
-      "end": 1715636874895,
+      "start": 1715637176976,
+      "end": 1715637176976,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1715636874895,
-      "end": 1715636874895,
+      "start": 1715637176976,
+      "end": 1715637176976,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1715636874895,
-      "end": 1715636874895,
+      "start": 1715637176976,
+      "end": 1715637176976,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1715636874895,
-      "end": 1715636874895,
+      "start": 1715637176976,
+      "end": 1715637176976,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1715636874895,
-      "end": 1715636874895,
+      "start": 1715637176976,
+      "end": 1715637176976,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1715636874895,
-      "end": 1715636874895,
+      "start": 1715637176976,
+      "end": 1715637176976,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1715636874895,
-      "end": 1715636874895,
+      "start": 1715637176976,
+      "end": 1715637176976,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1715636874895,
-      "end": 1715636874895,
+      "start": 1715637176976,
+      "end": 1715637176976,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1715636874895,
-      "end": 1715636874895,
+      "start": 1715637176976,
+      "end": 1715637176976,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1715636874895,
-      "end": 1715636874895,
+      "start": 1715637176976,
+      "end": 1715637176976,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1715636874895,
-      "end": 1715636874895,
+      "start": 1715637176976,
+      "end": 1715637176976,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1715636874895,
-      "end": 1715636874895,
+      "start": 1715637176976,
+      "end": 1715637176976,
       "order": "normal"
     }
   ]

@@ -4,135 +4,135 @@
     {
       "name": "vite:load-fallback",
       "result": "/*\nLanguage: C/AL\nAuthor: Kenneth Fuglsang Christensen <kfuglsang@gmail.com>\nDescription: Provides highlighting of Microsoft Dynamics NAV C/AL code files\nWebsite: https://docs.microsoft.com/en-us/dynamics-nav/programming-in-c-al\n*/\n\n/** @type LanguageFn */\nfunction cal(hljs) {\n  const regex = hljs.regex;\n  const KEYWORDS = [\n    \"div\",\n    \"mod\",\n    \"in\",\n    \"and\",\n    \"or\",\n    \"not\",\n    \"xor\",\n    \"asserterror\",\n    \"begin\",\n    \"case\",\n    \"do\",\n    \"downto\",\n    \"else\",\n    \"end\",\n    \"exit\",\n    \"for\",\n    \"local\",\n    \"if\",\n    \"of\",\n    \"repeat\",\n    \"then\",\n    \"to\",\n    \"until\",\n    \"while\",\n    \"with\",\n    \"var\"\n  ];\n  const LITERALS = 'false true';\n  const COMMENT_MODES = [\n    hljs.C_LINE_COMMENT_MODE,\n    hljs.COMMENT(\n      /\\{/,\n      /\\}/,\n      { relevance: 0 }\n    ),\n    hljs.COMMENT(\n      /\\(\\*/,\n      /\\*\\)/,\n      { relevance: 10 }\n    )\n  ];\n  const STRING = {\n    className: 'string',\n    begin: /'/,\n    end: /'/,\n    contains: [ { begin: /''/ } ]\n  };\n  const CHAR_STRING = {\n    className: 'string',\n    begin: /(#\\d+)+/\n  };\n  const DATE = {\n    className: 'number',\n    begin: '\\\\b\\\\d+(\\\\.\\\\d+)?(DT|D|T)',\n    relevance: 0\n  };\n  const DBL_QUOTED_VARIABLE = {\n    className: 'string', // not a string technically but makes sense to be highlighted in the same style\n    begin: '\"',\n    end: '\"'\n  };\n\n  const PROCEDURE = {\n    match: [\n      /procedure/,\n      /\\s+/,\n      /[a-zA-Z_][\\w@]*/,\n      /\\s*/\n    ],\n    scope: {\n      1: \"keyword\",\n      3: \"title.function\"\n    },\n    contains: [\n      {\n        className: 'params',\n        begin: /\\(/,\n        end: /\\)/,\n        keywords: KEYWORDS,\n        contains: [\n          STRING,\n          CHAR_STRING,\n          hljs.NUMBER_MODE\n        ]\n      },\n      ...COMMENT_MODES\n    ]\n  };\n\n  const OBJECT_TYPES = [\n    \"Table\",\n    \"Form\",\n    \"Report\",\n    \"Dataport\",\n    \"Codeunit\",\n    \"XMLport\",\n    \"MenuSuite\",\n    \"Page\",\n    \"Query\"\n  ];\n  const OBJECT = {\n    match: [\n      /OBJECT/,\n      /\\s+/,\n      regex.either(...OBJECT_TYPES),\n      /\\s+/,\n      /\\d+/,\n      /\\s+(?=[^\\s])/,\n      /.*/,\n      /$/\n    ],\n    relevance: 3,\n    scope: {\n      1: \"keyword\",\n      3: \"type\",\n      5: \"number\",\n      7: \"title\"\n    }\n  };\n\n  const PROPERTY = {\n    match: /[\\w]+(?=\\=)/,\n    scope: \"attribute\",\n    relevance: 0\n  };\n\n  return {\n    name: 'C/AL',\n    case_insensitive: true,\n    keywords: {\n      keyword: KEYWORDS,\n      literal: LITERALS\n    },\n    illegal: /\\/\\*/,\n    contains: [\n      PROPERTY,\n      STRING,\n      CHAR_STRING,\n      DATE,\n      DBL_QUOTED_VARIABLE,\n      hljs.NUMBER_MODE,\n      OBJECT,\n      PROCEDURE\n    ]\n  };\n}\n\nmodule.exports = cal;\n",
-      "start": 1715636874829,
-      "end": 1715636874858,
+      "start": 1715637176909,
+      "end": 1715637176938,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1715636874858,
-      "end": 1715636874858,
+      "start": 1715637176938,
+      "end": 1715637176938,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1715636874858,
-      "end": 1715636874858,
+      "start": 1715637176938,
+      "end": 1715637176938,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1715636874858,
-      "end": 1715636874858,
+      "start": 1715637176938,
+      "end": 1715637176938,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1715636874858,
-      "end": 1715636874858,
+      "start": 1715637176938,
+      "end": 1715637176938,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1715636874858,
-      "end": 1715636874858,
+      "start": 1715637176938,
+      "end": 1715637176938,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1715636874858,
-      "end": 1715636874858,
+      "start": 1715637176938,
+      "end": 1715637176938,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1715636874858,
-      "end": 1715636874858,
+      "start": 1715637176938,
+      "end": 1715637176938,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1715636874858,
-      "end": 1715636874858,
+      "start": 1715637176938,
+      "end": 1715637176938,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1715636874858,
-      "end": 1715636874858,
+      "start": 1715637176938,
+      "end": 1715637176938,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1715636874858,
-      "end": 1715636874858,
+      "start": 1715637176938,
+      "end": 1715637176938,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1715636874858,
-      "end": 1715636874858,
+      "start": 1715637176938,
+      "end": 1715637176938,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1715636874858,
-      "end": 1715636874858,
+      "start": 1715637176938,
+      "end": 1715637176938,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1715636874858,
-      "end": 1715636874858,
+      "start": 1715637176938,
+      "end": 1715637176938,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1715636874858,
-      "end": 1715636874858,
+      "start": 1715637176938,
+      "end": 1715637176938,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1715636874858,
-      "end": 1715636874858,
+      "start": 1715637176938,
+      "end": 1715637176938,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1715636874858,
-      "end": 1715636874858,
+      "start": 1715637176938,
+      "end": 1715637176938,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1715636874858,
-      "end": 1715636874858,
+      "start": 1715637176938,
+      "end": 1715637176938,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1715636874858,
-      "end": 1715636874858,
+      "start": 1715637176938,
+      "end": 1715637176938,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1715636874858,
-      "end": 1715636874858,
+      "start": 1715637176938,
+      "end": 1715637176938,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1715636874858,
-      "end": 1715636874858,
+      "start": 1715637176938,
+      "end": 1715637176938,
       "order": "normal"
     },
     {
       "name": "commonjs",
       "result": "/*\nLanguage: C/AL\nAuthor: Kenneth Fuglsang Christensen <kfuglsang@gmail.com>\nDescription: Provides highlighting of Microsoft Dynamics NAV C/AL code files\nWebsite: https://docs.microsoft.com/en-us/dynamics-nav/programming-in-c-al\n*/\nimport * as commonjsHelpers from \"\u0000commonjsHelpers.js\";\n\nvar cal_1;\nvar hasRequiredCal;\n\nfunction requireCal () {\n\tif (hasRequiredCal) return cal_1;\n\thasRequiredCal = 1;\n\t/** @type LanguageFn */\n\tfunction cal(hljs) {\n\t  const regex = hljs.regex;\n\t  const KEYWORDS = [\n\t    \"div\",\n\t    \"mod\",\n\t    \"in\",\n\t    \"and\",\n\t    \"or\",\n\t    \"not\",\n\t    \"xor\",\n\t    \"asserterror\",\n\t    \"begin\",\n\t    \"case\",\n\t    \"do\",\n\t    \"downto\",\n\t    \"else\",\n\t    \"end\",\n\t    \"exit\",\n\t    \"for\",\n\t    \"local\",\n\t    \"if\",\n\t    \"of\",\n\t    \"repeat\",\n\t    \"then\",\n\t    \"to\",\n\t    \"until\",\n\t    \"while\",\n\t    \"with\",\n\t    \"var\"\n\t  ];\n\t  const LITERALS = 'false true';\n\t  const COMMENT_MODES = [\n\t    hljs.C_LINE_COMMENT_MODE,\n\t    hljs.COMMENT(\n\t      /\\{/,\n\t      /\\}/,\n\t      { relevance: 0 }\n\t    ),\n\t    hljs.COMMENT(\n\t      /\\(\\*/,\n\t      /\\*\\)/,\n\t      { relevance: 10 }\n\t    )\n\t  ];\n\t  const STRING = {\n\t    className: 'string',\n\t    begin: /'/,\n\t    end: /'/,\n\t    contains: [ { begin: /''/ } ]\n\t  };\n\t  const CHAR_STRING = {\n\t    className: 'string',\n\t    begin: /(#\\d+)+/\n\t  };\n\t  const DATE = {\n\t    className: 'number',\n\t    begin: '\\\\b\\\\d+(\\\\.\\\\d+)?(DT|D|T)',\n\t    relevance: 0\n\t  };\n\t  const DBL_QUOTED_VARIABLE = {\n\t    className: 'string', // not a string technically but makes sense to be highlighted in the same style\n\t    begin: '\"',\n\t    end: '\"'\n\t  };\n\n\t  const PROCEDURE = {\n\t    match: [\n\t      /procedure/,\n\t      /\\s+/,\n\t      /[a-zA-Z_][\\w@]*/,\n\t      /\\s*/\n\t    ],\n\t    scope: {\n\t      1: \"keyword\",\n\t      3: \"title.function\"\n\t    },\n\t    contains: [\n\t      {\n\t        className: 'params',\n\t        begin: /\\(/,\n\t        end: /\\)/,\n\t        keywords: KEYWORDS,\n\t        contains: [\n\t          STRING,\n\t          CHAR_STRING,\n\t          hljs.NUMBER_MODE\n\t        ]\n\t      },\n\t      ...COMMENT_MODES\n\t    ]\n\t  };\n\n\t  const OBJECT_TYPES = [\n\t    \"Table\",\n\t    \"Form\",\n\t    \"Report\",\n\t    \"Dataport\",\n\t    \"Codeunit\",\n\t    \"XMLport\",\n\t    \"MenuSuite\",\n\t    \"Page\",\n\t    \"Query\"\n\t  ];\n\t  const OBJECT = {\n\t    match: [\n\t      /OBJECT/,\n\t      /\\s+/,\n\t      regex.either(...OBJECT_TYPES),\n\t      /\\s+/,\n\t      /\\d+/,\n\t      /\\s+(?=[^\\s])/,\n\t      /.*/,\n\t      /$/\n\t    ],\n\t    relevance: 3,\n\t    scope: {\n\t      1: \"keyword\",\n\t      3: \"type\",\n\t      5: \"number\",\n\t      7: \"title\"\n\t    }\n\t  };\n\n\t  const PROPERTY = {\n\t    match: /[\\w]+(?=\\=)/,\n\t    scope: \"attribute\",\n\t    relevance: 0\n\t  };\n\n\t  return {\n\t    name: 'C/AL',\n\t    case_insensitive: true,\n\t    keywords: {\n\t      keyword: KEYWORDS,\n\t      literal: LITERALS\n\t    },\n\t    illegal: /\\/\\*/,\n\t    contains: [\n\t      PROPERTY,\n\t      STRING,\n\t      CHAR_STRING,\n\t      DATE,\n\t      DBL_QUOTED_VARIABLE,\n\t      hljs.NUMBER_MODE,\n\t      OBJECT,\n\t      PROCEDURE\n\t    ]\n\t  };\n\t}\n\n\tcal_1 = cal;\n\treturn cal_1;\n}\n\nexport { requireCal as __require };",
-      "start": 1715636874858,
-      "end": 1715636874858,
+      "start": 1715637176938,
+      "end": 1715637176939,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -149,74 +149,74 @@
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1715636874858,
-      "end": 1715636874858,
+      "start": 1715637176939,
+      "end": 1715637176939,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1715636874858,
-      "end": 1715636874858,
+      "start": 1715637176939,
+      "end": 1715637176939,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1715636874858,
-      "end": 1715636874858,
+      "start": 1715637176939,
+      "end": 1715637176939,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1715636874858,
-      "end": 1715636874858,
+      "start": 1715637176939,
+      "end": 1715637176939,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1715636874858,
-      "end": 1715636874858,
+      "start": 1715637176939,
+      "end": 1715637176939,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1715636874858,
-      "end": 1715636874858,
+      "start": 1715637176939,
+      "end": 1715637176939,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1715636874858,
-      "end": 1715636874858,
+      "start": 1715637176939,
+      "end": 1715637176939,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1715636874858,
-      "end": 1715636874858,
+      "start": 1715637176939,
+      "end": 1715637176939,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1715636874858,
-      "end": 1715636874858,
+      "start": 1715637176939,
+      "end": 1715637176939,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1715636874858,
-      "end": 1715636874858,
+      "start": 1715637176939,
+      "end": 1715637176939,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1715636874858,
-      "end": 1715636874858,
+      "start": 1715637176939,
+      "end": 1715637176939,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1715636874858,
-      "end": 1715636874858,
+      "start": 1715637176939,
+      "end": 1715637176939,
       "order": "normal"
     }
   ]
