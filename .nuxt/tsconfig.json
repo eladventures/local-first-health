@@ -84,6 +84,7 @@
   },
   "include": [
     "./nuxt.d.ts",
+    "../.config/nuxt.*",
     "../**/*",
     "../src/**/*",
     "../node_modules/@nuxtjs/tailwindcss/runtime",
