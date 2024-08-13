@@ -84,7 +84,7 @@ function eraseText() {
 <template>
     <section class="bg-white font-kalam">
         <div
-            class="container flex flex-col items-center px-4 pb-8 mx-auto text-center lg:pb-8 md:py-10 md:px-10 lg:px-32 text-gray-900"
+            class="container flex flex-col items-center px-4 pb-8 mx-auto text-center text-gray-900 lg:pb-8 md:py-10 md:px-10 lg:px-32"
             id="our-story"
         >
             <!-- Adjust path as necessary -->
@@ -99,14 +99,15 @@ function eraseText() {
             <img
                 src="../assets/images/local-first-health-broken.png"
                 alt="Small Image"
-                class="inline-block mb-2 mt-20"
+                class="inline-block mt-20 mb-2"
                 style="height: 170px; width: auto"
             />
 
             <p class="max-w-2xl mx-auto mt-4 text-2xl text-justify">
-                As you know, our healthcare systems are broken. Despite the
-                advances in technology, our medical records remain vulnerable to
-                security concerns and privacy issues.
+                As you know, our healthcare systems are broken. Despite the advances in technology, our medical records remain vulnerable to security concerns and privacy issues.
+
+            
+                
             </p>
 
             <br />
@@ -219,7 +220,7 @@ function eraseText() {
             <img
                 src="../assets/images/local-first-health-letters.png"
                 alt="Small Image"
-                class="inline-block mb-2 mt-8"
+                class="inline-block mt-8 mb-2"
                 style="height: 190px; width: auto"
             />
             <p class="max-w-2xl mx-auto -mt-8 text-2xl text-justify">
@@ -315,7 +316,7 @@ function eraseText() {
             <img
                 src="../assets/images/local-first-health-mission.png"
                 alt="Small Image"
-                class="inline-block mb-2 mt-8"
+                class="inline-block mt-8 mb-2"
                 style="height: 300px; width: auto"
             />
 
@@ -328,12 +329,12 @@ function eraseText() {
         </div>
 
         <div
-            class="container flex flex-col items-center px-4 pb-8 mx-auto text-center lg:pb-8 md:py-10 md:px-10 lg:px-32 text-gray-900"
+            class="container flex flex-col items-center px-4 pb-8 mx-auto text-center text-gray-900 lg:pb-8 md:py-10 md:px-10 lg:px-32"
             id="products"
         >
             <!-- HEALTH SUITE -->
             <div
-                class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 w-full max-w-2xl mx-auto"
+                class="grid w-full max-w-2xl grid-cols-1 gap-4 mx-auto sm:grid-cols-2 lg:grid-cols-5"
             >
                 <div class="flex flex-col items-center">
                     <a
@@ -344,11 +345,11 @@ function eraseText() {
                         <img
                             src="~/assets/images/local-first-health-suite-easyjoey.png"
                             alt="Clinic Management System"
-                            class="w-full h-auto object-contain"
+                            class="object-contain w-full h-auto"
                         />
                     </a>
 
-                    <p class="mt-2 text-lg text-center w-full">
+                    <p class="w-full mt-2 text-lg text-center">
                         <b>
                             <a
                                 href="https://www.easyjoey.com"
@@ -359,7 +360,7 @@ function eraseText() {
                             </a>
                         </b>
                     </p>
-                    <p class="mt-0 text-sm text-center w-full">
+                    <p class="w-full mt-0 text-sm text-center">
                         For Solo Practice & Small Clinics
                     </p>
                 </div>
@@ -367,12 +368,12 @@ function eraseText() {
                     <img
                         src="~/assets/images/local-first-health-suite-parmago.png"
                         alt="Pharmacy Management System"
-                        class="w-full h-auto object-contain"
+                        class="object-contain w-full h-auto"
                     />
-                    <p class="mt-2 text-lg text-center w-full">
+                    <p class="w-full mt-2 text-lg text-center">
                         <b>ParmaGO</b>
                     </p>
-                    <p class="mt-0 text-sm text-center w-full">
+                    <p class="w-full mt-0 text-sm text-center">
                         For Pharmacies & Drustores
                     </p>
                 </div>
@@ -380,12 +381,12 @@ function eraseText() {
                     <img
                         src="~/assets/images/local-first-health-suite-dentalulu.png"
                         alt="Dental Management System"
-                        class="w-full h-auto object-contain"
+                        class="object-contain w-full h-auto"
                     />
-                    <p class="mt-2 text-lg text-center w-full">
+                    <p class="w-full mt-2 text-lg text-center">
                         <b>Dentalulu</b>
                     </p>
-                    <p class="mt-0 text-sm text-center w-full">
+                    <p class="w-full mt-0 text-sm text-center">
                         For Dentists & Dental Clinics
                     </p>
                 </div>
@@ -393,12 +394,12 @@ function eraseText() {
                     <img
                         src="~/assets/images/local-first-health-suite-diagnozip.png"
                         alt="Laboratory & Radiology Information Systems"
-                        class="w-full h-auto object-contain"
+                        class="object-contain w-full h-auto"
                     />
-                    <p class="mt-2 text-lg text-center w-full">
+                    <p class="w-full mt-2 text-lg text-center">
                         <b>Diagnozip</b>
                     </p>
-                    <p class="mt-0 text-sm text-center w-full">
+                    <p class="w-full mt-0 text-sm text-center">
                         For Laboratories & Imaging Centers
                     </p>
                 </div>
@@ -406,12 +407,12 @@ function eraseText() {
                     <img
                         src="~/assets/images/local-first-health-suite-ospitalis.png"
                         alt="Hospital Management System"
-                        class="w-full h-auto object-contain"
+                        class="object-contain w-full h-auto"
                     />
-                    <p class="mt-2 text-lg text-center w-full">
+                    <p class="w-full mt-2 text-lg text-center">
                         <b>Ospitalis</b>
                     </p>
-                    <p class="mt-0 text-sm text-center w-full">For Hospitals</p>
+                    <p class="w-full mt-0 text-sm text-center">For Hospitals</p>
                 </div>
             </div>
             <!-- END OF HEALTH SUITE -->
@@ -478,10 +479,7 @@ function eraseText() {
             />
             <br />
             <p class="max-w-2xl mx-auto -mt-5 text-2xl text-justify">
-                We also plan to open source the foundational core, empowering
-                developers to easily create local-first health apps that will
-                ultimately benefit everyone—because we are all part of the
-                healthcare ecosystem.
+                We also plan to open source the foundational core, empowering developers to easily create local-first health apps. More importantly, this approach allows for the development of localized features and functionalities tailored to specific cities or areas, rather than relying on a one-size-fits-all solution dictated by a few providers. Ultimately, this will benefit everyone—because we are all part of the healthcare ecosystem.
             </p>
             <br />
 
