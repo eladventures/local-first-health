@@ -2,8 +2,7 @@
 import { ref, onMounted } from "vue";
 import { useHead } from "#imports";
 import { definePageMeta } from "#imports";
-import hljs from "highlight.js";
-import "highlight.js/styles/atom-one-dark.css"; // Import the theme you want
+
 import ogBanner from "../assets/images/local-first-health-banner.png"; // Ensure this path is correct
 
 definePageMeta({
@@ -11,8 +10,9 @@ definePageMeta({
 });
 
 useHead({
-  title: "Local-First Health Org",
-  description: "The first and only 'Local-First' Healthcare Suite.",
+  title: "Local-First Health",
+  description:
+    "The first and only 'Local-First' Healthcare Suite—Reshaping healthcare with secure, private, offline, and data-owned solutions.",
   link: [{ rel: "icon", type: "image/png", href: "/favicon.png" }],
   meta: [
     {
@@ -23,61 +23,6 @@ useHead({
     },
   ],
 });
-
-const typeValue = ref("");
-const typeStatus = ref(false);
-const displayTextArray = ref([
-  "It's Affordable",
-  "It Works Offline",
-  "It's Secure",
-  "It's Private",
-  "It's Shareable",
-  "It's Record-Centric",
-  "It's Encrypted",
-]);
-const typingSpeed = ref(100);
-const erasingSpeed = ref(100);
-const newTextDelay = ref(2000);
-const displayTextArrayIndex = ref(0);
-const charIndex = ref(0);
-
-onMounted(() => {
-  setTimeout(typeText, newTextDelay.value + 200);
-  hljs.highlightAll(); // Apply syntax highlighting immediately after component mounts
-});
-
-const typeText = () => {
-  if (
-    charIndex.value < displayTextArray.value[displayTextArrayIndex.value].length
-  ) {
-    if (!typeStatus.value) typeStatus.value = true;
-    typeValue.value += displayTextArray.value[
-      displayTextArrayIndex.value
-    ].charAt(charIndex.value);
-    charIndex.value += 1;
-    setTimeout(typeText, typingSpeed.value);
-  } else {
-    typeStatus.value = false;
-    setTimeout(eraseText, newTextDelay.value);
-  }
-};
-
-function eraseText() {
-  if (charIndex.value > 0) {
-    if (!typeStatus.value) typeStatus.value = true;
-    typeValue.value = displayTextArray.value[
-      displayTextArrayIndex.value
-    ].substring(0, charIndex.value - 1);
-    charIndex.value -= 1;
-    setTimeout(eraseText, erasingSpeed.value);
-  } else {
-    typeStatus.value = false;
-    displayTextArrayIndex.value += 1;
-    if (displayTextArrayIndex.value >= displayTextArray.value.length)
-      displayTextArrayIndex.value = 0;
-    setTimeout(typeText, typingSpeed.value + 1000);
-  }
-}
 </script>
 
 <template>
@@ -223,6 +168,23 @@ function eraseText() {
           Thankfully, there's a powerful solution to these challenges: the
           "Local-First" software approach.</u
         >
+      </p>
+
+      <br /><br />
+      <!-- Local-First Diagram -->
+      <img
+        src="../assets/images/local-first-health-era-diagram.png"
+        alt="Small Image"
+        class="inline-block max-w-3xl mt-0 mb-2"
+        style="height: auto; width: auto"
+      />
+      <p class="max-w-2xl mx-auto mt-5 text-2xl text-justify">
+        Local-First is a software paradigm that ensures data stays on users’
+        devices, offering full control, privacy, and offline access. Unlike
+        cloud-based systems that rely on third-party servers, Local-First
+        combines the local storage of the pre-cloud era with modern sync
+        capabilities, enabling seamless collaboration without sacrificing data
+        ownership.
       </p>
 
       <br /><br />
@@ -593,6 +555,17 @@ function eraseText() {
   font-family: "Courier", monospace;
 }
 
+@font-face {
+  font-family: "Kalam";
+  src: url("../assets/fonts/Kalam-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.font-kalam {
+  font-family: "Kalam", sans-serif;
+}
+
 /* easyjoey logo container */
 .logo-container {
   display: flex;
@@ -610,102 +583,5 @@ function eraseText() {
   /* Maintain the aspect ratio */
   margin-right: 10px;
   /* Adjust the margin as needed */
-}
-
-/* font animation container */
-.custom-container {
-  /* width: 100%;
-  height: 100vh; */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.custom-heading {
-  font-size: 3rem;
-  font-weight: normal;
-}
-
-/* animation blinking */
-.custom-heading .typed-text {
-  color: #009999;
-}
-
-.blinking-cursor {
-  font-size: 2.5rem;
-  color: #2c3e50;
-  -webkit-animation: 1s blink step-end infinite;
-  -moz-animation: 1s blink step-end infinite;
-  -ms-animation: 1s blink step-end infinite;
-  -o-animation: 1s blink step-end infinite;
-  animation: 1s blink step-end infinite;
-}
-
-@keyframes blink {
-  from,
-  to {
-    color: transparent;
-  }
-
-  50% {
-    color: #2c3e50;
-  }
-}
-
-@-moz-keyframes blink {
-  from,
-  to {
-    color: transparent;
-  }
-
-  50% {
-    color: #2c3e50;
-  }
-}
-
-@-webkit-keyframes blink {
-  from,
-  to {
-    color: transparent;
-  }
-
-  50% {
-    color: #2c3e50;
-  }
-}
-
-@-ms-keyframes blink {
-  from,
-  to {
-    color: transparent;
-  }
-
-  50% {
-    color: #2c3e50;
-  }
-}
-
-@-o-keyframes blink {
-  from,
-  to {
-    color: transparent;
-  }
-
-  50% {
-    color: #2c3e50;
-  }
-}
-
-/* end of animation blinking */
-
-@font-face {
-  font-family: "Kalam";
-  src: url("../assets/fonts/Kalam-Regular.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
-
-.font-kalam {
-  font-family: "Kalam", sans-serif;
 }
 </style>
