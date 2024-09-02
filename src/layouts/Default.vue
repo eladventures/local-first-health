@@ -10,11 +10,11 @@
           aria-label="Back to homepage"
           class="flex items-center p-2"
         >
-          <img
+          <!-- <img
             src="../assets/images/local-first-health-logo-location.png"
             alt="Your Logo"
             class="object-contain w-auto mt-1 h-11 dark:text-default-400"
-          />
+          /> -->
         </a>
         <b>Local-First Health</b>
         <!-- <ul class="items-stretch hidden mt-1 ml-20 space-x-3 lg:flex">
