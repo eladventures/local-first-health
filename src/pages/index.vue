@@ -70,7 +70,11 @@ useHead({
           Why Local-First Health?
         </h3>
         <!-- 1ST ROW OF CARDS -->
-        <div class="flex flex-wrap justify-center max-w-5xl mx-auto mt-5">
+        <div
+          class="flex flex-wrap justify-center max-w-5xl mx-auto mt-5"
+          style="font-family: Arial, sans-serif"
+        >
+          <!-- <div class="flex flex-wrap justify-center max-w-5xl mx-auto mt-5"> -->
           <!-- ITEM 1-->
           <div class="w-full px-4 md:w-1/2 lg:w-1/3">
             <div class="max-w-xs p-5 mx-auto">
@@ -408,19 +412,22 @@ useHead({
     >
       <!-- HEALTH SUITE -->
       <div
-        class="grid w-full max-w-3xl grid-cols-1 gap-4 mx-auto sm:grid-cols-2 lg:grid-cols-5"
+        class="grid w-full max-w-5xl grid-cols-1 gap-4 mx-auto sm:grid-cols-2 lg:grid-cols-5"
       >
+        <!-- First Product -->
         <div class="flex flex-col items-center">
           <a
             href="https://www.easyjoey.com"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <img
-              src="~/assets/images/local-first-health-suite-easyjoey.png"
-              alt="Clinic Management System"
-              class="object-contain w-full h-auto"
-            />
+            <div class="w-full h-40">
+              <img
+                src="~/assets/images/logo-local-first-health-suite-easyjoey.png"
+                alt="Clinic Management System"
+                class="object-cover w-full h-full border border-gray-200"
+              />
+            </div>
           </a>
 
           <p class="w-full mt-2 text-lg text-center">
@@ -438,38 +445,48 @@ useHead({
             For Solo Practice & Small Clinics
           </p>
         </div>
+
+        <!-- Repeat for other products -->
         <div class="flex flex-col items-center">
-          <img
-            src="~/assets/images/local-first-health-suite-parmago.png"
-            alt="Pharmacy Management System"
-            class="object-contain w-full h-auto"
-          />
+          <div class="w-full h-40">
+            <img
+              src="~/assets/images/logo-local-first-health-suite-parmago.png"
+              alt="Pharmacy Management System"
+              class="object-cover w-full h-full border border-gray-200"
+            />
+          </div>
           <p class="w-full mt-2 text-lg text-center">
             <b>ParmaGO</b>
           </p>
           <p class="w-full mt-0 text-sm text-center">
-            For Pharmacies & Drustores
+            For Pharmacies & Drugstores
           </p>
         </div>
+
         <div class="flex flex-col items-center">
-          <img
-            src="~/assets/images/local-first-health-suite-dentalulu.png"
-            alt="Dental Management System"
-            class="object-contain w-full h-auto"
-          />
+          <div class="w-full h-40">
+            <img
+              src="~/assets/images/logo-local-first-health-suite-dentalemon.png"
+              alt="Dental Management System"
+              class="object-cover w-full h-full border border-gray-200"
+            />
+          </div>
           <p class="w-full mt-2 text-lg text-center">
-            <b>Dentalulu</b>
+            <b>Dentalemon</b>
           </p>
           <p class="w-full mt-0 text-sm text-center">
             For Dentists & Dental Clinics
           </p>
         </div>
+
         <div class="flex flex-col items-center">
-          <img
-            src="~/assets/images/local-first-health-suite-diagnozip.png"
-            alt="Laboratory & Radiology Information Systems"
-            class="object-contain w-full h-auto"
-          />
+          <div class="w-full h-40">
+            <img
+              src="~/assets/images/logo-local-first-health-suite-diagnozip.png"
+              alt="Laboratory & Radiology Information Systems"
+              class="object-cover w-full h-full border border-gray-200"
+            />
+          </div>
           <p class="w-full mt-2 text-lg text-center">
             <b>Diagnozip</b>
           </p>
@@ -477,18 +494,22 @@ useHead({
             For Laboratories & Imaging Centers
           </p>
         </div>
+
         <div class="flex flex-col items-center">
-          <img
-            src="~/assets/images/local-first-health-suite-ospitalis.png"
-            alt="Hospital Management System"
-            class="object-contain w-full h-auto"
-          />
+          <div class="w-full h-40">
+            <img
+              src="~/assets/images/logo-local-first-health-suite-ospitalis.png"
+              alt="Hospital Management System"
+              class="object-cover w-full h-full border border-gray-200"
+            />
+          </div>
           <p class="w-full mt-2 text-lg text-center">
             <b>Ospitalis</b>
           </p>
           <p class="w-full mt-0 text-sm text-center">For Hospitals</p>
         </div>
       </div>
+
       <!-- END OF HEALTH SUITE -->
 
       <p class="max-w-3xl mx-auto mt-10 text-2xl text-center">
@@ -541,12 +562,39 @@ useHead({
         ownership.
       </p>
       <!-- Local-First Diagram -->
-      <img
+      <!-- <img
         src="../assets/images/local-first-health-era-diagram.png"
         alt="Small Image"
         class="inline-block max-w-3xl mt-10 mb-2"
         style="height: auto; width: auto"
-      />
+      /> -->
+      <div
+        class="grid w-full max-w-4xl grid-cols-1 gap-4 mx-auto mt-10 sm:grid-cols-2 lg:grid-cols-3"
+      >
+        <div class="w-full h-auto">
+          <img
+            src="~/assets/images/diagram-local-first-pre-cloud.png"
+            alt="Image 1"
+            class="object-cover w-full h-full border border-gray-200"
+          />
+        </div>
+
+        <div class="w-full h-auto">
+          <img
+            src="~/assets/images/diagram-local-first-cloud-era.png"
+            alt="Image 2"
+            class="object-cover w-full h-full border border-gray-200"
+          />
+        </div>
+
+        <div class="w-full h-auto">
+          <img
+            src="~/assets/images/diagram-local-first-local-first-era.png"
+            alt="Image 3"
+            class="object-cover w-full h-full border border-gray-200"
+          />
+        </div>
+      </div>
 
       <br /><br />
 
@@ -626,16 +674,34 @@ useHead({
           >"MYCURE."</a
         >
         <br /><br />
-        Over the past 8+ years, we've encountered the challenges in this sector
+        Over the past 8+ years, I've encountered the challenges in this sector
         firsthand. Before relocating to San Francisco, I traveled extensively
         across the Philippines, Indonesia, Ethiopia, Kenya, South Africa, India,
         Sri Lanka, and other countries to observe the difficulties faced by
         doctors and small clinics, particularly in developing regions. Many
-        still rely on paper-based or outdated systems.
+        still rely on paper-based or outdated systems, highlighting a stark
+        reality: health equity remains a significant global issue.
+        <br /><br />
+        Health equity, a top priority for organizations like the World Health
+        Organization (WHO), is about ensuring fair and just access to healthcare
+        for all individuals, regardless of socio-economic status, ethnicity,
+        gender, or geographic location. A critical aspect of this is the ability
+        to access and manage medical records. Yet, in many low- and
+        middle-income countries and marginalized communities, disparities in
+        health outcomes persist due to limited or outdated systems that hinder
+        access to vital health information.
+
         <br /><br />
         We believe that 'Local-First Health' is the solution to these persistent
-        issues. It’s time to finally solve the holy grail of healthcare data.
+        issues. By putting data ownership and management back into the hands of
+        healthcare providers and patients, LFH aims to bridge the gap in
+        healthcare accessibility, empowering underserved communities with
+        secure, offline-capable solutions.
 
+        <br /><br />
+        It’s time to finally solve the holy grail of healthcare data and
+        contribute to a world where health equity is more than just an
+        aspiration—it’s a reality.
         <br /><br />
         The future is now—and it’s local.
         <br /><br />
