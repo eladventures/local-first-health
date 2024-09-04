@@ -10,79 +10,56 @@
           aria-label="Back to homepage"
           class="flex items-center p-2"
         >
-          <!-- <img
+          <img
             src="../assets/images/local-first-health-logo-location.png"
             alt="Your Logo"
             class="object-contain w-auto mt-1 h-11 dark:text-default-400"
-          /> -->
+          />
         </a>
-        <b>Local-First Health</b>
-        <!-- <ul class="items-stretch hidden mt-1 ml-20 space-x-3 lg:flex">
-          <li class="flex">
+        <!-- <b>Local-First Health</b> -->
+
+        <ul class="items-stretch hidden mt-2 ml-20 space-x-3 lg:flex">
+          <!-- <li class="flex">
             <a
               rel="noopener noreferrer"
               href="#true-privacy"
               class="flex items-center px-4 -mb-1 text-lg font-bold dark:border-transparent"
               >Local-First Health</a
             >
+          </li> -->
+          <li class="flex">
+            <a
+              rel="noopener noreferrer"
+              href="#why-local-first-health"
+              class="flex items-center px-4 -mb-1 dark:border-transparent dark:text-default-400 dark:border-default-400"
+              >Why Local-First Health</a
+            >
           </li>
           <li class="flex">
-                        <a
-                            rel="noopener noreferrer"
-                            href="#challenges"
-                            class="flex items-center px-4 -mb-1 dark:border-transparent dark:text-default-400 dark:border-default-400"
-                            >Current Challenges</a
-                        >
-                    </li>
-                    <li class="flex">
-                        <a
-                            rel="noopener noreferrer"
-                            href="#actions"
-                            class="flex items-center px-4 -mb-1 dark:border-transparent dark:text-default-400 dark:border-default-400"
-                            >Actions</a
-                        >
-                    </li>
-                    <li class="flex">
-                        <a
-                            rel="noopener noreferrer"
-                            href="#local-first"
-                            class="flex items-center px-4 -mb-1 dark:border-transparent"
-                            >What is Local-First</a
-                        >
-                    </li>
-                    <li class="flex">
-                        <a
-                            rel="noopener noreferrer"
-                            href="#papaya-sdk"
-                            class="flex items-center px-4 -mb-1 dark:border-transparent"
-                            >Papaya SDK</a
-                        >
-                    </li>
-                    <li class="flex">
-                        <a
-                            rel="noopener noreferrer"
-                            href="#health-suite"
-                            class="flex items-center px-4 -mb-1 dark:border-transparent"
-                            >Health Suite</a
-                        >
-                    </li>
-                    <li class="flex">
-                        <a
-                            rel="noopener noreferrer"
-                            href="#mission"
-                            class="flex items-center px-4 -mb-1 dark:border-transparent"
-                            >Mission</a
-                        >
-                    </li>
-                    <li class="flex">
-                        <a
-                            rel="noopener noreferrer"
-                            href="#our-story"
-                            class="flex items-center px-4 -mb-1 dark:border-transparent"
-                            >Our Story</a
-                        >
-                    </li>
-        </ul> -->
+            <a
+              rel="noopener noreferrer"
+              href="#local-first-health-apps"
+              class="flex items-center px-4 -mb-1 dark:border-transparent dark:text-default-400 dark:border-default-400"
+              >LF Health Apps</a
+            >
+          </li>
+          <li class="flex">
+            <a
+              rel="noopener noreferrer"
+              href="#local-first"
+              class="flex items-center px-4 -mb-1 dark:border-transparent"
+              >What is Local-First</a
+            >
+          </li>
+          <li class="flex">
+            <a
+              rel="noopener noreferrer"
+              href="#mission"
+              class="flex items-center px-4 -mb-1 dark:border-transparent"
+              >Mission</a
+            >
+          </li>
+        </ul>
       </div>
       <div class="items-center flex-shrink-0 hidden lg:flex">
         <a

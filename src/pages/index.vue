@@ -37,7 +37,7 @@ useHead({
         src="../assets/images/local-first-health-logo-location.png"
         alt="Small Image"
         class="inline-block mt-0 mb-2"
-        style="height: 170px; width: auto"
+        style="height: 150px; width: auto"
       />
 
       <b class="text-3xl" style="font-family: Arial, sans-serif"
@@ -49,15 +49,15 @@ useHead({
       </p>
 
       <p class="max-w-4xl mx-auto mt-10 text-2xl text-center">
-        Our healthcare systems are broken. <br />Despite technological advances,
-        medical records remain vulnerable and out of users' control, stored in
-        third-party clouds and exposed to potential breaches. <br /><br />Local
-        First Health changes that. It puts data ownership and management back
-        where they belong—in the hands of healthcare providers and patients.
-        With secure, offline-capable solutions, LFH eliminates dependency on
-        system providers and unreliable internet. Say goodbye to fragmented
-        systems and embrace seamless, efficient, and private health records
-        management.
+        Our healthcare systems are broken. <br /><br />Despite technological
+        advances, medical records remain vulnerable and out of users' control,
+        stored in third-party clouds and exposed to potential breaches.
+        <br /><br />Local First Health changes that. It puts data ownership and
+        management back where they belong—in the hands of healthcare providers
+        and patients. With secure, offline-capable solutions, LFH eliminates
+        dependency on system providers and unreliable internet. Say goodbye to
+        fragmented systems and embrace seamless, efficient, and private health
+        records management.
       </p>
 
       <!-- END OF MAIN PANEL -->
@@ -65,7 +65,7 @@ useHead({
       <br />
       <!-- START OF WHY LOFCAL FIRST HEALTH-->
       <!-- FIRST -->
-      <div class="pt-1 pb-5 text-xs text-zinc-800">
+      <div id="why-local-first-health" class="pt-1 pb-5 text-xs text-zinc-800">
         <h3
           class="px-3 mt-10 mb-3 text-3xl font-bold underline fonttext-center text-sky-600"
         >
@@ -391,6 +391,7 @@ useHead({
 
       <!-- START OF WHAT ARE LFH APPS? -->
       <h3
+        id="local-first-health-apps"
         class="px-3 mt-20 mb-3 text-3xl font-bold text-center underline text-sky-600"
       >
         What are the Local-First Health Apps?
@@ -426,7 +427,7 @@ useHead({
             target="_blank"
             rel="noopener noreferrer"
           >
-            <div class="w-full h-40">
+            <div class="w-full h-auto">
               <img
                 src="~/assets/images/logo-local-first-health-suite-easyjoey.png"
                 alt="Clinic Management System"
@@ -453,7 +454,7 @@ useHead({
 
         <!-- Repeat for other products -->
         <div class="flex flex-col items-center">
-          <div class="w-full h-40">
+          <div class="w-full h-auto">
             <img
               src="~/assets/images/logo-local-first-health-suite-parmago.png"
               alt="Pharmacy Management System"
@@ -469,7 +470,7 @@ useHead({
         </div>
 
         <div class="flex flex-col items-center">
-          <div class="w-full h-40">
+          <div class="w-full h-auto">
             <img
               src="~/assets/images/logo-local-first-health-suite-dentalemon.png"
               alt="Dental Management System"
@@ -485,7 +486,7 @@ useHead({
         </div>
 
         <div class="flex flex-col items-center">
-          <div class="w-full h-40">
+          <div class="w-full h-auto">
             <img
               src="~/assets/images/logo-local-first-health-suite-diagnozip.png"
               alt="Laboratory & Radiology Information Systems"
@@ -501,7 +502,7 @@ useHead({
         </div>
 
         <div class="flex flex-col items-center">
-          <div class="w-full h-40">
+          <div class="w-full h-auto">
             <img
               src="~/assets/images/logo-local-first-health-suite-ospitalis.png"
               alt="Hospital Management System"
@@ -555,6 +556,7 @@ useHead({
       <!-- WHAT IS LOCAL-FIRST? -->
 
       <h3
+        id="local-first"
         class="px-3 mt-20 mb-3 text-3xl font-bold text-center underline text-sky-600"
       >
         What is Local-First?
@@ -658,6 +660,7 @@ useHead({
       <br /> -->
 
       <h3
+        id="mission"
         class="px-3 mt-20 mb-3 text-3xl font-bold text-center underline text-sky-600"
       >
         Our Mission
@@ -665,7 +668,7 @@ useHead({
 
       <img
         src="../assets/images/local-first-health-team.png"
-        alt="Small Image"
+        alt="local first health team image"
         class="inline-block mt-10"
         style="height: 300px; width: auto"
       />
@@ -682,13 +685,14 @@ useHead({
           target="_blank"
           >"MYCURE."</a
         >
+        Over the past 8+ years, we've encountered the challenges in this sector
+        and experienced firsthand the limitations of a cloud-based setup.
         <br /><br />
-        Over the past 8+ years, I've encountered the challenges in this sector
-        firsthand. Before relocating to San Francisco, I traveled extensively
-        across the Philippines, Indonesia, Ethiopia, Kenya, South Africa, India,
-        Sri Lanka, and other countries to observe the difficulties faced by
-        doctors and small clinics, particularly in developing regions. Many
-        still rely on paper-based or outdated systems, highlighting a stark
+        Before relocating to San Francisco, I traveled extensively across the
+        Philippines, Indonesia, Ethiopia, Kenya, South Africa, India, Sri Lanka,
+        and other countries to observe the difficulties faced by doctors, small
+        clinics, and communtiy drugstores, particularly in developing regions.
+        Many still rely on paper-based or outdated systems, highlighting a stark
         reality: health equity remains a significant global issue.
         <br /><br />
         Health equity, a top priority for organizations like the World Health
