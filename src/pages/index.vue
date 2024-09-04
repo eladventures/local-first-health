@@ -48,7 +48,7 @@ useHead({
         a new era of health records management
       </p>
 
-      <p class="max-w-4xl mx-auto mt-10 text-2xl text-center">
+      <p class="max-w-3xl mx-auto mt-10 text-2xl text-center">
         Our healthcare systems are broken. <br /><br />Despite technological
         advances, medical records remain vulnerable and out of users' control,
         stored in third-party clouds and exposed to potential breaches.
