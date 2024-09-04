@@ -66,7 +66,9 @@ useHead({
       <!-- START OF WHY LOFCAL FIRST HEALTH-->
       <!-- FIRST -->
       <div class="pt-1 pb-5 text-xs text-zinc-800">
-        <h3 class="px-3 mt-10 mb-3 text-3xl font-bold text-center text-sky-700">
+        <h3
+          class="px-3 mt-10 mb-3 text-3xl font-bold underline fonttext-center text-sky-600"
+        >
           Why Local-First Health?
         </h3>
         <!-- 1ST ROW OF CARDS -->
@@ -74,6 +76,7 @@ useHead({
           class="flex flex-wrap justify-center max-w-5xl mx-auto mt-5"
           style="font-family: Arial, sans-serif"
         >
+          <!-- remvoe comment mode to bring back to default -->
           <!-- <div class="flex flex-wrap justify-center max-w-5xl mx-auto mt-5"> -->
           <!-- ITEM 1-->
           <div class="w-full px-4 md:w-1/2 lg:w-1/3">
@@ -387,7 +390,9 @@ useHead({
       <!-- END OF WHY LFH -->
 
       <!-- START OF WHAT ARE LFH APPS? -->
-      <h3 class="px-3 mt-20 mb-3 text-3xl font-bold text-center text-sky-700">
+      <h3
+        class="px-3 mt-20 mb-3 text-3xl font-bold text-center underline text-sky-600"
+      >
         What are the Local-First Health Apps?
       </h3>
 
@@ -549,7 +554,9 @@ useHead({
 
       <!-- WHAT IS LOCAL-FIRST? -->
 
-      <h3 class="px-3 mt-20 mb-3 text-3xl font-bold text-center text-sky-700">
+      <h3
+        class="px-3 mt-20 mb-3 text-3xl font-bold text-center underline text-sky-600"
+      >
         What is Local-First?
       </h3>
 
@@ -650,8 +657,10 @@ useHead({
       </p>
       <br /> -->
 
-      <h3 class="px-3 mt-20 mb-3 text-3xl font-bold text-center text-sky-700">
-        Our Story
+      <h3
+        class="px-3 mt-20 mb-3 text-3xl font-bold text-center underline text-sky-600"
+      >
+        Our Mission
       </h3>
 
       <img
