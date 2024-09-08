@@ -418,7 +418,7 @@ useHead({
     >
       <!-- HEALTH SUITE -->
       <div
-        class="grid w-full max-w-5xl grid-cols-1 gap-4 mx-auto sm:grid-cols-2 lg:grid-cols-5"
+        class="grid w-full max-w-4xl grid-cols-1 gap-4 mx-auto sm:grid-cols-2 lg:grid-cols-5"
       >
         <!-- First Product -->
         <div class="flex flex-col items-center">
@@ -431,7 +431,7 @@ useHead({
               <img
                 src="~/assets/images/logo-local-first-health-suite-easyjoey.png"
                 alt="Clinic Management System"
-                class="object-cover w-full h-full border border-gray-200"
+                class="object-cover w-full h-full"
               />
             </div>
           </a>
@@ -458,7 +458,7 @@ useHead({
             <img
               src="~/assets/images/logo-local-first-health-suite-parmago.png"
               alt="Pharmacy Management System"
-              class="object-cover w-full h-full border border-gray-200"
+              class="object-cover w-full h-full"
             />
           </div>
           <p class="w-full mt-2 text-lg text-center">
@@ -474,7 +474,7 @@ useHead({
             <img
               src="~/assets/images/logo-local-first-health-suite-dentalemon.png"
               alt="Dental Management System"
-              class="object-cover w-full h-full border border-gray-200"
+              class="object-cover w-full h-full"
             />
           </div>
           <p class="w-full mt-2 text-lg text-center">
@@ -490,7 +490,7 @@ useHead({
             <img
               src="~/assets/images/logo-local-first-health-suite-diagnozip.png"
               alt="Laboratory & Radiology Information Systems"
-              class="object-cover w-full h-full border border-gray-200"
+              class="object-cover w-full h-full"
             />
           </div>
           <p class="w-full mt-2 text-lg text-center">
@@ -506,7 +506,7 @@ useHead({
             <img
               src="~/assets/images/logo-local-first-health-suite-ospitalis.png"
               alt="Hospital Management System"
-              class="object-cover w-full h-full border border-gray-200"
+              class="object-cover w-full h-full"
             />
           </div>
           <p class="w-full mt-2 text-lg text-center">
