@@ -40,24 +40,33 @@ useHead({
         style="height: 150px; width: auto"
       />
 
-      <b class="text-3xl" style="font-family: Arial, sans-serif"
-        >Local-First Health</b
+      <b
+        class="text-4xl text-neutral-600"
+        style="font-family: Arial, sans-serif"
+        >Local First Health</b
       >
 
-      <p class="max-w-2xl mx-auto mt-0 text-xl text-justify">
+      <p
+        class="max-w-2xl mx-auto mt-0 mb-5 text-xl text-justify text-neutral-500"
+        style="font-family: Arial, sans-serif"
+      >
         a new era of health records management
       </p>
 
-      <p class="max-w-3xl mx-auto mt-10 text-2xl text-center">
-        Our healthcare systems are broken. <br /><br />Despite technological
-        advances, medical records remain vulnerable and out of users' control,
-        stored in third-party clouds and exposed to potential breaches.
-        <br /><br />Local First Health changes that. It puts data ownership and
-        management back where they belong—in the hands of healthcare providers
-        and patients. With secure, offline-capable solutions, LFH eliminates
-        dependency on system providers and unreliable internet. Say goodbye to
-        fragmented systems and embrace seamless, efficient, and private health
-        records management.
+      <p class="max-w-2xl mx-auto mt-10 text-2xl text-center text-neutral-600">
+        Our healthcare systems are broken.
+      </p>
+      <p class="max-w-2xl mx-auto text-2xl text-justify text-neutral-600">
+        <br />
+        Despite technological advances, medical records remain vulnerable and
+        out of users' control, stored in third-party clouds and exposed to
+        breaches.
+        <br /><br />
+        Local-First Health puts data ownership and management back where they
+        belong—in the hands of healthcare providers and patients. With secure,
+        offline-capable solutions, LFH removes dependence on system providers
+        and unreliable internet, offering seamless, efficient, and private
+        health records management.
       </p>
 
       <!-- END OF MAIN PANEL -->
@@ -65,10 +74,12 @@ useHead({
       <br />
       <!-- START OF WHY LOFCAL FIRST HEALTH-->
       <!-- FIRST -->
-      <div id="why-local-first-health" class="pt-1 pb-5 text-xs text-zinc-800">
-        <h3
-          class="px-3 mt-10 mb-3 text-3xl font-bold underline fonttext-center text-sky-600"
-        >
+      <div
+        id="why-local-first-health"
+        class="pt-1 pb-5 text-xs text-neutral-600"
+        style="font-family: Arial, sans-serif"
+      >
+        <h3 class="px-3 mt-10 mb-3 text-2xl font-bold text-center">
           Why Local-First Health?
         </h3>
         <!-- 1ST ROW OF CARDS -->
@@ -392,10 +403,18 @@ useHead({
       <!-- START OF WHAT ARE LFH APPS? -->
       <h3
         id="local-first-health-apps"
+        class="px-3 mt-20 mb-3 text-2xl font-bold text-center text-neutral-600"
+        style="font-family: Arial, sans-serif"
+      >
+        The Local-First Health Suite
+      </h3>
+
+      <!-- <h3
+        id="local-first-health-apps"
         class="px-3 mt-20 mb-3 text-3xl font-bold text-center underline text-sky-600"
       >
         What are the Local-First Health Apps?
-      </h3>
+      </h3> -->
 
       <!-- <img
         src="../assets/images/local-first-health-mission.png"
@@ -404,7 +423,7 @@ useHead({
         style="height: 300px; width: auto"
       /> -->
 
-      <p class="max-w-3xl mx-auto mt-4 text-2xl text-center">
+      <p class="max-w-3xl mx-auto mt-4 text-2xl text-justify text-neutral-600">
         Local-First Health is an initiative focused on building the world’s
         first and only local-first health apps—a powerful suite of products
         designed to empower the millions of healthcare providers and facilities
@@ -418,7 +437,7 @@ useHead({
     >
       <!-- HEALTH SUITE -->
       <div
-        class="grid w-full max-w-4xl grid-cols-1 gap-4 mx-auto sm:grid-cols-2 lg:grid-cols-5"
+        class="grid w-full max-w-3xl grid-cols-1 gap-4 mx-auto sm:grid-cols-2 lg:grid-cols-5"
       >
         <!-- First Product -->
         <div class="flex flex-col items-center">
@@ -518,7 +537,7 @@ useHead({
 
       <!-- END OF HEALTH SUITE -->
 
-      <p class="max-w-3xl mx-auto mt-10 text-2xl text-center">
+      <p class="max-w-3xl mx-auto mt-10 text-2xl text-justify text-neutral-600">
         Unlike traditional systems, which can lock you out of your data,
         local-first health apps ensure your information is always accessible,
         regardless of internet connectivity. It also offers seamless
@@ -539,7 +558,7 @@ useHead({
         Your browser does not support the video tag.
       </video>
 
-      <p class="max-w-3xl mx-auto mt-10 text-2xl text-center">
+      <p class="max-w-3xl mx-auto mt-10 text-2xl text-justify text-neutral-600">
         Although LFH only recently begun this initiative, the core technologies
         needed to build our health apps are already in place (see 'our story'
         below), allowing the team to accelerate the development process.
@@ -557,12 +576,13 @@ useHead({
 
       <h3
         id="local-first"
-        class="px-3 mt-20 mb-3 text-3xl font-bold text-center underline text-sky-600"
+        class="px-3 mt-20 mb-3 text-2xl font-bold text-justify text-neutral-600"
+        style="font-family: Arial, sans-serif"
       >
         What is Local-First?
       </h3>
 
-      <p class="max-w-3xl mx-auto mt-5 text-2xl text-center">
+      <p class="max-w-3xl mx-auto mt-5 text-2xl text-justify text-neutral-600">
         Local-First is a software paradigm that ensures data stays on users’
         devices, offering full control, privacy, and offline access. Unlike
         cloud-based systems that rely on third-party servers, Local-First
@@ -578,7 +598,7 @@ useHead({
         style="height: auto; width: auto"
       /> -->
       <div
-        class="grid w-full max-w-4xl grid-cols-1 gap-4 mx-auto mt-10 sm:grid-cols-2 lg:grid-cols-3"
+        class="grid w-full max-w-3xl grid-cols-1 gap-4 mx-auto mt-10 sm:grid-cols-2 lg:grid-cols-3"
       >
         <div class="w-full h-auto">
           <img
@@ -614,7 +634,7 @@ useHead({
         style="height: auto; width: 600px"
       />
 
-      <p class="max-w-2xl mx-auto mt-4 text-2xl text-center">
+      <p class="max-w-xl mx-auto mt-4 text-2xl text-justify text-neutral-600">
         The concept was introduced in a 2019 whitepaper by Ink & Switch titled
         <a
           href="https://www.inkandswitch.com/local-first/"
@@ -634,7 +654,7 @@ useHead({
         style="height: auto; width: 600px"
       />
 
-      <p class="max-w-2xl mx-auto mt-4 text-2xl text-center">
+      <p class="max-w-2xl mx-auto mt-4 text-2xl text-justify text-neutral-600">
         Even Wired Magazine featured an
 
         <a
@@ -661,7 +681,8 @@ useHead({
 
       <h3
         id="mission"
-        class="px-3 mt-20 mb-3 text-3xl font-bold text-center underline text-sky-600"
+        class="px-3 mt-20 mb-3 text-3xl font-bold text-center text-neutral-600"
+        style="font-family: Arial, sans-serif"
       >
         Our Mission
       </h3>
@@ -669,11 +690,11 @@ useHead({
       <img
         src="../assets/images/local-first-health-team.png"
         alt="local first health team image"
-        class="inline-block mt-10"
+        class="inline-block mt-0"
         style="height: 300px; width: auto"
       />
 
-      <p class="max-w-2xl mx-auto mt-4 text-2xl text-justify">
+      <p class="max-w-2xl mx-auto mt-4 text-2xl text-justify text-neutral-600">
         Our team has been developing health record systems since 2016. Even
         before the local-first concept was introduced in 2019, we were building
         offline functionality with our own ‘Syncbase’ technology, integrated
@@ -764,7 +785,7 @@ useHead({
 
       <br />
       <br />
-      <p class="max-w-2xl mx-auto mt-4 text-2xl text-justify">
+      <p class="max-w-2xl mx-auto mt-4 text-2xl text-justify text-neutral-600">
         PS - I participated in the first Local-First Conference, recently held
         in Berlin, Germany (May 2024). This movement is indeed growing. Re-live
         the energy of the conference in a
