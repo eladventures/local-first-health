@@ -13,57 +13,52 @@
           <img
             src="../assets/images/local-first-health-logo-location.png"
             alt="Your Logo"
-            class="object-contain w-auto mt-1 h-11 dark:text-default-400"
+            class="object-contain w-auto h-10 mt-2 dark:text-default-400"
           />
+          <p class="mt-3 text-teal-500">
+            <b>Local First Health</b>
+          </p>
         </a>
-        <!-- <b>Local-First Health</b> -->
 
         <ul class="items-stretch hidden mt-2 ml-20 space-x-3 lg:flex">
-          <!-- <li class="flex">
+          <li class="flex">
             <a
               rel="noopener noreferrer"
               href="#true-privacy"
-              class="flex items-center px-4 -mb-1 text-lg font-bold dark:border-transparent"
-              >Local-First Health</a
-            >
-          </li> -->
-          <li class="flex">
-            <a
-              rel="noopener noreferrer"
-              href="#why-local-first-health"
-              class="flex items-center px-4 -mb-1 dark:border-transparent dark:text-default-400 dark:border-default-400"
-              >Why Local-First Health</a
-            >
-          </li>
-          <li class="flex">
-            <a
-              rel="noopener noreferrer"
-              href="#local-first-health-apps"
-              class="flex items-center px-4 -mb-1 dark:border-transparent dark:text-default-400 dark:border-default-400"
-              >LF Health Apps</a
-            >
-          </li>
-          <li class="flex">
-            <a
-              rel="noopener noreferrer"
-              href="#local-first"
               class="flex items-center px-4 -mb-1 dark:border-transparent"
+              >True Privacy</a
+            >
+          </li>
+          <li class="flex">
+            <a
+              rel="noopener noreferrer"
+              href="#whylfh"
+              class="flex items-center px-4 -mb-1 dark:border-transparent dark:text-default-400 dark:border-default-400"
+              >Why Local First Health</a
+            >
+          </li>
+          <li class="flex">
+            <a
+              rel="noopener noreferrer"
+              href="#local_first"
+              class="flex items-center px-4 -mb-1 dark:border-transparent dark:text-default-400 dark:border-default-400"
               >What is Local-First</a
             >
           </li>
+
           <li class="flex">
             <a
               rel="noopener noreferrer"
-              href="#mission"
-              class="flex items-center px-4 -mb-1 dark:border-transparent"
-              >Mission</a
+              href="#our-story"
+              class="flex items-center px-4 -mb-1 dark:border-transparent dark:text-default-400 dark:border-default-400"
+              >Our Story</a
             >
           </li>
         </ul>
       </div>
       <div class="items-center flex-shrink-0 hidden lg:flex">
         <a
-          href="/easyjoey-paper.pdf"
+          href="/local-first-paper.pdf"
           target="_blank"
           rel="noopener noreferrer"
           class="inline-block px-4 py-2 mt-5 text-sm font-semibold text-gray-800 bg-transparent border border-gray-800 rounded"

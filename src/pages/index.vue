@@ -1,9 +1,9 @@
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref } from "vue";
 import { useHead } from "#imports";
 import { definePageMeta } from "#imports";
-
-import ogBanner from "../assets/images/local-first-health-banner.png"; // Ensure this path is correct
+// import GenericPanel from "~/components/commons/GenericPanel";
+import ogBanner from "../assets/images/local-first-health-banner.png";
 
 definePageMeta({
   layout: "default",
@@ -11,8 +11,7 @@ definePageMeta({
 
 useHead({
   title: "Local-First Health",
-  description:
-    "The first and only 'Local-First' Healthcare Suite—Reshaping healthcare with secure, private, offline, and data-owned solutions.",
+  description: "Local-First Health is the first and only local-first health .",
   link: [{ rel: "icon", type: "image/png", href: "/favicon.png" }],
   meta: [
     {
@@ -23,65 +22,302 @@ useHead({
     },
   ],
 });
+
+const typeValue = ref("");
+const typeStatus = ref(false);
+const displayTextArray = ref([
+  "Works Offline",
+  "Own Your Data",
+  "Instant Response",
+  "Collaborative",
+  "Private and Secure",
+  "Future-Proof",
+]);
+const typingSpeed = ref(100);
+const erasingSpeed = ref(100);
+const newTextDelay = ref(2000);
+const displayTextArrayIndex = ref(0);
+const charIndex = ref(0);
+
+onMounted(() => {
+  setTimeout(typeText, newTextDelay.value + 200);
+});
+
+const typeText = () => {
+  if (
+    charIndex.value < displayTextArray.value[displayTextArrayIndex.value].length
+  ) {
+    if (!typeStatus.value) typeStatus.value = true;
+    typeValue.value += displayTextArray.value[
+      displayTextArrayIndex.value
+    ].charAt(charIndex.value);
+    charIndex.value += 1;
+    setTimeout(typeText, typingSpeed.value);
+  } else {
+    typeStatus.value = false;
+    setTimeout(eraseText, newTextDelay.value);
+  }
+};
+
+function eraseText() {
+  if (charIndex.value > 0) {
+    if (!typeStatus.value) typeStatus.value = true;
+    typeValue.value = displayTextArray.value[
+      displayTextArrayIndex.value
+    ].substring(0, charIndex.value - 1);
+    charIndex.value -= 1;
+    setTimeout(eraseText, erasingSpeed.value);
+  } else {
+    typeStatus.value = false;
+    displayTextArrayIndex.value += 1;
+    if (displayTextArrayIndex.value >= displayTextArray.value.length)
+      displayTextArrayIndex.value = 0;
+    setTimeout(typeText, typingSpeed.value + 1000);
+  }
+}
+
+// export default {
+//   components: {
+//     GenericPanel,
+//   },
+//   setup () {
+
+//     return {};
+//   },
+//   data: () => {
+//     return {
+//       typeValue: "",
+//       typeStatus: false,
+//       displayTextArray: [
+//         "It's Affordable",
+//         "It Works Offline",
+//         "It's Secure",
+//         "It's Private",
+//         "It's Shareable",
+//         "It's Record-Centric",
+//         "It's Encrypted",
+//       ],
+//       typingSpeed: 100,
+//       erasingSpeed: 100,
+//       newTextDelay: 2000,
+//       displayTextArrayIndex: 0,
+//       charIndex: 0,
+//     };
+//   },
+//   props: {},
+//   created() {
+//     setTimeout(this.typeText, this.newTextDelay + 200);
+//   },
+//   methods: {
+//     typeText() {
+//       if (
+//         this.charIndex <
+//         this.displayTextArray[this.displayTextArrayIndex].length
+//       ) {
+//         if (!this.typeStatus) this.typeStatus = true;
+//         this.typeValue += this.displayTextArray[
+//           this.displayTextArrayIndex
+//         ].charAt(this.charIndex);
+//         this.charIndex += 1;
+//         setTimeout(this.typeText, this.typingSpeed);
+//       } else {
+//         this.typeStatus = false;
+//         setTimeout(this.eraseText, this.newTextDelay);
+//       }
+//     },
+//     eraseText() {
+//       if (this.charIndex > 0) {
+//         if (!this.typeStatus) this.typeStatus = true;
+//         this.typeValue = this.displayTextArray[
+//           this.displayTextArrayIndex
+//         ].substring(0, this.charIndex - 1);
+//         this.charIndex -= 1;
+//         setTimeout(this.eraseText, this.erasingSpeed);
+//       } else {
+//         this.typeStatus = false;
+//         this.displayTextArrayIndex += 1;
+//         if (this.displayTextArrayIndex >= this.displayTextArray.length)
+//           this.displayTextArrayIndex = 0;
+//         setTimeout(this.typeText, this.typingSpeed + 1000);
+//       }
+//     },
+//   },
+// };
 </script>
 
 <template>
-  <section class="bg-white font-kalam">
+  <!-- HERO PANEL -->
+  <!-- Animation souce  https://dev.to/gayathri_r/how-to-add-a-typewriter-animation-in-vuejs-43kj -->
+
+  <!-- <section class="bg-gray-100"> -->
+  <section class="bg-white">
+    <div>
+      <div
+        class="container flex flex-col items-center px-4 pt-16 pb-8 mx-auto text-center text-gray-900 lg:pb-8 md:py-32 md:px-10 lg:px-32"
+      >
+        <p class="text-xl sm:mb-12 xl:max-w-3xl font-inter">
+          The First & Only 'Local-First' Health Management Suite
+        </p>
+        <h1
+          class="-mt-10 text-6xl font-bold leadi sm:text-6xl xl:max-w-3xl font-inter"
+        >
+          A new era of health records management.
+        </h1>
+        <div class="custom-container">
+          <h1 class="items-center custom-heading font-inter">
+            <span class="typed-text">{{ typeValue }}</span>
+            <span class="blinking-cursor">|</span>
+            <span class="cursor" :class="{ typing: typeStatus }">&nbsp;</span>
+          </h1>
+        </div>
+        <p class="mb-0 text-2xl sm:mb-8 xl:max-w-2xl font-inter">
+          Own, manage, and protect your health records with ease right on your
+          own computer—no subscription required.<Input:t></Input:t>
+        </p>
+        <div class="flex flex-wrap justify-center">
+          <button
+            type="button"
+            class="px-8 py-3 m-2 text-lg border border-gray-800 rounded"
+          >
+            <a
+              href="#local_first_panel"
+              style="text-decoration: none; color: inherit"
+            >
+              What is Local-First?
+            </a>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- HEALTH SUITE STARTS HERE -->
+    <div class="container mx-auto lg:max-w-6xl" id="mission">
+      <!-- <div class="text-left">
+        <p
+          class="max-w-4xl px-5 mx-auto mt-10 text-3xl font-bold tracki sm:text-3xl font-inter"
+        >
+          The Mission
+        </p>
+      </div> -->
+
+      <div
+        class="container flex flex-col justify-center max-w-6xl mt-4 mb-10 md:flex-row"
+      >
+        <!-- <div class="flex flex-col justify-center mt-4 md:flex-row"> -->
+        <div class="w-full mx-2 text-left md:w-1/5">
+          <img
+            src="~/assets/images/local-first-health-suite-easy-joey.png"
+            alt="Your Image Description"
+            class="w-full rounded-xl"
+            data-aos="zoom-in"
+          />
+        </div>
+        <div class="w-full mx-2 text-left md:w-1/5">
+          <img
+            src="~/assets/images/local-first-health-suite-dentalemon.png"
+            alt="Your Image Description"
+            class="w-full rounded-xl"
+            data-aos="zoom-in"
+          />
+        </div>
+        <div class="w-full mx-2 text-left md:w-1/5">
+          <img
+            src="~/assets/images/local-first-health-suite-parmago.png"
+            alt="Your Image Description"
+            class="w-full rounded-xl"
+            data-aos="zoom-in"
+          />
+        </div>
+        <div class="w-full mx-2 text-left md:w-1/5">
+          <img
+            src="~/assets/images/local-first-health-suite-diagnozip.png"
+            alt="Your Image Description"
+            class="w-full rounded-xl"
+            data-aos="zoom-in"
+          />
+        </div>
+        <div class="w-full mx-2 text-left md:w-1/5">
+          <img
+            src="~/assets/images/local-first-health-suite-ospitalis.png"
+            alt="Your Image Description"
+            class="w-full rounded-xl"
+            data-aos="zoom-in"
+          />
+        </div>
+        <!-- </div> -->
+      </div>
+    </div>
+    <!-- HEALTH SUITE ENDS HERE -->
+
+    <!-- VIDEO HERE -->
+    <!-- <div
+      class="container flex flex-col items-center px-4 py-8 pb-4 mx-auto mt-8 text-center md:py-16 md:-mt-40 md:pb-8 lg:pb-8 md:py-32 md:px-10 lg:px-32"
+    >
+      <video
+        src="../assets/images/easy-joey-1.mp4"
+        autoplay
+        loop
+        muted
+        class="w-full mx-auto mt-4 mb-8 border-0 border-gray-800 shadow-2xl md:max-w-5xl md:mb-10 md:mt-20 rounded-3xl"
+      ></video>
+    </div> -->
+    <!-- TRUE PRIVACY AND DATA FREEDOM -->
     <div
       class="container flex flex-col items-center px-4 pb-8 mx-auto text-center text-gray-900 lg:pb-8 md:py-10 md:px-10 lg:px-32"
-      id="our-story"
+      id="true-privacy"
     >
-      <!--MAIN PANEL -->
-      <!-- new era of health records management-->
       <img
         src="../assets/images/local-first-health-logo-location.png"
         alt="Small Image"
         class="inline-block mt-0 mb-2"
-        style="height: 150px; width: auto"
+        style="height: 100px; width: auto"
       />
-
-      <b
-        class="text-4xl text-neutral-600"
-        style="font-family: Arial, sans-serif"
-        >Local First Health</b
+      <h1
+        class="mt-5 text-6xl font-bold leadi sm:text-5xl xl:max-w-4xl font-inter"
       >
-
-      <p
-        class="max-w-2xl mx-auto mt-0 mb-5 text-xl text-justify text-neutral-500"
-        style="font-family: Arial, sans-serif"
-      >
-        a new era of health records management
+        True Privacy and Data Freedom
+      </h1>
+      <p class="max-w-3xl mx-auto mt-4 text-2xl font-inter">
+        <b>Our healthcare systems are broken.</b> Despite technological
+        advances, medical records remain vulnerable and out of users' control,
+        stored in third-party clouds and exposed to breaches. It's time to put
+        data ownership and management back where they belong—in the hands of
+        healthcare providers and patients.
       </p>
+    </div>
+    <!-- END OF TRUE PRIVACY -->
+    <!-- VIDEO HERE -->
+    <div
+      class="container flex flex-col items-center px-4 py-8 pb-4 mx-auto mt-8 text-center md:py-16 md:-mt-40 md:pb-8 lg:pb-8 md:py-32 md:px-10 lg:px-32"
+    >
+      <video
+        src="../assets/images/easy-joey-1.mp4"
+        autoplay
+        loop
+        muted
+        class="w-full mx-auto mt-4 mb-8 border-0 border-gray-800 shadow-2xl md:max-w-5xl md:mb-10 md:mt-20 rounded-3xl"
+      ></video>
+    </div>
+    <!-- end of video -->
+    <!-- START OF WHY LFH -->
+    <div
+      class="container flex flex-col items-center max-w-md p-6 mx-auto text-gray-900 bg-white lg:max-w-5xl rounded-3xl"
+      id="whylfh"
+    >
+      <div class="text-center">
+        <h1
+          class="mt-10 text-6xl font-bold leadi sm:text-3xl xl:max-w-4xl font-inter"
+        >
+          Why Local-First Health?
+        </h1>
+      </div>
 
-      <p class="max-w-2xl mx-auto mt-10 text-2xl text-center text-neutral-600">
-        Our healthcare systems are broken.
-      </p>
-      <p class="max-w-2xl mx-auto text-2xl text-justify text-neutral-600">
-        <br />
-        Despite technological advances, medical records remain vulnerable and
-        out of users' control, stored in third-party clouds and exposed to
-        breaches.
-        <br /><br />
-        Local-First Health puts data ownership and management back where they
-        belong—in the hands of healthcare providers and patients. With secure,
-        offline-capable solutions, LFH removes dependence on system providers
-        and unreliable internet, offering seamless, efficient, and private
-        health records management.
-      </p>
-
-      <!-- END OF MAIN PANEL -->
-
-      <br />
-      <!-- START OF WHY LOFCAL FIRST HEALTH-->
       <!-- FIRST -->
       <div
         id="why-local-first-health"
         class="pt-1 pb-5 text-xs text-neutral-600"
         style="font-family: Arial, sans-serif"
       >
-        <h3 class="px-3 mt-10 mb-3 text-2xl font-bold text-center">
-          Why Local-First Health?
-        </h3>
         <!-- 1ST ROW OF CARDS -->
         <div
           class="flex flex-wrap justify-center max-w-5xl mx-auto mt-5"
@@ -334,7 +570,7 @@ useHead({
 
           <!-- START of 5th ROW -->
           <!-- ITEM 1-->
-          <div class="w-full px-4 md:w-1/2 lg:w-1/3">
+          <div class="w-full px-4 mb-20 md:w-1/2 lg:w-1/3">
             <div class="max-w-xs p-5 mx-auto">
               <img
                 src="../assets/images/why-local-first-health-mission-pharmacist-open.png"
@@ -393,420 +629,266 @@ useHead({
               </p>
             </div>
           </div>
-
           <!-- END OF CARDS -->
         </div>
       </div>
+    </div>
+    <!-- END OF EHY LFH -->
 
-      <!-- END OF WHY LFH -->
+    <!-- START OF What is LF? -->
+    <div
+      class="container max-w-xl p-6 py-12 mx-auto mb-20 space-y-24 bg-amber-100 lg:px-8 lg:max-w-5xl rounded-3xl"
+    >
+      <div id="local_first">
+        <h2
+          class="text-3xl font-bold text-center tracki sm:text-5xl text-neutral font-inter"
+        >
+          What is Local-First?
+        </h2>
+        <p class="max-w-3xl mx-auto mt-4 text-xl text-center font-inter">
+          Local-First is a software paradigm that ensures data stays on users’
+          devices, offering full control, privacy, and offline access. Unlike
+          cloud-based systems that rely on third-party servers, Local-First
+          combines the local storage of the pre-cloud era with modern sync
+          capabilities, enabling seamless collaboration without sacrificing data
+          ownership.
+          <!-- <em>
+            <small>
+              * Ink & Switch's
 
-      <!-- START OF WHAT ARE LFH APPS? -->
-      <h3
-        id="local-first-health-apps"
-        class="px-3 mt-20 mb-3 text-2xl font-bold text-center text-neutral-600"
-        style="font-family: Arial, sans-serif"
-      >
-        The Local-First Health Suite
-      </h3>
+              <a
+                href="https://www.inkandswitch.com/local-first/"
+                target="_blank"
+                ><u> research paper</u></a
+              >
 
-      <!-- <h3
-        id="local-first-health-apps"
-        class="px-3 mt-20 mb-3 text-3xl font-bold text-center underline text-sky-600"
-      >
-        What are the Local-First Health Apps?
-      </h3> -->
+              has been key in defining and solidifying this concept.
+            </small>
+          </em> -->
+        </p>
+        <!-- 3 images -->
+        <div
+          class="grid w-full max-w-5xl grid-cols-1 gap-4 mx-auto mt-10 sm:grid-cols-2 lg:grid-cols-3"
+        >
+          <div class="w-full h-auto">
+            <img
+              src="~/assets/images/diagram-local-first-pre-cloud.png"
+              alt="Image 1"
+              class="object-cover w-full h-full border border-gray-200"
+            />
+          </div>
 
-      <!-- <img
-        src="../assets/images/local-first-health-mission.png"
-        alt="Small Image"
-        class="inline-block mt-8 mb-2"
-        style="height: 300px; width: auto"
-      /> -->
+          <div class="w-full h-auto">
+            <img
+              src="~/assets/images/diagram-local-first-cloud-era.png"
+              alt="Image 2"
+              class="object-cover w-full h-full border border-gray-200"
+            />
+          </div>
 
-      <p class="max-w-3xl mx-auto mt-4 text-2xl text-justify text-neutral-600">
-        Local-First Health is an initiative focused on building the world’s
-        first and only local-first health apps—a powerful suite of products
-        designed to empower the millions of healthcare providers and facilities
-        worldwide that either lack systems or struggle with outdated ones.
-      </p>
+          <div class="w-full h-auto">
+            <img
+              src="~/assets/images/diagram-local-first-local-first-era.png"
+              alt="Image 3"
+              class="object-cover w-full h-full border border-gray-200"
+            />
+          </div>
+        </div>
+        <!-- end of 3 images -->
+        <!-- xxxx -->
+        <div class="flex flex-col items-center mt-20">
+          <img
+            src="../assets/images/local-first-health-ink-switch-paper.png"
+            alt="Ink & Switch Paper"
+            class="inline-block my-2"
+            style="height: auto; width: 600px"
+          />
+
+          <p
+            class="max-w-xl mx-auto mt-4 text-xl text-justify text-neutral-600"
+          >
+            The concept was introduced in a 2019 whitepaper by Ink & Switch
+            titled
+            <a
+              href="https://www.inkandswitch.com/local-first/"
+              class="underline text-sky-600"
+              target="_blank"
+              >"Local-first software: You own your data, in spite of the
+              cloud."</a
+            >
+            , a pivotal document outlining seven key principles.
+            <br /><br />
+          </p>
+        </div>
+
+        <div class="flex flex-col items-center mt-10">
+          <img
+            src="../assets/images/local-first-health-wired-magazine.png"
+            alt="Wired Mag Local-First"
+            class="inline-block my-2"
+            style="height: auto; width: 600px"
+          />
+
+          <p class="max-w-xl mx-auto mt-4 text-xl text-center text-neutral-600">
+            Even Wired Magazine featured an
+            <a
+              href="https://www.wired.com/story/the-cloud-is-a-prison-can-the-local-first-software-movement-set-us-free/"
+              class="underline text-sky-600"
+              target="_blank"
+              >article</a
+            >
+            on Local-First <br />(August 2023).
+          </p>
+        </div>
+        <!-- xxxx -->
+      </div>
     </div>
 
-    <div
-      class="container flex flex-col items-center px-0 pb-8 mx-auto text-center text-gray-900 lg:pb-8 md:py-0 md:px-10 lg:px-32"
-      id="products"
-    >
-      <!-- HEALTH SUITE -->
-      <div
-        class="grid w-full max-w-3xl grid-cols-1 gap-4 mx-auto sm:grid-cols-2 lg:grid-cols-5"
-      >
-        <!-- First Product -->
-        <div class="flex flex-col items-center">
+    <!-- END OF What is LF? -->
+    <!-- START of Our Story -->
+    <div class="container max-w-xl p-6 mx-auto lg:max-w-7xl" id="our-story">
+      <div class="text-center" id="our_story">
+        <h2 class="mt-20 text-3xl font-bold tracki sm:text-5xl font-inter">
+          Our Story
+        </h2>
+        <!-- IMAGE HERE -->
+        <img
+          src="../assets/images/local-first-health-team.png"
+          alt="local first health team image"
+          class="inline-block mt-5"
+          style="height: 300px; width: auto"
+        />
+        <!-- END OF IMAGE -->
+        <p
+          class="max-w-2xl mx-auto mt-10 text-xl text-justify text-neutral-600"
+        >
+          Our team has been developing health record systems since 2016. Even
+          before the local-first concept was introduced in 2019, we were
+          building offline functionality with our own ‘Syncbase’ technology,
+          integrated into our health app,
+
           <a
-            href="https://www.easyjoey.com"
+            href="https://www.mycure.md"
+            class="underline text-sky-600"
+            target="_blank"
+            >"MYCURE."</a
+          >
+          Over the past 8+ years, we've encountered the challenges in this
+          sector and experienced firsthand the limitations of a cloud-based
+          setup.
+          <br /><br />
+
+          Before relocating to San Francisco, I traveled extensively across the
+          Philippines, Indonesia, Ethiopia, Kenya, South Africa, India, Sri
+          Lanka, and other countries to observe the difficulties faced by
+          doctors, small clinics, and communtiy drugstores, particularly in
+          developing regions. Many still rely on paper-based or outdated
+          systems, highlighting a stark reality: health equity remains a
+          significant global issue.
+          <br /><br />
+          Health equity, a top priority for organizations like the World Health
+          Organization (WHO), is about ensuring fair and just access to
+          healthcare for all individuals, regardless of socio-economic status,
+          ethnicity, gender, or geographic location. A critical aspect of this
+          is the ability to access and manage medical records. Yet, in many low-
+          and middle-income countries and marginalized communities, disparities
+          in health outcomes persist due to limited or outdated systems that
+          hinder access to vital health information.
+
+          <br /><br />
+          We believe that 'Local-First Health' is the solution to these
+          persistent issues. By putting data ownership and management back into
+          the hands of healthcare providers and patients, LFH aims to bridge the
+          gap in healthcare accessibility, empowering underserved communities
+          with secure, offline-capable solutions.
+
+          <br /><br />
+          It’s time to finally solve the holy grail of healthcare data and
+          contribute to a world where health equity is more than just an
+          aspiration—it’s a reality.
+          <br /><br />
+          The future is now—and it’s local.
+          <br /><br />
+
+          Dale David<br />
+          Founder<br />
+          Local-First Health <br />
+          San Francisco, CA <br />
+          localfirsthealth@gmail.com <br />
+          <br />
+
+          <!-- twitter -->
+          <a
+            href="https://x.com/localfirsthlth"
             target="_blank"
             rel="noopener noreferrer"
+            style="display: inline-block"
           >
-            <div class="w-full h-auto">
-              <img
-                src="~/assets/images/logo-local-first-health-suite-easyjoey.png"
-                alt="Clinic Management System"
-                class="object-cover w-full h-full"
-              />
-            </div>
+            <img
+              src="../assets/images/x.svg"
+              alt="Substack Icon"
+              width="24"
+              height="24"
+            />
           </a>
-
-          <p class="w-full mt-2 text-lg text-center">
-            <b>
-              <a
-                href="https://www.easyjoey.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                EasyJoey
-              </a>
-            </b>
-          </p>
-          <p class="w-full mt-0 text-sm text-center">
-            For Solo Practice & Small Clinics
-          </p>
-        </div>
-
-        <!-- Repeat for other products -->
-        <div class="flex flex-col items-center">
-          <div class="w-full h-auto">
+          <!-- Icon links -->
+          <a
+            href="https://localfirsthealth.substack.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            style="display: inline-block; margin-left: 20px"
+          >
             <img
-              src="~/assets/images/logo-local-first-health-suite-parmago.png"
-              alt="Pharmacy Management System"
-              class="object-cover w-full h-full"
+              src="../assets/images/substack.svg"
+              alt="Substack Icon"
+              width="24"
+              height="24"
             />
-          </div>
-          <p class="w-full mt-2 text-lg text-center">
-            <b>ParmaGO</b>
-          </p>
-          <p class="w-full mt-0 text-sm text-center">
-            For Pharmacies & Drugstores
-          </p>
-        </div>
+          </a>
+        </p>
+        <p class="max-w-2xl mx-auto mt-4 text-xl text-justify text-neutral-600">
+          PS - I participated in the first Local-First Conference, recently held
+          in Berlin, Germany (May 2024). This movement is indeed growing.
+          Re-live the energy of the conference in a
 
-        <div class="flex flex-col items-center">
-          <div class="w-full h-auto">
-            <img
-              src="~/assets/images/logo-local-first-health-suite-dentalemon.png"
-              alt="Dental Management System"
-              class="object-cover w-full h-full"
-            />
-          </div>
-          <p class="w-full mt-2 text-lg text-center">
-            <b>Dentalemon</b>
-          </p>
-          <p class="w-full mt-0 text-sm text-center">
-            For Dentists & Dental Clinics
-          </p>
-        </div>
+          <a
+            href="https://www.youtube.com/watch?v=cLuX0AFNJzQ"
+            class="underline text-sky-600"
+            target="_blank"
+            >96-second video.</a
+          ><br />
+          <br />
+        </p>
 
-        <div class="flex flex-col items-center">
-          <div class="w-full h-auto">
-            <img
-              src="~/assets/images/logo-local-first-health-suite-diagnozip.png"
-              alt="Laboratory & Radiology Information Systems"
-              class="object-cover w-full h-full"
-            />
-          </div>
-          <p class="w-full mt-2 text-lg text-center">
-            <b>Diagnozip</b>
-          </p>
-          <p class="w-full mt-0 text-sm text-center">
-            For Laboratories & Imaging Centers
-          </p>
-        </div>
-
-        <div class="flex flex-col items-center">
-          <div class="w-full h-auto">
-            <img
-              src="~/assets/images/logo-local-first-health-suite-ospitalis.png"
-              alt="Hospital Management System"
-              class="object-cover w-full h-full"
-            />
-          </div>
-          <p class="w-full mt-2 text-lg text-center">
-            <b>Ospitalis</b>
-          </p>
-          <p class="w-full mt-0 text-sm text-center">For Hospitals</p>
-        </div>
+        <br /><br />
+        <img
+          src="../assets/images/local-first-health-hands-2.png"
+          alt="Logo"
+          class="inline-block mt-10"
+          style="height: 550px; width: auto"
+        />
       </div>
-
-      <!-- END OF HEALTH SUITE -->
-
-      <p class="max-w-3xl mx-auto mt-10 text-2xl text-justify text-neutral-600">
-        Unlike traditional systems, which can lock you out of your data,
-        local-first health apps ensure your information is always accessible,
-        regardless of internet connectivity. It also offers seamless
-        synchronization and interoperability for a fully integrated experience.
-        Best of all, there’s no subscription required—just a one-time payment.
-      </p>
-
-      <video
-        src="../assets/videos/easy-joey-1.mp4"
-        alt="Small Video"
-        class="inline-block max-w-3xl mt-10 mb-2 border border-gray-400 shadow-lg"
-        style="height: auto; width: auto"
-        autoplay
-        loop
-        muted
-        playsinline
-      >
-        Your browser does not support the video tag.
-      </video>
-
-      <p class="max-w-3xl mx-auto mt-10 text-2xl text-justify text-neutral-600">
-        Although LFH only recently begun this initiative, the core technologies
-        needed to build our health apps are already in place (see 'our story'
-        below), allowing the team to accelerate the development process.
-        <a
-          href="https://www.easyjoey.com"
-          class="underline text-sky-600"
-          target="_blank"
-          >"EasyJoey"</a
-        >
-        is already in Alpha and is set to be released by the fourth quarter of
-        2024, with other apps following thereafter.
-      </p>
-
-      <!-- WHAT IS LOCAL-FIRST? -->
-
-      <h3
-        id="local-first"
-        class="px-3 mt-20 mb-3 text-2xl font-bold text-justify text-neutral-600"
-        style="font-family: Arial, sans-serif"
-      >
-        What is Local-First?
-      </h3>
-
-      <p class="max-w-3xl mx-auto mt-5 text-2xl text-justify text-neutral-600">
-        Local-First is a software paradigm that ensures data stays on users’
-        devices, offering full control, privacy, and offline access. Unlike
-        cloud-based systems that rely on third-party servers, Local-First
-        combines the local storage of the pre-cloud era with modern sync
-        capabilities, enabling seamless collaboration without sacrificing data
-        ownership.
-      </p>
-      <!-- Local-First Diagram -->
-      <!-- <img
-        src="../assets/images/local-first-health-era-diagram.png"
-        alt="Small Image"
-        class="inline-block max-w-3xl mt-10 mb-2"
-        style="height: auto; width: auto"
-      /> -->
-      <div
-        class="grid w-full max-w-3xl grid-cols-1 gap-4 mx-auto mt-10 sm:grid-cols-2 lg:grid-cols-3"
-      >
-        <div class="w-full h-auto">
-          <img
-            src="~/assets/images/diagram-local-first-pre-cloud.png"
-            alt="Image 1"
-            class="object-cover w-full h-full border border-gray-200"
-          />
-        </div>
-
-        <div class="w-full h-auto">
-          <img
-            src="~/assets/images/diagram-local-first-cloud-era.png"
-            alt="Image 2"
-            class="object-cover w-full h-full border border-gray-200"
-          />
-        </div>
-
-        <div class="w-full h-auto">
-          <img
-            src="~/assets/images/diagram-local-first-local-first-era.png"
-            alt="Image 3"
-            class="object-cover w-full h-full border border-gray-200"
-          />
-        </div>
-      </div>
-
-      <br /><br />
-
-      <img
-        src="../assets/images/local-first-health-ink-switch-paper.png"
-        alt="Ink & Switch Paper"
-        class="inline-block my-2"
-        style="height: auto; width: 600px"
-      />
-
-      <p class="max-w-xl mx-auto mt-4 text-2xl text-justify text-neutral-600">
-        The concept was introduced in a 2019 whitepaper by Ink & Switch titled
-        <a
-          href="https://www.inkandswitch.com/local-first/"
-          class="underline text-sky-600"
-          target="_blank"
-          >"Local-first software: You own your data, in spite of the cloud."</a
-        >
-
-        , a pivotal document outlining seven key principles.
-        <br /><br />
-      </p>
-
-      <img
-        src="../assets/images/local-first-health-wired-magazine.png"
-        alt="Wired Mag Local-First"
-        class="inline-block my-2"
-        style="height: auto; width: 600px"
-      />
-
-      <p class="max-w-2xl mx-auto mt-4 text-2xl text-justify text-neutral-600">
-        Even Wired Magazine featured an
-
-        <a
-          href="https://www.wired.com/story/the-cloud-is-a-prison-can-the-local-first-software-movement-set-us-free/"
-          class="underline text-sky-600"
-          target="_blank"
-          >article</a
-        >
-        on Local-First <br />(August 2023).
-      </p>
-
-      <!-- END OF WHAT IS LOCAL-FIRST -->
-
-      <!-- <p class="max-w-2xl mx-auto -mt-5 text-2xl text-justify">
-        We also plan to open source the foundational core, empowering developers
-        to easily create local-first health apps. More importantly, this
-        approach allows for the development of localized features and
-        functionalities tailored to specific cities or areas, rather than
-        relying on a one-size-fits-all solution dictated by a few providers.
-        Ultimately, this will benefit everyone—because we are all part of the
-        healthcare ecosystem.
-      </p>
-      <br /> -->
-
-      <h3
-        id="mission"
-        class="px-3 mt-20 mb-3 text-3xl font-bold text-center text-neutral-600"
-        style="font-family: Arial, sans-serif"
-      >
-        Our Mission
-      </h3>
-
-      <img
-        src="../assets/images/local-first-health-team.png"
-        alt="local first health team image"
-        class="inline-block mt-0"
-        style="height: 300px; width: auto"
-      />
-
-      <p class="max-w-2xl mx-auto mt-4 text-2xl text-justify text-neutral-600">
-        Our team has been developing health record systems since 2016. Even
-        before the local-first concept was introduced in 2019, we were building
-        offline functionality with our own ‘Syncbase’ technology, integrated
-        into our health app,
-
-        <a
-          href="https://www.mycure.md"
-          class="underline text-sky-600"
-          target="_blank"
-          >"MYCURE."</a
-        >
-        Over the past 8+ years, we've encountered the challenges in this sector
-        and experienced firsthand the limitations of a cloud-based setup.
-        <br /><br />
-        Before relocating to San Francisco, I traveled extensively across the
-        Philippines, Indonesia, Ethiopia, Kenya, South Africa, India, Sri Lanka,
-        and other countries to observe the difficulties faced by doctors, small
-        clinics, and communtiy drugstores, particularly in developing regions.
-        Many still rely on paper-based or outdated systems, highlighting a stark
-        reality: health equity remains a significant global issue.
-        <br /><br />
-        Health equity, a top priority for organizations like the World Health
-        Organization (WHO), is about ensuring fair and just access to healthcare
-        for all individuals, regardless of socio-economic status, ethnicity,
-        gender, or geographic location. A critical aspect of this is the ability
-        to access and manage medical records. Yet, in many low- and
-        middle-income countries and marginalized communities, disparities in
-        health outcomes persist due to limited or outdated systems that hinder
-        access to vital health information.
-
-        <br /><br />
-        We believe that 'Local-First Health' is the solution to these persistent
-        issues. By putting data ownership and management back into the hands of
-        healthcare providers and patients, LFH aims to bridge the gap in
-        healthcare accessibility, empowering underserved communities with
-        secure, offline-capable solutions.
-
-        <br /><br />
-        It’s time to finally solve the holy grail of healthcare data and
-        contribute to a world where health equity is more than just an
-        aspiration—it’s a reality.
-        <br /><br />
-        The future is now—and it’s local.
-        <br /><br />
-
-        Dale David<br />
-        Founder<br />
-        Local-First Health <br />
-        San Francisco, CA <br />
-        localfirsthealth@gmail.com <br />
-        <br />
-
-        <!-- twitter -->
-        <a
-          href="https://x.com/localfirsthlth"
-          target="_blank"
-          rel="noopener noreferrer"
-          style="display: inline-block"
-        >
-          <img
-            src="../assets/images/x.svg"
-            alt="Substack Icon"
-            width="24"
-            height="24"
-          />
-        </a>
-        <!-- Icon links -->
-        <a
-          href="https://localfirsthealth.substack.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          style="display: inline-block; margin-left: 20px"
-        >
-          <img
-            src="../assets/images/substack.svg"
-            alt="Substack Icon"
-            width="24"
-            height="24"
-          />
-        </a>
-
-        <!-- Reddit Icon -->
-        <!-- <a href="https://reddit.com/r/localfirsthealth" target="_blank" rel="noopener noreferrer" style="display: inline-block; margin-left: 20px;">
-    <img src="../assets/images/reddit.svg" alt="Substack Icon" width="24" height="24" />
-    
-</a> -->
-      </p>
-
-      <br />
-      <br />
-      <p class="max-w-2xl mx-auto mt-4 text-2xl text-justify text-neutral-600">
-        PS - I participated in the first Local-First Conference, recently held
-        in Berlin, Germany (May 2024). This movement is indeed growing. Re-live
-        the energy of the conference in a
-
-        <a
-          href="https://www.youtube.com/watch?v=cLuX0AFNJzQ"
-          class="underline text-sky-600"
-          target="_blank"
-          >96-second video.</a
-        ><br />
-        <br />
-      </p>
-
-      <br /><br />
-      <img
-        src="../assets/images/local-first-health-hands-2.png"
-        alt="Logo"
-        class="inline-block mt-10"
-        style="height: 550px; width: auto"
-      />
     </div>
+
+    <!-- END OF OUR Story -->
+
+    <!-- START OF FOOTER -->
+    <footer class="px-4 divide-y">
+      <div class="flex flex-col items-center py-6">
+        <img
+          src="../assets/images/local-first-health-logo-location.png"
+          alt="Local First Health Logo"
+          class="w-auto h-10 mb-2"
+        />
+        <!-- Logo added here -->
+        <div class="text-sm text-center">Born in San Francisco, CA</div>
+        <div class="text-sm text-center">localfirsthealth@gmail.com</div>
+        <div class="text-sm text-center">
+          © 2024 Local First Health | All rights reserved.
+        </div>
+      </div>
+    </footer>
+    <!-- END OF FOOTER -->
   </section>
 </template>
 
@@ -819,17 +901,6 @@ useHead({
 
 .font-courier {
   font-family: "Courier", monospace;
-}
-
-@font-face {
-  font-family: "Kalam";
-  src: url("../assets/fonts/Kalam-Regular.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
-
-.font-kalam {
-  font-family: "Kalam", sans-serif;
 }
 
 /* easyjoey logo container */
@@ -850,4 +921,90 @@ useHead({
   margin-right: 10px;
   /* Adjust the margin as needed */
 }
+
+/* font animation container */
+.custom-container {
+  /* width: 100%;
+  height: 100vh; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.custom-heading {
+  font-size: 3rem;
+  font-weight: normal;
+}
+
+/* animation blinking */
+.custom-heading .typed-text {
+  color: #009999;
+}
+
+.blinking-cursor {
+  font-size: 2.5rem;
+  color: #2c3e50;
+  -webkit-animation: 1s blink step-end infinite;
+  -moz-animation: 1s blink step-end infinite;
+  -ms-animation: 1s blink step-end infinite;
+  -o-animation: 1s blink step-end infinite;
+  animation: 1s blink step-end infinite;
+}
+
+@keyframes blink {
+  from,
+  to {
+    color: transparent;
+  }
+
+  50% {
+    color: #2c3e50;
+  }
+}
+
+@-moz-keyframes blink {
+  from,
+  to {
+    color: transparent;
+  }
+
+  50% {
+    color: #2c3e50;
+  }
+}
+
+@-webkit-keyframes blink {
+  from,
+  to {
+    color: transparent;
+  }
+
+  50% {
+    color: #2c3e50;
+  }
+}
+
+@-ms-keyframes blink {
+  from,
+  to {
+    color: transparent;
+  }
+
+  50% {
+    color: #2c3e50;
+  }
+}
+
+@-o-keyframes blink {
+  from,
+  to {
+    color: transparent;
+  }
+
+  50% {
+    color: #2c3e50;
+  }
+}
+
+/* end of animation blinking */
 </style>
