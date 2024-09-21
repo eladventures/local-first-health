@@ -155,11 +155,11 @@ function eraseText() {
       <div
         class="container flex flex-col items-center px-4 pt-16 pb-8 mx-auto text-center text-gray-900 lg:pb-8 md:py-32 md:px-10 lg:px-32"
       >
-        <p class="text-xl sm:mb-12 xl:max-w-3xl font-inter">
+        <p class="text-xl sm:mb-1 xl:max-w-3xl font-inter">
           The First & Only 'Local-First' Health Management Suite
         </p>
         <h1
-          class="-mt-10 text-6xl font-bold leadi sm:text-6xl xl:max-w-3xl font-inter"
+          class="mt-0 text-6xl font-bold leadi sm:text-6xl xl:max-w-3xl font-inter"
         >
           A new era of health records management.
         </h1>
@@ -180,7 +180,7 @@ function eraseText() {
             class="px-8 py-3 m-2 text-lg border border-gray-800 rounded"
           >
             <a
-              href="#local_first_panel"
+              href="#local_first"
               style="text-decoration: none; color: inherit"
             >
               What is Local-First?
@@ -192,61 +192,52 @@ function eraseText() {
 
     <!-- HEALTH SUITE STARTS HERE -->
     <div class="container mx-auto lg:max-w-6xl" id="mission">
-      <!-- <div class="text-left">
-        <p
-          class="max-w-4xl px-5 mx-auto mt-10 text-3xl font-bold tracki sm:text-3xl font-inter"
-        >
-          The Mission
-        </p>
-      </div> -->
-
       <div
         class="container flex flex-col justify-center max-w-6xl mt-4 mb-10 md:flex-row"
       >
-        <!-- <div class="flex flex-col justify-center mt-4 md:flex-row"> -->
-        <div class="w-full mx-2 text-left md:w-1/5">
+        <div class="flex justify-center w-full mx-2 mb-4 text-left md:w-1/5">
           <img
             src="~/assets/images/local-first-health-suite-easy-joey.png"
             alt="Your Image Description"
-            class="w-full rounded-xl"
+            class="w-2/3 sm:w-full rounded-xl"
             data-aos="zoom-in"
           />
         </div>
-        <div class="w-full mx-2 text-left md:w-1/5">
+        <div class="flex justify-center w-full mx-2 mb-4 text-left md:w-1/5">
           <img
             src="~/assets/images/local-first-health-suite-dentalemon.png"
             alt="Your Image Description"
-            class="w-full rounded-xl"
+            class="w-2/3 sm:w-full rounded-xl"
             data-aos="zoom-in"
           />
         </div>
-        <div class="w-full mx-2 text-left md:w-1/5">
+        <div class="flex justify-center w-full mx-2 mb-4 text-left md:w-1/5">
           <img
             src="~/assets/images/local-first-health-suite-parmago.png"
             alt="Your Image Description"
-            class="w-full rounded-xl"
+            class="w-2/3 sm:w-full rounded-xl"
             data-aos="zoom-in"
           />
         </div>
-        <div class="w-full mx-2 text-left md:w-1/5">
+        <div class="flex justify-center w-full mx-2 mb-4 text-left md:w-1/5">
           <img
             src="~/assets/images/local-first-health-suite-diagnozip.png"
             alt="Your Image Description"
-            class="w-full rounded-xl"
+            class="w-2/3 sm:w-full rounded-xl"
             data-aos="zoom-in"
           />
         </div>
-        <div class="w-full mx-2 text-left md:w-1/5">
+        <div class="flex justify-center w-full mx-2 mb-4 text-left md:w-1/5">
           <img
             src="~/assets/images/local-first-health-suite-ospitalis.png"
             alt="Your Image Description"
-            class="w-full rounded-xl"
+            class="w-2/3 sm:w-full rounded-xl"
             data-aos="zoom-in"
           />
         </div>
-        <!-- </div> -->
       </div>
     </div>
+
     <!-- HEALTH SUITE ENDS HERE -->
 
     <!-- VIDEO HERE -->
@@ -861,12 +852,13 @@ function eraseText() {
         </p>
 
         <br /><br />
-        <img
-          src="../assets/images/local-first-health-hands-2.png"
-          alt="Logo"
-          class="inline-block mt-10"
-          style="height: 550px; width: auto"
-        />
+        <div class="flex justify-center mt-10">
+          <img
+            src="../assets/images/local-first-health-hands-2.png"
+            alt="Logo"
+            class="object-contain w-full max-w-md"
+          />
+        </div>
       </div>
     </div>
 

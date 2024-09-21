@@ -1,9 +1,10 @@
 <template>
-  <div :data-theme="theme" class="bg-white">
-    <div class="container flex items-center justify-between h-12 mx-auto">
+  <div :data-theme="theme" class="fixed top-0 z-50 w-full bg-white">
+    <div
+      class="container flex items-center justify-between h-16 mx-auto max-w-7xl"
+    >
       <!-- Added 'items-center' class -->
       <div class="flex items-center">
-        <!-- Added 'items-center' class -->
         <a
           rel="noopener noreferrer"
           href="#"
@@ -11,16 +12,16 @@
           class="flex items-center p-2"
         >
           <img
-            src="../assets/images/local-first-health-logo-location.png"
+            src="../assets/images/local-first-health-logo-location-black.png"
             alt="Your Logo"
-            class="object-contain w-auto h-10 mt-2 dark:text-default-400"
+            class="object-contain w-auto h-12 mt-3 dark:text-default-400"
           />
-          <p class="mt-3 text-teal-500">
+          <p class="mt-4 text-xl text-zinc-500">
             <b>Local First Health</b>
           </p>
         </a>
 
-        <ul class="items-stretch hidden mt-2 ml-20 space-x-3 lg:flex">
+        <ul class="items-stretch hidden mt-4 ml-20 space-x-3 lg:flex">
           <li class="flex">
             <a
               rel="noopener noreferrer"
@@ -61,12 +62,16 @@
           href="/local-first-paper.pdf"
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-block px-4 py-2 mt-5 text-sm font-semibold text-gray-800 bg-transparent border border-gray-800 rounded"
+          class="inline-block px-4 py-2 mt-4 text-sm font-semibold text-gray-800 bg-transparent border border-gray-800 rounded"
         >
           Read Whitepaper
         </a>
       </div>
     </div>
+  </div>
+
+  <!-- Adding padding to the content to avoid overlapping with the navbar -->
+  <div class="pt-16">
     <slot />
   </div>
 </template>
