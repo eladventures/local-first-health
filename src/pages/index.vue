@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { useHead } from "#imports";
 import { definePageMeta } from "#imports";
 // import GenericPanel from "~/components/commons/GenericPanel";
@@ -75,74 +75,6 @@ function eraseText() {
     setTimeout(typeText, typingSpeed.value + 1000);
   }
 }
-
-// export default {
-//   components: {
-//     GenericPanel,
-//   },
-//   setup () {
-
-//     return {};
-//   },
-//   data: () => {
-//     return {
-//       typeValue: "",
-//       typeStatus: false,
-//       displayTextArray: [
-//         "It's Affordable",
-//         "It Works Offline",
-//         "It's Secure",
-//         "It's Private",
-//         "It's Shareable",
-//         "It's Record-Centric",
-//         "It's Encrypted",
-//       ],
-//       typingSpeed: 100,
-//       erasingSpeed: 100,
-//       newTextDelay: 2000,
-//       displayTextArrayIndex: 0,
-//       charIndex: 0,
-//     };
-//   },
-//   props: {},
-//   created() {
-//     setTimeout(this.typeText, this.newTextDelay + 200);
-//   },
-//   methods: {
-//     typeText() {
-//       if (
-//         this.charIndex <
-//         this.displayTextArray[this.displayTextArrayIndex].length
-//       ) {
-//         if (!this.typeStatus) this.typeStatus = true;
-//         this.typeValue += this.displayTextArray[
-//           this.displayTextArrayIndex
-//         ].charAt(this.charIndex);
-//         this.charIndex += 1;
-//         setTimeout(this.typeText, this.typingSpeed);
-//       } else {
-//         this.typeStatus = false;
-//         setTimeout(this.eraseText, this.newTextDelay);
-//       }
-//     },
-//     eraseText() {
-//       if (this.charIndex > 0) {
-//         if (!this.typeStatus) this.typeStatus = true;
-//         this.typeValue = this.displayTextArray[
-//           this.displayTextArrayIndex
-//         ].substring(0, this.charIndex - 1);
-//         this.charIndex -= 1;
-//         setTimeout(this.eraseText, this.erasingSpeed);
-//       } else {
-//         this.typeStatus = false;
-//         this.displayTextArrayIndex += 1;
-//         if (this.displayTextArrayIndex >= this.displayTextArray.length)
-//           this.displayTextArrayIndex = 0;
-//         setTimeout(this.typeText, this.typingSpeed + 1000);
-//       }
-//     },
-//   },
-// };
 </script>
 
 <template>
@@ -155,7 +87,860 @@ function eraseText() {
       <div
         class="container flex flex-col items-center px-4 pt-16 pb-8 mx-auto text-center text-gray-900 lg:pb-8 md:py-32 md:px-10 lg:px-32"
       >
-        <p class="text-xl sm:mb-1 xl:max-w-3xl font-inter">
+        <!-- HERO TITLE Section -->
+
+        <h1
+          class="mt-0 text-3xl font-bold leadi sm:text-4xl xl:max-w-3xl font-inter"
+        >
+          WARNING: <br />
+          Our Health Data is in Jeopardy
+        </h1>
+
+        <p
+          class="mt-2 mb-0 text-2xl sm:mb-8 xl:max-w-3xl font-inter text-neutral-500"
+        >
+          The current cloud-based setup leaves our medical records exposed to
+          breaches and exploitation. Ransomware attacks and data breaches are
+          constantly in the news. Perhaps it's time to rethink how we manage
+          sensitive health information?
+        </p>
+
+        <!-- END OF HERO Title -->
+
+        <!-- START of NEWS CARDS -->
+        <div class="container max-w-5xl px-4 py-8 mx-auto">
+          <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <!-- Start of Card 1 -->
+
+            <a
+              href="https://www.wired.com/story/plaintext-our-medical-security-is-code-blue/"
+              class="p-8 text-white rounded-3xl bg-slate-950"
+              id="a-1"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <!-- <div class="text-xs cursor-pointer text-cyan-400">1</div> -->
+              <div class="flex flex-col justify-start gap-4">
+                <div>
+                  <div class="flex justify-between">
+                    <img
+                      src="../assets/images/logo-wired.png"
+                      id="img-1"
+                      class="w-auto h-10"
+                    />
+                  </div>
+                  <br />
+
+                  <h2 class="text-xl font-medium text-left text-bold">
+                    Your Medical Data Is Code Blue
+                  </h2>
+                  <br />
+                  <div class="flex justify-between py-3">
+                    <img
+                      src="../assets/images/news-1.png"
+                      id="img-1"
+                      class="w-full h-auto"
+                    />
+                  </div>
+
+                  <p class="text-left text-stone-300">
+                    Medical data companies aren’t doing all they can to protect
+                    your most private information. When they get hacked and
+                    patient data is stolen, it’s the patients who suffer.
+                  </p>
+                </div>
+              </div>
+            </a>
+            <!-- End of Card 1 -->
+
+            <!-- Start of Card 2 -->
+            <a
+              href="https://www.washingtonpost.com/podcasts/post-reports/the-unprecedented-healthcare-hack-that-may-affect-you/"
+              class="p-8 text-white rounded-3xl bg-slate-950"
+              id="a-1"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <div class="flex flex-col justify-start gap-4">
+                <div>
+                  <div class="flex justify-between">
+                    <img
+                      src="../assets/images/logo-washingtonpost.png"
+                      id="img-1"
+                      class="w-auto h-10"
+                    />
+                  </div>
+                  <br />
+
+                  <h2 class="text-xl font-medium text-left text-bold">
+                    The unprecedented health-care hack that may affect you
+                  </h2>
+                  <div class="flex justify-between py-3">
+                    <img
+                      src="../assets/images/news-2.png"
+                      id="img-1"
+                      class="w-full h-auto"
+                    />
+                  </div>
+
+                  <p class="text-left text-stone-300">
+                    In February, a massive cyberattack nearly brought down the
+                    entire U.S. health system. Doctors are still reeling, and
+                    many patients don’t even know their data has been exposed.
+                  </p>
+                </div>
+              </div>
+            </a>
+            <!-- End of Card 2-->
+
+            <!-- Card 3 -->
+            <a
+              href="https://www.theguardian.com/society/2023/may/27/nhs-data-breach-trusts-shared-patient-details-with-facebook-meta-without-consent"
+              class="p-8 text-white rounded-3xl bg-slate-950"
+              id="a-1"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <div class="flex flex-col justify-start gap-4">
+                <div>
+                  <div class="flex justify-between">
+                    <img
+                      src="../assets/images/logo-theguardian.png"
+                      id="img-1"
+                      class="w-auto h-10"
+                    />
+                  </div>
+
+                  <h2 class="mt-5 text-xl font-medium text-left text-bold">
+                    NHS data breach: trusts shared patient details with Facebook
+                    without consent
+                  </h2>
+                  <div class="flex justify-between py-3">
+                    <img
+                      src="../assets/images/news-3.png"
+                      id="img-1"
+                      class="w-full h-auto"
+                    />
+                  </div>
+
+                  <p class="text-left text-stone-300">
+                    NHS trusts are sharing intimate details about patients'
+                    medical conditions, apointments and treatments with Facebook
+                    without consent despite promising never to do so.
+                  </p>
+                </div>
+              </div>
+            </a>
+            <!-- end of Card 3 -->
+
+            <!-- Start of Card 4 -->
+            <a
+              href="https://www.nytimes.com/2024/03/05/health/cyberattack-healthcare-cash.html"
+              class="p-8 text-white rounded-3xl bg-slate-950"
+              id="a-1"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <div class="flex flex-col justify-start gap-4">
+                <div>
+                  <div class="flex justify-between">
+                    <img
+                      src="../assets/images/logo-nytimes.png"
+                      id="img-1"
+                      class="w-auto h-10"
+                    />
+                  </div>
+                  <br />
+
+                  <h2 class="text-xl font-medium text-left text-bold">
+                    Cyberattack Paralyzes the Largest U.S. Health Care Payment
+                    System
+                  </h2>
+                  <div class="flex justify-between py-3">
+                    <img
+                      src="../assets/images/news-4.png"
+                      id="img-1"
+                      class="w-full h-auto"
+                    />
+                  </div>
+
+                  <p class="text-left text-stone-300">
+                    The hacking shut down the nation’s biggest health care
+                    payment system, causing financial chaos that affected a
+                    broad spectrum ranging from large hospitals to single-doctor
+                    practices.
+                  </p>
+                </div>
+              </div>
+            </a>
+            <!-- End of Card 4 -->
+
+            <!-- Card 5 -->
+            <a
+              href="https://www.vpnmentor.com/news/report-confidanthealth-breach/"
+              class="p-8 text-white rounded-3xl bg-slate-950"
+              id="a-1"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <div class="flex flex-col justify-start gap-4">
+                <div>
+                  <div class="flex justify-between">
+                    <img
+                      src="../assets/images/logo-vpn.png"
+                      id="img-1"
+                      class="w-auto h-10"
+                    />
+                  </div>
+                  <br />
+
+                  <h2 class="text-xl font-medium text-left text-bold">
+                    Mental Health and Addiction Treatment Provider Exposed
+                    Patient Information
+                  </h2>
+                  <div class="flex justify-between py-3">
+                    <img
+                      src="../assets/images/news-5.png"
+                      id="img-1"
+                      class="w-full h-auto"
+                    />
+                  </div>
+
+                  <p class="text-left text-stone-300">
+                    Cybersecurity Researcher discovered a non-password-protected
+                    database that contained thousands of records belonging to an
+                    AI platform offering mental health and addiction treatment.
+                  </p>
+                </div>
+              </div>
+            </a>
+            <!-- End of Card 5 -->
+
+            <!-- Card 6 -->
+            <a
+              href="https://www.wired.com/story/change-healthcare-22-million-payment-ransomware-spike/"
+              class="p-8 text-white rounded-3xl bg-slate-950"
+              id="a-1"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <div class="flex flex-col justify-start gap-4">
+                <div>
+                  <div class="flex justify-between">
+                    <img
+                      src="../assets/images/logo-wired.png"
+                      id="img-1"
+                      class="w-auto h-10"
+                    />
+                  </div>
+                  <br />
+
+                  <h2 class="text-xl font-medium text-left text-bold">
+                    Medical-Targeted Ransomware Is Breaking Records After $22M
+                    Payout
+                  </h2>
+                  <div class="flex justify-between py-3">
+                    <img
+                      src="../assets/images/news-6.png"
+                      id="img-1"
+                      class="w-full h-auto"
+                    />
+                  </div>
+
+                  <p class="text-left text-stone-300">
+                    Cybersecurity firm Recorded Future counted 44
+                    health-care-related incidents in the month after Change
+                    Healthcare’s payment came to light—the most it’s ever seen
+                    in a single month.
+                  </p>
+                </div>
+              </div>
+            </a>
+            <!-- end of Card 6 -->
+          </div>
+        </div>
+        <!-- END OF NEWS CARD -->
+
+        <!-- START OF CURRENT PROBLEMS SECTION -->
+        <h1
+          class="mt-20 text-3xl font-bold leadi sm:text-4xl xl:max-w-3xl font-inter"
+          id="cloud"
+        >
+          The Cloud Problem
+        </h1>
+
+        <p
+          class="mt-2 mb-0 text-2xl sm:mb-8 xl:max-w-3xl font-inter text-neutral-500"
+        >
+          Today’s healthcare systems rely heavily on cloud-based setups, and
+          while they offer convenience, they come with significant risks:
+        </p>
+        <!-- BULLETS: Reasons -->
+        <ul
+          class="mt-2 mb-0 space-y-4 text-2xl text-left sm:mb-8 xl:max-w-2xl font-inter text-neutral-500"
+        >
+          <li class="flex items-start">
+            <img
+              src="~/assets/images/icons-data-breach.png"
+              alt="Icon"
+              class="w-10 h-auto mt-3 mr-3"
+            />
+            <span>
+              <strong class="text-neutral-800">Data Breaches:</strong>
+              Centralized data storage has made cloud systems prime targets for
+              cyberattacks, putting millions of health records at risk.
+            </span>
+          </li>
+          <li class="flex items-start">
+            <img
+              src="~/assets/images/icons-ransomware.png"
+              alt="Icon"
+              class="w-10 h-auto mt-3 mr-3"
+            />
+            <span>
+              <strong class="text-neutral-800">Ransomware:</strong> Hospitals
+              and clinics have been crippled by ransomware attacks, locking them
+              out of vital patient information until hefty ransoms are paid.
+            </span>
+          </li>
+          <li class="flex items-start">
+            <img
+              src="~/assets/images/icons-privacy.png"
+              alt="Icon"
+              class="w-10 h-auto mt-3 mr-3"
+            />
+            <span>
+              <strong class="text-neutral-800">Privacy Concerns:</strong>
+              Sensitive health data is often processed and stored by third-party
+              providers, raising serious privacy issues and regulatory concerns.
+            </span>
+          </li>
+          <li class="flex items-start">
+            <img
+              src="~/assets/images/icons-no-cloud.png"
+              alt="Icon"
+              class="w-10 h-auto mt-3 mr-3"
+            />
+            <span>
+              <strong class="text-neutral-800"
+                >Downtime & Access Issues:</strong
+              >
+              Internet outages or service disruptions can render cloud-dependent
+              systems inaccessible, potentially delaying patient care.
+            </span>
+          </li>
+          <li class="flex items-start">
+            <img
+              src="~/assets/images/icons-no-document.png"
+              alt="Icon"
+              class="w-10 h-auto mt-3 mr-3"
+            />
+            <span>
+              <strong class="text-neutral-800">Lack of Ownership:</strong>
+              Healthcare providers and patients have limited control over their
+              data, with cloud services holding ultimate authority over where
+              and how information is stored.
+            </span>
+          </li>
+        </ul>
+        <!-- End of Bullets -->
+        <!-- END OF PROBLEMS Section -->
+
+        <!-- START OF LF SOLUTION-->
+        <div
+          class="container max-w-xl p-6 py-10 mx-auto mt-20 mb-20 space-y-24 bg-gray-100 lg:px-8 lg:max-w-4xl rounded-3xl"
+        >
+          <div id="local-first">
+            <!-- <h1
+              class="mt-10 text-3xl font-bold leadi sm:text-4xl xl:max-w-3xl font-inter"
+            >
+              The Cloud Problem
+            </h1>
+
+            <p
+              class="mt-2 mb-0 text-2xl sm:mb-8 xl:max-w-3xl font-inter text-neutral-500"
+            >
+              Today’s healthcare systems rely heavily on cloud-based setups, and
+              while they offer convenience, they come with significant risks:
+            </p> -->
+            <h2
+              class="text-3xl font-bold text-center text-gray-900 tracki sm:text-4xl text-neutral font-inter"
+            >
+              Taking Control: <br />The 'Local-First' Approach
+            </h2>
+            <p
+              class="max-w-3xl mx-auto mt-4 text-2xl text-center font-inter text-neutral-500"
+            >
+              It’s time for a shift in how we handle health data. Local-first
+              software offers a groundbreaking approach to the vulnerabilities
+              of cloud-based systems. By keeping sensitive information on your
+              device, local-first ensures privacy, security, and control, while
+              still allowing seamless collaboration and syncing when needed.
+            </p>
+            <!-- 3 images -->
+            <div
+              class="grid w-full max-w-5xl grid-cols-1 gap-4 mx-auto mt-10 sm:grid-cols-2 lg:grid-cols-3"
+            >
+              <div class="w-full h-auto">
+                <img
+                  src="~/assets/images/diagram-local-first-pre-cloud.png"
+                  alt="Image 1"
+                  class="object-cover w-full h-full border border-gray-200"
+                />
+              </div>
+
+              <div class="w-full h-auto">
+                <img
+                  src="~/assets/images/diagram-local-first-cloud-era.png"
+                  alt="Image 2"
+                  class="object-cover w-full h-full border border-gray-200"
+                />
+              </div>
+
+              <div class="w-full h-auto">
+                <img
+                  src="~/assets/images/diagram-local-first-local-first-era.png"
+                  alt="Image 3"
+                  class="object-cover w-full h-full border border-gray-200"
+                />
+              </div>
+            </div>
+            <!-- end of 3 images -->
+            <!-- xxxx -->
+            <div class="flex flex-col items-center mt-20">
+              <img
+                src="../assets/images/local-first-health-ink-switch-paper.png"
+                alt="Ink & Switch Paper"
+                class="inline-block my-2"
+                style="height: auto; width: 600px"
+              />
+
+              <p
+                class="max-w-xl mx-auto mt-4 text-xl text-justify text-neutral-600"
+              >
+                The concept was introduced in a 2019 whitepaper by Ink & Switch
+                titled
+                <a
+                  href="https://www.inkandswitch.com/local-first/"
+                  class="underline text-sky-600"
+                  target="_blank"
+                  >"Local-first software: You own your data, in spite of the
+                  cloud."</a
+                >
+                , a pivotal document outlining seven key principles.
+                <br /><br />
+              </p>
+              <!-- START OF 7 IDEALS -->
+              <ul
+                class="mt-2 mb-0 space-y-4 text-xl text-left sm:mb-8 xl:max-w-xl font-inter text-neutral-500"
+              >
+                <li class="flex items-start">
+                  <span>
+                    <strong class="text-neutral-800">1. No Spinners:</strong>
+                    Your work is always at your fingertips, fast and responsive.
+                  </span>
+                </li>
+                <li class="flex items-start">
+                  <span>
+                    <strong class="text-neutral-800"
+                      >2. The Network is Optional:</strong
+                    >
+                    Work offline, sync when you’re back online.
+                  </span>
+                </li>
+                <li class="flex items-start">
+                  <span>
+                    <strong class="text-neutral-800"
+                      >3. Seamless Collaboration:</strong
+                    >
+                    Work with colleagues without data conflicts.
+                  </span>
+                </li>
+                <li class="flex items-start">
+                  <span>
+                    <strong class="text-neutral-800"
+                      >4. Your Work is Not Trapped on One Device:</strong
+                    >
+                    Your data isn’t tied to one device; it syncs across all of
+                    them.
+                  </span>
+                </li>
+                <li class="flex items-start">
+                  <span>
+                    <strong class="text-neutral-800">5. The Long Now:</strong>
+                    Your data lasts as long as you need it, independent of cloud
+                    services.
+                  </span>
+                </li>
+                <li class="flex items-start">
+                  <span>
+                    <strong class="text-neutral-800"
+                      >6. Security & Privacy by Default:</strong
+                    >
+                    Your data is protected from breaches and exploitation.
+                  </span>
+                </li>
+                <li class="flex items-start">
+                  <span>
+                    <strong class="text-neutral-800"
+                      >7. You Retain Ultimate Ownership & Control:</strong
+                    >
+                    You own and control your data at all times.
+                  </span>
+                </li>
+              </ul>
+              <!-- END OF 7 IDEALS -->
+            </div>
+
+            <div class="flex flex-col items-center mt-10">
+              <img
+                src="../assets/images/local-first-health-wired-magazine.png"
+                alt="Wired Mag Local-First"
+                class="inline-block my-2"
+                style="height: auto; width: 600px"
+              />
+
+              <p
+                class="max-w-xl mx-auto mt-4 text-xl text-center text-neutral-600"
+              >
+                Even Wired Magazine featured an
+                <a
+                  href="https://www.wired.com/story/the-cloud-is-a-prison-can-the-local-first-software-movement-set-us-free/"
+                  class="underline text-sky-600"
+                  target="_blank"
+                  >article</a
+                >
+                on Local-First <br />(August 2023).
+              </p>
+            </div>
+            <!-- xxxx -->
+          </div>
+        </div>
+        <!-- END OF What LF SOLUTION -->
+
+        <!--START OF LF HEALTH  -->
+        <img
+          src="../assets/images/local-first-health-logo-location-brown.png"
+          alt="Small Image"
+          class="inline-block mt-0 mb-0"
+          style="height: 150px; width: auto"
+        />
+        <h1
+          class="mt-0 text-3xl font-bold leadi sm:text-4xl xl:max-w-3xl font-inter"
+          id="local-first-health"
+        >
+          Introducing: <br />
+          Local First Health
+        </h1>
+
+        <p
+          class="mt-2 mb-0 text-2xl sm:mb-8 xl:max-w-3xl font-inter text-neutral-500"
+        >
+          By applying local-first ideals, we bring you Local First Health
+          (LFH)—a tech initiative transforming healthcare data management. LFH
+          ensures your health information stays in your control, remains secure,
+          and is accessible, even offline.
+        </p>
+
+        <!-- START OF ICONS -->
+        <h1
+          class="text-4xl leadi sm:text-2xl xl:max-w-4xl font-inter text-neutral-500"
+        >
+          Apps built on the LFH platform will embody the following:
+        </h1>
+
+        <!-- FIRST -->
+        <div
+          id="why-local-first-health"
+          class="pt-1 pb-5 text-xs text-neutral-600"
+          style="font-family: Arial, sans-serif"
+        >
+          <!-- 1ST ROW OF CARDS -->
+          <div
+            class="flex flex-wrap justify-center max-w-4xl mx-auto mt-0"
+            style="font-family: Arial, sans-serif"
+          >
+            <!-- remvoe comment mode to bring back to default -->
+            <!-- <div class="flex flex-wrap justify-center max-w-5xl mx-auto mt-5"> -->
+            <!-- ITEM 1-->
+            <div class="w-full px-4 md:w-1/2 lg:w-1/3">
+              <div class="max-w-xs p-5 mx-auto">
+                <img
+                  src="../assets/images/why-local-first-health-lab-tech-no-subscription.png"
+                  alt="No Subscription"
+                  class="w-40 mx-auto"
+                />
+                <h3 class="mt-4 mb-2 text-2xl font-medium text-center">
+                  No Subscription
+                </h3>
+                <p class="text-base text-center">
+                  Requires no subscription - no monthly fees, no hidden costs.
+                </p>
+              </div>
+            </div>
+
+            <!-- ITEM 2-->
+            <div class="w-full px-4 md:w-1/2 lg:w-1/3">
+              <div class="max-w-xs p-5 mx-auto">
+                <img
+                  src="../assets/images/why-local-first-health-mission-doctor-work-offline.png"
+                  alt="Works Offline"
+                  class="w-40 mx-auto"
+                />
+                <h3 class="mt-4 mb-2 text-2xl font-medium text-center">
+                  Works Offline
+                </h3>
+                <p class="text-base text-center">
+                  Works anywhere even without an internet connection.
+                </p>
+              </div>
+            </div>
+
+            <!-- ITEM 3-->
+            <div class="w-full px-4 md:w-1/2 lg:w-1/3">
+              <div class="max-w-xs p-5 mx-auto">
+                <img
+                  src="../assets/images/why-local-first-health-doctor-own-data.png"
+                  alt="Own Your Data"
+                  class="w-40 mx-auto"
+                />
+                <h3 class="mt-4 mb-2 text-2xl font-medium text-center">
+                  Own Your Data
+                </h3>
+                <p class="text-base text-center">
+                  our data stays with you, fully controlled and always
+                  accessible.
+                </p>
+              </div>
+            </div>
+
+            <!-- 2ND ROW OF CARDS -->
+            <!-- ITEM 1-->
+            <div class="w-full px-4 md:w-1/2 lg:w-1/3">
+              <div class="max-w-xs p-5 mx-auto">
+                <img
+                  src="../assets/images/why-local-first-health-doctor-own-the-software.png"
+                  alt="Own the Software"
+                  class="w-40 mx-auto"
+                />
+                <h3 class="mt-4 mb-2 text-2xl font-medium text-center">
+                  Own the Software
+                </h3>
+                <p class="text-base text-center">
+                  Gives you full ownership, so you control the software without
+                  relying on external providers.
+                </p>
+              </div>
+            </div>
+            <!-- ITEM 2 -->
+            <div class="w-full px-4 md:w-1/2 lg:w-1/3">
+              <div class="max-w-xs p-5 mx-auto">
+                <img
+                  src="../assets/images/why-local-first-health-mission-nurse-compliant.png"
+                  alt="Compliant"
+                  class="w-40 mx-auto"
+                />
+                <h3 class="mt-4 mb-2 text-2xl font-medium text-center">
+                  Compliant
+                </h3>
+                <p class="text-base text-center">
+                  Built to meet security industry standards. Also HIPAA
+                  compliant.
+                </p>
+              </div>
+            </div>
+
+            <!-- ITEM 3-->
+            <div class="w-full px-4 md:w-1/2 lg:w-1/3">
+              <div class="max-w-xs p-5 mx-auto">
+                <img
+                  src="../assets/images/why-local-first-health-doctor-data-privacy.png"
+                  alt="True Privacy"
+                  class="w-40 mx-auto"
+                />
+                <h3 class="mt-4 mb-2 text-2xl font-medium text-center">
+                  True Privacy
+                </h3>
+                <p class="text-base text-center">
+                  Keeps your data private, with no third-party access or
+                  unnecessary sharing.
+                </p>
+              </div>
+            </div>
+            <!-- START OF 3RD ROW -->
+            <!-- ITEM 1-->
+            <div class="w-full px-4 md:w-1/2 lg:w-1/3">
+              <div class="max-w-xs p-5 mx-auto">
+                <img
+                  src="../assets/images/why-local-first-health-nurse-secure.png"
+                  alt="Secure"
+                  class="w-40 mx-auto"
+                />
+                <h3 class="mt-4 mb-2 text-2xl font-medium text-center">
+                  Secure
+                </h3>
+                <p class="text-base text-center">
+                  Encryption + security features that protect your data from
+                  breaches and unauthorized access.
+                </p>
+              </div>
+            </div>
+
+            <!-- ITEM 2 -->
+            <div class="w-full px-4 md:w-1/2 lg:w-1/3">
+              <div class="max-w-xs p-5 mx-auto">
+                <img
+                  src="../assets/images/why-local-first-health-mission-doctor-super.png"
+                  alt="Powerful"
+                  class="w-40 mx-auto"
+                />
+                <h3 class="mt-4 mb-2 text-2xl font-medium text-center">
+                  Powerful
+                </h3>
+                <p class="text-base text-center">
+                  Equipped with advanced tools to handle all your healthcare
+                  needs efficiently.
+                </p>
+              </div>
+            </div>
+
+            <!-- ITEM 3-->
+            <div class="w-full px-4 md:w-1/2 lg:w-1/3">
+              <div class="max-w-xs p-5 mx-auto">
+                <img
+                  src="../assets/images/why-local-first-health-mission-lab-tech-fast.png"
+                  alt="Fast"
+                  class="w-40 mx-auto"
+                />
+                <h3 class="mt-4 mb-2 text-2xl font-medium text-center">Fast</h3>
+                <p class="text-base text-center">
+                  Delivers fast performance, free from server lag or internet
+                  slowdowns.
+                </p>
+              </div>
+            </div>
+
+            <!-- START of 4th ROW -->
+            <!-- ITEM 1-->
+            <div class="w-full px-4 md:w-1/2 lg:w-1/3">
+              <div class="max-w-xs p-5 mx-auto">
+                <img
+                  src="../assets/images/why-local-first-health-pharmacist-collaborate.png"
+                  alt="Collaborate"
+                  class="w-40 mx-auto"
+                />
+                <h3 class="mt-4 mb-2 text-2xl font-medium text-center">
+                  Collaborate
+                </h3>
+                <p class="text-base text-center">
+                  Allows seamless collaboration while keeping your data secure
+                  and private.
+                </p>
+              </div>
+            </div>
+
+            <!-- ITEM 2 -->
+            <div class="w-full px-4 md:w-1/2 lg:w-1/3">
+              <div class="max-w-xs p-5 mx-auto">
+                <img
+                  src="../assets/images/why-local-first-health-mission-nurse-synced.png"
+                  alt="Synchronize"
+                  class="w-40 mx-auto"
+                />
+                <h3 class="mt-4 mb-2 text-2xl font-medium text-center">
+                  Synchronize
+                </h3>
+                <p class="text-base text-center">
+                  Syncs your data across all your devices effortlessly, ensuring
+                  everything is up-to-date.
+                </p>
+              </div>
+            </div>
+
+            <!-- ITEM 3 -->
+            <div class="w-full px-4 md:w-1/2 lg:w-1/3">
+              <div class="max-w-xs p-5 mx-auto">
+                <img
+                  src="../assets/images/why-local-first-health-mission-lab-tech-decentralized.png"
+                  alt="Decentralized"
+                  class="w-40 mx-auto"
+                />
+                <h3 class="mt-4 mb-2 text-2xl font-medium text-center">
+                  Decentralized
+                </h3>
+                <p class="text-base text-center">
+                  No single point of failure—your data is always within your
+                  reach.
+                </p>
+              </div>
+            </div>
+
+            <!-- START of 5th ROW -->
+            <!-- ITEM 1-->
+            <div class="w-full px-4 mb-20 md:w-1/2 lg:w-1/3">
+              <div class="max-w-xs p-5 mx-auto">
+                <img
+                  src="../assets/images/why-local-first-health-mission-pharmacist-open.png"
+                  alt="Open"
+                  class="w-40 mx-auto"
+                />
+                <h3 class="mt-4 mb-2 text-2xl font-medium text-center">Open</h3>
+                <p class="text-base text-center">
+                  Built on an open-source foundation, allowing for customization
+                  and transparency.
+                </p>
+              </div>
+            </div>
+
+            <!-- ITEM 2 -->
+            <div class="w-full px-4 md:w-1/2 lg:w-1/3">
+              <div class="max-w-xs p-5 mx-auto">
+                <img
+                  src="../assets/images/why-local-first-health-mission-pharma-affordable.png"
+                  alt="Affordable"
+                  class="w-40 mx-auto"
+                />
+                <h3 class="mt-4 mb-2 text-2xl font-medium text-center">
+                  Affordable
+                </h3>
+                <p class="text-base text-center">
+                  Designed to be cost-effective, making advanced healthcare
+                  technology accessible to everyone.
+                </p>
+              </div>
+            </div>
+
+            <!-- ITEM 3 -->
+            <div class="w-full px-4 md:w-1/2 lg:w-1/3">
+              <div class="max-w-xs p-5 mx-auto">
+                <img
+                  src="../assets/images/why-local-first-health-lab-tech-freedom.png"
+                  alt="Freedom"
+                  class="w-40 mx-auto"
+                />
+                <h3 class="mt-4 mb-2 text-2xl font-medium text-center">
+                  Freedom
+                </h3>
+                <p class="text-base text-center">
+                  Gives you the freedom to use the software your way, with no
+                  restrictions or vendor lock-in.
+                </p>
+              </div>
+            </div>
+            <!-- END OF CARDS -->
+          </div>
+        </div>
+
+        <!-- END Of Test -->
+
+        <!-- LINE -->
+        <div class="w-3/4 my-8 border-t border-gray-300"></div>
+
+        <!-- HEALTH SUITE -->
+        <p
+          class="mt-10 text-xl sm:mb-1 xl:max-w-3xl font-inter"
+          id="health-suite"
+        >
           The First & Only 'Local-First' Health Management Suite
         </p>
         <h1
@@ -165,8 +950,13 @@ function eraseText() {
         </h1>
         <div class="custom-container">
           <h1 class="items-center custom-heading font-inter">
+            <!-- Display the typed text -->
             <span class="typed-text">{{ typeValue }}</span>
+
+            <!-- Blinking cursor -->
             <span class="blinking-cursor">|</span>
+
+            <!-- Optional cursor that changes class based on typeStatus -->
             <span class="cursor" :class="{ typing: typeStatus }">&nbsp;</span>
           </h1>
         </div>
@@ -179,11 +969,8 @@ function eraseText() {
             type="button"
             class="px-8 py-3 m-2 text-lg border border-gray-800 rounded"
           >
-            <a
-              href="#local_first"
-              style="text-decoration: none; color: inherit"
-            >
-              What is Local-First?
+            <a style="text-decoration: none; color: inherit">
+              Coming Soon. Join the Waitlist.
             </a>
           </button>
         </div>
@@ -240,40 +1027,29 @@ function eraseText() {
 
     <!-- HEALTH SUITE ENDS HERE -->
 
-    <!-- VIDEO HERE -->
-    <!-- <div
-      class="container flex flex-col items-center px-4 py-8 pb-4 mx-auto mt-8 text-center md:py-16 md:-mt-40 md:pb-8 lg:pb-8 md:py-32 md:px-10 lg:px-32"
-    >
-      <video
-        src="../assets/images/easy-joey-1.mp4"
-        autoplay
-        loop
-        muted
-        class="w-full mx-auto mt-4 mb-8 border-0 border-gray-800 shadow-2xl md:max-w-5xl md:mb-10 md:mt-20 rounded-3xl"
-      ></video>
-    </div> -->
     <!-- TRUE PRIVACY AND DATA FREEDOM -->
     <div
       class="container flex flex-col items-center px-4 pb-8 mx-auto text-center text-gray-900 lg:pb-8 md:py-10 md:px-10 lg:px-32"
       id="true-privacy"
     >
-      <img
+      <!-- <img
         src="../assets/images/local-first-health-logo-location.png"
         alt="Small Image"
         class="inline-block mt-0 mb-2"
         style="height: 100px; width: auto"
-      />
+      /> -->
       <h1
         class="mt-5 text-6xl font-bold leadi sm:text-5xl xl:max-w-4xl font-inter"
       >
         True Privacy and Data Freedom
       </h1>
-      <p class="max-w-3xl mx-auto mt-4 text-2xl font-inter">
-        <b>Our healthcare systems are broken.</b> Despite technological
-        advances, medical records remain vulnerable and out of users' control,
-        stored in third-party clouds and exposed to breaches. It's time to put
-        data ownership and management back where they belong—in the hands of
-        healthcare providers and patients.
+      <p class="max-w-4xl mx-auto mt-4 text-2xl font-inter">
+        With Local First Health (LFH), true privacy means your health data stays
+        on your device, under your control—no third-party servers, no
+        unnecessary risks. You have full data freedom, working offline,
+        accessing records anytime, and deciding when and how to share
+        information. It's privacy and freedom the way it should be: secure,
+        accessible, and entirely yours.
       </p>
     </div>
     <!-- END OF TRUE PRIVACY -->
@@ -290,452 +1066,7 @@ function eraseText() {
       ></video>
     </div>
     <!-- end of video -->
-    <!-- START OF WHY LFH -->
-    <div
-      class="container flex flex-col items-center max-w-md p-6 mx-auto text-gray-900 bg-white lg:max-w-5xl rounded-3xl"
-      id="whylfh"
-    >
-      <div class="text-center">
-        <h1
-          class="mt-10 text-6xl font-bold leadi sm:text-3xl xl:max-w-4xl font-inter"
-        >
-          Why Local-First Health?
-        </h1>
-      </div>
 
-      <!-- FIRST -->
-      <div
-        id="why-local-first-health"
-        class="pt-1 pb-5 text-xs text-neutral-600"
-        style="font-family: Arial, sans-serif"
-      >
-        <!-- 1ST ROW OF CARDS -->
-        <div
-          class="flex flex-wrap justify-center max-w-5xl mx-auto mt-5"
-          style="font-family: Arial, sans-serif"
-        >
-          <!-- remvoe comment mode to bring back to default -->
-          <!-- <div class="flex flex-wrap justify-center max-w-5xl mx-auto mt-5"> -->
-          <!-- ITEM 1-->
-          <div class="w-full px-4 md:w-1/2 lg:w-1/3">
-            <div class="max-w-xs p-5 mx-auto">
-              <img
-                src="../assets/images/why-local-first-health-lab-tech-no-subscription.png"
-                alt="No Subscription"
-                class="w-40 mx-auto"
-              />
-              <h3
-                class="mt-4 mb-2 text-2xl font-medium text-center text-sky-600"
-              >
-                No Subscription
-              </h3>
-              <p class="text-base text-center">
-                <b class="font-bold">LFH Apps</b> requires no subscription - no
-                monthly fees, no hidden costs.
-              </p>
-            </div>
-          </div>
-
-          <!-- ITEM 2-->
-          <div class="w-full px-4 md:w-1/2 lg:w-1/3">
-            <div class="max-w-xs p-5 mx-auto">
-              <img
-                src="../assets/images/why-local-first-health-mission-doctor-work-offline.png"
-                alt="Works Offline"
-                class="w-40 mx-auto"
-              />
-              <h3
-                class="mt-4 mb-2 text-2xl font-medium text-center text-sky-600"
-              >
-                Works Offline
-              </h3>
-              <p class="text-base text-center">
-                <b class="font-bold">LFH Apps</b> work anywhere even without an
-                internet connection.
-              </p>
-            </div>
-          </div>
-
-          <!-- ITEM 3-->
-          <div class="w-full px-4 md:w-1/2 lg:w-1/3">
-            <div class="max-w-xs p-5 mx-auto">
-              <img
-                src="../assets/images/why-local-first-health-doctor-own-data.png"
-                alt="Own Your Data"
-                class="w-40 mx-auto"
-              />
-              <h3
-                class="mt-4 mb-2 text-2xl font-medium text-center text-sky-600"
-              >
-                Own Your Data
-              </h3>
-              <p class="text-base text-center">
-                With <b class="font-bold">LFH Apps,</b> your data stays with
-                you, fully controlled and always accessible.
-              </p>
-            </div>
-          </div>
-
-          <!-- 2ND ROW OF CARDS -->
-          <!-- ITEM 1-->
-          <div class="w-full px-4 md:w-1/2 lg:w-1/3">
-            <div class="max-w-xs p-5 mx-auto">
-              <img
-                src="../assets/images/why-local-first-health-doctor-own-the-software.png"
-                alt="Own the Software"
-                class="w-40 mx-auto"
-              />
-              <h3
-                class="mt-4 mb-2 text-2xl font-medium text-center text-sky-600"
-              >
-                Own the Software
-              </h3>
-              <p class="text-base text-center">
-                <b class="font-bold">LFH Apps</b> gives you full ownership, so
-                you control the software without relying on external providers.
-              </p>
-            </div>
-          </div>
-          <!-- ITEM 2 -->
-          <div class="w-full px-4 md:w-1/2 lg:w-1/3">
-            <div class="max-w-xs p-5 mx-auto">
-              <img
-                src="../assets/images/why-local-first-health-mission-nurse-compliant.png"
-                alt="Compliant"
-                class="w-40 mx-auto"
-              />
-              <h3
-                class="mt-4 mb-2 text-2xl font-medium text-center text-sky-600"
-              >
-                Compliant
-              </h3>
-              <p class="text-base text-center">
-                <b class="font-bold">LFH Apps</b> are built to meet industry
-                standards and regulations, ensuring compliance and peace of
-                mind.
-              </p>
-            </div>
-          </div>
-
-          <!-- ITEM 3-->
-          <div class="w-full px-4 md:w-1/2 lg:w-1/3">
-            <div class="max-w-xs p-5 mx-auto">
-              <img
-                src="../assets/images/why-local-first-health-doctor-data-privacy.png"
-                alt="True Privacy"
-                class="w-40 mx-auto"
-              />
-              <h3
-                class="mt-4 mb-2 text-2xl font-medium text-center text-sky-600"
-              >
-                True Privacy
-              </h3>
-              <p class="text-base text-center">
-                <b class="font-bold">LFH Apps</b> keep your data private, with
-                no third-party access or unnecessary sharing.
-              </p>
-            </div>
-          </div>
-          <!-- START OF 3RD ROW -->
-          <!-- ITEM 1-->
-          <div class="w-full px-4 md:w-1/2 lg:w-1/3">
-            <div class="max-w-xs p-5 mx-auto">
-              <img
-                src="../assets/images/why-local-first-health-nurse-secure.png"
-                alt="Secure"
-                class="w-40 mx-auto"
-              />
-              <h3
-                class="mt-4 mb-2 text-2xl font-medium text-center text-sky-600"
-              >
-                Secure
-              </h3>
-              <p class="text-base text-center">
-                <b class="font-bold">LFH Apps</b> provide robust security
-                features that protect your data from breaches and unauthorized
-                access.
-              </p>
-            </div>
-          </div>
-
-          <!-- ITEM 2 -->
-          <div class="w-full px-4 md:w-1/2 lg:w-1/3">
-            <div class="max-w-xs p-5 mx-auto">
-              <img
-                src="../assets/images/why-local-first-health-mission-doctor-super.png"
-                alt="Powerful"
-                class="w-40 mx-auto"
-              />
-              <h3
-                class="mt-4 mb-2 text-2xl font-medium text-center text-sky-600"
-              >
-                Powerful
-              </h3>
-              <p class="text-base text-center">
-                <b class="font-bold">LFH Apps</b> are equipped with advanced
-                tools to handle all your healthcare needs efficiently.
-              </p>
-            </div>
-          </div>
-
-          <!-- ITEM 3-->
-          <div class="w-full px-4 md:w-1/2 lg:w-1/3">
-            <div class="max-w-xs p-5 mx-auto">
-              <img
-                src="../assets/images/why-local-first-health-mission-lab-tech-fast.png"
-                alt="Fast"
-                class="w-40 mx-auto"
-              />
-              <h3
-                class="mt-4 mb-2 text-2xl font-medium text-center text-sky-600"
-              >
-                Fast
-              </h3>
-              <p class="text-base text-center">
-                <b class="font-bold">LFH Apps</b> deliver lightning-fast
-                performance, free from server lag or internet slowdowns.
-              </p>
-            </div>
-          </div>
-
-          <!-- START of 4th ROW -->
-          <!-- ITEM 1-->
-          <div class="w-full px-4 md:w-1/2 lg:w-1/3">
-            <div class="max-w-xs p-5 mx-auto">
-              <img
-                src="../assets/images/why-local-first-health-pharmacist-collaborate.png"
-                alt="Collaborate"
-                class="w-40 mx-auto"
-              />
-              <h3
-                class="mt-4 mb-2 text-2xl font-medium text-center text-sky-600"
-              >
-                Collaborate
-              </h3>
-              <p class="text-base text-center">
-                <b class="font-bold">LFH Apps</b> allow seamless collaboration
-                while keeping your data secure and private.
-              </p>
-            </div>
-          </div>
-
-          <!-- ITEM 2 -->
-          <div class="w-full px-4 md:w-1/2 lg:w-1/3">
-            <div class="max-w-xs p-5 mx-auto">
-              <img
-                src="../assets/images/why-local-first-health-mission-nurse-synced.png"
-                alt="Synchronize"
-                class="w-40 mx-auto"
-              />
-              <h3
-                class="mt-4 mb-2 text-2xl font-medium text-center text-sky-600"
-              >
-                Synchronize
-              </h3>
-              <p class="text-base text-center">
-                <b class="font-bold">LFH Apps</b> sync your data across all your
-                devices effortlessly, ensuring everything is up-to-date.
-              </p>
-            </div>
-          </div>
-
-          <!-- ITEM 3 -->
-          <div class="w-full px-4 md:w-1/2 lg:w-1/3">
-            <div class="max-w-xs p-5 mx-auto">
-              <img
-                src="../assets/images/why-local-first-health-mission-lab-tech-decentralized.png"
-                alt="Decentralized"
-                class="w-40 mx-auto"
-              />
-              <h3
-                class="mt-4 mb-2 text-2xl font-medium text-center text-sky-600"
-              >
-                Decentralized
-              </h3>
-              <p class="text-base text-center">
-                <b class="font-bold">LFH Apps</b> are decentralized, meaning no
-                single point of failure—your data is always within your reach.
-              </p>
-            </div>
-          </div>
-
-          <!-- START of 5th ROW -->
-          <!-- ITEM 1-->
-          <div class="w-full px-4 mb-20 md:w-1/2 lg:w-1/3">
-            <div class="max-w-xs p-5 mx-auto">
-              <img
-                src="../assets/images/why-local-first-health-mission-pharmacist-open.png"
-                alt="Open"
-                class="w-40 mx-auto"
-              />
-              <h3
-                class="mt-4 mb-2 text-2xl font-medium text-center text-sky-600"
-              >
-                Open
-              </h3>
-              <p class="text-base text-center">
-                <b class="font-bold">LFH Apps</b> are built on an open-source
-                foundation, allowing for customization and transparency.
-              </p>
-            </div>
-          </div>
-
-          <!-- ITEM 2 -->
-          <div class="w-full px-4 md:w-1/2 lg:w-1/3">
-            <div class="max-w-xs p-5 mx-auto">
-              <img
-                src="../assets/images/why-local-first-health-mission-pharma-affordable.png"
-                alt="Affordable"
-                class="w-40 mx-auto"
-              />
-              <h3
-                class="mt-4 mb-2 text-2xl font-medium text-center text-sky-600"
-              >
-                Affordable
-              </h3>
-              <p class="text-base text-center">
-                <b class="font-bold">LFH Apps</b> are designed to be
-                cost-effective, making advanced healthcare technology accessible
-                to everyone.
-              </p>
-            </div>
-          </div>
-
-          <!-- ITEM 3 -->
-          <div class="w-full px-4 md:w-1/2 lg:w-1/3">
-            <div class="max-w-xs p-5 mx-auto">
-              <img
-                src="../assets/images/why-local-first-health-lab-tech-freedom.png"
-                alt="Freedom"
-                class="w-40 mx-auto"
-              />
-              <h3
-                class="mt-4 mb-2 text-2xl font-medium text-center text-sky-600"
-              >
-                Freedom
-              </h3>
-              <p class="text-base text-center">
-                <b class="font-bold">LFH Apps</b> give you the freedom to use
-                the software your way, with no restrictions or vendor lock-in.
-              </p>
-            </div>
-          </div>
-          <!-- END OF CARDS -->
-        </div>
-      </div>
-    </div>
-    <!-- END OF EHY LFH -->
-
-    <!-- START OF What is LF? -->
-    <div
-      class="container max-w-xl p-6 py-12 mx-auto mb-20 space-y-24 bg-amber-100 lg:px-8 lg:max-w-5xl rounded-3xl"
-    >
-      <div id="local_first">
-        <h2
-          class="text-3xl font-bold text-center tracki sm:text-5xl text-neutral font-inter"
-        >
-          What is Local-First?
-        </h2>
-        <p class="max-w-3xl mx-auto mt-4 text-xl text-center font-inter">
-          Local-First is a software paradigm that ensures data stays on users’
-          devices, offering full control, privacy, and offline access. Unlike
-          cloud-based systems that rely on third-party servers, Local-First
-          combines the local storage of the pre-cloud era with modern sync
-          capabilities, enabling seamless collaboration without sacrificing data
-          ownership.
-          <!-- <em>
-            <small>
-              * Ink & Switch's
-
-              <a
-                href="https://www.inkandswitch.com/local-first/"
-                target="_blank"
-                ><u> research paper</u></a
-              >
-
-              has been key in defining and solidifying this concept.
-            </small>
-          </em> -->
-        </p>
-        <!-- 3 images -->
-        <div
-          class="grid w-full max-w-5xl grid-cols-1 gap-4 mx-auto mt-10 sm:grid-cols-2 lg:grid-cols-3"
-        >
-          <div class="w-full h-auto">
-            <img
-              src="~/assets/images/diagram-local-first-pre-cloud.png"
-              alt="Image 1"
-              class="object-cover w-full h-full border border-gray-200"
-            />
-          </div>
-
-          <div class="w-full h-auto">
-            <img
-              src="~/assets/images/diagram-local-first-cloud-era.png"
-              alt="Image 2"
-              class="object-cover w-full h-full border border-gray-200"
-            />
-          </div>
-
-          <div class="w-full h-auto">
-            <img
-              src="~/assets/images/diagram-local-first-local-first-era.png"
-              alt="Image 3"
-              class="object-cover w-full h-full border border-gray-200"
-            />
-          </div>
-        </div>
-        <!-- end of 3 images -->
-        <!-- xxxx -->
-        <div class="flex flex-col items-center mt-20">
-          <img
-            src="../assets/images/local-first-health-ink-switch-paper.png"
-            alt="Ink & Switch Paper"
-            class="inline-block my-2"
-            style="height: auto; width: 600px"
-          />
-
-          <p
-            class="max-w-xl mx-auto mt-4 text-xl text-justify text-neutral-600"
-          >
-            The concept was introduced in a 2019 whitepaper by Ink & Switch
-            titled
-            <a
-              href="https://www.inkandswitch.com/local-first/"
-              class="underline text-sky-600"
-              target="_blank"
-              >"Local-first software: You own your data, in spite of the
-              cloud."</a
-            >
-            , a pivotal document outlining seven key principles.
-            <br /><br />
-          </p>
-        </div>
-
-        <div class="flex flex-col items-center mt-10">
-          <img
-            src="../assets/images/local-first-health-wired-magazine.png"
-            alt="Wired Mag Local-First"
-            class="inline-block my-2"
-            style="height: auto; width: 600px"
-          />
-
-          <p class="max-w-xl mx-auto mt-4 text-xl text-center text-neutral-600">
-            Even Wired Magazine featured an
-            <a
-              href="https://www.wired.com/story/the-cloud-is-a-prison-can-the-local-first-software-movement-set-us-free/"
-              class="underline text-sky-600"
-              target="_blank"
-              >article</a
-            >
-            on Local-First <br />(August 2023).
-          </p>
-        </div>
-        <!-- xxxx -->
-      </div>
-    </div>
-
-    <!-- END OF What is LF? -->
     <!-- START of Our Story -->
     <div class="container max-w-xl p-6 mx-auto lg:max-w-7xl" id="our-story">
       <div class="text-center" id="our_story">
@@ -868,7 +1199,7 @@ function eraseText() {
     <footer class="px-4 divide-y">
       <div class="flex flex-col items-center py-6">
         <img
-          src="../assets/images/local-first-health-logo-location.png"
+          src="../assets/images/local-first-health-logo-location-brown.png"
           alt="Local First Health Logo"
           class="w-auto h-10 mb-2"
         />
@@ -881,6 +1212,16 @@ function eraseText() {
       </div>
     </footer>
     <!-- END OF FOOTER -->
+    <!-- TEST TEST TEST FOR SECOND PAGE LINK-->
+    <!-- <nuxt-link to="/dentalemon" class="block mt-5">
+      <img
+        src="~/assets/images/local-first-health-suite-easy-joey.png"
+        alt="Dental Page Icon"
+        class="w-16 h-16 mx-auto"
+      />
+      <p class="mt-2 text-lg">Go to Dental Page</p>
+    </nuxt-link> -->
+    <!-- END OF TEST -->
   </section>
 </template>
 
@@ -934,7 +1275,7 @@ function eraseText() {
 }
 
 .blinking-cursor {
-  font-size: 2.5rem;
+  font-size: 2rem;
   color: #2c3e50;
   -webkit-animation: 1s blink step-end infinite;
   -moz-animation: 1s blink step-end infinite;

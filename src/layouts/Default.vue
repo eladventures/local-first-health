@@ -16,7 +16,7 @@
             alt="Your Logo"
             class="object-contain w-auto h-12 mt-3 dark:text-default-400"
           />
-          <p class="mt-4 text-xl text-zinc-500">
+          <p class="mt-4 ml-3 text-xl text-stone-600">
             <b>Local First Health</b>
           </p>
         </a>
@@ -25,25 +25,34 @@
           <li class="flex">
             <a
               rel="noopener noreferrer"
-              href="#true-privacy"
+              href="#cloud"
               class="flex items-center px-4 -mb-1 dark:border-transparent"
-              >True Privacy</a
+              >Cloud Problem</a
             >
           </li>
           <li class="flex">
             <a
               rel="noopener noreferrer"
-              href="#whylfh"
+              href="#local-first"
               class="flex items-center px-4 -mb-1 dark:border-transparent dark:text-default-400 dark:border-default-400"
-              >Why Local First Health</a
+              >Local-First</a
             >
           </li>
           <li class="flex">
             <a
               rel="noopener noreferrer"
-              href="#local_first"
+              href="#local-first-health"
               class="flex items-center px-4 -mb-1 dark:border-transparent dark:text-default-400 dark:border-default-400"
-              >What is Local-First</a
+              >Local First Health</a
+            >
+          </li>
+
+          <li class="flex">
+            <a
+              rel="noopener noreferrer"
+              href="#health-suite"
+              class="flex items-center px-4 -mb-1 dark:border-transparent dark:text-default-400 dark:border-default-400"
+              >Health Suite</a
             >
           </li>
 
