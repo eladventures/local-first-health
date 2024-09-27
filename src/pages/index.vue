@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, nextTick } from "vue";
 import { useHead } from "#imports";
 import { definePageMeta } from "#imports";
 // import GenericPanel from "~/components/commons/GenericPanel";
@@ -75,20 +75,185 @@ function eraseText() {
     setTimeout(typeText, typingSpeed.value + 1000);
   }
 }
+//START OF MODAL for WAITLIST
+// Create refs to control modal visibility and widget load status
+const showWaitlist = ref(false);
+const isWidgetLoaded = ref(false); // Track if the widget has been loaded
+
+// Method to show the modal and load the waitlist widget when the button is clicked
+const triggerWaitlist = async () => {
+  showWaitlist.value = true; // Show the modal
+
+  // Wait for the DOM to update before loading the widget
+  await nextTick();
+
+  // Clear any previous instance of the widget to ensure a fresh load
+  const existingWidget = document.getElementById("getWaitlistContainer");
+  if (existingWidget) {
+    existingWidget.innerHTML = ""; // Clear previous widget content if exists
+  }
+
+  // Always reload the CSS and script dynamically when the modal is opened
+  const cssLink = document.createElement("link");
+  cssLink.rel = "stylesheet";
+  cssLink.href =
+    "https://prod-waitlist-widget.s3.us-east-2.amazonaws.com/getwaitlist.min.css";
+  document.head.appendChild(cssLink);
+
+  // Reload the waitlist widget JavaScript dynamically
+  const script = document.createElement("script");
+  script.src = `https://prod-waitlist-widget.s3.us-east-2.amazonaws.com/getwaitlist.min.js?cacheBust=${new Date().getTime()}`;
+  script.async = true;
+  script.onload = () => {
+    isWidgetLoaded.value = true; // Mark the widget as loaded
+  };
+  document.body.appendChild(script);
+};
+
+// Method to close the modal and clean up the widget
+const closeModal = () => {
+  showWaitlist.value = false; // Hide the modal
+
+  // Properly clean up the widget content
+  const widgetContainer = document.getElementById("getWaitlistContainer");
+  if (widgetContainer) {
+    widgetContainer.innerHTML = ""; // Clear widget container
+  }
+
+  // Optionally, remove the script and link tags for complete cleanup
+  const cssLink = document.querySelector('link[href*="getwaitlist.min.css"]');
+  const scriptTag = document.querySelector('script[src*="getwaitlist.min.js"]');
+  if (cssLink) cssLink.remove();
+  if (scriptTag) scriptTag.remove();
+
+  isWidgetLoaded.value = false; // Reset widget load state
+};
 </script>
 
 <template>
-  <!-- HERO PANEL -->
   <!-- Animation souce  https://dev.to/gayathri_r/how-to-add-a-typewriter-animation-in-vuejs-43kj -->
-
-  <!-- <section class="bg-gray-100"> -->
   <section class="bg-white">
     <div>
       <div
-        class="container flex flex-col items-center px-4 pt-16 pb-8 mx-auto text-center text-gray-900 lg:pb-8 md:py-32 md:px-10 lg:px-32"
+        class="container flex flex-col items-center px-4 pt-16 pb-8 mx-auto text-center text-gray-900 lg:pb-8 md:py-10 md:px-10 lg:px-32"
       >
-        <!-- HERO TITLE Section -->
+        <!-- Hero Panel -->
+        <div
+          class="flex justify-center w-full px-5 pb-20 mt-5 overflow-hidden border-2 border-gray-200 shadow-lg rounded-3xl"
+        >
+          <div class="w-full">
+            <h1 class="mt-10 font-extrabold text-center">
+              <img
+                src="../assets/images/section-local-first-health-doctor-app.png"
+                class="pt-3 w-64 h-auto mx-auto lg:top-[-5rem]"
+                alt="Void"
+              />
+              <span class="block mt-2 text-6xl font-bold"
+                >Build 'Local-First' Health Apps</span
+              >
+            </h1>
+            <div class="custom-container">
+              <h1 class="items-center custom-heading font-inter">
+                <!-- Display the typed text -->
+                <span class="typed-text">{{ typeValue }}</span>
 
+                <!-- Blinking cursor -->
+                <span class="blinking-cursor">|</span>
+
+                <!-- Optional cursor that changes class based on typeStatus -->
+                <span class="cursor" :class="{ typing: typeStatus }"
+                  >&nbsp;</span
+                >
+              </h1>
+            </div>
+            <div class="max-w-4xl py-10 mx-auto text-xl text-center">
+              <p class="mb-2 text-2xl font-inter text-neutral-500">
+                <b>Our health systems are broken. </b><br />Health records
+                should belong to providers and patients—not controlled by third
+                parties. It’s time to reclaim our medical records and build
+                healthcare the way it should be, with true privacy and data
+                freedom securely in our control.
+              </p>
+            </div>
+            <div class="flex items-center justify-center gap-3 mx-auto mt-10">
+              <!-- What is Local-First Button -->
+              <a
+                href="#local-first"
+                class="flex items-center gap-2 px-8 py-3 bg-gray-400 rounded-lg hover:bg-gray-300"
+              >
+                <span class="text-xl font-medium text-white cursor-pointer"
+                  >What is Local-First</span
+                >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="white"
+                  class="size-6"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                  />
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
+                  />
+                </svg>
+              </a>
+              <!-- Star on GitHub Button -->
+              <a
+                href="javascript:void(0);"
+                @click="triggerWaitlist"
+                class="flex items-center gap-2 px-8 py-3 rounded-lg bg-slate-900 hover:bg-slate-700"
+              >
+                <span class="text-xl font-medium text-white cursor-pointer">
+                  Get early access
+                </span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 512 512"
+                  class="w-7 h-7"
+                >
+                  <path
+                    d="M256 32C132.3 32 32 134.9 32 261.7c0 101.5 64.2 187.5 153.2 217.9 1.4.3 2.6.4 3.8.4 8.3 0 11.5-6.1 11.5-11.4 0-5.5-.2-19.9-.3-39.1-8.4 1.9-15.9 2.7-22.6 2.7-43.1 0-52.9-33.5-52.9-33.5-10.2-26.5-24.9-33.6-24.9-33.6-19.5-13.7-.1-14.1 1.4-14.1h.1c22.5 2 34.3 23.8 34.3 23.8 11.2 19.6 26.2 25.1 39.6 25.1 10.5 0 20-3.4 25.6-6 2-14.8 7.8-24.9 14.2-30.7-49.7-5.8-102-25.5-102-113.5 0-25.1 8.7-45.6 23-61.6-2.3-5.8-10-29.2 2.2-60.8 0 0 1.6-.5 5-.5 8.1 0 26.4 3.1 56.6 24.1 17.9-5.1 37-7.6 56.1-7.7 19 .1 38.2 2.6 56.1 7.7 30.2-21 48.5-24.1 56.6-24.1 3.4 0 5 .5 5 .5 12.2 31.6 4.5 55 2.2 60.8 14.3 16.1 23 36.6 23 61.6 0 88.2-52.4 107.6-102.3 113.3 8 7.1 15.2 21.1 15.2 42.5 0 30.7-.3 55.5-.3 63 0 5.4 3.1 11.5 11.4 11.5 1.2 0 2.6-.1 4-.4C415.9 449.2 480 363.1 480 261.7 480 134.9 379.7 32 256 32z"
+                    fill="white"
+                    stroke="black"
+                  />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- END of HERO Panel-->
+
+        <!-- WAITLIST Modal Structure with the widget (hidden initially) -->
+        <div v-if="showWaitlist" class="modal-overlay">
+          <div class="modal-content">
+            <button @click="closeModal" class="close-button">&times;</button>
+
+            <!-- Waitlist Widget Container -->
+            <div
+              id="getWaitlistContainer"
+              data-waitlist_id="20759"
+              data-widget_type="WIDGET_1"
+            ></div>
+          </div>
+        </div>
+
+        <!-- END of WAITLIST MODAL -->
+
+        <!-- END OF HERO Title -->
+        <!-- HERO TITLE Section -->
+        <img
+          src="../assets/images/section-local-first-health-mission-nurse-warning.png"
+          alt="Void"
+          class="w-[200px] h-auto mt-20"
+        />
         <h1
           class="mt-0 text-3xl font-bold leadi sm:text-4xl xl:max-w-3xl font-inter"
         >
@@ -362,8 +527,14 @@ function eraseText() {
         <!-- END OF NEWS CARD -->
 
         <!-- START OF CURRENT PROBLEMS SECTION -->
+
+        <img
+          src="../assets/images/section-local-first-health-mission-nurse-cloud-problem.png"
+          alt="Void"
+          class="w-[200px] h-auto mt-10"
+        />
         <h1
-          class="mt-20 text-3xl font-bold leadi sm:text-4xl xl:max-w-3xl font-inter"
+          class="mt-0 text-3xl font-bold leadi sm:text-4xl xl:max-w-3xl font-inter"
           id="cloud"
         >
           The Cloud Problem
@@ -447,22 +618,17 @@ function eraseText() {
         <!-- END OF PROBLEMS Section -->
 
         <!-- START OF LF SOLUTION-->
-        <div
-          class="container max-w-xl p-6 py-10 mx-auto mt-20 mb-20 space-y-24 bg-gray-100 lg:px-8 lg:max-w-4xl rounded-3xl"
-        >
-          <div id="local-first">
-            <!-- <h1
-              class="mt-10 text-3xl font-bold leadi sm:text-4xl xl:max-w-3xl font-inter"
-            >
-              The Cloud Problem
-            </h1>
 
-            <p
-              class="mt-2 mb-0 text-2xl sm:mb-8 xl:max-w-3xl font-inter text-neutral-500"
-            >
-              Today’s healthcare systems rely heavily on cloud-based setups, and
-              while they offer convenience, they come with significant risks:
-            </p> -->
+        <div
+          class="container flex flex-col items-center justify-center max-w-xl p-6 py-10 mx-auto mt-20 mb-20 space-y-24 bg-gray-100 lg:px-8 lg:max-w-4xl rounded-3xl"
+        >
+          <div id="local-first" class="text-center">
+            <img
+              src="../assets/images/section-local-first-health-mission-nurse-warning.png"
+              alt="Void"
+              class="w-[200px] h-auto mt-0 mx-auto"
+            />
+
             <h2
               class="text-3xl font-bold text-center text-gray-900 tracki sm:text-4xl text-neutral font-inter"
             >
@@ -619,51 +785,74 @@ function eraseText() {
         <!-- END OF What LF SOLUTION -->
 
         <!--START OF LF HEALTH  -->
-        <img
-          src="../assets/images/local-first-health-logo-location-brown.png"
-          alt="Small Image"
-          class="inline-block mt-0 mb-0"
-          style="height: 150px; width: auto"
-        />
-        <h1
-          class="mt-0 text-3xl font-bold leadi sm:text-4xl xl:max-w-3xl font-inter"
-          id="local-first-health"
-        >
-          Introducing: <br />
-          Local First Health
-        </h1>
-
-        <p
-          class="mt-2 mb-0 text-2xl sm:mb-8 xl:max-w-3xl font-inter text-neutral-500"
-        >
-          By applying local-first ideals, we bring you Local First Health
-          (LFH)—a tech initiative transforming healthcare data management. LFH
-          ensures your health information stays in your control, remains secure,
-          and is accessible, even offline.
-        </p>
-
-        <!-- START OF ICONS -->
-        <h1
-          class="text-4xl leadi sm:text-2xl xl:max-w-4xl font-inter text-neutral-500"
-        >
-          Apps built on the LFH platform will embody the following:
-        </h1>
-
-        <!-- FIRST -->
         <div
-          id="why-local-first-health"
-          class="pt-1 pb-5 text-xs text-neutral-600"
-          style="font-family: Arial, sans-serif"
+          class="flex items-center justify-center w-full max-w-5xl px-5 pb-0 mt-20 mb-10 overflow-hidden border-2 border-gray-200 shadow-lg rounded-3xl"
         >
-          <!-- 1ST ROW OF CARDS -->
-          <div
-            class="flex flex-wrap justify-center max-w-4xl mx-auto mt-0"
-            style="font-family: Arial, sans-serif"
-          >
-            <!-- remvoe comment mode to bring back to default -->
-            <!-- <div class="flex flex-wrap justify-center max-w-5xl mx-auto mt-5"> -->
-            <!-- ITEM 1-->
-            <div class="w-full px-4 md:w-1/2 lg:w-1/3">
+          <div class="max-w-3xl text-center">
+            <img
+              src="../assets/images/section-local-first-health-doctor-super.png"
+              alt="Small Image"
+              class="inline-block mt-10 mb-0"
+              style="height: 200px; width: auto"
+            />
+            <h1
+              class="mt-0 text-3xl font-bold sm:text-4xl font-inter"
+              id="local-first-health"
+            >
+              Introducing: <br />
+              Local First Health
+            </h1>
+            <p class="mt-2 mb-0 text-2xl sm:mb-8 font-inter text-neutral-500">
+              Local First Health (LFH) is a tech initiative that leverages
+              local-first principles to solve inefficiencies and security risks
+              in health records management. <br /><br />Introducing Project
+              Loofah—an open-source SDK that empowers developers to easily
+              create custom, local-first health apps, boosting accessibility,
+              speed, security, and data ownership.
+            </p>
+
+            <!-- Star on GitHub Button -->
+            <a
+              href="https://github.com/voideditor/void"
+              class="inline-flex items-center justify-center gap-2 px-8 py-3 mx-auto mt-10 rounded-lg bg-slate-900 hover:bg-slate-700"
+            >
+              <span class="text-xl font-medium text-white cursor-pointer">
+                Get early access on GitHub
+              </span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 512 512"
+                class="w-7 h-7"
+              >
+                <path
+                  d="M256 32C132.3 32 32 134.9 32 261.7c0 101.5 64.2 187.5 153.2 217.9 1.4.3 2.6.4 3.8.4 8.3 0 11.5-6.1 11.5-11.4 0-5.5-.2-19.9-.3-39.1-8.4 1.9-15.9 2.7-22.6 2.7-43.1 0-52.9-33.5-52.9-33.5-10.2-26.5-24.9-33.6-24.9-33.6-19.5-13.7-.1-14.1 1.4-14.1h.1c22.5 2 34.3 23.8 34.3 23.8 11.2 19.6 26.2 25.1 39.6 25.1 10.5 0 20-3.4 25.6-6 2-14.8 7.8-24.9 14.2-30.7-49.7-5.8-102-25.5-102-113.5 0-25.1 8.7-45.6 23-61.6-2.3-5.8-10-29.2 2.2-60.8 0 0 1.6-.5 5-.5 8.1 0 26.4 3.1 56.6 24.1 17.9-5.1 37-7.6 56.1-7.7 19 .1 38.2 2.6 56.1 7.7 30.2-21 48.5-24.1 56.6-24.1 3.4 0 5 .5 5 .5 12.2 31.6 4.5 55 2.2 60.8 14.3 16.1 23 36.6 23 61.6 0 88.2-52.4 107.6-102.3 113.3 8 7.1 15.2 21.1 15.2 42.5 0 30.7-.3 55.5-.3 63 0 5.4 3.1 11.5 11.4 11.5 1.2 0 2.6-.1 4-.4C415.9 449.2 480 363.1 480 261.7 480 134.9 379.7 32 256 32z"
+                  fill="white"
+                  stroke="black"
+                />
+              </svg>
+            </a>
+            <!-- START OF ICONS -->
+            <h1
+              class="mt-20 text-4xl leadi sm:text-2xl xl:max-w-4xl font-inter text-neutral-500"
+            >
+              Start building health apps that can do the following:
+            </h1>
+
+            <!-- FIRST -->
+            <div
+              id="why-local-first-health"
+              class="pt-1 pb-5 text-xs text-neutral-600"
+              style="font-family: Arial, sans-serif"
+            >
+              <!-- 1ST ROW OF CARDS -->
+              <div
+                class="flex flex-wrap justify-center max-w-4xl mx-auto mt-0"
+                style="font-family: Arial, sans-serif"
+              >
+                <!-- remvoe comment mode to bring back to default -->
+                <!-- <div class="flex flex-wrap justify-center max-w-5xl mx-auto mt-5"> -->
+                <!-- ITEM 1-->
+                <!-- <div class="w-full px-4 md:w-1/2 lg:w-1/3">
               <div class="max-w-xs p-5 mx-auto">
                 <img
                   src="../assets/images/why-local-first-health-lab-tech-no-subscription.png"
@@ -677,117 +866,112 @@ function eraseText() {
                   Requires no subscription - no monthly fees, no hidden costs.
                 </p>
               </div>
-            </div>
+            </div> -->
 
-            <!-- ITEM 2-->
-            <div class="w-full px-4 md:w-1/2 lg:w-1/3">
-              <div class="max-w-xs p-5 mx-auto">
-                <img
-                  src="../assets/images/why-local-first-health-mission-doctor-work-offline.png"
-                  alt="Works Offline"
-                  class="w-40 mx-auto"
-                />
-                <h3 class="mt-4 mb-2 text-2xl font-medium text-center">
-                  Works Offline
-                </h3>
-                <p class="text-base text-center">
-                  Works anywhere even without an internet connection.
-                </p>
-              </div>
-            </div>
+                <!-- ITEM 2-->
+                <div class="w-full px-4 md:w-1/2 lg:w-1/3">
+                  <div class="max-w-xs p-5 mx-auto">
+                    <img
+                      src="../assets/images/why-local-first-health-mission-doctor-work-offline.png"
+                      alt="Works Offline"
+                      class="w-40 mx-auto"
+                    />
+                    <h3 class="mt-4 mb-2 text-xl font-medium text-center">
+                      Works Offline
+                    </h3>
+                    <p class="text-base text-center">
+                      Works anywhere even without an internet.
+                    </p>
+                  </div>
+                </div>
 
-            <!-- ITEM 3-->
-            <div class="w-full px-4 md:w-1/2 lg:w-1/3">
-              <div class="max-w-xs p-5 mx-auto">
-                <img
-                  src="../assets/images/why-local-first-health-doctor-own-data.png"
-                  alt="Own Your Data"
-                  class="w-40 mx-auto"
-                />
-                <h3 class="mt-4 mb-2 text-2xl font-medium text-center">
-                  Own Your Data
-                </h3>
-                <p class="text-base text-center">
-                  our data stays with you, fully controlled and always
-                  accessible.
-                </p>
-              </div>
-            </div>
+                <!-- ITEM 3-->
+                <div class="w-full px-4 md:w-1/2 lg:w-1/3">
+                  <div class="max-w-xs p-5 mx-auto">
+                    <img
+                      src="../assets/images/why-local-first-health-doctor-own-data.png"
+                      alt="Own Your Data"
+                      class="w-40 mx-auto"
+                    />
+                    <h3 class="mt-4 mb-2 text-xl font-medium text-center">
+                      Own Your Data
+                    </h3>
+                    <p class="text-base text-center">
+                      Data stays with you, always accessible.
+                    </p>
+                  </div>
+                </div>
 
-            <!-- 2ND ROW OF CARDS -->
-            <!-- ITEM 1-->
-            <div class="w-full px-4 md:w-1/2 lg:w-1/3">
-              <div class="max-w-xs p-5 mx-auto">
-                <img
-                  src="../assets/images/why-local-first-health-doctor-own-the-software.png"
-                  alt="Own the Software"
-                  class="w-40 mx-auto"
-                />
-                <h3 class="mt-4 mb-2 text-2xl font-medium text-center">
-                  Own the Software
-                </h3>
-                <p class="text-base text-center">
-                  Gives you full ownership, so you control the software without
-                  relying on external providers.
-                </p>
-              </div>
-            </div>
-            <!-- ITEM 2 -->
-            <div class="w-full px-4 md:w-1/2 lg:w-1/3">
-              <div class="max-w-xs p-5 mx-auto">
-                <img
-                  src="../assets/images/why-local-first-health-mission-nurse-compliant.png"
-                  alt="Compliant"
-                  class="w-40 mx-auto"
-                />
-                <h3 class="mt-4 mb-2 text-2xl font-medium text-center">
-                  Compliant
-                </h3>
-                <p class="text-base text-center">
-                  Built to meet security industry standards. Also HIPAA
-                  compliant.
-                </p>
-              </div>
-            </div>
+                <!-- 2ND ROW OF CARDS -->
+                <!-- ITEM 1-->
+                <div class="w-full px-4 md:w-1/2 lg:w-1/3">
+                  <div class="max-w-xs p-5 mx-auto">
+                    <img
+                      src="../assets/images/why-local-first-health-doctor-own-the-software.png"
+                      alt="Own the Software"
+                      class="w-40 mx-auto"
+                    />
+                    <h3 class="mt-4 mb-2 text-xl font-medium text-center">
+                      Own the Software
+                    </h3>
+                    <p class="text-base text-center">
+                      Full control & management.
+                    </p>
+                  </div>
+                </div>
+                <!-- ITEM 2 -->
+                <div class="w-full px-4 md:w-1/2 lg:w-1/3">
+                  <div class="max-w-xs p-5 mx-auto">
+                    <img
+                      src="../assets/images/why-local-first-health-mission-nurse-compliant.png"
+                      alt="Compliant"
+                      class="w-40 mx-auto"
+                    />
+                    <h3 class="mt-4 mb-2 text-xl font-medium text-center">
+                      Compliant
+                    </h3>
+                    <p class="text-base text-center">
+                      Industry security standards + HIPAA.
+                    </p>
+                  </div>
+                </div>
 
-            <!-- ITEM 3-->
-            <div class="w-full px-4 md:w-1/2 lg:w-1/3">
-              <div class="max-w-xs p-5 mx-auto">
-                <img
-                  src="../assets/images/why-local-first-health-doctor-data-privacy.png"
-                  alt="True Privacy"
-                  class="w-40 mx-auto"
-                />
-                <h3 class="mt-4 mb-2 text-2xl font-medium text-center">
-                  True Privacy
-                </h3>
-                <p class="text-base text-center">
-                  Keeps your data private, with no third-party access or
-                  unnecessary sharing.
-                </p>
-              </div>
-            </div>
-            <!-- START OF 3RD ROW -->
-            <!-- ITEM 1-->
-            <div class="w-full px-4 md:w-1/2 lg:w-1/3">
-              <div class="max-w-xs p-5 mx-auto">
-                <img
-                  src="../assets/images/why-local-first-health-nurse-secure.png"
-                  alt="Secure"
-                  class="w-40 mx-auto"
-                />
-                <h3 class="mt-4 mb-2 text-2xl font-medium text-center">
-                  Secure
-                </h3>
-                <p class="text-base text-center">
-                  Encryption + security features that protect your data from
-                  breaches and unauthorized access.
-                </p>
-              </div>
-            </div>
+                <!-- ITEM 3-->
+                <div class="w-full px-4 md:w-1/2 lg:w-1/3">
+                  <div class="max-w-xs p-5 mx-auto">
+                    <img
+                      src="../assets/images/why-local-first-health-doctor-data-privacy.png"
+                      alt="True Privacy"
+                      class="w-40 mx-auto"
+                    />
+                    <h3 class="mt-4 mb-2 text-xl font-medium text-center">
+                      True Privacy
+                    </h3>
+                    <p class="text-base text-center">
+                      No third-party access or unnecessary sharing.
+                    </p>
+                  </div>
+                </div>
+                <!-- START OF 3RD ROW -->
+                <!-- ITEM 1-->
+                <div class="w-full px-4 md:w-1/2 lg:w-1/3">
+                  <div class="max-w-xs p-5 mx-auto">
+                    <img
+                      src="../assets/images/why-local-first-health-nurse-secure.png"
+                      alt="Secure"
+                      class="w-40 mx-auto"
+                    />
+                    <h3 class="mt-4 mb-2 text-xl font-medium text-center">
+                      Secure
+                    </h3>
+                    <p class="text-base text-center">
+                      Encryption + extra security features
+                    </p>
+                  </div>
+                </div>
 
-            <!-- ITEM 2 -->
-            <div class="w-full px-4 md:w-1/2 lg:w-1/3">
+                <!-- ITEM 2 -->
+                <!-- <div class="w-full px-4 md:w-1/2 lg:w-1/3">
               <div class="max-w-xs p-5 mx-auto">
                 <img
                   src="../assets/images/why-local-first-health-mission-doctor-super.png"
@@ -802,98 +986,97 @@ function eraseText() {
                   needs efficiently.
                 </p>
               </div>
-            </div>
+            </div> -->
 
-            <!-- ITEM 3-->
-            <div class="w-full px-4 md:w-1/2 lg:w-1/3">
-              <div class="max-w-xs p-5 mx-auto">
-                <img
-                  src="../assets/images/why-local-first-health-mission-lab-tech-fast.png"
-                  alt="Fast"
-                  class="w-40 mx-auto"
-                />
-                <h3 class="mt-4 mb-2 text-2xl font-medium text-center">Fast</h3>
-                <p class="text-base text-center">
-                  Delivers fast performance, free from server lag or internet
-                  slowdowns.
-                </p>
-              </div>
-            </div>
+                <!-- ITEM 3-->
+                <div class="w-full px-4 md:w-1/2 lg:w-1/3">
+                  <div class="max-w-xs p-5 mx-auto">
+                    <img
+                      src="../assets/images/why-local-first-health-mission-lab-tech-fast.png"
+                      alt="Fast"
+                      class="w-40 mx-auto"
+                    />
+                    <h3 class="mt-4 mb-2 text-xl font-medium text-center">
+                      Fast
+                    </h3>
+                    <p class="text-base text-center">
+                      Free from server lag or internet slowdowns.
+                    </p>
+                  </div>
+                </div>
 
-            <!-- START of 4th ROW -->
-            <!-- ITEM 1-->
-            <div class="w-full px-4 md:w-1/2 lg:w-1/3">
-              <div class="max-w-xs p-5 mx-auto">
-                <img
-                  src="../assets/images/why-local-first-health-pharmacist-collaborate.png"
-                  alt="Collaborate"
-                  class="w-40 mx-auto"
-                />
-                <h3 class="mt-4 mb-2 text-2xl font-medium text-center">
-                  Collaborate
-                </h3>
-                <p class="text-base text-center">
-                  Allows seamless collaboration while keeping your data secure
-                  and private.
-                </p>
-              </div>
-            </div>
+                <!-- START of 4th ROW -->
+                <!-- ITEM 1-->
+                <div class="w-full px-4 md:w-1/2 lg:w-1/3">
+                  <div class="max-w-xs p-5 mx-auto">
+                    <img
+                      src="../assets/images/why-local-first-health-pharmacist-collaborate.png"
+                      alt="Collaborate"
+                      class="w-40 mx-auto"
+                    />
+                    <h3 class="mt-4 mb-2 text-xl font-medium text-center">
+                      Collaborate
+                    </h3>
+                    <p class="text-base text-center">
+                      Allows seamless, secure collaboration.
+                    </p>
+                  </div>
+                </div>
 
-            <!-- ITEM 2 -->
-            <div class="w-full px-4 md:w-1/2 lg:w-1/3">
-              <div class="max-w-xs p-5 mx-auto">
-                <img
-                  src="../assets/images/why-local-first-health-mission-nurse-synced.png"
-                  alt="Synchronize"
-                  class="w-40 mx-auto"
-                />
-                <h3 class="mt-4 mb-2 text-2xl font-medium text-center">
-                  Synchronize
-                </h3>
-                <p class="text-base text-center">
-                  Syncs your data across all your devices effortlessly, ensuring
-                  everything is up-to-date.
-                </p>
-              </div>
-            </div>
+                <!-- ITEM 2 -->
+                <div class="w-full px-4 md:w-1/2 lg:w-1/3">
+                  <div class="max-w-xs p-5 mx-auto">
+                    <img
+                      src="../assets/images/why-local-first-health-mission-nurse-synced.png"
+                      alt="Synchronize"
+                      class="w-40 mx-auto"
+                    />
+                    <h3 class="mt-4 mb-2 text-xl font-medium text-center">
+                      Synchronize
+                    </h3>
+                    <p class="text-base text-center">
+                      Syncs your data across all your devices.
+                    </p>
+                  </div>
+                </div>
 
-            <!-- ITEM 3 -->
-            <div class="w-full px-4 md:w-1/2 lg:w-1/3">
-              <div class="max-w-xs p-5 mx-auto">
-                <img
-                  src="../assets/images/why-local-first-health-mission-lab-tech-decentralized.png"
-                  alt="Decentralized"
-                  class="w-40 mx-auto"
-                />
-                <h3 class="mt-4 mb-2 text-2xl font-medium text-center">
-                  Decentralized
-                </h3>
-                <p class="text-base text-center">
-                  No single point of failure—your data is always within your
-                  reach.
-                </p>
-              </div>
-            </div>
+                <!-- ITEM 3 -->
+                <div class="w-full px-4 md:w-1/2 lg:w-1/3">
+                  <div class="max-w-xs p-5 mx-auto">
+                    <img
+                      src="../assets/images/why-local-first-health-mission-lab-tech-decentralized.png"
+                      alt="Decentralized"
+                      class="w-40 mx-auto"
+                    />
+                    <h3 class="mt-4 mb-2 text-xl font-medium text-center">
+                      Decentralized
+                    </h3>
+                    <p class="text-base text-center">
+                      No single point of failure—your data within reach.
+                    </p>
+                  </div>
+                </div>
 
-            <!-- START of 5th ROW -->
-            <!-- ITEM 1-->
-            <div class="w-full px-4 mb-20 md:w-1/2 lg:w-1/3">
-              <div class="max-w-xs p-5 mx-auto">
-                <img
-                  src="../assets/images/why-local-first-health-mission-pharmacist-open.png"
-                  alt="Open"
-                  class="w-40 mx-auto"
-                />
-                <h3 class="mt-4 mb-2 text-2xl font-medium text-center">Open</h3>
-                <p class="text-base text-center">
-                  Built on an open-source foundation, allowing for customization
-                  and transparency.
-                </p>
-              </div>
-            </div>
+                <!-- START of 5th ROW -->
+                <!-- ITEM 1-->
+                <div class="w-full px-4 mb-20 md:w-1/2 lg:w-1/3">
+                  <div class="max-w-xs p-5 mx-auto">
+                    <img
+                      src="../assets/images/why-local-first-health-mission-pharmacist-open.png"
+                      alt="Open"
+                      class="w-40 mx-auto"
+                    />
+                    <h3 class="mt-4 mb-2 text-xl font-medium text-center">
+                      Open
+                    </h3>
+                    <p class="text-base text-center">
+                      Open-source, for custom and transparency.
+                    </p>
+                  </div>
+                </div>
 
-            <!-- ITEM 2 -->
-            <div class="w-full px-4 md:w-1/2 lg:w-1/3">
+                <!-- ITEM 2 -->
+                <!-- <div class="w-full px-4 md:w-1/2 lg:w-1/3">
               <div class="max-w-xs p-5 mx-auto">
                 <img
                   src="../assets/images/why-local-first-health-mission-pharma-affordable.png"
@@ -908,37 +1091,52 @@ function eraseText() {
                   technology accessible to everyone.
                 </p>
               </div>
-            </div>
+            </div> -->
 
-            <!-- ITEM 3 -->
-            <div class="w-full px-4 md:w-1/2 lg:w-1/3">
-              <div class="max-w-xs p-5 mx-auto">
-                <img
-                  src="../assets/images/why-local-first-health-lab-tech-freedom.png"
-                  alt="Freedom"
-                  class="w-40 mx-auto"
-                />
-                <h3 class="mt-4 mb-2 text-2xl font-medium text-center">
-                  Freedom
-                </h3>
-                <p class="text-base text-center">
-                  Gives you the freedom to use the software your way, with no
-                  restrictions or vendor lock-in.
-                </p>
+                <!-- ITEM 3 -->
+                <div class="w-full px-4 md:w-1/2 lg:w-1/3">
+                  <div class="max-w-xs p-5 mx-auto">
+                    <img
+                      src="../assets/images/why-local-first-health-lab-tech-freedom.png"
+                      alt="Freedom"
+                      class="w-40 mx-auto"
+                    />
+                    <h3 class="mt-4 mb-2 text-xl font-medium text-center">
+                      Freedom
+                    </h3>
+                    <p class="text-base text-center">
+                      Use software your way, no vendor lock-in.
+                    </p>
+                  </div>
+                </div>
+                <!-- END OF CARDS -->
               </div>
             </div>
-            <!-- END OF CARDS -->
+
+            <!-- END Of Why LF -->
           </div>
         </div>
 
-        <!-- END Of Test -->
+        <!-- LINE -->
+        <div class="w-1/2 my-8 mt-20 border-t border-gray-300"></div>
+
+        <img
+          src="../assets/images/section-local-first-health-down.png"
+          alt="Void"
+          class="w-[200px] h-auto mt-0 mx-auto"
+        />
+        <p
+          class="mt-10 mb-0 text-2xl sm:mb-8 xl:max-w-3xl font-inter text-neutral-500"
+        >
+          Below are health apps being built using the LFH platform.
+        </p>
 
         <!-- LINE -->
-        <div class="w-3/4 my-8 border-t border-gray-300"></div>
+        <div class="w-1/3 my-8 border-t border-gray-300"></div>
 
         <!-- HEALTH SUITE -->
         <p
-          class="mt-10 text-xl sm:mb-1 xl:max-w-3xl font-inter"
+          class="mt-20 text-xl sm:mb-1 xl:max-w-3xl font-inter"
           id="health-suite"
         >
           The First & Only 'Local-First' Health Management Suite
@@ -1340,4 +1538,54 @@ function eraseText() {
 }
 
 /* end of animation blinking */
+
+/* start of waitlist modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensure it overlays other content */
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  position: relative;
+  width: 80%;
+  max-width: 500px;
+  height: auto; /* Adjust height based on content */
+  z-index: 1100;
+  overflow-y: auto; /* Add vertical scrolling if content exceeds modal height */
+  max-height: 90vh; /* Keep the modal from growing too large */
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+@media (max-width: 480px) {
+  .modal-content {
+    width: 90%;
+  }
+}
+
+# getWaitlistContainer {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+/* end of waitlist modal */
 </style>
