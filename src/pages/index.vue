@@ -190,7 +190,7 @@ const closeModal = () => {
                   viewBox="0 0 24 24"
                   stroke-width="1.5"
                   stroke="white"
-                  class="size-6"
+                  class="w-6 h-7"
                 >
                   <path
                     stroke-linecap="round"
