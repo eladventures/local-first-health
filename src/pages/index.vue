@@ -813,7 +813,7 @@ const closeModal = () => {
 
             <!-- Star on GitHub Button -->
             <a
-              href="https://github.com/voideditor/void"
+              href=""
               class="inline-flex items-center justify-center gap-2 px-8 py-3 mx-auto mt-10 rounded-lg bg-slate-900 hover:bg-slate-700"
             >
               <span class="text-xl font-medium text-white cursor-pointer">
