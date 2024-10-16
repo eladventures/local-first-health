@@ -5,6 +5,13 @@ import { definePageMeta } from "#imports";
 // import GenericPanel from "~/components/commons/GenericPanel";
 import ogBanner from "../assets/images/local-first-health-banner.png";
 
+//for highlight.js (code block)
+import hljs from "highlight.js";
+import "highlight.js/styles/atom-one-dark.css"; // Import the theme you want
+import javascript from "highlight.js/lib/languages/javascript";
+
+hljs.registerLanguage("javascript", javascript);
+
 definePageMeta({
   layout: "default",
 });
@@ -41,6 +48,7 @@ const charIndex = ref(0);
 
 onMounted(() => {
   setTimeout(typeText, newTextDelay.value + 200);
+  hljs.highlightAll(); // For highlight.js
 });
 
 const typeText = () => {
@@ -166,13 +174,15 @@ const closeModal = () => {
                 >
               </h1>
             </div>
-            <div class="max-w-4xl py-10 mx-auto text-xl text-center">
+            <div class="max-w-4xl py-5 mx-auto text-xl text-center">
               <p class="mb-2 text-2xl font-inter text-neutral-500">
                 <b>Our health systems are broken. </b><br />Health records
-                should belong to providers and patients—not controlled by third
-                parties. It’s time to reclaim our medical records and build
-                healthcare the way it should be, with true privacy and data
-                freedom securely in our control.
+                should belong to healthcare providers and patients—not be
+                controlled by third parties. It’s time to take back control of
+                our medical records and build healthcare systems that prioritize
+                privacy, security, collaboration, and data ownership. Let’s
+                reclaim healthcare with Local First Health—where data freedom
+                and true privacy are in our hands.
               </p>
             </div>
             <div class="flex items-center justify-center gap-3 mx-auto mt-10">
@@ -526,12 +536,119 @@ const closeModal = () => {
         </div>
         <!-- END OF NEWS CARD -->
 
+        <!-- TEST REED -->
+        <div class="flex items-center justify-center min-h-screen">
+          <!-- Main container without border and shadow -->
+          <div
+            class="flex flex-col items-center justify-center w-full max-w-6xl px-5 pb-20 mt-10 mb-10 text-center rounded-3xl"
+            id="mission"
+          >
+            <!-- Centering additional content -->
+
+            <p
+              class="mt-0 text-3xl font-bold sm:text-4xl xl:max-w-2xl font-inter"
+            >
+              <b>Excerpt: Reed Jobs & Dean Lloyd Minor Interview</b>
+            </p>
+
+            <p
+              class="mt-2 mb-0 text-2xl sm:mb-8 xl:max-w-2xl font-inter text-neutral-500"
+            >
+              Reed Jobs, the former Managing Director of Health at Emerson
+              Collective, eloquently highlighted the concerns regarding medical
+              records during his interview with Dean Lloyd Minor of Stanford
+              Medical School (March 2022).
+            </p>
+
+            <!-- Reed JObs Panel -->
+            <div
+              class="container items-center justify-center max-w-3xl px-5 pb-10 mt-0 overflow-hidden border-2 border-gray-200 shadow-lg bg-gray-50 rounded-3xl"
+            >
+              <div class="w-full">
+                <h1 class="mt-5 font-extrabold text-center">
+                  <img
+                    src="../assets/images/local-first-image-reed-jobs-2.png"
+                    class="pt-3 w-max h-auto mx-auto lg:top-[-5rem]"
+                    alt="Void"
+                  />
+                </h1>
+
+                <div class="max-w-4xl py-5 mx-auto text-xl text-justify">
+                  <p class="mt-10 mb-2 text-xl font-inter text-neutral-600">
+                    <i
+                      >“I think one of the most important things we can learn is
+                      that we need to
+                      <b
+                        ><u
+                          >really respect people's privacy and we need to give
+                          them the power to determine who has access to their
+                          data and what that's used for
+                        </u></b
+                      >.. and so it's interesting when you look at healthcare,
+                      clinical records, and most data that flows through
+                      hospital systems, it is absurdly balkanized and the user
+                      interface is atrocious, and it's kind of this surreal
+                      experience honestly because we live in a wonderfully
+                      high-tech world and particularly here in Silicon Valley,
+                      yet when you go to a hospital, even a great hospital like
+                      Stanford, it's like you're stepping back in a time machine
+                      30 years and you know the software there is nothing
+                      against everybody, the software's not very, not very good,
+                      the
+                      <b
+                        ><u
+                          >user interface isn't very good, and it's this, you
+                          know, departments can't talk to each other, and you
+                          can't transfer data
+                        </u></b
+                      >, and people give you floppy disks with things on it, and
+                      it's like this anachronistic little, you know, little time
+                      machine, it's crazy. <br /><br />
+
+                      So I think one of the most interesting things that's going
+                      to happen in healthcare in the next kind of 20 years is
+                      seeing it really catch up with the rest of the world from
+                      a technological point of view just both from a data
+                      infrastructure interoperability and UI aspect, and I
+                      really hope, and luckily, this is a lot of this is already
+                      codified in legislature like HIPAA and stuff, but
+                      <b
+                        ><u
+                          >people's privacy and control over that data is gonna
+                          need to be paramount
+                        </u></b
+                      >
+                      as it, you know, it currently is now, but it really needs
+                      to be a lot more electronic and it needs to be a lot more
+                      interoperable, again, this is something that's probably,
+                      you know, a nationwide, you know, level, whether that's
+                      through legislation or through some really innovative
+                      companies in the space of which I think there's space for
+                      many, but yeah, we need to, we need to really shape up
+                      the, the, the infrastructure systems that we have in place
+                      because, not only are they really not helping patient
+                      care, but it's, it's really bad for the hospital systems
+                      themselves too and the physicians..” <br /><br />
+
+                      - <b>Reed Jobs</b>
+                    </i>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- END of Reed Jobs Panel-->
+          </div>
+        </div>
+
+        <!-- END OF TEST REED -->
+
         <!-- START OF CURRENT PROBLEMS SECTION -->
 
         <img
           src="../assets/images/section-local-first-health-mission-nurse-cloud-problem.png"
           alt="Void"
-          class="w-[200px] h-auto mt-10"
+          class="w-[200px] h-auto mt-0"
         />
         <h1
           class="mt-0 text-3xl font-bold leadi sm:text-4xl xl:max-w-3xl font-inter"
@@ -814,7 +931,7 @@ const closeModal = () => {
             <!-- Star on GitHub Button -->
             <a
               href=""
-              class="inline-flex items-center justify-center gap-2 px-8 py-3 mx-auto mt-10 rounded-lg bg-slate-900 hover:bg-slate-700"
+              class="inline-flex items-center justify-center gap-2 px-8 py-3 mx-auto mt-5 rounded-lg bg-slate-900 hover:bg-slate-700"
             >
               <span class="text-xl font-medium text-white cursor-pointer">
                 Get early access on GitHub
@@ -831,6 +948,64 @@ const closeModal = () => {
                 />
               </svg>
             </a>
+            <!-- end of GITHUB Button -->
+
+            <!-- SDK -->
+            <div class="mt-10 code-block-container">
+              <pre><code class="language-javascript">
+      import { createId, createKeyPair } from '@localfirsthealth/papaya/encryption';
+      import { Application } from '@localfirsthealth/papaya/application';
+      import { Identities } from '@localfirsthealth/papaya/identities';
+      import { MedicalRecords } from '@localfirsthealth/papaya/emr';
+
+      // ensure a unique instance id for the app
+      const instanceId = createId();
+
+      // ensure a key-pair for signing
+      const signinKeys = createKeyPair();
+
+      // create the main app
+      const app = new Application({ instanceId, signinKeys })
+      app.use(new Identities())
+      app.use(new MedicalRecords())
+
+      // signup/signin user
+      const identity = await app.identities.identities.create({
+        attributes: {
+          email: 'sample@example.com',
+          name: {
+            firstName: 'Sample',
+            lastName: 'User',
+          },
+        },
+        credentials: [{
+          strategy: 'local',
+          identity: 'sample@example.com',
+          password: 'strongpassword',
+        }],
+      });
+      await app.identities.authenticate({
+        credential: {
+          strategy: 'local',
+          email: 'sample@example.com',
+          password: 'strongpassword',
+        },
+      });
+
+      // create a medical record
+      const record = await app.emr.records.create({
+        type: 'prescription',
+        patient: identity.id,
+        medications: [{
+          name: 'Aspirin',
+          dosage: '1 pill',
+          frequency: 'daily',
+        }],
+      });
+    </code></pre>
+            </div>
+            <!-- END OF SDK -->
+
             <!-- START OF ICONS -->
             <h1
               class="mt-20 text-4xl leadi sm:text-2xl xl:max-w-4xl font-inter text-neutral-500"
@@ -1133,137 +1308,149 @@ const closeModal = () => {
 
         <!-- LINE -->
         <div class="w-1/3 my-8 border-t border-gray-300"></div>
-
-        <!-- HEALTH SUITE -->
-        <p
-          class="mt-20 text-xl sm:mb-1 xl:max-w-3xl font-inter"
-          id="health-suite"
-        >
-          The First & Only 'Local-First' Health Management Suite
-        </p>
-        <h1
-          class="mt-0 text-6xl font-bold leadi sm:text-6xl xl:max-w-3xl font-inter"
-        >
-          A new era of health records management.
-        </h1>
-        <div class="custom-container">
-          <h1 class="items-center custom-heading font-inter">
-            <!-- Display the typed text -->
-            <span class="typed-text">{{ typeValue }}</span>
-
-            <!-- Blinking cursor -->
-            <span class="blinking-cursor">|</span>
-
-            <!-- Optional cursor that changes class based on typeStatus -->
-            <span class="cursor" :class="{ typing: typeStatus }">&nbsp;</span>
-          </h1>
-        </div>
-        <p class="mb-0 text-2xl sm:mb-8 xl:max-w-2xl font-inter">
-          Own, manage, and protect your health records with ease right on your
-          own computer—no subscription required.<Input:t></Input:t>
-        </p>
-        <div class="flex flex-wrap justify-center">
-          <button
-            type="button"
-            class="px-8 py-3 m-2 text-lg border border-gray-800 rounded"
-          >
-            <a style="text-decoration: none; color: inherit">
-              Coming Soon. Join the Waitlist.
-            </a>
-          </button>
-        </div>
       </div>
     </div>
 
-    <!-- HEALTH SUITE STARTS HERE -->
-    <div class="container mx-auto lg:max-w-6xl" id="mission">
+    <!-- LFH PRODUCT START -->
+    <div class="flex items-center justify-center min-h-screen bg-white">
       <div
-        class="container flex flex-col justify-center max-w-6xl mt-4 mb-10 md:flex-row"
+        class="container flex flex-col justify-center max-w-5xl px-5 pb-10 mt-4 mb-10 overflow-hidden border-2 border-gray-200 shadow-lg rounded-3xl"
+        id="mission"
       >
-        <div class="flex justify-center w-full mx-2 mb-4 text-left md:w-1/5">
-          <img
-            src="~/assets/images/local-first-health-suite-easy-joey.png"
-            alt="Your Image Description"
-            class="w-2/3 sm:w-full rounded-xl"
-            data-aos="zoom-in"
-          />
-        </div>
-        <div class="flex justify-center w-full mx-2 mb-4 text-left md:w-1/5">
-          <img
-            src="~/assets/images/local-first-health-suite-dentalemon.png"
-            alt="Your Image Description"
-            class="w-2/3 sm:w-full rounded-xl"
-            data-aos="zoom-in"
-          />
-        </div>
-        <div class="flex justify-center w-full mx-2 mb-4 text-left md:w-1/5">
-          <img
-            src="~/assets/images/local-first-health-suite-parmago.png"
-            alt="Your Image Description"
-            class="w-2/3 sm:w-full rounded-xl"
-            data-aos="zoom-in"
-          />
-        </div>
-        <div class="flex justify-center w-full mx-2 mb-4 text-left md:w-1/5">
-          <img
-            src="~/assets/images/local-first-health-suite-diagnozip.png"
-            alt="Your Image Description"
-            class="w-2/3 sm:w-full rounded-xl"
-            data-aos="zoom-in"
-          />
-        </div>
-        <div class="flex justify-center w-full mx-2 mb-4 text-left md:w-1/5">
-          <img
-            src="~/assets/images/local-first-health-suite-ospitalis.png"
-            alt="Your Image Description"
-            class="w-2/3 sm:w-full rounded-xl"
-            data-aos="zoom-in"
-          />
-        </div>
-      </div>
-    </div>
+        <!-- START OF COPY -->
+        <div
+          class="container flex flex-col items-center px-4 py-16 pb-8 mx-auto text-center text-gray-900 lg:pb-8 md:py-12 md:px-10 lg:px-32"
+        >
+          <p
+            class="mt-10 text-xl sm:mb-1 xl:max-w-3xl font-inter"
+            id="health-suite"
+          >
+            The First & Only 'Local-First' Health Management Suite
+          </p>
+          <h1
+            class="mt-0 text-6xl font-bold leadi sm:text-6xl xl:max-w-3xl font-inter"
+          >
+            A new era of health records management.
+          </h1>
+          <div class="custom-container">
+            <h1 class="items-center custom-heading font-inter">
+              <!-- Display the typed text -->
+              <span class="typed-text">{{ typeValue }}</span>
 
-    <!-- HEALTH SUITE ENDS HERE -->
+              <!-- Blinking cursor -->
+              <span class="blinking-cursor">|</span>
 
-    <!-- TRUE PRIVACY AND DATA FREEDOM -->
-    <div
-      class="container flex flex-col items-center px-4 pb-8 mx-auto text-center text-gray-900 lg:pb-8 md:py-10 md:px-10 lg:px-32"
-      id="true-privacy"
-    >
-      <!-- <img
+              <!-- Optional cursor that changes class based on typeStatus -->
+              <span class="cursor" :class="{ typing: typeStatus }">&nbsp;</span>
+            </h1>
+          </div>
+
+          <p class="mb-0 text-2xl sm:mb-8 xl:max-w-2xl font-inter">
+            Own, manage, and protect your health records with ease right on your
+            own computer—no subscription required.<Input:t></Input:t>
+          </p>
+          <div class="flex flex-wrap justify-center">
+            <button
+              type="button"
+              class="px-8 py-3 m-2 text-lg border border-gray-800 rounded"
+            >
+              <a style="text-decoration: none; color: inherit">
+                Coming Soon. Join the Waitlist.
+              </a>
+            </button>
+          </div>
+        </div>
+        <!-- END OF COPY -->
+
+        <!-- HEALTH SUITE STARTS HERE -->
+        <div
+          class="container flex flex-col justify-center max-w-6xl md:flex-row"
+        >
+          <div class="flex justify-center w-full mx-2 mb-4 text-left md:w-1/5">
+            <img
+              src="~/assets/images/local-first-health-suite-easy-joey.png"
+              alt="Your Image Description"
+              class="w-2/3 sm:w-full rounded-xl"
+              data-aos="zoom-in"
+            />
+          </div>
+          <div class="flex justify-center w-full mx-2 mb-4 text-left md:w-1/5">
+            <img
+              src="~/assets/images/local-first-health-suite-dentalemon.png"
+              alt="Your Image Description"
+              class="w-2/3 sm:w-full rounded-xl"
+              data-aos="zoom-in"
+            />
+          </div>
+          <div class="flex justify-center w-full mx-2 mb-4 text-left md:w-1/5">
+            <img
+              src="~/assets/images/local-first-health-suite-parmago.png"
+              alt="Your Image Description"
+              class="w-2/3 sm:w-full rounded-xl"
+              data-aos="zoom-in"
+            />
+          </div>
+          <div class="flex justify-center w-full mx-2 mb-4 text-left md:w-1/5">
+            <img
+              src="~/assets/images/local-first-health-suite-diagnozip.png"
+              alt="Your Image Description"
+              class="w-2/3 sm:w-full rounded-xl"
+              data-aos="zoom-in"
+            />
+          </div>
+          <div class="flex justify-center w-full mx-2 mb-4 text-left md:w-1/5">
+            <img
+              src="~/assets/images/local-first-health-suite-ospitalis.png"
+              alt="Your Image Description"
+              class="w-2/3 sm:w-full rounded-xl"
+              data-aos="zoom-in"
+            />
+          </div>
+        </div>
+
+        <!-- TRUE PRIVACY AND DATA FREEDOM -->
+        <div
+          class="container flex flex-col items-center px-4 pb-8 mx-auto text-center text-gray-900 lg:pb-8 md:py-10 md:px-10 lg:px-32"
+          id="true-privacy"
+        >
+          <!-- <img
         src="../assets/images/local-first-health-logo-location.png"
         alt="Small Image"
         class="inline-block mt-0 mb-2"
         style="height: 100px; width: auto"
       /> -->
-      <h1
-        class="mt-5 text-6xl font-bold leadi sm:text-5xl xl:max-w-4xl font-inter"
-      >
-        True Privacy and Data Freedom
-      </h1>
-      <p class="max-w-4xl mx-auto mt-4 text-2xl font-inter">
-        With Local First Health (LFH), true privacy means your health data stays
-        on your device, under your control—no third-party servers, no
-        unnecessary risks. You have full data freedom, working offline,
-        accessing records anytime, and deciding when and how to share
-        information. It's privacy and freedom the way it should be: secure,
-        accessible, and entirely yours.
-      </p>
+          <h1
+            class="mt-5 text-6xl font-bold leadi sm:text-5xl xl:max-w-4xl font-inter"
+          >
+            True Privacy and Data Freedom
+          </h1>
+          <p class="max-w-4xl mx-auto mt-4 text-2xl font-inter">
+            With Local First Health (LFH), true privacy means your health data
+            stays on your device, under your control—no third-party servers, no
+            unnecessary risks. You have full data freedom, working offline,
+            accessing records anytime, and deciding when and how to share
+            information. It's privacy and freedom the way it should be: secure,
+            accessible, and entirely yours.
+          </p>
+        </div>
+        <!-- END OF TRUE PRIVACY -->
+        <!-- VIDEO HERE -->
+        <div
+          class="container flex flex-col items-center px-4 py-8 pb-4 mx-auto mt-8 text-center md:py-16 md:-mt-40 md:pb-8 lg:pb-8 md:py-32 md:px-10 lg:px-32"
+        >
+          <video
+            src="../assets/images/easy-joey-1.mp4"
+            autoplay
+            loop
+            muted
+            class="w-full mx-auto mt-4 mb-8 border-0 border-gray-800 shadow-2xl md:max-w-5xl md:mb-10 md:mt-20 rounded-3xl"
+          ></video>
+        </div>
+        <!-- end of video -->
+      </div>
     </div>
-    <!-- END OF TRUE PRIVACY -->
-    <!-- VIDEO HERE -->
-    <div
-      class="container flex flex-col items-center px-4 py-8 pb-4 mx-auto mt-8 text-center md:py-16 md:-mt-40 md:pb-8 lg:pb-8 md:py-32 md:px-10 lg:px-32"
-    >
-      <video
-        src="../assets/images/easy-joey-1.mp4"
-        autoplay
-        loop
-        muted
-        class="w-full mx-auto mt-4 mb-8 border-0 border-gray-800 shadow-2xl md:max-w-5xl md:mb-10 md:mt-20 rounded-3xl"
-      ></video>
-    </div>
-    <!-- end of video -->
+
+    <!-- END OF LFH PRODUCT START -->
 
     <!-- START of Our Story -->
     <div class="container max-w-xl p-6 mx-auto lg:max-w-7xl" id="our-story">
@@ -1280,7 +1467,7 @@ const closeModal = () => {
         />
         <!-- END OF IMAGE -->
         <p
-          class="max-w-2xl mx-auto mt-10 text-xl text-justify text-neutral-600"
+          class="max-w-2xl mx-auto mt-10 text-xl text-left text-neutral-600 font-courier"
         >
           Our team has been developing health record systems since 2016. Even
           before the local-first concept was introduced in 2019, we were
@@ -1366,7 +1553,9 @@ const closeModal = () => {
             />
           </a>
         </p>
-        <p class="max-w-2xl mx-auto mt-4 text-xl text-justify text-neutral-600">
+        <p
+          class="max-w-2xl mx-auto mt-4 text-xl text-left text-neutral-600 font-courier"
+        >
           PS - I participated in the first Local-First Conference, recently held
           in Berlin, Germany (May 2024). This movement is indeed growing.
           Re-live the energy of the conference in a
@@ -1588,4 +1777,24 @@ const closeModal = () => {
   display: block;
 }
 /* end of waitlist modal */
+
+/* for highlights js */
+.code-block-container pre {
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  white-space: pre-wrap; /* Allows long code lines to wrap */
+}
+
+.code-block-container code {
+  display: block;
+  overflow-x: auto;
+  padding: 1rem;
+  background-color: #272822; /* Monokai theme background color */
+  color: #f8f8f2; /* Monokai theme text color */
+  border-radius: 5px;
+  font-size: 0.875rem; /* This is where you adjust the font size, 0.875rem is smaller */
+  line-height: 1.4; /* Adjust line height for readability */
+}
+/* end highlights js */
 </style>
