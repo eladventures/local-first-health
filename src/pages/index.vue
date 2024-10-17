@@ -1,13 +1,13 @@
 <script setup>
-import { ref, onMounted, nextTick } from "vue";
+import { ref, onMounted, nextTick, watch } from "vue";
 import { useHead } from "#imports";
 import { definePageMeta } from "#imports";
-// import GenericPanel from "~/components/commons/GenericPanel";
+import NewsSection from "../components/NewsSection.vue";
 import ogBanner from "../assets/images/local-first-health-banner.png";
 
-//for highlight.js (code block)
-import hljs from "highlight.js";
-import "highlight.js/styles/atom-one-dark.css"; // Import the theme you want
+// For highlight.js (code block)
+import hljs from "highlight.js/lib/core";
+import "highlight.js/styles/atom-one-dark.css";
 import javascript from "highlight.js/lib/languages/javascript";
 
 hljs.registerLanguage("javascript", javascript);
@@ -18,7 +18,8 @@ definePageMeta({
 
 useHead({
   title: "Local-First Health",
-  description: "Local-First Health is the first and only local-first health .",
+  description:
+    "Local-First Health is the first and only local-first health solution.",
   link: [{ rel: "icon", type: "image/png", href: "/favicon.png" }],
   meta: [
     {
@@ -30,112 +31,130 @@ useHead({
   ],
 });
 
+// Typing animation logic
 const typeValue = ref("");
 const typeStatus = ref(false);
-const displayTextArray = ref([
+const displayTextArray = [
   "Works Offline",
   "Own Your Data",
   "Instant Response",
   "Collaborative",
   "Private and Secure",
   "Future-Proof",
-]);
-const typingSpeed = ref(100);
-const erasingSpeed = ref(100);
-const newTextDelay = ref(2000);
+];
+const typingSpeed = 100;
+const erasingSpeed = 100;
+const newTextDelay = 2000;
 const displayTextArrayIndex = ref(0);
 const charIndex = ref(0);
 
-onMounted(() => {
-  setTimeout(typeText, newTextDelay.value + 200);
-  hljs.highlightAll(); // For highlight.js
-});
-
 const typeText = () => {
-  if (
-    charIndex.value < displayTextArray.value[displayTextArrayIndex.value].length
-  ) {
-    if (!typeStatus.value) typeStatus.value = true;
-    typeValue.value += displayTextArray.value[
-      displayTextArrayIndex.value
-    ].charAt(charIndex.value);
-    charIndex.value += 1;
-    setTimeout(typeText, typingSpeed.value);
+  const currentText = displayTextArray[displayTextArrayIndex.value];
+  if (charIndex.value < currentText.length) {
+    typeStatus.value = true;
+    typeValue.value += currentText.charAt(charIndex.value);
+    charIndex.value++;
+    setTimeout(typeText, typingSpeed);
   } else {
     typeStatus.value = false;
-    setTimeout(eraseText, newTextDelay.value);
+    setTimeout(eraseText, newTextDelay);
   }
 };
 
-function eraseText() {
+const eraseText = () => {
+  const currentText = displayTextArray[displayTextArrayIndex.value];
   if (charIndex.value > 0) {
-    if (!typeStatus.value) typeStatus.value = true;
-    typeValue.value = displayTextArray.value[
-      displayTextArrayIndex.value
-    ].substring(0, charIndex.value - 1);
-    charIndex.value -= 1;
-    setTimeout(eraseText, erasingSpeed.value);
+    typeStatus.value = true;
+    typeValue.value = currentText.substring(0, charIndex.value - 1);
+    charIndex.value--;
+    setTimeout(eraseText, erasingSpeed);
   } else {
     typeStatus.value = false;
-    displayTextArrayIndex.value += 1;
-    if (displayTextArrayIndex.value >= displayTextArray.value.length)
-      displayTextArrayIndex.value = 0;
-    setTimeout(typeText, typingSpeed.value + 1000);
+    displayTextArrayIndex.value =
+      (displayTextArrayIndex.value + 1) % displayTextArray.length;
+    setTimeout(typeText, typingSpeed + 1000);
   }
-}
-//START OF MODAL for WAITLIST
-// Create refs to control modal visibility and widget load status
+};
+
+// Waitlist modal logic
 const showWaitlist = ref(false);
-const isWidgetLoaded = ref(false); // Track if the widget has been loaded
+const isWidgetLoaded = ref(false);
+let waitlistScript = null;
 
-// Method to show the modal and load the waitlist widget when the button is clicked
 const triggerWaitlist = async () => {
-  showWaitlist.value = true; // Show the modal
-
-  // Wait for the DOM to update before loading the widget
+  showWaitlist.value = true;
   await nextTick();
-
-  // Clear any previous instance of the widget to ensure a fresh load
-  const existingWidget = document.getElementById("getWaitlistContainer");
-  if (existingWidget) {
-    existingWidget.innerHTML = ""; // Clear previous widget content if exists
+  if (!isWidgetLoaded.value) {
+    loadWaitlistResources();
+  } else {
+    reinitializeWidget();
   }
+};
 
-  // Always reload the CSS and script dynamically when the modal is opened
+const loadWaitlistResources = () => {
   const cssLink = document.createElement("link");
   cssLink.rel = "stylesheet";
   cssLink.href =
     "https://prod-waitlist-widget.s3.us-east-2.amazonaws.com/getwaitlist.min.css";
   document.head.appendChild(cssLink);
 
-  // Reload the waitlist widget JavaScript dynamically
-  const script = document.createElement("script");
-  script.src = `https://prod-waitlist-widget.s3.us-east-2.amazonaws.com/getwaitlist.min.js?cacheBust=${new Date().getTime()}`;
-  script.async = true;
-  script.onload = () => {
-    isWidgetLoaded.value = true; // Mark the widget as loaded
+  waitlistScript = document.createElement("script");
+  waitlistScript.src = `https://prod-waitlist-widget.s3.us-east-2.amazonaws.com/getwaitlist.min.js?cacheBust=${Date.now()}`;
+  waitlistScript.async = true;
+  waitlistScript.onload = () => {
+    isWidgetLoaded.value = true;
+    initializeWidget();
   };
-  document.body.appendChild(script);
+  document.body.appendChild(waitlistScript);
 };
 
-// Method to close the modal and clean up the widget
-const closeModal = () => {
-  showWaitlist.value = false; // Hide the modal
-
-  // Properly clean up the widget content
-  const widgetContainer = document.getElementById("getWaitlistContainer");
-  if (widgetContainer) {
-    widgetContainer.innerHTML = ""; // Clear widget container
+const initializeWidget = () => {
+  if (window.GetWaitlistWidget) {
+    window.GetWaitlistWidget.init({
+      waitlistId: "20759",
+      elementId: "getWaitlistContainer",
+      widgetType: "WIDGET_1",
+    });
   }
-
-  // Optionally, remove the script and link tags for complete cleanup
-  const cssLink = document.querySelector('link[href*="getwaitlist.min.css"]');
-  const scriptTag = document.querySelector('script[src*="getwaitlist.min.js"]');
-  if (cssLink) cssLink.remove();
-  if (scriptTag) scriptTag.remove();
-
-  isWidgetLoaded.value = false; // Reset widget load state
 };
+
+const reinitializeWidget = () => {
+  const container = document.getElementById("getWaitlistContainer");
+  if (container) {
+    container.innerHTML = "";
+    initializeWidget();
+  }
+};
+
+const closeModal = () => {
+  showWaitlist.value = false;
+};
+
+onMounted(() => {
+  setTimeout(typeText, newTextDelay + 200);
+  hljs.highlightAll();
+
+  // Clean up resources when component is unmounted
+  return () => {
+    if (waitlistScript) {
+      waitlistScript.remove();
+    }
+    const cssLink = document.querySelector('link[href*="getwaitlist.min.css"]');
+    if (cssLink) {
+      cssLink.remove();
+    }
+  };
+});
+
+// Expose necessary variables and functions to the template
+defineExpose({
+  typeValue,
+  typeStatus,
+  showWaitlist,
+  isWidgetLoaded,
+  triggerWaitlist,
+  closeModal,
+});
 </script>
 
 <template>
@@ -214,7 +233,8 @@ const closeModal = () => {
                   />
                 </svg>
               </a>
-              <!-- Star on GitHub Button -->
+
+              <!-- GitHub Waitlist Button -->
               <a
                 href="javascript:void(0);"
                 @click="triggerWaitlist"
@@ -239,7 +259,7 @@ const closeModal = () => {
           </div>
         </div>
 
-        <!-- END of HERO Panel-->
+        <!-- END of Hero Panel-->
 
         <!-- WAITLIST Modal Structure with the widget (hidden initially) -->
         <div v-if="showWaitlist" class="modal-overlay">
@@ -257,8 +277,7 @@ const closeModal = () => {
 
         <!-- END of WAITLIST MODAL -->
 
-        <!-- END OF HERO Title -->
-        <!-- HERO TITLE Section -->
+        <!-- WARNING: News Section -->
         <img
           src="../assets/images/section-local-first-health-mission-nurse-warning.png"
           alt="Void"
@@ -280,263 +299,11 @@ const closeModal = () => {
           sensitive health information?
         </p>
 
-        <!-- END OF HERO Title -->
-
-        <!-- START of NEWS CARDS -->
-        <div class="container max-w-5xl px-4 py-8 mx-auto">
-          <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            <!-- Start of Card 1 -->
-
-            <a
-              href="https://www.wired.com/story/plaintext-our-medical-security-is-code-blue/"
-              class="p-8 text-white rounded-3xl bg-slate-950"
-              id="a-1"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <!-- <div class="text-xs cursor-pointer text-cyan-400">1</div> -->
-              <div class="flex flex-col justify-start gap-4">
-                <div>
-                  <div class="flex justify-between">
-                    <img
-                      src="../assets/images/logo-wired.png"
-                      id="img-1"
-                      class="w-auto h-10"
-                    />
-                  </div>
-                  <br />
-
-                  <h2 class="text-xl font-medium text-left text-bold">
-                    Your Medical Data Is Code Blue
-                  </h2>
-                  <br />
-                  <div class="flex justify-between py-3">
-                    <img
-                      src="../assets/images/news-1.png"
-                      id="img-1"
-                      class="w-full h-auto"
-                    />
-                  </div>
-
-                  <p class="text-left text-stone-300">
-                    Medical data companies aren’t doing all they can to protect
-                    your most private information. When they get hacked and
-                    patient data is stolen, it’s the patients who suffer.
-                  </p>
-                </div>
-              </div>
-            </a>
-            <!-- End of Card 1 -->
-
-            <!-- Start of Card 2 -->
-            <a
-              href="https://www.washingtonpost.com/podcasts/post-reports/the-unprecedented-healthcare-hack-that-may-affect-you/"
-              class="p-8 text-white rounded-3xl bg-slate-950"
-              id="a-1"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <div class="flex flex-col justify-start gap-4">
-                <div>
-                  <div class="flex justify-between">
-                    <img
-                      src="../assets/images/logo-washingtonpost.png"
-                      id="img-1"
-                      class="w-auto h-10"
-                    />
-                  </div>
-                  <br />
-
-                  <h2 class="text-xl font-medium text-left text-bold">
-                    The unprecedented health-care hack that may affect you
-                  </h2>
-                  <div class="flex justify-between py-3">
-                    <img
-                      src="../assets/images/news-2.png"
-                      id="img-1"
-                      class="w-full h-auto"
-                    />
-                  </div>
-
-                  <p class="text-left text-stone-300">
-                    In February, a massive cyberattack nearly brought down the
-                    entire U.S. health system. Doctors are still reeling, and
-                    many patients don’t even know their data has been exposed.
-                  </p>
-                </div>
-              </div>
-            </a>
-            <!-- End of Card 2-->
-
-            <!-- Card 3 -->
-            <a
-              href="https://www.theguardian.com/society/2023/may/27/nhs-data-breach-trusts-shared-patient-details-with-facebook-meta-without-consent"
-              class="p-8 text-white rounded-3xl bg-slate-950"
-              id="a-1"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <div class="flex flex-col justify-start gap-4">
-                <div>
-                  <div class="flex justify-between">
-                    <img
-                      src="../assets/images/logo-theguardian.png"
-                      id="img-1"
-                      class="w-auto h-10"
-                    />
-                  </div>
-
-                  <h2 class="mt-5 text-xl font-medium text-left text-bold">
-                    NHS data breach: trusts shared patient details with Facebook
-                    without consent
-                  </h2>
-                  <div class="flex justify-between py-3">
-                    <img
-                      src="../assets/images/news-3.png"
-                      id="img-1"
-                      class="w-full h-auto"
-                    />
-                  </div>
-
-                  <p class="text-left text-stone-300">
-                    NHS trusts are sharing intimate details about patients'
-                    medical conditions, apointments and treatments with Facebook
-                    without consent despite promising never to do so.
-                  </p>
-                </div>
-              </div>
-            </a>
-            <!-- end of Card 3 -->
-
-            <!-- Start of Card 4 -->
-            <a
-              href="https://www.nytimes.com/2024/03/05/health/cyberattack-healthcare-cash.html"
-              class="p-8 text-white rounded-3xl bg-slate-950"
-              id="a-1"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <div class="flex flex-col justify-start gap-4">
-                <div>
-                  <div class="flex justify-between">
-                    <img
-                      src="../assets/images/logo-nytimes.png"
-                      id="img-1"
-                      class="w-auto h-10"
-                    />
-                  </div>
-                  <br />
-
-                  <h2 class="text-xl font-medium text-left text-bold">
-                    Cyberattack Paralyzes the Largest U.S. Health Care Payment
-                    System
-                  </h2>
-                  <div class="flex justify-between py-3">
-                    <img
-                      src="../assets/images/news-4.png"
-                      id="img-1"
-                      class="w-full h-auto"
-                    />
-                  </div>
-
-                  <p class="text-left text-stone-300">
-                    The hacking shut down the nation’s biggest health care
-                    payment system, causing financial chaos that affected a
-                    broad spectrum ranging from large hospitals to single-doctor
-                    practices.
-                  </p>
-                </div>
-              </div>
-            </a>
-            <!-- End of Card 4 -->
-
-            <!-- Card 5 -->
-            <a
-              href="https://www.vpnmentor.com/news/report-confidanthealth-breach/"
-              class="p-8 text-white rounded-3xl bg-slate-950"
-              id="a-1"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <div class="flex flex-col justify-start gap-4">
-                <div>
-                  <div class="flex justify-between">
-                    <img
-                      src="../assets/images/logo-vpn.png"
-                      id="img-1"
-                      class="w-auto h-10"
-                    />
-                  </div>
-                  <br />
-
-                  <h2 class="text-xl font-medium text-left text-bold">
-                    Mental Health and Addiction Treatment Provider Exposed
-                    Patient Information
-                  </h2>
-                  <div class="flex justify-between py-3">
-                    <img
-                      src="../assets/images/news-5.png"
-                      id="img-1"
-                      class="w-full h-auto"
-                    />
-                  </div>
-
-                  <p class="text-left text-stone-300">
-                    Cybersecurity Researcher discovered a non-password-protected
-                    database that contained thousands of records belonging to an
-                    AI platform offering mental health and addiction treatment.
-                  </p>
-                </div>
-              </div>
-            </a>
-            <!-- End of Card 5 -->
-
-            <!-- Card 6 -->
-            <a
-              href="https://www.wired.com/story/change-healthcare-22-million-payment-ransomware-spike/"
-              class="p-8 text-white rounded-3xl bg-slate-950"
-              id="a-1"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <div class="flex flex-col justify-start gap-4">
-                <div>
-                  <div class="flex justify-between">
-                    <img
-                      src="../assets/images/logo-wired.png"
-                      id="img-1"
-                      class="w-auto h-10"
-                    />
-                  </div>
-                  <br />
-
-                  <h2 class="text-xl font-medium text-left text-bold">
-                    Medical-Targeted Ransomware Is Breaking Records After $22M
-                    Payout
-                  </h2>
-                  <div class="flex justify-between py-3">
-                    <img
-                      src="../assets/images/news-6.png"
-                      id="img-1"
-                      class="w-full h-auto"
-                    />
-                  </div>
-
-                  <p class="text-left text-stone-300">
-                    Cybersecurity firm Recorded Future counted 44
-                    health-care-related incidents in the month after Change
-                    Healthcare’s payment came to light—the most it’s ever seen
-                    in a single month.
-                  </p>
-                </div>
-              </div>
-            </a>
-            <!-- end of Card 6 -->
-          </div>
-        </div>
+        <!-- Replace the old news cards with the new NewsSection component -->
+        <NewsSection />
         <!-- END OF NEWS CARD -->
 
-        <!-- TEST REED -->
+        <!-- Reed Jobs Section -->
         <div class="flex items-center justify-center min-h-screen">
           <!-- Main container without border and shadow -->
           <div
@@ -560,7 +327,7 @@ const closeModal = () => {
               Medical School (March 2022).
             </p>
 
-            <!-- Reed JObs Panel -->
+            <!-- Reed Jobs Interview -->
             <div
               class="container items-center justify-center max-w-3xl px-5 pb-10 mt-0 overflow-hidden border-2 border-gray-200 shadow-lg bg-gray-50 rounded-3xl"
             >
@@ -637,14 +404,13 @@ const closeModal = () => {
               </div>
             </div>
 
-            <!-- END of Reed Jobs Panel-->
+            <!-- END of Reed Jobs Interview-->
           </div>
         </div>
 
-        <!-- END OF TEST REED -->
+        <!-- END OF Reed Jobs -->
 
         <!-- START OF CURRENT PROBLEMS SECTION -->
-
         <img
           src="../assets/images/section-local-first-health-mission-nurse-cloud-problem.png"
           alt="Void"
@@ -747,7 +513,7 @@ const closeModal = () => {
             />
 
             <h2
-              class="text-3xl font-bold text-center text-gray-900 tracki sm:text-4xl text-neutral font-inter"
+              class="text-3xl font-bold text-center text-gray-900 tracki sm:text-4xl font-inter"
             >
               Taking Control: <br />The 'Local-First' Approach
             </h2>
@@ -902,107 +668,105 @@ const closeModal = () => {
         <!-- END OF What LF SOLUTION -->
 
         <!--START OF LF HEALTH  -->
-        <div
-          class="flex items-center justify-center w-full max-w-5xl px-5 pb-0 mt-20 mb-10 overflow-hidden border-2 border-gray-200 shadow-lg rounded-3xl"
-        >
-          <div class="max-w-3xl text-center">
+        <div class="container max-w-3xl px-4 py-8 mx-auto">
+          <div class="text-center">
             <img
               src="../assets/images/section-local-first-health-doctor-super.png"
-              alt="Small Image"
-              class="inline-block mt-10 mb-0"
-              style="height: 200px; width: auto"
+              alt="Local First Health Superhero"
+              class="inline-block mt-10 mb-0 w-[200px] h-auto"
             />
-            <h1
-              class="mt-0 text-3xl font-bold sm:text-4xl font-inter"
+            <h2
+              class="mt-4 text-3xl font-bold sm:text-4xl font-inter"
               id="local-first-health"
             >
-              Introducing: <br />
-              Local First Health
-            </h1>
-            <p class="mt-2 mb-0 text-2xl sm:mb-8 font-inter text-neutral-500">
+              Introducing: Local First Health
+            </h2>
+            <p
+              class="mt-4 mb-8 text-xl sm:text-2xl font-inter text-neutral-500"
+            >
               Local First Health (LFH) is a tech initiative that leverages
               local-first principles to solve inefficiencies and security risks
-              in health records management. <br /><br />Introducing Project
-              Loofah—an open-source SDK that empowers developers to easily
-              create custom, local-first health apps, boosting accessibility,
-              speed, security, and data ownership.
+              in health records management. Introducing Project Papaya—an
+              open-source SDK that empowers developers to easily create custom,
+              local-first health apps, boosting accessibility, speed, security,
+              and data ownership.
             </p>
 
-            <!-- Star on GitHub Button -->
+            <!-- GitHub Early Access Button -->
             <a
-              href=""
-              class="inline-flex items-center justify-center gap-2 px-8 py-3 mx-auto mt-5 rounded-lg bg-slate-900 hover:bg-slate-700"
+              href="javascript:void(0);"
+              @click="triggerWaitlist"
+              class="inline-flex items-center justify-center gap-2 px-8 py-3 text-xl font-medium text-white rounded-lg bg-slate-900 hover:bg-slate-700"
             >
-              <span class="text-xl font-medium text-white cursor-pointer">
-                Get early access on GitHub
-              </span>
+              Get early access on GitHub
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 512 512"
-                class="w-7 h-7"
+                viewBox="0 0 496 512"
+                class="w-6 h-6 fill-current"
               >
                 <path
-                  d="M256 32C132.3 32 32 134.9 32 261.7c0 101.5 64.2 187.5 153.2 217.9 1.4.3 2.6.4 3.8.4 8.3 0 11.5-6.1 11.5-11.4 0-5.5-.2-19.9-.3-39.1-8.4 1.9-15.9 2.7-22.6 2.7-43.1 0-52.9-33.5-52.9-33.5-10.2-26.5-24.9-33.6-24.9-33.6-19.5-13.7-.1-14.1 1.4-14.1h.1c22.5 2 34.3 23.8 34.3 23.8 11.2 19.6 26.2 25.1 39.6 25.1 10.5 0 20-3.4 25.6-6 2-14.8 7.8-24.9 14.2-30.7-49.7-5.8-102-25.5-102-113.5 0-25.1 8.7-45.6 23-61.6-2.3-5.8-10-29.2 2.2-60.8 0 0 1.6-.5 5-.5 8.1 0 26.4 3.1 56.6 24.1 17.9-5.1 37-7.6 56.1-7.7 19 .1 38.2 2.6 56.1 7.7 30.2-21 48.5-24.1 56.6-24.1 3.4 0 5 .5 5 .5 12.2 31.6 4.5 55 2.2 60.8 14.3 16.1 23 36.6 23 61.6 0 88.2-52.4 107.6-102.3 113.3 8 7.1 15.2 21.1 15.2 42.5 0 30.7-.3 55.5-.3 63 0 5.4 3.1 11.5 11.4 11.5 1.2 0 2.6-.1 4-.4C415.9 449.2 480 363.1 480 261.7 480 134.9 379.7 32 256 32z"
-                  fill="white"
-                  stroke="black"
+                  d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"
                 />
               </svg>
             </a>
             <!-- end of GITHUB Button -->
 
-            <!-- SDK -->
-            <div class="mt-10 code-block-container">
-              <pre><code class="language-javascript">
-      import { createId, createKeyPair } from '@localfirsthealth/papaya/encryption';
-      import { Application } from '@localfirsthealth/papaya/application';
-      import { Identities } from '@localfirsthealth/papaya/identities';
-      import { MedicalRecords } from '@localfirsthealth/papaya/emr';
+            <!-- SDK Example -->
+            <div class="mt-10 text-left">
+              <div class="code-block-container">
+                <!-- <h3 class="mb-4 text-2xl font-semibold">Coming Soon:</h3> -->
+                <pre><code class="language-javascript">
+import { createId, createKeyPair } from '@localfirsthealth/papaya/encryption';
+import { Application } from '@localfirsthealth/papaya/application';
+import { Identities } from '@localfirsthealth/papaya/identities';
+import { MedicalRecords } from '@localfirsthealth/papaya/emr';
 
-      // ensure a unique instance id for the app
-      const instanceId = createId();
+// ensure a unique instance id for the app
+const instanceId = createId();
 
-      // ensure a key-pair for signing
-      const signinKeys = createKeyPair();
+// ensure a key-pair for signing
+const signinKeys = createKeyPair();
 
-      // create the main app
-      const app = new Application({ instanceId, signinKeys })
-      app.use(new Identities())
-      app.use(new MedicalRecords())
+// create the main app
+const app = new Application({ instanceId, signinKeys })
+app.use(new Identities())
+app.use(new MedicalRecords())
 
-      // signup/signin user
-      const identity = await app.identities.identities.create({
-        attributes: {
-          email: 'sample@example.com',
-          name: {
-            firstName: 'Sample',
-            lastName: 'User',
-          },
-        },
-        credentials: [{
-          strategy: 'local',
-          identity: 'sample@example.com',
-          password: 'strongpassword',
-        }],
-      });
-      await app.identities.authenticate({
-        credential: {
-          strategy: 'local',
-          email: 'sample@example.com',
-          password: 'strongpassword',
-        },
-      });
+// signup/signin user
+const identity = await app.identities.identities.create({
+  attributes: {
+    email: 'sample@example.com',
+    name: {
+      firstName: 'Sample',
+      lastName: 'User',
+    },
+  },
+  credentials: [{
+    strategy: 'local',
+    identity: 'sample@example.com',
+    password: 'strongpassword',
+  }],
+});
+await app.identities.authenticate({
+  credential: {
+    strategy: 'local',
+    email: 'sample@example.com',
+    password: 'strongpassword',
+  },
+});
 
-      // create a medical record
-      const record = await app.emr.records.create({
-        type: 'prescription',
-        patient: identity.id,
-        medications: [{
-          name: 'Aspirin',
-          dosage: '1 pill',
-          frequency: 'daily',
-        }],
-      });
-    </code></pre>
+// create a medical record
+const record = await app.emr.records.create({
+  type: 'prescription',
+  patient: identity.id,
+  medications: [{
+    name: 'Aspirin',
+    dosage: '1 pill',
+    frequency: 'daily',
+  }],
+});
+      </code></pre>
+              </div>
             </div>
             <!-- END OF SDK -->
 
@@ -1771,7 +1535,7 @@ const closeModal = () => {
   }
 }
 
-# getWaitlistContainer {
+.getWaitlistContainer {
   width: 100%;
   height: auto;
   display: block;
@@ -1793,7 +1557,7 @@ const closeModal = () => {
   background-color: #272822; /* Monokai theme background color */
   color: #f8f8f2; /* Monokai theme text color */
   border-radius: 5px;
-  font-size: 0.875rem; /* This is where you adjust the font size, 0.875rem is smaller */
+  font-size: 0.9rem; /* This is where you adjust the font size, 0.875rem is smaller */
   line-height: 1.4; /* Adjust line height for readability */
 }
 /* end highlights js */
