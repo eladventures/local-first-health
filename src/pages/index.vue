@@ -130,6 +130,24 @@ const closeModal = () => {
   showWaitlist.value = false;
 };
 
+const showVideoModal = ref(false);
+
+// Function to close the video modal
+const closeVideoModal = () => {
+  showVideoModal.value = false;
+};
+
+// External script loading example
+let externalScript = null;
+
+const loadExternalScript = () => {
+  externalScript = document.createElement("script");
+  externalScript.src = "https://example.com/external-script.js"; // Replace with actual external script source
+  externalScript.async = true;
+  document.body.appendChild(externalScript);
+};
+
+// OnMounted actions
 onMounted(() => {
   setTimeout(typeText, newTextDelay + 200);
   hljs.highlightAll();
@@ -143,6 +161,10 @@ onMounted(() => {
     if (cssLink) {
       cssLink.remove();
     }
+
+    if (externalScript) {
+      externalScript.remove(); // Clean up the external script if loaded
+    }
   };
 });
 
@@ -154,6 +176,7 @@ defineExpose({
   isWidgetLoaded,
   triggerWaitlist,
   closeModal,
+  loadExternalScript,
 });
 </script>
 
@@ -234,8 +257,50 @@ defineExpose({
                 </svg>
               </a>
 
-              <!-- GitHub Waitlist Button -->
+              <!-- Play Video Button -->
+
               <a
+                href="javascript:void(0);"
+                @click="showVideoModal = true"
+                class="flex items-center gap-2 px-8 py-3 rounded-lg bg-slate-900 hover:bg-slate-700"
+              >
+                <span class="text-xl font-medium text-white cursor-pointer"
+                  >Play Video</span
+                >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  class="w-7 h-7"
+                >
+                  <path
+                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5V7.5l6 4.5-6 4.5z"
+                    fill="white"
+                  />
+                </svg>
+              </a>
+
+              <!-- Video Modal -->
+              <div v-if="showVideoModal" class="modal-overlay">
+                <div class="modal-content">
+                  <button @click="closeVideoModal" class="close-button">
+                    &times;
+                  </button>
+                  <div class="video-wrapper">
+                    <!-- Embedded YouTube video -->
+                    <iframe
+                      width="100%"
+                      height="315"
+                      src="https://www.youtube.com/embed/9PhRbxEWy8I"
+                      frameborder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowfullscreen
+                    ></iframe>
+                  </div>
+                </div>
+              </div>
+
+              <!-- GitHub Waitlist Button -->
+              <!-- <a
                 href="javascript:void(0);"
                 @click="triggerWaitlist"
                 class="flex items-center gap-2 px-8 py-3 rounded-lg bg-slate-900 hover:bg-slate-700"
@@ -254,7 +319,7 @@ defineExpose({
                     stroke="black"
                   />
                 </svg>
-              </a>
+              </a> -->
             </div>
           </div>
         </div>
@@ -1561,4 +1626,51 @@ const record = await app.emr.records.create({
   line-height: 1.4; /* Adjust line height for readability */
 }
 /* end highlights js */
+
+/* For Video Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 800px;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 30px;
+  cursor: pointer;
+  color: #333;
+}
+
+.video-wrapper iframe {
+  width: 100%;
+  height: 450px;
+  border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+  .video-wrapper iframe {
+    height: 250px;
+  }
+}
 </style>
