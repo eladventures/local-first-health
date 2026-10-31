@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Principles · Local First Health</title>
+<meta name="description" content="Five proposed principles that turn &quot;the records you write should stay with you&quot; into things you can check, with a question to ask any health software.">
+<meta property="og:title" content="Principles · Local First Health">
+<meta property="og:description" content="Five proposed principles that turn &quot;the records you write should stay with you&quot; into things you can check, with a question to ask any health software.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#FBFBF9" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#131312" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="favicon.svg?v=21" type="image/svg+xml">
+<link rel="stylesheet" href="style.css?v=22">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header><nav class="top" aria-label="Main">
+  <a class="home" href="index.html"><img src="logo.svg?v=21" alt="" width="28" height="28">Local First Health</a>
+  <a href="principles.html" aria-current="page">Principles</a><a href="status.html">Status</a><a href="participate.html">Contact</a><a href="about.html">About</a>
+</nav></header>
+
+<main id="main"><div class="grid">
+  <div class="m"><small>Proposed<br>for review</small></div>
+  <div>
+    <h1 class="page">Five principles to build toward.</h1>
+    <p class="lede">"The records you write should stay with you" is a belief. These proposed principles describe what software built toward that belief should do. Each ends with a question you can ask a health software provider.</p>
+    <p>They are aspirations for software, not delivered LFH capabilities or a development schedule. No clinical product is available through LFH.</p>
+    <p class="aside">Local-first software keeps a usable copy of data on your device and supports work without a constant internet connection. Sharing between systems requires additional design and testing.</p>
+  </div>
+
+  <div class="m">1<svg class="icon" aria-hidden="true" focusable="false"><use href="icons.svg#export"/></svg><small>ideals 5, 7</small></div>
+  <section class="principle">
+    <h2>Keep records usable when people change tools.</h2>
+    <h3>What it means for you</h3>
+    <p>A clinic should be able to switch software without losing the records it is responsible for. A patient should be able to obtain their records and take them to the next clinic.</p>
+    <h3>What it requires</h3>
+    <ul class="plain"><li>A documented way to export every record, in a format another tool can read.</li><li>Continued access to existing records, even after a subscription or contract ends.</li><li>No fee to get existing records back.</li></ul>
+    <p class="ask"><span>The question to ask</span>Can I take every record out, in a form another tool can read, without paying?</p>
+    <p class="meta">Status: proposed. Not yet demonstrated.</p>
+  </section>
+
+  <div class="m">2<svg class="icon" aria-hidden="true" focusable="false"><use href="icons.svg#write-on"/></svg><small>ideals 1, 3</small></div>
+  <section class="principle">
+    <h2>Support essential work offline.</h2>
+    <h3>What it means for you</h3>
+    <p>Essential recordkeeping should stay available when the connection drops, with documented limits. Work that needs a connection should be clearly identified.</p>
+    <h3>What it requires</h3>
+    <ul class="plain"><li>A published list of which tasks work without a connection.</li><li>A published list of what waits until the connection returns.</li><li>Tests of the offline tasks and their limits, with findings available to the people using the software.</li></ul>
+    <p class="ask"><span>The question to ask</span>If the internet goes down at 10 a.m., what can my clinic still do, and what has to wait?</p>
+    <p class="meta">Status: proposed. Not yet demonstrated.</p>
+  </section>
+
+  <div class="m">3<svg class="icon" aria-hidden="true" focusable="false"><use href="icons.svg#exchange"/></svg><small>ideals 2, 4</small></div>
+  <section class="principle">
+    <h2>Make records useful across care settings.</h2>
+    <h3>What it means for you</h3>
+    <p>The next clinic, lab, or pharmacy should be able to read and use the record. Sharing between systems requires additional design and testing.</p>
+    <h3>What it requires</h3>
+    <ul class="plain"><li>Shared health data standards, such as FHIR (a common standard for exchanging health records).</li><li>The source and date of each record kept with it, so the next clinician knows where it came from.</li><li>Testing with at least one other tool, with the results published.</li></ul>
+    <p class="ask"><span>The question to ask</span>If I send this record to another clinic, can their software use it, and can they see who wrote it and when?</p>
+    <p class="meta">Status: proposed. Not yet demonstrated.</p>
+  </section>
+
+  <div class="m">4<svg class="icon" aria-hidden="true" focusable="false"><use href="icons.svg#layers"/></svg><small>ideal 5</small></div>
+  <section class="principle">
+    <h2>Publish the foundations for others to build on.</h2>
+    <h3>What it means for you</h3>
+    <p>We want builders to be able to build on shared foundations. A clinic's continued access to its records should not depend on one company's survival.</p>
+    <h3>What it requires</h3>
+    <ul class="plain"><li>A shared foundation codebase remains an ambition. No release date, scope or license has been announced.</li><li>If a foundation is released, its code, license, documentation and contribution rules should be available together.</li></ul>
+    <p class="ask"><span>The question to ask</span>Is the code public, under what license, and who decides what changes?</p>
+    <p class="meta">Status: an ambition. Not released.</p>
+  </section>
+
+  <div class="m">5<svg class="icon" aria-hidden="true" focusable="false"><use href="icons.svg#talk"/></svg><small>all ideals</small></div>
+  <section class="principle">
+    <h2>Test with the people doing the work.</h2>
+    <h3>What it means for you</h3>
+    <p>Clinicians and patients should help shape what matters first. Priorities should reflect the work and be open to question.</p>
+    <h3>What it requires</h3>
+    <ul class="plain"><li>Testing with clinicians and patients in real settings before making claims about usefulness.</li><li>Documented findings and limits, including what did not work.</li></ul>
+    <p class="ask"><span>The question to ask</span>Who tested this, where, and what did they say was missing?</p>
+    <p class="meta">Status: proposed. Not yet demonstrated.</p>
+  </section>
+
+  <div></div><h2 class="sec">One policy, stated plainly</h2>
+  <div class="m"></div>
+  <div><p class="lede">Paying for software or support should never be a condition of retrieving existing records.</p></div>
+
+  <div></div><h2 class="sec">Open questions for builders</h2>
+  <div class="m"></div>
+  <div>
+    <p>These principles raise hard problems we have not solved. If you build software, help us think them through.</p>
+    <ul class="plain">
+      <li><strong>What counts as "essential"?</strong> Which clinic tasks must work offline on day one, and which can wait?</li>
+      <li><strong>Two people, one record.</strong> When two clinicians edit the same record offline, how should changes merge safely?</li>
+      <li><strong>Shared ownership in practice.</strong> How should a patient's copy and a provider's copy of the same record stay in step?</li>
+      <li><strong>Protecting local copies.</strong> How should devices, backups, and keys be protected when data lives on the device?</li>
+      <li><strong>Starting small with standards.</strong> What is the smallest useful set of FHIR resources to support first?</li>
+    </ul>
+  </div>
+
+  <div></div><h2 id="for-builders">For builders</h2>
+  <div class="m"></div>
+  <div>
+    <p>LFH’s mission sits within a wider local-first software community. These independent resources offer places to learn and explore; they are not endorsements of LFH or assessments of suitability for clinical use.</p>
+    <ul class="plain">
+      <li><a href="https://lofi.so/">LoFi</a> — a community hub for discovering local-first resources and projects.</li>
+      <li><a href="https://www.localfirstconf.com/">Local-first Conf</a> — a conference for people exploring and building local-first software.</li>
+      <li><a href="https://www.smashingmagazine.com/2026/05/architecture-local-first-web-development/">The Architecture Of Local-First Web Development</a> — a developer’s perspective in Smashing Magazine, including when the approach may not fit.</li>
+      <li><a href="https://se-radio.net/?p=9421">Martin Kleppmann on local-first software</a> — a Software Engineering Radio interview and transcript covering architecture, synchronization and tradeoffs, from IEEE Computer Society and IEEE Software magazine.</li>
+    </ul>
+  </div>
+
+  <div></div>
+  <div class="cta">
+    <h2>Help shape these</h2>
+    <p>These are proposals. Tell us what's missing, wrong, or unworkable.</p>
+    <p class="mail">Email <a href="mailto:hello@localfirsthealth.org?subject=Principles%20feedback">hello@localfirsthealth.org</a> with the subject "Principles feedback".</p>
+  </div>
+</div></main>
+
+<footer><div class="in">
+  <p class="sig"><img src="logo.svg?v=21" alt="" width="32" height="32"><a href="index.html#ownership">The record should travel. Not the patient.</a></p>
+  <nav aria-label="Footer"><a href="about.html">About</a><a href="status.html">Status</a><a href="privacy.html">Privacy</a></nav>
+  <p class="meta">Static pages, no trackers or third-party requests. Offline reading is available after your browser has saved the site.</p>
+</div></footer>
+<script>if("serviceWorker" in navigator)navigator.serviceWorker.register("sw.js")</script>
+</body>
+</html>

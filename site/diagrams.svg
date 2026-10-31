@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg">
+<symbol id="standalone" viewBox="0 0 240 170" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M63 85h114v58H63zM51 144h138l-9 11H60zM108 149h24"/><path d="M109 95h16l8 8v27h-24zM125 95v9h8M114 112h13M114 119h13"/></symbol>
+<symbol id="hosted" viewBox="0 0 240 170" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M94 48C77 48 78 24 94 24c-1-22 32-27 38-7 23-9 35 18 19 27-4 3-8 4-14 4z"/><path d="M111 16h12l7 7v17h-19zM123 16v8h7M115 30h10M115 35h10"/><path d="M120 50v32"/><path d="M63 85h114v58H63zM51 144h138l-9 11H60zM108 149h24"/><path d="M103 103h34v23h-34zM109 111h22M109 118h16"/></symbol>
+<symbol id="local-first" viewBox="0 0 240 170" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M94 48C77 48 78 24 94 24c-1-22 32-27 38-7 23-9 35 18 19 27-4 3-8 4-14 4z"/><path d="M120 50v32" stroke-dasharray="3 5"/><path d="M63 85h114v58H63zM51 144h138l-9 11H60zM108 149h24"/><path d="M109 95h16l8 8v27h-24zM125 95v9h8M114 112h13M114 119h13"/></symbol>
+</svg>

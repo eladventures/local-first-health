@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Local First Health · You wrote the record. It should stay with you.</title>
+<meta name="description" content="Clinicians should be able to keep, move, and share the records they write, without paying to get them back. A manifesto for local-first health software.">
+<meta property="og:title" content="Local First Health · You wrote the record. It should stay with you.">
+<meta property="og:description" content="Clinicians should be able to keep, move, and share the records they write, without paying to get them back. A manifesto for local-first health software.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#FBFBF9" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#131312" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="favicon.svg?v=21" type="image/svg+xml">
+<link rel="stylesheet" href="style.css?v=22">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header><nav class="top" aria-label="Main">
+  <a class="home" href="index.html" aria-current="page"><img src="logo.svg?v=21" alt="" width="28" height="28">Local First Health</a>
+  <a href="principles.html">Principles</a><a href="status.html">Status</a><a href="participate.html">Contact</a><a href="about.html">About</a>
+</nav></header>
+
+<main id="main"><div class="grid">
+  <div class="m"><small>Manifesto<br>for review</small></div>
+  <div>
+    <h1>You wrote the record. It should stay with you.</h1>
+    <p class="sub">Clinicians should be able to keep and move the records they write. Patients should be able to take their history to the next clinic. Neither should have to pay to get those records back.</p>
+    <figure class="ink-scene"><img src="images/clinician-simple.webp" alt="" width="960" height="676" decoding="async"></figure>
+    <p class="lede">Picture a family doctor finishing a day at her clinic. Eight years of notes are in her software: allergies, adjusted doses, things to check at the next visit. Those notes are how she remembers people.</p>
+    <p class="lede">A renewal notice arrives. She considers another system and asks how to take her records with her. Will the export include the attachments? Can she read the history after her subscription ends? Which parts can the next system use?</p>
+    <p class="lede">Tomorrow, a patient she has seen for years will sit down across from her. She needs those notes to remain useful through whatever comes next.</p>
+    <p>We believe changing tools should not make that history less useful. Patients should be able to obtain and share their information. Providers should be able to maintain and move the records they are responsible for.</p>
+    <p>Local First Health is an early-stage initiative. Our mission is to help more local-first health apps get built around that belief. No clinical product is available through LFH.</p>
+  </div>
+  <div></div><h2 id="record-lives">Where the record lives</h2>
+  <div class="m"></div>
+  <div><p>Local-first software keeps a usable copy of data on your device and supports work without a constant internet connection. Sharing between systems requires additional design and testing.</p><p>Three approaches that coexist today. These diagrams show typical arrangements; individual systems vary.</p></div>
+  <div class="comparison">
+    <div class="arrangements">
+      <figure class="arrangement"><svg viewBox="0 0 240 170" role="img" aria-labelledby="standalone-title standalone-desc"><title id="standalone-title">Pre-cloud era: standalone local arrangement</title><desc id="standalone-desc">A record is inside a clinic laptop, with no connection to another system shown.</desc><use href="diagrams.svg#standalone"/></svg><figcaption><h3>Pre-cloud era</h3><p>A usable record lives on the clinic's machine.</p><p>Sharing with another device or clinic needs a separate process.</p></figcaption></figure>
+      <figure class="arrangement"><svg viewBox="0 0 240 170" role="img" aria-labelledby="hosted-title hosted-desc"><title id="hosted-title">Cloud era: centrally hosted arrangement</title><desc id="hosted-desc">The working record is inside a remote service. A required connection leads to a view on the clinic laptop.</desc><use href="diagrams.svg#hosted"/></svg><figcaption><h3>Cloud era</h3><p>The working record depends on a remote service.</p><p>This example needs a connection. Some hosted systems also offer local or offline features.</p></figcaption></figure>
+      <figure class="arrangement"><svg viewBox="0 0 240 170" role="img" aria-labelledby="local-first-title local-first-desc"><title id="local-first-title">Local-first era arrangement</title><desc id="local-first-desc">A usable record is inside the clinic laptop. A dashed line shows an optional connection to a remote service.</desc><use href="diagrams.svg#local-first"/></svg><figcaption><h3>Local-first era</h3><p>A usable copy stays on the clinic's device.</p><p>Essential work should continue offline, with documented limits. Sharing and synchronization need separate design and testing.</p></figcaption></figure>
+    </div>
+    <p class="meta diagram-key">Solid line: a required connection in this example. Dashed line: an optional connection.</p>
+  </div>
+  <div></div><h2 id="software-goals">What we want health apps to make possible</h2>
+  <div class="m"></div>
+  <div>
+    <p>These are qualities we want health apps to have. They are aspirations, not features LFH delivers today.</p>
+    <p>They draw on the <a href="https://www.inkandswitch.com/essay/local-first/">seven local-first ideals from Ink &amp; Switch</a> and the responsibilities that come with health records. These twelve goals are our own interpretation; Ink &amp; Switch has not reviewed or endorsed LFH.</p>
+    <ul class="software-goals" role="list">
+      <li><img class="pin-illustration" src="images/pins/work-offline.webp" alt="" width="144" height="144" loading="lazy" decoding="async"><h3>Work offline</h3><p>Essential recordkeeping should work offline, with clear limits.</p></li>
+      <li><img class="pin-illustration" src="images/pins/keep-records.webp" alt="" width="144" height="144" loading="lazy" decoding="async"><h3>Keep your records</h3><p>Patients and providers should be able to keep and move the records they need.</p></li>
+      <li><img class="pin-illustration" src="images/pins/keep-software.webp" alt="" width="144" height="144" loading="lazy" decoding="async"><h3>Keep using the software</h3><p>Clinics should be able to keep working if a software company closes.</p></li>
+      <li><img class="pin-illustration" src="images/pins/requirements.webp" alt="" width="144" height="144" loading="lazy" decoding="async"><h3>Clear requirements</h3><p>Each implementation should state which standards apply and what remains unevaluated.</p></li>
+      <li><img class="pin-illustration" src="images/pins/privacy.webp" alt="" width="144" height="144" loading="lazy" decoding="async"><h3>Privacy by design</h3><p>People should know what leaves their device and who can access it.</p></li>
+      <li><img class="pin-illustration" src="images/pins/protection.webp" alt="" width="144" height="144" loading="lazy" decoding="async"><h3>Protection with clear limits</h3><p>Each implementation must explain how it protects records and where its limits lie.</p></li>
+      <li><img class="pin-illustration" src="images/pins/ready.webp" alt="" width="144" height="144" loading="lazy" decoding="async"><h3>Ready when needed</h3><p>Essential local work should not have to wait for a server.</p></li>
+      <li><img class="pin-illustration" src="images/pins/collaborate.webp" alt="" width="144" height="144" loading="lazy" decoding="async"><h3>Work together</h3><p>Shared records should keep their source and date intact.</p></li>
+      <li><img class="pin-illustration" src="images/pins/sync.webp" alt="" width="144" height="144" loading="lazy" decoding="async"><h3>Copies that stay in step</h3><p>Synchronization needs testing and a way to handle conflicting edits.</p></li>
+      <li><img class="pin-illustration" src="images/pins/local-copies.webp" alt="" width="144" height="144" loading="lazy" decoding="async"><h3>Usable local copies</h3><p>A usable copy should stay on the clinic’s own devices.</p></li>
+      <li><img class="pin-illustration" src="images/pins/open.webp" alt="" width="144" height="144" loading="lazy" decoding="async"><h3>Open foundations</h3><p>Shared code should help others build; an LFH foundation remains an ambition.</p></li>
+      <li><img class="pin-illustration" src="images/pins/freedom.webp" alt="" width="144" height="144" loading="lazy" decoding="async"><h3>Freedom to move</h3><p>Retrieving existing records should be free; moving them may need extra work.</p></li>
+    </ul>
+    <p class="goals-context">A person's history should outlast any app or company. The <a href="principles.html">five proposed principles</a> turn these beliefs into questions you can ask a software provider. Builders can also <a href="principles.html#for-builders">explore the wider local-first community</a>.</p>
+  </div>
+  <div></div><h2 id="ownership">What ownership means</h2>
+  <div class="m"></div>
+  <div><p>Health data belongs to people, not platforms. A patient and the providers responsible for a record should be able to keep useful copies and decide how to share them.</p><p>Some systems already offer bulk exports. What comes out, what another tool can use, and what access remains after cancellation vary. Here are four questions worth asking:</p>
+    <ul class="questions"><li>Can we keep a readable copy after our subscription ends?</li><li>What is included in the export, and what is left out?</li><li>Which parts can the next tool use, and what needs conversion or checking?</li><li>Which essential tasks work without an internet connection, and with what limits?</li></ul>
+    <p><mark>Paying for software or support should never be a condition of retrieving existing records.</mark></p><p>Moving records into another system may need additional work. That work is different from getting your existing records back.</p></div>
+  <div></div><h2>Where LFH stands</h2>
+  <div class="m"></div>
+  <div><p>LFH grew out of experience working in teams building health record systems since 2016. <a href="about.html">Read the background</a>.</p><p>This is an early-stage initiative that develops as time allows. No clinical product or foundation codebase is available through LFH. <a href="status.html">See the current stage</a>.</p><p>Local-first reduces dependence on central services. It does not make privacy or security automatic. Each implementation must explain how it protects devices, backups and shared records. These principles are not a HIPAA compliance assessment.</p></div>
+  <div></div><h2>Further reading</h2>
+  <div class="m"></div>
+  <div><p>LFH is part of a wider conversation about software people can keep and use. These sources discuss the ideas; neither is an endorsement of LFH.</p>
+    <div class="source"><p class="meta">Ink &amp; Switch · Kleppmann, Wiggins, van Hardenberg, McGranaghan · 2019</p><p class="source-t"><a href="https://www.inkandswitch.com/essay/local-first/">“Local-first software: You own your data, in spite of the cloud”</a></p><p>The essay that named the seven ideals.</p></div>
+    <div class="source"><p class="meta">WIRED · Gregory Barber · August 2023</p><p class="source-t"><a href="https://www.wired.com/story/the-cloud-is-a-prison-can-the-local-first-software-movement-set-us-free/">“The Cloud Is a Prison. Can the Local-First Software Movement Set Us Free?”</a></p><p>The local-first movement, outside health. It does not cover LFH.</p></div></div>
+  <div></div><div class="cta" id="work-together">
+    <h2>If you believe this too</h2>
+    <p>Picture the choice we want that doctor to have. Before renewing, she has checked what she can keep reading, what the next system can use, and what needs more work. Retrieving her existing records carries no fee.</p>
+    <p>She decides to stay. Staying is now a choice.</p>
+    <p>If these ideas matter to your work, share a workflow problem, question or perspective. We have limited capacity and may be slow to respond.</p>
+    <p><a class="btn btn-primary" href="mailto:hello@localfirsthealth.org">Email LFH</a> <a class="contact-detail" href="participate.html">What you can send</a></p>
+    <p class="meta">Please do not send patient records or identifying medical details.</p>
+  </div>
+</div></main>
+
+<footer><div class="in">
+  <p class="sig"><img src="logo.svg?v=21" alt="" width="32" height="32"><a href="index.html#ownership">The record should travel. Not the patient.</a></p>
+  <nav aria-label="Footer"><a href="about.html">About</a><a href="status.html">Status</a><a href="privacy.html">Privacy</a></nav>
+  <p class="meta">Static pages, no trackers or third-party requests. Offline reading is available after your browser has saved the site.</p>
+</div></footer>
+<script>if("serviceWorker" in navigator)navigator.serviceWorker.register("sw.js")</script>
+</body>
+</html>
