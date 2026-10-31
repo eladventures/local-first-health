@@ -1,10 +1,10 @@
 // Cache the whole site so it stays readable offline. Bump VERSION when files change.
-const VERSION = "lfh-v22";
+const VERSION = "lfh-v27";
 const FILES = [
   "./", "index.html", "principles.html", "status.html", "participate.html", "about.html", "privacy.html",
-  "style.css?v=22", "favicon.svg?v=21", "logo.svg?v=21", "icons.svg", "404.html", "fonts/general-sans-500.woff2",
+  "style.css?v=23", "favicon.svg?v=21", "logo.svg?v=21", "icons.svg", "404.html", "fonts/general-sans-500.woff2",
   "fonts/source-serif-4.woff2?v=2", "fonts/jetbrains-mono-400.woff2",
-  "diagrams.svg", "images/clinician-simple.webp",
+  "diagrams.svg", "images/clinician-doc2.webp", "images/lfh-boxed-logo.png", "images/lfh-original-badge.webp",
   "images/pins/work-offline.webp",
   "images/pins/keep-records.webp",
   "images/pins/keep-software.webp",

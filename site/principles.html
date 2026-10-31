@@ -10,7 +10,7 @@
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#FBFBF9" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#131312" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="favicon.svg?v=21" type="image/svg+xml">
-<link rel="stylesheet" href="style.css?v=22">
+<link rel="stylesheet" href="style.css?v=23">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -23,9 +23,11 @@
   <div class="m"><small>Proposed<br>for review</small></div>
   <div>
     <h1 class="page">Five principles to build toward.</h1>
-    <p class="lede">"The records you write should stay with you" is a belief. These proposed principles describe what software built toward that belief should do. Each ends with a question you can ask a health software provider.</p>
+    <p class="lede">These five proposed principles describe the health apps we want to see built. Each connects a belief to practical requirements and a question you can ask a software provider.</p>
     <p>They are aspirations for software, not delivered LFH capabilities or a development schedule. No clinical product is available through LFH.</p>
     <p class="aside">Local-first software keeps a usable copy of data on your device and supports work without a constant internet connection. Sharing between systems requires additional design and testing.</p>
+    <figure class="principles-badge"><img src="images/lfh-original-badge.webp" alt="Local-First Health. True Privacy · Data Freedom. Own the Software · Own the Data." width="690" height="554" decoding="async"></figure>
+    <p class="badge-caption">The badge expresses the goals behind these principles. Privacy and control depend on how each app is built.</p>
   </div>
 
   <div class="m">1<svg class="icon" aria-hidden="true" focusable="false"><use href="icons.svg#export"/></svg><small>ideals 5, 7</small></div>
@@ -35,8 +37,7 @@
     <p>A clinic should be able to switch software without losing the records it is responsible for. A patient should be able to obtain their records and take them to the next clinic.</p>
     <h3>What it requires</h3>
     <ul class="plain"><li>A documented way to export every record, in a format another tool can read.</li><li>Continued access to existing records, even after a subscription or contract ends.</li><li>No fee to get existing records back.</li></ul>
-    <p class="ask"><span>The question to ask</span>Can I take every record out, in a form another tool can read, without paying?</p>
-    <p class="meta">Status: proposed. Not yet demonstrated.</p>
+    <p class="ask"><span>The question to ask</span>Can I retrieve every existing record without a fee, and what would another tool need to use it?</p>
   </section>
 
   <div class="m">2<svg class="icon" aria-hidden="true" focusable="false"><use href="icons.svg#write-on"/></svg><small>ideals 1, 3</small></div>
@@ -47,25 +48,24 @@
     <h3>What it requires</h3>
     <ul class="plain"><li>A published list of which tasks work without a connection.</li><li>A published list of what waits until the connection returns.</li><li>Tests of the offline tasks and their limits, with findings available to the people using the software.</li></ul>
     <p class="ask"><span>The question to ask</span>If the internet goes down at 10 a.m., what can my clinic still do, and what has to wait?</p>
-    <p class="meta">Status: proposed. Not yet demonstrated.</p>
   </section>
 
   <div class="m">3<svg class="icon" aria-hidden="true" focusable="false"><use href="icons.svg#exchange"/></svg><small>ideals 2, 4</small></div>
-  <section class="principle">
+  <section class="principle" id="across-care-settings">
     <h2>Make records useful across care settings.</h2>
     <h3>What it means for you</h3>
     <p>The next clinic, lab, or pharmacy should be able to read and use the record. Sharing between systems requires additional design and testing.</p>
     <h3>What it requires</h3>
     <ul class="plain"><li>Shared health data standards, such as FHIR (a common standard for exchanging health records).</li><li>The source and date of each record kept with it, so the next clinician knows where it came from.</li><li>Testing with at least one other tool, with the results published.</li></ul>
     <p class="ask"><span>The question to ask</span>If I send this record to another clinic, can their software use it, and can they see who wrote it and when?</p>
-    <p class="meta">Status: proposed. Not yet demonstrated.</p>
+    <p class="aside">In a 2022 interview with Stanford Medicine’s Dean Lloyd Minor, Reed Jobs discussed fragmented clinical records and people’s control over access to their data. <a href="https://med.stanford.edu/minorconsult/reed-jobs.html">Listen to their conversation on The Minor Consult</a>.</p>
   </section>
 
   <div class="m">4<svg class="icon" aria-hidden="true" focusable="false"><use href="icons.svg#layers"/></svg><small>ideal 5</small></div>
   <section class="principle">
     <h2>Publish the foundations for others to build on.</h2>
     <h3>What it means for you</h3>
-    <p>We want builders to be able to build on shared foundations. A clinic's continued access to its records should not depend on one company's survival.</p>
+    <p>Open code and documentation should let builders learn from each other and adapt software to local needs. A clinic should be able to keep using the tools it relies on.</p>
     <h3>What it requires</h3>
     <ul class="plain"><li>A shared foundation codebase remains an ambition. No release date, scope or license has been announced.</li><li>If a foundation is released, its code, license, documentation and contribution rules should be available together.</li></ul>
     <p class="ask"><span>The question to ask</span>Is the code public, under what license, and who decides what changes?</p>
@@ -80,7 +80,6 @@
     <h3>What it requires</h3>
     <ul class="plain"><li>Testing with clinicians and patients in real settings before making claims about usefulness.</li><li>Documented findings and limits, including what did not work.</li></ul>
     <p class="ask"><span>The question to ask</span>Who tested this, where, and what did they say was missing?</p>
-    <p class="meta">Status: proposed. Not yet demonstrated.</p>
   </section>
 
   <div></div><h2 class="sec">One policy, stated plainly</h2>
@@ -90,7 +89,7 @@
   <div></div><h2 class="sec">Open questions for builders</h2>
   <div class="m"></div>
   <div>
-    <p>These principles raise hard problems we have not solved. If you build software, help us think them through.</p>
+    <p>Putting these principles into practice raises important design questions. If you build software, share how you would approach them.</p>
     <ul class="plain">
       <li><strong>What counts as "essential"?</strong> Which clinic tasks must work offline on day one, and which can wait?</li>
       <li><strong>Two people, one record.</strong> When two clinicians edit the same record offline, how should changes merge safely?</li>

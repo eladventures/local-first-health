@@ -190,6 +190,11 @@ td.yes{color:var(--success);font-family:var(--display);font-weight:500}
 .mail{font:500 1.0625rem/1.5 var(--display)}
 
 /* The primary mark and its rationale on About. */
-.about-mark{width:min(100%,240px);margin:24px 0 32px}
+.about-mark{width:min(100%,280px);margin:24px 0 32px}
 .about-mark img{display:block;width:100%;height:auto}
 .mark-context{font-size:1rem;line-height:1.55;color:var(--muted)}
+
+.principles-badge{width:min(100%,260px);margin:32px 0 0}
+.principles-badge img{display:block;width:100%;height:auto}
+.badge-caption{max-width:42ch;font-size:1rem;line-height:1.55;color:var(--muted);margin-top:16px}
+@media (prefers-color-scheme:dark){.about-mark img{filter:invert(1)}}
