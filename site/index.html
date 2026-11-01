@@ -10,7 +10,7 @@
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#FBFBF9" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#131312" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="favicon.svg?v=21" type="image/svg+xml">
-<link rel="stylesheet" href="style.css?v=23">
+<link rel="stylesheet" href="style.css?v=33">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -24,23 +24,25 @@
   <div>
     <h1>You wrote the record. It should stay with you.</h1>
     <p class="sub">Clinicians should be able to keep and move the records they write. Patients should be able to take their history to the next clinic. Neither should have to pay to get those records back.</p>
-    <figure class="ink-scene"><img src="images/clinician-doc2.webp" alt="" width="960" height="676" decoding="async"></figure>
-    <p class="lede">Picture a family doctor finishing a day at her clinic. Eight years of notes are in her software: allergies, adjusted doses, things to check at the next visit. Those notes are how she remembers people.</p>
-    <p class="lede">A renewal notice arrives. She considers another system and asks how to take her records with her. Will the export include the attachments? Can she read the history after her subscription ends? Which parts can the next system use?</p>
-    <p class="lede">Tomorrow, a patient she has seen for years will sit down across from her. She needs those notes to remain useful through whatever comes next.</p>
+    <figure class="ink-scene"><img src="images/doctor-free.webp" alt="" width="1200" height="800" decoding="async"></figure>
+    <section class="opening-story" aria-label="A clinic scenario">
+      <p>Picture a family doctor closing her clinic for the evening. For eight years, she has written a note after each visit: an allergy a patient mentioned, why she changed a dose, what they agreed to check next time. She built that history one appointment at a time.</p>
+      <p>Now she wants to cancel her software subscription. Before she can, she has to ask: when the payments stop, will she still be able to open the records she wrote? If access ends with the subscription, eight years of her work could be out of reach just when she needs it.</p>
+      <p>Tomorrow, someone she has cared for for years will sit across from her. She needs to remember what they have already tried and what comes next. She is ready to leave the software. She still needs the history they built together.</p>
+    </section>
     <p>We believe changing tools should not make that history less useful. Patients should be able to obtain and share their information. Providers should be able to maintain and move the records they are responsible for.</p>
     <p>Local First Health is an early-stage initiative. Our mission is to help more local-first health apps get built around that belief. No clinical product is available through LFH.</p>
   </div>
   <div></div><h2 id="record-lives">Where the record lives</h2>
   <div class="m"></div>
-  <div><p>Local-first software keeps a usable copy of data on your device and supports work without a constant internet connection. Sharing between systems requires additional design and testing.</p><p>Three approaches that coexist today. These diagrams show typical arrangements; individual systems vary.</p></div>
+  <div><p>Local-first software keeps a usable copy of data on your device and supports work without a constant internet connection. Sharing records between different apps needs compatible software.</p><p>All three approaches are still used today. These are simplified examples: some cloud apps work offline too, and sharing features vary by app.</p></div>
   <div class="comparison">
     <div class="arrangements">
-      <figure class="arrangement"><svg viewBox="0 0 240 170" role="img" aria-labelledby="standalone-title standalone-desc"><title id="standalone-title">Pre-cloud era: standalone local arrangement</title><desc id="standalone-desc">A record is inside a clinic laptop, with no connection to another system shown.</desc><use href="diagrams.svg#standalone"/></svg><figcaption><h3>Pre-cloud era</h3><p>A usable record lives on the clinic's machine.</p><p>Sharing with another device or clinic needs a separate process.</p></figcaption></figure>
-      <figure class="arrangement"><svg viewBox="0 0 240 170" role="img" aria-labelledby="hosted-title hosted-desc"><title id="hosted-title">Cloud era: centrally hosted arrangement</title><desc id="hosted-desc">The working record is inside a remote service. A required connection leads to a view on the clinic laptop.</desc><use href="diagrams.svg#hosted"/></svg><figcaption><h3>Cloud era</h3><p>The working record depends on a remote service.</p><p>This example needs a connection. Some hosted systems also offer local or offline features.</p></figcaption></figure>
-      <figure class="arrangement"><svg viewBox="0 0 240 170" role="img" aria-labelledby="local-first-title local-first-desc"><title id="local-first-title">Local-first era arrangement</title><desc id="local-first-desc">A usable record is inside the clinic laptop. A dashed line shows an optional connection to a remote service.</desc><use href="diagrams.svg#local-first"/></svg><figcaption><h3>Local-first era</h3><p>A usable copy stays on the clinic's device.</p><p>Essential work should continue offline, with documented limits. Sharing and synchronization need separate design and testing.</p></figcaption></figure>
+      <figure class="arrangement"><svg viewBox="0 0 240 170" role="img" aria-labelledby="standalone-title standalone-desc"><title id="standalone-title">Pre-cloud era: standalone local arrangement</title><desc id="standalone-desc">A record is inside a clinic laptop, with no connection to another system shown.</desc><use href="diagrams.svg#standalone"/></svg><figcaption><h3>Pre-cloud era</h3><p>Records stay on a clinic computer. You can use them without internet, but moving them to another device takes a separate step.</p></figcaption></figure>
+      <figure class="arrangement"><svg viewBox="0 0 240 170" role="img" aria-labelledby="hosted-title hosted-desc"><title id="hosted-title">Cloud era: centrally hosted arrangement</title><desc id="hosted-desc">The record is kept on the software provider’s computers. The clinic laptop needs an internet connection to open it in this example.</desc><use href="diagrams.svg#hosted"/></svg><figcaption><h3>Cloud era</h3><p>Records are kept on the software provider’s computers. You open them over the internet, so access depends on the service and your connection.</p></figcaption></figure>
+      <figure class="arrangement"><svg viewBox="0 0 240 170" role="img" aria-labelledby="local-first-title local-first-desc"><title id="local-first-title">Local-first era arrangement</title><desc id="local-first-desc">A working copy of the record is on the clinic laptop. A dashed line shows an optional connection to an online service.</desc><use href="diagrams.svg#local-first"/></svg><figcaption><h3>Local-first era</h3><p>A working copy stays on your device. Essential work should continue offline, with updates shared when devices can connect.</p></figcaption></figure>
     </div>
-    <p class="meta diagram-key">Solid line: a required connection in this example. Dashed line: an optional connection.</p>
+    <p class="meta diagram-key">Solid line: a connection is needed. Dashed line: a connection is optional.</p>
   </div>
   <div></div><h2 id="software-goals">What we want health apps to make possible</h2>
   <div class="m"></div>
@@ -78,7 +80,7 @@
     <div class="source"><p class="meta">WIRED · Gregory Barber · August 2023</p><p class="source-t"><a href="https://www.wired.com/story/the-cloud-is-a-prison-can-the-local-first-software-movement-set-us-free/">“The Cloud Is a Prison. Can the Local-First Software Movement Set Us Free?”</a></p><p>The local-first movement, outside health. It does not cover LFH.</p></div></div>
   <div></div><div class="cta" id="work-together">
     <h2>If you believe this too</h2>
-    <p>Picture the choice we want that doctor to have. Before renewing, she has checked what she can keep reading, what the next system can use, and what needs more work. Retrieving her existing records carries no fee.</p>
+    <p>Picture the choice we want that doctor to have. Before deciding whether to stay, she has checked what she can keep reading, what the next system can use, and what needs more work. Retrieving her existing records carries no fee.</p>
     <p>She decides to stay. Staying is now a choice.</p>
     <p>If these ideas matter to your work, share a workflow problem, question or perspective. We have limited capacity and may be slow to respond.</p>
     <p><a class="btn btn-primary" href="mailto:hello@localfirsthealth.org">Email LFH</a> <a class="contact-detail" href="participate.html">What you can send</a></p>
