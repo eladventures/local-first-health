@@ -1,5 +1,5 @@
 // Cache the whole site so it stays readable offline. Bump VERSION when files change.
-const VERSION = "lfh-v33";
+const VERSION = "lfh-v34";
 const FILES = [
   "./", "index.html", "principles.html", "status.html", "participate.html", "about.html", "privacy.html",
   "style.css?v=33", "favicon.svg?v=21", "logo.svg?v=21", "icons.svg", "404.html", "fonts/general-sans-500.woff2",
