@@ -1,10 +1,13 @@
 // Cache the whole site so it stays readable offline. Bump VERSION when files change.
-const VERSION = "lfh-v34";
+// v2 cache name is distinct from every v1 "lfh-vNN" name; old lfh- caches are removed on activate.
+const VERSION = "lfh-site-v2-9";
 const FILES = [
-  "./", "index.html", "principles.html", "status.html", "participate.html", "about.html", "privacy.html",
-  "style.css?v=33", "favicon.svg?v=21", "logo.svg?v=21", "icons.svg", "404.html", "fonts/general-sans-500.woff2",
-  "fonts/source-serif-4.woff2?v=2", "fonts/source-serif-4-italic-latin.woff2", "fonts/jetbrains-mono-400.woff2",
-  "diagrams.svg", "images/doctor-free.webp", "images/lfh-boxed-logo.png", "images/lfh-original-badge.webp",
+  "./", "index.html", "questions.html", "principles.html", "about.html", "participate.html", "privacy.html",
+  "status.html", "404.html", "style.css", "favicon.svg", "logo.svg", "logo.png", "icons.svg", "diagrams.svg",
+  "robots.txt",
+  "fonts/general-sans-500.woff2", "fonts/source-serif-4.woff2?v=2", "fonts/source-serif-4-italic-latin.woff2",
+  "fonts/jetbrains-mono-400.woff2", "fonts/source-serif-4-OFL.txt",
+  "images/doctor-free.webp", "images/lfh-boxed-logo.png",
   "images/pins/work-offline.webp",
   "images/pins/keep-records.webp",
   "images/pins/keep-software.webp",
@@ -23,7 +26,7 @@ self.addEventListener("install", e => e.waitUntil(caches.open(VERSION).then(c =>
 self.addEventListener("activate", e => e.waitUntil(
   caches.keys().then(keys => Promise.all(keys.filter(k => k.startsWith("lfh-") && k !== VERSION).map(k => caches.delete(k))))
 ));
-// Network first so edits show up; cache when offline.
+// Network first so edits show up; cache when offline. Same-origin GET only.
 self.addEventListener("fetch", e => {
   if (e.request.method !== "GET" || new URL(e.request.url).origin !== self.location.origin) return;
   e.respondWith(

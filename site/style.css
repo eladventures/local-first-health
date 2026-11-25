@@ -75,22 +75,22 @@ h1.page{font-size:clamp(1.875rem,3.6vw,2.75rem);max-width:22ch}
 .arrangements{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-top:24px}
 .arrangement{margin:0;min-width:0}
 .arrangement svg{display:block;width:100%;height:auto;max-width:280px;color:var(--text);margin-bottom:24px}
-.arrangement h3{margin-bottom:12px}
+.arrangement :is(h3,h4){margin-bottom:12px}
 .arrangement p{font-size:1rem;line-height:1.55;margin:0}
-.diagram-key{margin-top:24px}
+.diagram-key{margin:24px 0 0}
 .questions{margin:24px 0 0;padding-left:1.1em}
 .questions li+li{margin-top:16px}
 .software-goals{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px 24px;list-style:none;padding:0;margin:40px 0}
 .software-goals li{min-width:0}
 .software-goals .pin-illustration{display:block;width:144px;height:144px;object-fit:contain;margin-bottom:16px}
-.software-goals h3{font-size:1.0625rem;line-height:1.35;min-height:2.7em;margin-bottom:8px}
+.software-goals :is(h3,h4){font-size:1.0625rem;line-height:1.35;min-height:2.7em;margin-bottom:8px}
 .software-goals p{font-size:1rem;line-height:1.55;margin:0}
 .goals-context{margin-top:40px}
 .status-facts{margin:40px 0}
 .status-facts>div{display:grid;grid-template-columns:120px minmax(0,1fr);gap:24px;margin-bottom:32px}
 .status-facts dt{font:500 .9375rem/1.65 var(--display);color:var(--muted);padding-top:4px}
 .status-facts dd{margin:0}
-.contact-detail{font:500 .9375rem/1.5 var(--display);display:inline-block;margin:16px 0 0 16px}
+.contact-detail{font:500 .9375rem/1.5 var(--display);display:inline-block;margin:16px 0 0 16px;padding-block:12px}
 .work-cycle{list-style:none;counter-reset:work;padding:0;margin:32px 0}
 .work-cycle li{counter-increment:work;display:grid;grid-template-columns:32px 1fr;gap:16px;margin-top:24px}
 .work-cycle li:before{content:counter(work,decimal-leading-zero);font:400 .8125rem/1.65 var(--mono);color:var(--muted);padding-top:4px}
@@ -98,6 +98,7 @@ h1.page{font-size:clamp(1.875rem,3.6vw,2.75rem);max-width:22ch}
 @media (prefers-color-scheme:dark){.ink-scene img{filter:grayscale(1) contrast(1.15) invert(1);mix-blend-mode:screen}}
 h2{font:500 1.5rem/1.25 var(--display);letter-spacing:-.01em;margin:104px 0 16px;text-wrap:balance}
 h3{font:500 1.1875rem/1.35 var(--display);margin:0 0 8px;text-wrap:balance}
+h4{font:500 1.1875rem/1.35 var(--display);margin:0 0 8px;text-wrap:balance}
 p{text-wrap:pretty}
 .clause{padding-block:20px}
 .clause p{margin:0}
@@ -121,22 +122,17 @@ ul.plain li+li{margin-top:8px}
 .btn-primary:hover{background:var(--accent);border-color:var(--accent);color:var(--paper)}
 .btn-ghost{color:var(--text);background:transparent}
 .btn-ghost:hover{color:var(--accent);border-color:var(--accent)}
-.sign{font:500 1rem var(--display);text-underline-offset:6px;position:relative;display:inline-block;padding-bottom:6px}
-.sign:hover,.sign:focus-visible{text-decoration-color:transparent}
-.sign svg{position:absolute;left:0;bottom:-4px;width:100%;height:10px;overflow:visible}
-.sign path{stroke:var(--accent);stroke-width:1.5;fill:none;stroke-dasharray:240;stroke-dashoffset:240;transition:stroke-dashoffset .5s ease-out}
-.sign:hover path,.sign:focus-visible path{stroke-dashoffset:0}
-@media (prefers-reduced-motion:reduce){.sign path{transition:none;stroke-dashoffset:0}}
 
 /* principles page */
 .aside{font-size:1rem;color:var(--muted);padding-top:24px}
 .principle{padding:8px 0 64px}
-.principle h2{margin-top:0;margin-bottom:24px}
+/* principle headings are h2, sub-labels h3 (outline H1 > H2 > H3); look unchanged */
+.principle>h2{font:500 1.5rem/1.25 var(--display);letter-spacing:-.01em;margin:0 0 24px}
 .principle h3{font:500 .9375rem var(--display);color:var(--muted);margin:32px 0 8px}
 .principle p,.principle ul{margin-top:0}
 .grid>.m:has(+ .principle){font-size:1.25rem;padding-top:.1em}
 .grid>.m:has(.icon):has(+ .principle){font-size:.8125rem;padding-top:20px}
-.ask{background:var(--surface);border-radius:2px;padding:18px 20px;margin:32px 0 16px}
+.ask{background:var(--surface);border-radius:2px;padding:16px 24px;margin:24px 0 16px}
 .ask span{display:block;font:500 .9375rem var(--display);color:var(--text);margin-bottom:4px}
 h2.sec{margin-top:40px}
 
@@ -178,24 +174,54 @@ td.yes{color:var(--success);font-family:var(--display);font-weight:500}
   h2{margin-top:64px}
   .cta{margin-top:64px}
   footer{margin-top:104px}
-  .top{padding:8px 16px;gap:0 22px}
+  .top{padding:8px 16px;gap:0 16px}
   .top a.home{flex-basis:100%}
   .comparison{grid-column:auto}
   .status-facts>div{grid-template-columns:1fr;gap:8px}
   .status-facts dt{padding-top:0}
   .software-goals{grid-template-columns:1fr}
-  .software-goals h3{min-height:0}
+  .software-goals :is(h3,h4){min-height:0}
   .arrangement svg{max-width:240px;margin-bottom:16px}
   main,footer .in{padding-inline:16px}
 }
+/* Narrowest phones: the four nav links do not fit one row; set them two by two instead of leaving "About" alone */
+@media (max-width:370px){.top a:not(.home){flex:0 0 calc(50% - 9px)}}
 .mail{font:500 1.0625rem/1.5 var(--display)}
+.mail a{display:inline-block;padding-block:12px}
 
 /* The primary mark and its rationale on About. */
 .about-mark{width:min(100%,280px);margin:24px 0 32px}
 .about-mark img{display:block;width:100%;height:auto}
 .mark-context{font-size:1rem;line-height:1.55;color:var(--muted)}
 
-.principles-badge{width:min(100%,260px);margin:32px 0 0}
-.principles-badge img{display:block;width:100%;height:auto}
-.badge-caption{max-width:42ch;font-size:1rem;line-height:1.55;color:var(--muted);margin-top:16px}
 @media (prefers-color-scheme:dark){.about-mark img{filter:invert(1)}}
+
+/* v2 additions, built from DESIGN.md tokens */
+/* Question lists (home, questions.html): unboxed, spaced, optional General Sans source line */
+.question-list{list-style:none;padding:0;margin:24px 0}
+.question-list li+li{margin-top:24px}
+/* label link: 12px block padding for a 44px+ target; -12px top margin keeps the 24px item gap */
+.question-list .from{display:block;font:500 .9375rem/1.5 var(--display);padding-block:12px;margin:-12px 0 0}
+.prompt{font-size:1rem;line-height:1.55;color:var(--muted);margin:8px 0 0}
+.ask.lead-q{font:500 1.1875rem/1.45 var(--display)}
+/* Core question set (home, questions.html): numbered 1-4 with muted mono markers, like clause numbers.
+   The lead box is item 1 of its own list; the follow-ups continue with start="2". */
+ol.core{list-style:decimal;padding-left:24px}
+ol.core.lead{margin:0}
+ol.core>li::marker{font:400 .8125rem var(--mono);color:var(--muted)}
+/* Jump list on Principles: muted General Sans links, like footer nav */
+.jump{margin:40px 0 0}
+.jump .meta{margin:0}
+.jump ul{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:0 24px;font:500 .9375rem/1.5 var(--display)}
+.jump a{display:inline-block;color:var(--muted);text-decoration:none;padding-block:12px}
+.jump a:hover{color:var(--text)}
+/* Subsections beneath an h2 divider (Principles background) */
+h3.sub-sec{font:500 1.1875rem/1.35 var(--display);margin:64px 0 16px}
+h2+div+h3.sub-sec{margin-top:24px}
+/* Notice holding paragraphs (LFH foundation status note) */
+.note p{margin:0}
+.note p+p{margin-top:8px}
+.sub.lead{margin-bottom:24px}
+@media (max-width:760px){h3.sub-sec{margin-top:40px}h2+div+h3.sub-sec{margin-top:16px}}
+/* questions.html: the lead-question box sits right under the intro; 40px (not 64px) above its heading keeps the box above the fold on 375x667 phones */
+@media (max-width:760px){h2#start{margin-top:40px}}
