@@ -64,7 +64,7 @@ h1.page{font-size:clamp(1.875rem,3.6vw,2.75rem);max-width:22ch}
 .opening-story{font:italic 400 1.1875rem/1.75 var(--body);margin:0 0 64px}
 .opening-story p{margin:0}
 .opening-story p+p{margin-top:24px}
-.sub{font:500 1.25rem/1.45 var(--display);color:var(--muted);margin:0 0 64px;max-width:36ch;text-wrap:balance}
+.sub{font:500 1.1875rem/1.45 var(--display);color:var(--muted);margin:0 0 64px;max-width:36ch;text-wrap:balance}
 /* Quiet editorial ink; the white image ground blends into each paper theme. */
 .ink-scene{margin:0 0 40px;width:100%}
 .ink-scene img{display:block;width:100%;height:auto;filter:grayscale(1) contrast(1.15);mix-blend-mode:multiply}
@@ -221,7 +221,16 @@ h2+div+h3.sub-sec{margin-top:24px}
 /* Notice holding paragraphs (LFH foundation status note) */
 .note p{margin:0}
 .note p+p{margin-top:8px}
-.sub.lead{margin-bottom:24px}
+.sub.lead{margin-bottom:24px;color:var(--text);max-width:46ch}
+/* Phone: the opening story comes before the illustration so it starts on the first screen.
+   Flex stops margin collapsing, so paragraphs here take bottom margins only. */
+@media (max-width:760px){
+  .hero{display:flex;flex-direction:column}
+  .hero>p{margin:0 0 1em}
+  .hero>h1,.hero>.sub.lead,.hero>.opening-story{order:-1}
+  .hero>.opening-story{margin-bottom:40px}
+  .hero>.ink-scene{margin-bottom:64px}
+}
 @media (max-width:760px){h3.sub-sec{margin-top:40px}h2+div+h3.sub-sec{margin-top:16px}}
 /* questions.html: the lead-question box sits right under the intro; 40px (not 64px) above its heading keeps the box above the fold on 375x667 phones */
 @media (max-width:760px){h2#start{margin-top:40px}}
