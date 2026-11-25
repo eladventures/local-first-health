@@ -1,6 +1,6 @@
 // Cache the whole site so it stays readable offline. Bump VERSION when files change.
 // v2 cache name is distinct from every v1 "lfh-vNN" name; old lfh- caches are removed on activate.
-const VERSION = "lfh-site-v2-9";
+const VERSION = "lfh-site-v2-10";
 const FILES = [
   "./", "index.html", "questions.html", "principles.html", "about.html", "participate.html", "privacy.html",
   "status.html", "404.html", "style.css", "favicon.svg", "logo.svg", "logo.png", "icons.svg", "diagrams.svg",
